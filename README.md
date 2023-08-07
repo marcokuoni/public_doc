@@ -1,6 +1,7 @@
 # public_doc
 
 ## Links
+* [WebAssembly](./links/webassembly.md)
 * [WASI](./links/wasi.md)
 
 ## Essays

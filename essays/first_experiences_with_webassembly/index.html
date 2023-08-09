@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>First experiences with WebAssembly</title>
+</head>
+
+<body>
+    <form>
+        <input type="number" name="a" value="3" />
+        <input type="number" name="b" value ="14" />
+        <button type="submit">Multiply</button>
+        <output name="output">
+    </form>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+
+                const a = formData.get('a');
+                const b = formData.get('b');
+
+                fetchAndInstantiate('multiply.wasm')
+                    .then(instance => {
+                        const result = instance.exports.multiply(a, b);
+                        form.output.value = result;
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -20,9 +20,9 @@
 * Kartesisches Produkt `A × B` mit `A × B = {(a, b) | a ∈ A ∧ b ∈ B}` Jedes Element von `A × B` ist ein Tupel `(a, b)` mit `a ∈ A` und `b ∈ B` Bsp: `A = {1, 2}, B = {a, b, c} ⇒ A × B = {(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)}`
 * Relation `R ⊆ A × B`
 * Funktion `f: A → B`
-* Injektivität `f: A → B` ist injektiv, wenn `∀x, y ∈ A: f(x) = f(y) → x = y`
-* Surjektivität `f: A → B` ist surjektiv, wenn `∀y ∈ B ∃x ∈ A: f(x) = y`
-* Bijektivität `f: A → B` ist bijektiv, wenn `f` injektiv und surjektiv ist
+* Injektivität `f: A → B` ist injektiv, wenn `∀x, y ∈ A: f(x) = f(y) → x = y` Bsp: Kino -> auf jedem Sitz maximal eine Person
+* Surjektivität `f: A → B` ist surjektiv, wenn `∀y ∈ B ∃x ∈ A: f(x) = y` Bsp: Kino -> jeder Sitz ist besetzt, jedoch auch mehrfach möglich
+* Bijektivität `f: A → B` ist bijektiv, wenn `f` injektiv und surjektiv ist Bsp: Kino -> jeder Sitz ist besetzt und auf jedem Sitz maximal eine Person
 * Identität `id_A: A → A` mit `id_A(x) = x`
 * Komposition `f ∘ g: A → C` mit `(f ∘ g)(x) = f(g(x))`
 * Inverse `f⁻¹: B → A` mit `f⁻¹(f(x)) = x`
@@ -102,7 +102,21 @@
 * Potenzmenge: `P(A) = {B | B ⊆ A}` Die Potenzmenge einer Menge A ist die Menge aller Teilmengen von A (inklusive der leeren Menge und A selbst) `|P(A)| = 2^|A|` Die Potenzmenge einer Menge mit n Elementen hat 2^n Elemente 
 * Teilmenge `A ⊆ B` Eine Menge A ist eine Teilmenge von B, wenn jedes Element von A auch in B ist
 * Echte Teilmenge `A ⊂ B` Eine Menge A ist eine echte Teilmenge von B, wenn jedes Element von A auch in B ist und A nicht gleich B ist
-
+* Partielle Funktion `f: A → B` Eine Funktion ist partiell, wenn nicht für alle Elemente von A ein Funktionswert existiert
+* Totale Funktion `f: A → B` Eine Funktion ist total, wenn für alle Elemente von A genau eine Zuordnung in B existiert. Bsp `f: ℕ → ℕ` mit `f(x) = x + 1` ist total, `f: ℕ → ℕ` mit `f(x) = 1/x` ist partiell (für die Null gibt es keinen Funktionswert)
+* Komposition `f ∘ g: A → C` mit `(f ∘ g)(x) = f(g(x))`
+* Graphen `G = (V, E)` mit `V` als Menge von Knoten (vertices) und `E` als Menge von Kanten (edges)
+    * benachbart wird auch mit adjazenz bezeichnet
+    * deg(v) ist der Grad eines Knotens v, also die Anzahl Nachbarn. Ohne Nachbarn, der Knoten ist isoliert, ist der Grad 0
+    * Ausgangsgrad `deg^+(v)` ist die Anzahl ausgehender Kanten, Eingangsgrad `deg^-(v)` ist die Anzahl eingehender Kanten
+    * Stark zusammenhängend: Es gibt einen Pfad von jedem Knoten zu jedem anderen Knoten.
+    * Schwach zusammenhängend: Zusammenhang ist nur gewährleistet, wenn die Richtun ignoriert wird.
+    * DAG (directed acyclic graph): Ein gerichteter Graph ohne Zyklen
+    * Ein Spannbaum ist ein Teilgraph, der alle Knoten enthält und ein Baum ist
+* Abzählbar unendlich: Eine Menge ist abzählbar unendlich, wenn es eine Bijektion zu den natürlichen Zahlen gibt
+* Überabzählbar unendlich: Eine Menge ist überabzählbar unendlich, wenn es keine Bijektion zu den natürlichen Zahlen gibt. Die Menge ist nicht mehr numerierbar
+* Beweise
+    * Direkter Beweis: `p → q` Wenn p wahr ist, ist q auch wahr (p impliziert q). Modus ponens (wenn p, dann q)
 
 ## Eigene Rezession
 

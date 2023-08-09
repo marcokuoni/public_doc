@@ -189,9 +189,13 @@ Dieser kann nun mit einem fetch im JavaScript geladen, instanziert und ausgefüh
 ```
 > Achtung: Dies ist nicht der bevorzugte Weg WASM zu laden, insofern dein Browser die [instantiate streaming Funktion](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiateStreaming) unterstützt.
 
-Damit die WASM Datei per fetch geladen werden kann muss ein Webserver gestartet werden. Dies kann zum Beispiel mit dem Python Modul `http.server` gemacht werden `python3 -m http.server`. Das Beispiel kann nun unter `http://localhost:8000` auf dem Browser aufgerufen werden.
+Damit die WASM Datei per fetch geladen werden kann muss ein Webserver gestartet werden. Dies kann zum Beispiel mit dem Python Modul `http.server` resalisiert werden `python3 -m http.server`. Das Beispiel kann nun unter `http://localhost:8000` auf dem Browser aufgerufen werden.
 
 ![Screenshot der Applikation](image.png)
 
 ## Weiterführend
+[Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/first_experiences_with_webassembly)
+
 Ich bin gerne bereit den Blogbeitrag noch zu erweitern, ergänzen oder zu korrigieren. Schreib mir einen Kommentar, wenn etwas unklar, fehlt oder fehlerhaft ist.
+
+Erstellt von [Marco Kuoni](https://marcokuoni.ch)

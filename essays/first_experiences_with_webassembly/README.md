@@ -6,7 +6,7 @@
 3. Stackautomat: Dieses binäre Format kann wiederum auf einem standartisierten Stackautomaten ausgeführt werden. 
 4. Virtualisierung: Sofern es eine Implementierung des Stackautomaen für das Zielsystem gibt, kann der Code dort ausgeführt werden.
 
-Dieser Prozess trennt die Programmiersprache von der Zielplattform. Das ist aber nur ein Vorteil der diese Lösung beinhaltet. Unter anderem würde dies erlauben verschiedene Programmiersprachen zu kombinieren, die Sicherheit und Efizienz zu erhöhen und vieles mehr.
+Diese Idee abstrahiert die Programmiersprache von der Zielplattform. Das ist aber nur ein Vorteil der diese Lösung beinhaltet. Unter anderem würde dies erlauben verschiedene Programmiersprachen zu kombinieren, die Sicherheit und Efizienz zu erhöhen und vieles mehr.
 
 > Gedankenexperiment: Du startest einen Browser, der lädt eine Applikation. Diese Applikation is wieder ein Browser, der lädt darin eine weitere Applikation. Diese Applikation ist eine Shell, in dieser Shell läuft ein Betriebsystem. Im Betriebssystem...
 

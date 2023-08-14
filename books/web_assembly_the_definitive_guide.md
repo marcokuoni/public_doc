@@ -43,6 +43,49 @@ Alternativ kann auch das WebAssembly Binary Toolkit (WABT, ausgesprochen wabbit)
 Das Resultat konnte von 200 Byte (WAT) auf 45 Byte (WASM) reduziert werden. Welches nun wieder in Node.js oder anderen Umgebungen ausgeführt werden kann.
 > wasm3 wäre ein Interpreter für WASM, der in C geschrieben ist und auf vielen Plattformen läuft. Damit kann nun der WASM-Code im Repl Stil auf dem Betriebssystem ausgeführt werden. `wasm3 --repl hello.wasm` -> `wasm3> how_old 2021 2000` -> `21`
 
+
+## Modules
+WebAssembly Code Explorer
+* [Online] (https://wasdk.github.io/wasmcodeexplorer/)
+* [Github] (https://github.com/wasdk/wasmcodeexplorer)
+
+Every file starts with the content type `0x6d736100` (WASM). The next 4 bytes are the version number `0x01 0x00 0x00 0x00`. This numbers are also called the «magic numbers».
+The Wabt toolkit is also quite helpful to inspect the WASM file. `wasm-objdump -h hello.wasm` shows the header of the WASM file.
+```bash
+$> wasm-objdump hello.wasm
+At leas one of te following switches mus be given:
+-d/--disassemble
+-h/--headers
+-x/--details
+-s/--full-contents
+```
+
+### WebAssembly module sections
+* [WebAssembly module sections](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#webassembly_module_sections)
+* [WebAssembly module sections](https://webassembly.github.io/spec/core/binary/modules.html#binary-module)
+
+ID | Name | Description
+---|------|------------
+0 | Custom | Custom sections are used for debugging information, embedding other languages, or anything else that doesn't fit into the other sections.
+1 | Type | The type section is used to define all the function signatures that are used in the module.
+2 | Import | The import section is used to import functions, globals, memories, and tables from the environment into the module.
+3 | Function | The function section is used to define all the functions in the module.
+4 | Table | The table section is used to define all the tables in the module.
+5 | Memory | The memory section is used to define all the memories in the module.
+6 | Global | The global section is used to define all the globals in the module.
+7 | Export | The export section is used to export functions, globals, memories, and tables from the module.
+8 | Start | The start section is used to declare the function that will be called when the module is instantiated.
+9 | Element | The element section is used to initialize the elements of tables.
+10 | Code | The code section is used to define the function bodies.
+11 | Data | The data section is used to initialize the data segments of memories.
+12 | Data Count | The numbe of data elements defined by the module
+
+By building the the wasm with the switch --debug-names it will insert some extra information, like the parameter names of the functions.
+`wat2wasm multiply.wat -o multiply.wasm --debug-names`
+
+* [Proposal for ES6 Modules in WebAssembly by lin clark] (https://www.youtube.com/watch?v=qR_b5gajwug)
+
+
 ## Eigene Rezession
 
 ## Review

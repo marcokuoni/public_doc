@@ -117,6 +117,12 @@
 * Überabzählbar unendlich: Eine Menge ist überabzählbar unendlich, wenn es keine Bijektion zu den natürlichen Zahlen gibt. Die Menge ist nicht mehr numerierbar
 * Beweise
     * Direkter Beweis: `p → q` Wenn p wahr ist, ist q auch wahr (p impliziert q). Modus ponens (wenn p, dann q)
+    * Fallunterscheidung: `p ∨ q` Wenn p oder q wahr ist, ist die Aussage wahr. o.B.d.A. (ohne Beschränkung der Allgemeinheit, komplett symetrische Fälle)
+    * Beweis per Kontraposition: `p → q ⇔ ¬q → ¬p` Wenn q falsch ist, ist p auch falsch. Modus tollens (wenn nicht q, dann nicht p)
+    * Widerspruchsbeweis: `p → q` Wenn p wahr ist, ist q auch wahr. Wenn q falsch ist, ist p auch falsch. Man zeigt das die Aussage nicht falsch sein kann.
+    * Vollständige Induktion: `p(0) ∧ ∀n ∈ ℕ: p(n) → p(n+1)` Wenn p(0) wahr ist und wenn p(n) wahr ist, ist auch p(n+1) wahr, dann ist p(n) für alle natürlichen Zahlen wahr. Starke Induktion `p(0) ∧ ∀n ∈ ℕ: (∀k ∈ ℕ: k < n → p(k)) → p(n)`: Anstatt nur auf einen Vorgänger zu beziehen, kann auch die Gültigkeit der Aussage für mehrere oder sogar für alle Vorgänger benötigt werden, um den Induktionsschritt zu beweisen (z.B. bei der Fibonacci-Folge).
+    * Konstruktive und nichtkonstruktive Beweise: «Es gibt ein x mit Eigenschaft p» ist ein konstruktiver Beweis. «Es gibt ein x mit Eigenschaft p, aber ich weiss nicht welches» ist ein nichtkonstruktiver Beweis. Nichtkonstruktive Beweise sind oft einfacher zu finden, aber weniger informativ. Bsp: «Es gibt eine Ziffer d, die unendlich oft in den Nachkommastellen der Dezimaldarstellung von π vorkommt» ist ein nichtkonstruktiver Beweis. «Die Zahl π ist irrational» ist ein konstruktiver Beweis.s
+
 
 ## Eigene Rezession
 

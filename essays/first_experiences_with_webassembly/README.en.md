@@ -1,31 +1,31 @@
-# Erste Erfahrungen mit WebAssembly
+# First Experiences with WebAssembly
 
-## Grundsätzliche Idee
-1. Programmiersprache: Wir haben eine beliebige existierende Programmiersprache. 
-2. Binäres Format: Welche in ein binäres Format übersetzt werden kann. 
-3. Stackautomat: Dieses binäre Format kann wiederum auf einem standartisierten Stackautomaten ausgeführt werden. 
-4. Virtualisierung: Sofern es eine Implementierung des Stackautomaen für das Zielsystem gibt, kann der Code dort ausgeführt werden.
+## Basic Idea
+1. We have any existing programming language (e.g., Rust, C, C++, etc.).
+2. This language is translated into a binary format (*.wasm).
+3. This binary format is executed on a standardised stack machine.
+4. The implementation of the stack machine exists for various target systems.
 
-Diese Idee abstrahiert die Programmiersprache von der Zielplattform. Das ist aber nur ein Vorteil der diese Lösung beinhaltet. Unter anderem würde dies erlauben verschiedene Programmiersprachen zu kombinieren, die Sicherheit und Efizienz zu erhöhen und vieles mehr.
+This idea abstracts the programming language from the target platform. But this is only one advantage of this solution. Among other things, this allows to combine different programming languages, to increase security and efficiency and much more.
 
-> Gedankenexperiment: Du startest einen Browser, der lädt eine Applikation. Diese Applikation is wieder ein Browser, der lädt darin eine weitere Applikation. Diese Applikation ist eine Shell, in dieser Shell läuft ein Betriebsystem. Im Betriebssystem...
+> Thought experiment: You start a browser, which loads an application. This application is again a browser, which loads another application. This application is a shell, and an operating system runs in this shell. In the operating system...
 
-Der Entwicklungs-Prozess für WebAssembly wird über eine Community Group der W3C geführt.
-* [WebAssembly official](https://webassembly.org/)
+The development process for WebAssembly is managed by a community group of the W3C.
+* [WebAssembly Official](https://webassembly.org/)
 * [WebAssembly Community Group](https://www.w3.org/community/webassembly/)
-* [WebAssembly design](https://github.com/WebAssembly/design/tree/main)
-* [WebAssembly specification](https://webassembly.github.io/spec/core/)
-* [WebAssembly proposal](https://github.com/WebAssembly/proposals)
+* [WebAssembly Design](https://github.com/WebAssembly/design/tree/main)
+* [WebAssembly Dpecification](https://webassembly.github.io/spec/core/)
+* [WebAssembly Proposal](https://github.com/WebAssembly/proposals)
 
 ## WebAssembly Text Format (WAT, *.wat)
-* [WebAssembly Text Format (WAT)](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
 * [WebAssembly Text Format (WAT) Specification](https://webassembly.github.io/spec/core/text/index.html)
+* [WebAssembly Text Format (WAT)](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
 
-Das binäre Format *.wasm ist für die Maschine optimiert. Es existiert eine direkte Übersetzung in ein Textformat *.wat, welches für Menschen lesbar ist.
+The binary format *.wasm is optimised for the machine. There is a direct translation into a text format *.wat, which is readable by humans.
 
-Das Format besteht aus Modulen, die aus Funktionen bestehen. Funktionen wiederum bestehen aus Instruktionen für den Stackautomaten. Die Instruktionen sind in der [WebAssembly Specification](https://webassembly.github.io/spec/core/binary/instructions.html) definiert.
+The format consists of modules, which in turn consist of functions. A function is a collection of instructions for the stack machine. The instructions are defined in the [WebAssembly Specification](https://webassembly.github.io/spec/core/binary/instructions.html).
 
-Hier ein Beispiel für eine Funktion, die zwei Zahlen multipliziert:
+Here's an example of a function that multiplies two numbers:
 ```wat
 (module
   (func $multiply (param $a i32) (param $b i32) (result i32)
@@ -35,9 +35,9 @@ Hier ein Beispiel für eine Funktion, die zwei Zahlen multipliziert:
   (export "multiply" (func $multiply)))
 ```
 
-> Erklärung: Interne Funktionen starten mit `$`. Die Parameter werden jeweils auf den Stack gelegt um sie zu verarbeiten `local.get`. Die Funktion `i32.mul` multipliziert die obersten zwei Elemente des Stacks und legt das Ergebnis wieder auf den Stack.
+> Explanation: Internal functions start with $. The input values are placed on the stack to process them using local.get. The i32.mul function multiplies the top two elements of the stack and puts the result back on the stack.
 
-Aktuell vorhandene Typen in der Spezifikation sind:
+Currently available types in the specification are:
 * `i32` 32-bit signed integer
 * `i64` 64-bit signed integer
 * `f32` 32-bit floating point number
@@ -46,18 +46,20 @@ Aktuell vorhandene Typen in der Spezifikation sind:
 ## WebAssembly Binary Format (WASM, *.wasm)
 * [WebAssembly Binary Format (WASM) Specification](https://webassembly.github.io/spec/core/binary/index.html)
 
-Um vom Textformat in das binäre Format zu kompilieren können verschiedene Werkzeuge verwendet werden. Die bekanntesten sind:
+To compile from the text format to the binary format, various tools can be used. The most well-known ones are:
 
-Der online [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/) Compiler, er zeigt in vier Bereichen folgende Informationen an:
-* WAT: Der eingegebene WAT-Code
-* Build Log: Das Build Log des Compilers (Hex Dump)
-* JavaScript: Der JavaScript-Code, der den WASM-Code ausführt
-* JS Log: Das Resultat des JavaScript-Codes
+The online [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/) compiler, which displays the following information in four areas:
+* WAT: The input WAT code
+* Build Log: The compiler's build log (Hex Dump)
+* JavaScript: The JavaScript code that executes the WASM code
+* JS Log: The result from the JavaScript code
 
-Oder das WebAssembly Binary Toolkit (WABT, ausgesprochen wabbit), welches zusätzlich noch weitere Tools anbietet. Zur Übersetzung wird `wat2wasm multiply.wat` im Terminal eingegeben. Das Resultat konnte damit von 155 Byte (WAT) auf 46 Byte (WASM) reduziert werden (29.67% vom WAT). 
+![war2wasm](war2wasm.png)
 
-## Stackautomat
-wasm3 wäre ein möglicher Interpreter für WASM, der in C geschrieben ist und auf vielen Plattformen läuft. Damit kann nun der WASM-Code im Repl Stil in der Kommandozeile ausgeführt werden. 
+Or the WebAssembly Binary Toolkit (WABT, pronounced wabbit), which also offers additional tools. To perform the translation, you can enter `wat2wasm multiply.wat` in the terminal. This reduced the size from 155 bytes (WAT) to 46 bytes (WASM) (29.67% of the WAT size).
+
+## Stack Machine
+wasm3 could be a potential interpreter for WASM, written in C and capable of running on various platforms. This allows executing WASM code in a REPL-style within the command line.
 ```bash
 > wasm3 --repl hello.wasm
 wasm3> multiply 3 14
@@ -65,8 +67,8 @@ Result: 42
 wasm3> ^C
 ```
 
-## Implementierung im Web
-Aus dem WAT-Code wurde folgender WASM-Code (Build Log) generiert und in der Datei `multiply.wasm` gespeichert:
+## Implementation on the Web
+From the WAT code, the following WASM code (Build Log) was generated and saved in the file `multiply.wasm`:
 ```wasm
 0000000: 0061 736d                                 ; WASM_BINARY_MAGIC
 0000004: 0100 0000                                 ; WASM_BINARY_VERSION
@@ -139,7 +141,7 @@ Aus dem WAT-Code wurde folgender WASM-Code (Build Log) generiert und in der Date
 000002f: 1d                                        ; FIXUP section size
 ```
 
-Dieser kann nun mit einem fetch im JavaScript geladen, instanziert und ausgeführt werden:
+This can now be loaded, instantiated, and executed with a fetch in JavaScript:
 
 ```html
 <!DOCTYPE html>
@@ -187,15 +189,17 @@ Dieser kann nun mit einem fetch im JavaScript geladen, instanziert und ausgefüh
 
 </html>
 ```
-> Achtung: Dies ist nicht der bevorzugte Weg WASM zu laden, insofern dein Browser die [instantiate streaming Funktion](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiateStreaming) unterstützt.
+> Note: This is not the preferred way to load WASM unless the browser supports the [instantiate streaming function](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiateStreaming).
 
-Damit die WASM Datei per fetch geladen werden kann muss ein Webserver gestartet werden. Dies kann zum Beispiel mit dem Python Modul `http.server` resalisiert werden `python3 -m http.server`. Das Beispiel kann nun unter `http://localhost:8000` auf dem Browser aufgerufen werden.
+To allow the WASM file to be loaded via fetch, a web server must be started. This can be accomplished, for example, using the Python module `http.server`: `python3 -m http.server`. The example can now be accessed in the browser at `http://localhost:8000`.
 
-![Screenshot der Applikation](image.png)
+![Screenshot der Applikation](website.png)
 
-## Weiterführend
-[Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/first_experiences_with_webassembly)
+## Further Information
+* [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/first_experiences_with_webassembly)
+* [Deutsche Version](https://github.com/marcokuoni/public_doc/tree/main/essays/first_experiences_with_webassembly/README.de.md)
 
-Ich bin gerne bereit den Blogbeitrag noch zu erweitern, ergänzen oder zu korrigieren. Schreib mir einen Kommentar, wenn etwas unklar, fehlt oder fehlerhaft ist.
 
-Erstellt von [Marco Kuoni](https://marcokuoni.ch)
+I am open to refining, expanding, or correcting the content. Feel free to provide feedback or get in touch.
+
+Created by [Marco Kuoni, August 2023](https://marcokuoni.ch)

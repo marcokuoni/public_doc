@@ -54,7 +54,7 @@ Der online [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/) Compile
 * JavaScript: Der JavaScript-Code, der den WASM-Code ausführt
 * JS Log: Das Resultat vom JavaScript-Code
 
-![war2wasm](war2wasm.png)
+![wat2wasm](wat2wasm.png)
 
 Oder das WebAssembly Binary Toolkit (WABT, ausgesprochen wabbit), welches zusätzlich noch weitere Tools anbietet. Zur Übersetzung wird `wat2wasm multiply.wat` im Terminal eingegeben. Das Resultat konnte damit von 155 Byte (WAT) auf 46 Byte (WASM) reduziert werden (29.67% vom WAT). 
 

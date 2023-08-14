@@ -1,12 +1,12 @@
 # First Experiences with WebAssembly
 
-## Basic Idea
+## Basic Idea and First Steps
 1. We have any existing programming language (e.g., Rust, C, C++, etc.).
 2. This language is translated into a binary format (*.wasm).
 3. This binary format is executed on a standardised stack machine.
 4. The implementation of the stack machine exists for various target systems.
 
-This idea abstracts the programming language from the target platform. But this is only one advantage of this solution. Among other things, this allows to combine different programming languages, to increase security and efficiency and much more.
+This idea abstracts the programming language from the target platform. But this is only one advantage of the solution. Among other things, this allows to combine different programming languages, to increase security and efficiency and much more.
 
 > Thought experiment: You start a browser, which loads an application. This application is again a browser, which loads another application. This application is a shell, and an operating system runs in this shell. In the operating system...
 
@@ -14,7 +14,7 @@ The development process for WebAssembly is managed by a community group of the W
 * [WebAssembly Official](https://webassembly.org/)
 * [WebAssembly Community Group](https://www.w3.org/community/webassembly/)
 * [WebAssembly Design](https://github.com/WebAssembly/design/tree/main)
-* [WebAssembly Dpecification](https://webassembly.github.io/spec/core/)
+* [WebAssembly Specification](https://webassembly.github.io/spec/core/)
 * [WebAssembly Proposal](https://github.com/WebAssembly/proposals)
 
 ## WebAssembly Text Format (WAT, *.wat)
@@ -54,7 +54,7 @@ The online [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/) compile
 * JavaScript: The JavaScript code that executes the WASM code
 * JS Log: The result from the JavaScript code
 
-![war2wasm](war2wasm.png)
+![wat2wasm](wat2wasm.png)
 
 Or the WebAssembly Binary Toolkit (WABT, pronounced wabbit), which also offers additional tools. To perform the translation, you can enter `wat2wasm multiply.wat` in the terminal. This reduced the size from 155 bytes (WAT) to 46 bytes (WASM) (29.67% of the WAT size).
 

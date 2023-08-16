@@ -20,9 +20,10 @@
 * Kartesisches Produkt `A × B` mit `A × B = {(a, b) | a ∈ A ∧ b ∈ B}` Jedes Element von `A × B` ist ein Tupel `(a, b)` mit `a ∈ A` und `b ∈ B` Bsp: `A = {1, 2}, B = {a, b, c} ⇒ A × B = {(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)}`
 * Relation `R ⊆ A × B`
 * Funktion `f: A → B`
-* Injektivität `f: A → B` ist injektiv, wenn `∀x, y ∈ A: f(x) = f(y) → x = y` Bsp: Kino -> auf jedem Sitz maximal eine Person
-* Surjektivität `f: A → B` ist surjektiv, wenn `∀y ∈ B ∃x ∈ A: f(x) = y` Bsp: Kino -> jeder Sitz ist besetzt, jedoch auch mehrfach möglich
-* Bijektivität `f: A → B` ist bijektiv, wenn `f` injektiv und surjektiv ist Bsp: Kino -> jeder Sitz ist besetzt und auf jedem Sitz maximal eine Person
+* Injektivität (Linkseindeutigkeit) `f: A → B` ist injektiv, wenn `∀x, y ∈ A: f(x) = f(y) → x = y` Bsp: Kino -> auf jedem Sitz maximal eine Person
+* Surjektivität (Rechtstotalen) `f: A → B` ist surjektiv, wenn `∀y ∈ B ∃x ∈ A: f(x) = y` Bsp: Kino -> jeder Sitz ist besetzt, jedoch auch mehrfach möglich
+* Bijektivität (Eindeutigkeit) `f: A → B` ist bijektiv, wenn `f` injektiv und surjektiv ist Bsp: Kino -> jeder Sitz ist besetzt und auf jedem Sitz maximal eine Person
+* Eine Relation ist eine totale Funktion: Linkstotal und Rechtseindeutig z.Bsp. y <= z
 * Identität `id_A: A → A` mit `id_A(x) = x`
 * Komposition `f ∘ g: A → C` mit `(f ∘ g)(x) = f(g(x))`
 * Inverse `f⁻¹: B → A` mit `f⁻¹(f(x)) = x`
@@ -121,8 +122,21 @@
     * Beweis per Kontraposition: `p → q ⇔ ¬q → ¬p` Wenn q falsch ist, ist p auch falsch. Modus tollens (wenn nicht q, dann nicht p)
     * Widerspruchsbeweis: `p → q` Wenn p wahr ist, ist q auch wahr. Wenn q falsch ist, ist p auch falsch. Man zeigt das die Aussage nicht falsch sein kann.
     * Vollständige Induktion: `p(0) ∧ ∀n ∈ ℕ: p(n) → p(n+1)` Wenn p(0) wahr ist und wenn p(n) wahr ist, ist auch p(n+1) wahr, dann ist p(n) für alle natürlichen Zahlen wahr. Starke Induktion `p(0) ∧ ∀n ∈ ℕ: (∀k ∈ ℕ: k < n → p(k)) → p(n)`: Anstatt nur auf einen Vorgänger zu beziehen, kann auch die Gültigkeit der Aussage für mehrere oder sogar für alle Vorgänger benötigt werden, um den Induktionsschritt zu beweisen (z.B. bei der Fibonacci-Folge).
-    * Konstruktive und nichtkonstruktive Beweise: «Es gibt ein x mit Eigenschaft p» ist ein konstruktiver Beweis. «Es gibt ein x mit Eigenschaft p, aber ich weiss nicht welches» ist ein nichtkonstruktiver Beweis. Nichtkonstruktive Beweise sind oft einfacher zu finden, aber weniger informativ. Bsp: «Es gibt eine Ziffer d, die unendlich oft in den Nachkommastellen der Dezimaldarstellung von π vorkommt» ist ein nichtkonstruktiver Beweis. «Die Zahl π ist irrational» ist ein konstruktiver Beweis.s
+    * Konstruktive und nichtkonstruktive Beweise: «Es gibt ein x mit Eigenschaft p» ist ein konstruktiver Beweis. «Es gibt ein x mit Eigenschaft p, aber ich weiss nicht welches» ist ein nichtkonstruktiver Beweis. Nichtkonstruktive Beweise sind oft einfacher zu finden, aber weniger informativ. Bsp: «Es gibt eine Ziffer d, die unendlich oft in den Nachkommastellen der Dezimaldarstellung von π vorkommt» ist ein nichtkonstruktiver Beweis. «Die Zahl π ist irrational» ist ein konstruktiver Beweis.
 
+## Einführung in die Berechenbarkeitstheorie
+Ein Algorithmus berechnet eine Funktion. Es gibt abzählbar unendlich viele Algorithmen (jeder Algorithmus kann in Form der natürlichen Zahlen auf den Speicher gelet werden), aber überabzählbar unendlich viele Funktionen. Es gibt also Funktionen, die nicht berechnet werden können. 
+
+### Halteproblem
+Das Halteproblem ist nicht berechenbar. Es gibt also keine Funktion, die für jedes Programm und jede Eingabe entscheiden kann, ob das Programm terminiert oder nicht.
+Schlussfolgerung:
+1. Es ist nicht für beliebige Algorithmen entscheidbar, ob diese auf einer bestimmten Eingabe anhalten.
+2. Wenn nicht entscheidbar ist, ob ein Algorithmus auf einer Eingabe anhält, kann auch nicht entschieden werden, ob er mit dem richtigen Ergebnis anhält.
+3. Wenn dies noch nicht einmal für eine einzelne Eingabe entscheidbar ist, dann erst recht nicht für alle möglichen Eingaben.
+4. Damit kann nicht entschieden werden, ob ein Algorithmus für alle Eingaben das korrekte Ergebnis liefert.
+Es kann also nicht entschieen werden ob ein Algorithus korrekt funktioniert.
+
+## Problemtypen
 
 ## Eigene Rezession
 

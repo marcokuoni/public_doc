@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>First experiences with WebAssembly</title>
+</head>
+
+<body>
+    <form>
+        <input type="number" name="a" value="3" />
+        <input type="number" name="b" value="14" />
+        <button type="submit">Multiply</button>
+        <output name="output">
+    </form>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+
+            // --> Erweiterung 1
+            WebAssembly.compileStreaming(fetch('multiply.wasm'))
+                .then(module => {
+                    console.log(WebAssembly.Module.exports(module));
+                    console.log(WebAssembly.Module.imports(module));
+                });
+            // <-- Erweiterung 1
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+
+                const a = formData.get('a');
+                const b = formData.get('b');
+
+                const importObject = {
+                    imports: {
+                        alert_func: function (arg) {
+                            window.alert(arg);
+                        }
+                    }
+                };
+
+                fetchAndInstantiate('multiply.wasm', importObject)
+                    .then(instance => {
+                        instance.exports.alert_multiply(a, b);
+                    });
+
+                // --> Erweiterung 2
+                (async () => {
+                    const fetchPromise = fetch('multiply.wasm');
+                    const { instance } = await WebAssembly.instantiateStreaming(fetchPromise, importObject);
+                    const result = instance.exports.multiply(a, b);
+                    form.output.value = result;
+                })();
+                // <-- Erweiterung 2
+            });
+        });
+    </script>
+</body>
+
+</html>

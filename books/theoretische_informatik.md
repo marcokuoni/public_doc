@@ -137,6 +137,80 @@ Schlussfolgerung:
 Es kann also nicht entschieen werden ob ein Algorithus korrekt funktioniert.
 
 ## Problemtypen
+### Formalisierung
+Die Formalisierung eines Problems besteht aus der Eingabe, Ausgabe und Korrektheitsbedingung sowie jeweils dr Interpretation dieser Elemente.
+
+### Berechenbare Funktionen (Definition)
+Eine Funktion ist berechenbar, wenn es einen Algorithmus gibt, der genau diese Funktion berechnet.
+
+### Datencodierung
+* Codierung von Daten aller Art als Zeichenketten
+* Alternativ als natürliche Zahlen
+Überabzählbar grosse Mengen können in der Regel nicht codiert werden. Bei enigen Mengen funktioniert dies jedoch:
+* Für berechenbare Funktionen, wir codieren mit einem Algorithmus
+* Darauf aufbauend codieren wir unendliche Mengen beziehungsweise Tupel. Wir nutzen eine Funktion die die Elemente der Menge zählt. Diese Funktion codieren wir dann wiederum stellvertretend über einen Algorithmus, der diese Funtkion berechnet. Mengen, für die diese Konstruktion funktioniert, heissen aufzählbare Mengen.
+
+> Achtung Verwechslungsgefahr: Abzählbarkeit, eine Menge ist abzählbar (unendlich), wenn es eine Bijektion zwischen der Menge und den natürlichen Zahlen gibt (Mathematik). Aufzählbarkeit, fordert zusätzlich noch, dass die Bijektion berechenbar ist (Informatik).
+
+### Entscheidbare Sprachen (Definition)
+Eine Sprache M heisst eintscheidbar, wen die dazugehörige charakteristische Funktion χ_M berechenbar ist. Ansonsten sagen wir, sie ist unentscheidbar bzw nicht entscheidbar. 
+
+#### Charakteristische Funktion einer Sprache
+Sei M eine Sprache über einem Alphabet Σ. Die charakteristische Funktion χ_M ist definiert als:
+```
+χ_M(w) = 1, falls w ∈ M
+χ_M(w) = 0, falls w ∉ M
+```
+
+Bsp. Halteproblem: Die Sprache M = {⟨P, w⟩ | Algorithmus P hält auf Eingabe w} ist nicht entscheidbar. Die charakteristische Funktion χ_M ist nicht berechenbar.
+
+### Semi-entscheidbare Sprachen (Definition)
+Eine Sprache M heisst semi-entscheidbar, wenn die dazugehörige partielle charakteristische Funktion χ^_M berechenbar ist. Man nennt die Sprache aufzählbare Sprache.
+
+#### Partielle charakteristische Funktion einer Sprache
+Sei M eine Sprache über einem Alphabet Σ. Die partielle charakteristische Funktion χ^_M ist definiert als:
+```
+χ^_M(w) = 1, falls w ∈ M
+χ^_M(w) = undefiniert (`⊥`, undefinierte Ausgabe), falls w ∉ M
+```
+
+Jede entscheidbare Sprache ist auch semi-entscheidbar. Die Umkehrung gilt nicht. Bsp. Halteproblem: Die Sprache M = {⟨P, w⟩ | Algorithmus P hält auf Eingabe w} ist nicht entscheidbar, aber semi-entscheidbar. Die partielle charakteristische Funktion χ^_M ist berechenbar.
+
+* Etnscheidbare Sprachen - REC (engl. recursive)
+* Semi-entscheidbare Sprachen - RE (engl. recursively enumerable)
+* Komplement von RE - co-RE (engl. co-recursively enumerable).
+
+-> REC = RE ∩ co-RE. Eine Sprache ist entscheidbar, wenn sowohl zugehörige als auch nicht zugehörige Elemente algorithmisch erkennen lassen.
+
+## Einführung in formale Sprachen
+* Alphabet Σ: endliche Menge von Symbolen Bsp: Σ = {a, b, c}
+* Wort: endliche Folge von Symbolen aus Σ Bsp: w = abba. Die Menge aller Wörter über Σ ist Σ^*.
+* Wortlänge: Anzahl Symbole in einem Wort Bsp: |w| = 4, |ε| = 0 (ε ist das leere Wort), |Σ^*| = ∞, |w|_a = 2 (Anzahl a in w)
+* Wortmengen: Menge von Wörtern über Σ Bsp: M = {ab, ba, bb} ⊆ Σ^2
+* Leeres Wort: ε ∈ Σ^*. Für jedes beliebige Alphabet Σ^0 = {ε}
+* Kleenesche Hülle: Σ^* = Σ^0 ∪ Σ^1 ∪ Σ^2 ∪ ... Wenn man das leere Wort explizit ausschliesst, dann ist Σ^+ = Σ^* \ Σ^0
+* Konkatenation: w_1w_2 = w_1 · w_2. Bsp: abba · b = abbab
+* Potenz: w^n = w · w · ... · w (n-mal). Bsp: abba^2 = abba · abba = abbaabba
+* Sprache: Menge von Wörtern über Σ. Bsp: L = {ab, ba, bb} ⊆ Σ^2. L_1 = { w ∈ Σ_1^* | die Symbole in w sind alphabetisch sortiert } -> aabbcc ∈ L_1, abcc ∈ L_1, aabb ∈ L_1, cab ∉ L_1
+    * Achtung in vielen Fällen wird das Alphabet nicht mehr expliziet genannt, weil die Sprache dies impliziert.
+* Konkatenation von Sprachen: L_1 ∘ L_2 = { w_1w_2 | w_1 ∈ L_1, w_2 ∈ L_2 }. Bsp: L_1 = {ab, ba, bb}, L_2 = {a, b} -> L_1L_2 = {aba, baa, bba, ab, ba, bb}
+* Kleenesche Hülle: L^* = L^0 ∪ L^1 ∪ L^2 ∪ ... Bsp: L = {ab, ba, bb} -> L^* = {ε, ab, ba, bb, abab, abba, abbb, baab, baba, babb, bbab, bbba, bbbb, ...}
+
+### Die Chomsky-Hierarchie
+* Typ-0: RE aufzählbare Sprachen. Viele Probleme in dieser Klasse können nur semi-entschieden werden.
+* Typ-1: Kontextsensitive Sprachen. Alle Sprachen in dieser Klasse sind entscheidbar. Da die Berechnung unbrauchbar lang dauern kann, werden sie wie auch Typ-0 in der Praxis nicht verwendet.
+* Typ-2: Kontextfreie Sprachen. Können effizient entschieden werden. Damit können die meisten Konzepte aus den bekannten Programmiersprachen bechrieben werden. Zum Beispiel die Syntax von korrekt geklammerten verschachtelten Bedingungen und Schleifen. Jedoch kann nur eingeschränkt mit Zahlen gearbeitet werden. zBsp kann nicht entschieden werden ob eine Zahl eine Primzahl ist.
+* Typ-3: Regulären Sprachen. Diese sind in der Lage, simple Wortstrukturen zu erkennen. Können mit sehr einfachen Berechnungsodellen sehr effizient entschieden werden.
+
+Echte Teilmengenbeziehungen:
+```
+Typ-3 ⊂ Typ-2 ⊂ Typ-1 ⊂ Typ-0
+```
+
+Alle gängigen Programmiersprachen sowie unsere Alltagscomputer sind Berechnungsmodelle für Typ-0-Sprachen. Die Vorteile aus Typ-2 und Typ-3 werden in einzelne Anwendungszwecke szunutze gemacht.
+
+## Reguläre Sprachen
+
 
 ## Eigene Rezession
 

@@ -198,6 +198,7 @@ To allow the WASM file to be loaded via fetch, a web server must be started. Thi
 ## Further Information
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/first_experiences_with_webassembly)
 * [Deutsche Version](https://github.com/marcokuoni/public_doc/tree/main/essays/first_experiences_with_webassembly/README.de.md)
+* Lin Clark: [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
 
 
 I am open to refining, expanding, or correcting the content. Feel free to provide feedback or get in touch.

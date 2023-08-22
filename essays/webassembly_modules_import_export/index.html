@@ -24,13 +24,13 @@
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('form');
 
-            // --> Erweiterung 1
+            // --> Extension 1
             WebAssembly.compileStreaming(fetch('multiply.wasm'))
                 .then(module => {
                     console.log(WebAssembly.Module.exports(module));
                     console.log(WebAssembly.Module.imports(module));
                 });
-            // <-- Erweiterung 1
+            // <-- Extension 1
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -52,14 +52,14 @@
                         instance.exports.alert_multiply(a, b);
                     });
 
-                // --> Erweiterung 2
+                // --> Extension 2
                 (async () => {
                     const fetchPromise = fetch('multiply.wasm');
                     const { instance } = await WebAssembly.instantiateStreaming(fetchPromise, importObject);
                     const result = instance.exports.multiply(a, b);
                     form.output.value = result;
                 })();
-                // <-- Erweiterung 2
+                // <-- Extension 2
             });
         });
     </script>

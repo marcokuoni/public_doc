@@ -14,7 +14,7 @@ Auf die Identifikation folgen die verschiedenen Modul Abschnitte (Sections). Jed
 
 ID | Name | Beschreibung
 ---|------|------------
-0 | Custom | Benutzerdefinierter Bereich definiert Debugging oder Metadaten zur Verwendung für Dritte
+0 | Custom | Benutzerdefinierter Bereich, der für Debugging, Metadaten oder Erweiterungen von Drittanbietern verwendet werden kann. Wird von der WebAssembly Sprache ignoriert  
 1 | Type | Definiert alle Funktionstypen im Modul
 2 | Import | Importiert Funktionen, globale Variablen, Tabellen und Speicher in das Modul
 3 | Function | Definiert alle Funktionssignaturen im Modul (Referenziert dazu andere Abschnitte)
@@ -24,7 +24,7 @@ ID | Name | Beschreibung
 7 | Export | Exportiert Funktionen, globale Variablen, Tabellen und Speicher vom Modul
 8 | Start | Eine optionale Startfunktion vom Modul. Wird bei Initialisierung des Moduls ausgeführt, sobald die Tabellen und der Speicher initialisiert sind. Das Modul selbst und seine Exports sind erst nach dieser Ausführung von Aussen nutzbar.
 9 | Element | Definiert die [Elemente](https://webassembly.github.io/spec/core/syntax/modules.html#syntax-elem) im Modul. Tabellen sind standardmässig nicht initialisiert, Teilbereiche von Tabellen können durch Vektoren an statischen Elementen initialisiert werden
-10 | Code | Definiert die Funktionen (Body/Code) im Modul
+10 | Code | Definiert die Funktions-Body/Codes im Modul
 11 | Data | Definiert die [Daten](https://webassembly.github.io/spec/core/syntax/modules.html#syntax-data) im Modul. Der Speicher wird standardmässig mit 0x00 initialisiert, Teilbereiche vom Speicher können durch Vektoren an statischen Bytes initialisiert werden.
 12 | Data Count | Anzahl an Daten im Modul (Optional)
 
@@ -91,7 +91,7 @@ Custom:
 ```
 
 ## Praxis
-Wir benutzen nun das gleiche Modul in einer Webanwendung. Importieren die JavaScript `window.alert` Funktion in das Modul und rufen die Exportierte `alert_multiply` Funktion auf.
+Wir benutzen nun das gleiche Modul in einer Webanwendung. Importieren die JavaScript API Funktion `window.alert` in das Modul und rufen die exportierte Funktion `alert_multiply` auf.
 
 ```html
 <!DOCTYPE html>
@@ -120,13 +120,13 @@ Wir benutzen nun das gleiche Modul in einer Webanwendung. Importieren die JavaSc
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('form');
 
-            // --> Erweiterung 1
+            // --> Extension 1
             WebAssembly.compileStreaming(fetch('multiply.wasm'))
                 .then(module => {
                     console.log(WebAssembly.Module.exports(module));
                     console.log(WebAssembly.Module.imports(module));
                 });
-            // <-- Erweiterung 1
+            // <-- Extension 1
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -148,14 +148,14 @@ Wir benutzen nun das gleiche Modul in einer Webanwendung. Importieren die JavaSc
                         instance.exports.alert_multiply(a, b);
                     });
 
-                // --> Erweiterung 2
+                // --> Extension 2
                 (async () => {
                     const fetchPromise = fetch('multiply.wasm');
                     const { instance } = await WebAssembly.instantiateStreaming(fetchPromise, importObject);
                     const result = instance.exports.multiply(a, b);
                     form.output.value = result;
                 })();
-                // <-- Erweiterung 2
+                // <-- Extension 2
             });
         });
     </script>

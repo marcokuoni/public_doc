@@ -54,37 +54,10 @@ Example of a WebAssembly module:
 )
 ```
 
-## Analysis
-Example of a WebAssembly module:
+This is translated into WASM along with debugging information using the following command: 
+`wat2wasm multiply.wat -o multiply.wasm --debug-names`. 
 
-```wat
-(module
-  (func $alert (import "imports" "alert_func") (param i32))
-
-  (func $multiply (param $a i32) (param $b i32) (result i32)
-    local.get $a
-    local.get $b
-    i32.mul
-  )
-
-  (func $alert_multiply (param $a i32) (param $b i32)
-    local.get $a
-    local.get $b
-    call $multiply
-    call $alert
-  )
-
-  (export "multiply" (func $multiply))
-  (export "alert_multiply" (func $alert_multiply))
-)
-```
-
-This is translated into WASM along with debugging information using the following command: `wat2wasm multiply.wat -o multiply.wasm --debug-names`. 
-The result can now be analyzed using the following command: `wasm-objdump -x multiply.wasm`. Alternatively, you can visualize the module in a [WebAssembly Code Explorer](https://wasdk.github.io/wasmcodeexplorer/). 
-
-![WebAssembly Code Explorer](webassembly_code_explorer.png)
-> The color markings and interactions with the bytes can help you identify the different sections.
-
+The result can now be analyzed using the following command: 
 ```bash
 $ wasm-objdump -x multiply.wasm
 
@@ -117,6 +90,11 @@ Custom:
  - func[2] local[0] <a>
  - func[2] local[1] <b>
 ```
+
+ Alternatively, you can visualize the module in a [WebAssembly Code Explorer](https://wasdk.github.io/wasmcodeexplorer/). 
+
+![WebAssembly Code Explorer](webassembly_code_explorer.png)
+> The color markings and interactions with the bytes can help you identify the different sections.
 
 ## Practice
 
@@ -198,7 +176,7 @@ To test the application, you can use the command `python3 -m http.server`. This 
 
 ![Screenshot of the application](website.png)
 
-> It's important to note that the host program must provide the necessary functions to the WebAssembly module. The same applies to memory areas used by the module.
+> It's important to note that the host program must provide the necessary functions to the WebAssembly module to been able to interact with the outer world. The same applies to memory areas used by the module.
 
 ### Extension 1
 To see what a WebAssembly module imports and exports, you can use the JavaScript API to output this information.

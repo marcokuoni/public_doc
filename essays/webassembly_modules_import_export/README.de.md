@@ -52,11 +52,7 @@ Beispiel eines WebAssembly Moduls:
 )
 ```
 
-Dies wird übersetzt in WASM inklusive den Debugging Informationen `wat2wasm multiply.wat -o multiply.wasm --debug-names`. Das Resultat kann nun per `wasm-objdump -x multiply.wasm` analysiert werden. Alternativ dazu gibt es die Möglichkeit das Modul in einem [WebAssembly Code Explorer](https://wasdk.github.io/wasmcodeexplorer/) zu darzustellen.
-
-![WebAssembly Code Explorer](webassembly_code_explorer.png)
-> Durch die Farbmarkierungen und das Klicken bzw. Überfahren der Bytes können die verschiedenen Abschnitte identifiziert werden.
-
+Dies wird übersetzt in WASM inklusive den Debugging Informationen `wat2wasm multiply.wat -o multiply.wasm --debug-names`. Das Resultat kann nun per `wasm-objdump -x multiply.wasm` analysiert werden.
 ```bash
 $ wasm-objdump -x multiply.wasm
 
@@ -89,6 +85,12 @@ Custom:
  - func[2] local[0] <a>
  - func[2] local[1] <b>
 ```
+
+ Alternativ dazu gibt es die Möglichkeit das Modul in einem [WebAssembly Code Explorer](https://wasdk.github.io/wasmcodeexplorer/) zu darzustellen.
+
+![WebAssembly Code Explorer](webassembly_code_explorer.png)
+> Durch die Farbmarkierungen und das Klicken bzw. Überfahren der Bytes können die verschiedenen Abschnitte identifiziert werden.
+
 
 ## Praxis
 Wir benutzen nun das gleiche Modul in einer Webanwendung. Importieren die JavaScript API Funktion `window.alert` in das Modul und rufen die exportierte Funktion `alert_multiply` auf.
@@ -168,7 +170,7 @@ Um die Anwendung zu testen verwenden wir `python3 -m http.server`, somit kann da
 
 ![Screenshot der Applikation](website.png)
 
-> Es gilt zu beachten, dass das Hostprogramm dem WebAssembly Modul die benötigten Funktionen zur Verfügung stellen muss. Das gleiche gilt auch für die Speicherbereiche, welche vom Modul verwendet werden.  
+> Es gilt zu beachten, dass das Hostprogramm dem WebAssembly Modul die benötigten Funktionen zur Verfügung stellen muss, damit es mit der Aussenwelt kommunizieren kann. Das gleiche gilt auch für die Speicherbereiche, welche vom Modul verwendet werden.  
 
 ### Erweiterung 1
 Um zu sehen was ein WebAssembly Modul importiert bzw. exportiert kann mit der JavaScript API dies ausgegeben werden.

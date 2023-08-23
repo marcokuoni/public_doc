@@ -210,6 +210,41 @@ Typ-3 ⊂ Typ-2 ⊂ Typ-1 ⊂ Typ-0
 Alle gängigen Programmiersprachen sowie unsere Alltagscomputer sind Berechnungsmodelle für Typ-0-Sprachen. Die Vorteile aus Typ-2 und Typ-3 werden in einzelne Anwendungszwecke szunutze gemacht.
 
 ## Reguläre Sprachen
+### Deterministischer endlicher Automat (DEA)
+Ein deterministischer endlicher Automat (DEA) ist ein 5-Tupel M = (Q, Σ, δ, q_0, F) mit:
+* Q: endliche Menge von Zuständen
+* Σ: endliches Eingabealphabet
+* δ: Zustandsübergangsfunktion δ: Q × Σ → Q. die Funktion δ ist total, d.h. für alle q ∈ Q und a ∈ Σ existiert ein q' ∈ Q mit δ(q, a) = q'
+* q_0: Startzustand q_0 ∈ Q
+* F: Menge von akzeptierenden Zuständen F ⊆ Q
+
+Erweiterete Zustandsübergangsfunktion δ^*: Q × Σ^* → Q mit: 
+```
+δ^*(q, ε) = q
+δ^*(q, wa) = δ(δ^*(q, w), a) für alle q ∈ Q, w ∈ Σ^*, a ∈ Σ
+```
+Während die «normale» Übergangsfunktion ausgehend vom aktuellen Zustand defniert, in welchem Zustand der Automat nach dem Lesen eines Symbols wechselt, gibt die Erweiterte dasselbe für ein ganzes Wort an.
+Wir defnieren darüber die Sprache des Automaten L(M) = { w ∈ Σ^* | δ^*(q_0, w) ∈ F }
+
+Sprachäquivalenz:
+* Jedes Wort der Sprache L_1 muss den Automaten in einen Endzustand führen, also L_1 ⊆ L(M)
+* Jedes vom Automaten akzeptierte Wort ist in der Sprache L_1 enthalten, also L(M) ⊆ L_1
+* Damit gilt L_1 = L(M)
+
+### Nichtdeterministischer endlicher Automat (NEA)
+Ein nichtdeterministischer endlicher Automat (NEA) ist ein 5-Tupel M = (Q, Σ, δ, q_0, F) mit:
+* Zustandsmenge, Alphabet, Startzustand und Endzustände sind genau wie bei DEAs defniert.
+* Die Zustandsüberführungsfunktion δ: Q × Σ → P(Q) bildet nun einen Zustand und ein gelesenes Zeichen auf eine Teilmenge der Zustände ab statt wie zuvor auf genau einen Zielzustand und beschreibt damit alle möglichen Zustände, in die der Automat mit dem gelesenen Eingabesymbol wechseln kann.
+
+Unterschied im Verhalten:
+* Sind für den aktuellen Zustand und das gelesene Eingabesymbol mehrere Übergänge definiert, so werden alle Möglichen der Arbarbeitung als eigene Berechnungspfade weiterverfolgt.
+* Is für das gelesene Symbol und den aktuellen Zustand kein Übergang definiert, so wird dieser Berechnungspfad abgebrochen.
+
+Epsilonübergänge: Ein NEA kann zusätzlich zu den normalen Übergängen auch Epsilonübergänge haben. Diese werden mit ε bezeichnet und erlauben es, den Zustand des Automaten zu wechseln, ohne ein Eingabesymbol zu lesen.
+
+Potenzmengenkonstruktion: Ein NEA kann in einen äquivalenten DEA umgewandelt werden. Dazu wird für jeden Zustand des NEA ein Zustand des DEAs definiert. Die Zustände des DEAs sind also die Potenzmenge der Zustände des NEA. Die Zustandsübergangsfunktion des DEAs wird so definiert, dass sie für jeden Zustand des NEA und jedes Eingabesymbol die Menge der Zustände des NEA enthält, in die der NEA mit dem Eingabesymbol wechseln kann. Der Startzustand des DEAs ist der Startzustand des NEA. Die Endzustände des DEAs sind die Zustände des NEA, die einen Endzustand enthalten.
+
+### Gramatiken
 
 
 ## Eigene Rezession

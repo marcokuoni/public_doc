@@ -85,6 +85,89 @@ By building the the wasm with the switch --debug-names it will insert some extra
 
 * [Proposal for ES6 Modules in WebAssembly by lin clark] (https://www.youtube.com/watch?v=qR_b5gajwug)
 
+## WebAssembly Memory
+* [WebAssembly Memory](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#webassembly_memory)
+* [WebAssembly Memory](https://webassembly.github.io/spec/core/binary/modules.html#binary-memorysec)
+
+### Typed Arrays
+* [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays)
+* [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)
+
+JavaScript ist usualy not able to handle convenient access to individual bytes in memory. This is where typed arrays come in. They provide a way to access raw binary data in memory buffers. The following typed arrays are available:
+* `Int8Array` 8-bit signed integer
+* `Uint8Array` 8-bit unsigned integer
+* `Uint8ClampedArray` 8-bit unsigned integer (clamped)
+* `Int16Array` 16-bit signed integer
+* `Uint16Array` 16-bit unsigned integer
+* `Int32Array` 32-bit signed integer
+* `Uint32Array` 32-bit unsigned integer
+* `Float32Array` 32-bit floating point number
+* `Float64Array` 64-bit floating point number
+* `BigInt64Array` 64-bit signed integer
+* `BigUint64Array` 64-bit unsigned integer
+
+
+### Array Buffer
+* [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
+* [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays#typedarray)
+* [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer#methods)
+
+The `ArrayBuffer` object is used to represent a generic, fixed-length raw binary data buffer. You cannot directly manipulate the contents of an `ArrayBuffer`; instead, you create one of the typed array objects or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer. It has special mechanisms to change there size and also to transfer them. If you transfer an `ArrayBuffer` the ownership of memory gets also moved and it's original copy gets detached.
+
+```javascript
+const u32arr = new Uint32Array([1, 2, 3]);
+const u32buf = u32arr.buffer;
+const u8arr = new Uint8Array(u32buf);
+
+console.log(`u32arr length: ${u32arr.length} bytes: ${u32arr.byteLength}`);
+console.log(`u32buf length: ${u32buf.length} bytes: ${u32buf.byteLength}`);
+console.log(`u8arr length: ${u8arr.length} bytes: ${u8arr.byteLength}`);
+
+console.log(`u32arr: ${u32arr}`);
+console.log(`u32buf: ${u32buf}`);
+console.log(`u8arr: ${u8arr}`);
+```
+
+### Data View
+* [Data View](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView)
+* [Data View](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays#typedarray)
+* [Data View](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView#methods)
+
+The `DataView` view provides a low-level interface for reading and writing multiple number types in an `ArrayBuffer` irrespective of the platform's endianness. You can use this to read and write to the buffer. 
+
+```javascript
+const buffer = new ArrayBuffer(21);
+const view = new DataView(buffer);
+
+view.setUint8(0, 4);
+view.setUint16(1, 1);
+view.setUint16(3, 1);
+view.setFloat32(5, 0x80);
+view.setFloat32(9, 0x80);
+view.setFloat32(13, 0x80);
+view.setFloat32(17, 0x80);
+
+console.log(`transfered buffer:`, buffer);
+
+const dv = new DataView(buffer);
+const vector_length = dv.getUint8(0);
+const width = dv.getUint16(1); // 0+uint8 = 1 bytes offset
+const height = dv.getUint16(3); // 0+uint8+uint16 = 3 bytes offset
+let littleEndianVectors = new Float32Array(width*height*vector_length);
+let vectors = new Float32Array(width*height*vector_length);
+for (let i=0, off=5; i<vectors.length; i++, off+=4) {
+  littleEndianVectors[i] = dv.getFloat32(off, true);
+  vectors[i] = dv.getFloat32(off, false);
+}
+
+console.log(`vector_length: ${vector_length}`);
+console.log(`width: ${width}`);
+console.log(`height: ${height}`);
+console.log(`little endian vectors:`, littleEndianVectors);
+console.log(`vectors:`, vectors);
+```
+
+
 
 ## Eigene Rezession
 

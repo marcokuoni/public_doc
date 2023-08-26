@@ -1,11 +1,13 @@
 # JavaScript and Bytes
-## Communication with the outerworld. To have control over memory and data types
+## Communication with the outer world. To have control over memory and data types
 
 JavaScript abstracts the memory and the data types. For instance, if we take the standard array type, its individual elements can possess various data types, and their representation in memory is not defined. This applies not only to complex data types but also to simple ones like `number`. However, when communicating through certain APIs (filesystem, web workers, WebAssembly, etc.), the byte arrangement must be guaranteed during data exchange. This is to ensure that the data can be correctly interpreted by both parties. Therefore, the WebGL committee developed typed arrays.
 
 ![Array Buffer from mozilla.org](array_buffer.png)
 
-To achieve a maximum level of flexibility and efficiency, the implementation was divided into a buffer and views. A buffer (implemented through the `ArrayBuffer` object) is an object that represents a data block of a defined size. It doesn't have a format (interpretation) and doesn't provide a mechanism to access its content directly. To access the memory content of a buffer, a view must be used. A view provides context – that is, a data type, a starting offset, and a number of elements – that converts the data into an actual typed array.
+To achieve a maximum level of flexibility and efficiency, the implementation was divided into a buffer and views. 
+A buffer (implemented through the `ArrayBuffer` object) is an object that represents a data block of a defined size. It doesn't have a format (interpretation) and doesn't provide a mechanism to access its content directly. 
+To access the memory content of a buffer, a view must be used. A view provides context – that is, a data type, a starting offset, and a number of elements – that converts the data into an actual typed array.
 
 ## Array Buffer
 * [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
@@ -107,11 +109,11 @@ console.log(`little endian vectors:`, littleEndianVectors);
 console.log(`vectors:`, vectors);
 ```
 
-![Console log From DataView](console_log_data_view.png)
+![Console log from DataView](console_log_data_view.png)
 
 ## Further Resources
-- [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes)
-- [Deutsche Version](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes/README.de.md)
+* [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes)
+* [Deutsche Version](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes/README.de.md)
 
 I am open to refining, expanding, or correcting the article. Feel free to provide a feedback or get in touch with me.
 

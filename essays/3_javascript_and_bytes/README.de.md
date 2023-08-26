@@ -55,60 +55,60 @@ console.log(`u8arr: ${u8arr}`);
 
 Die `DataView` stellt ein einfaches getter/setter Interface zur Verfügung. Mit welchem in einem `ArrayBuffer` Bereiche unabhängig von der Endianness und des Zahlentyps gelesen oder geschrieben werden können.
 
-### Endianness
-```
-Register:
-MSB      LSB
-0A 0B 0C 0D
+  ### Endianness
+  ```
+  Register:
+  MSB      LSB
+  0A 0B 0C 0D
 
-Memory:
-Big-endien
-a  : OA
-a+1: 0B
-a+2: 0C
-a+3: 0D
+  Memory:
+  Big-endien
+  a  : OA
+  a+1: 0B
+  a+2: 0C
+  a+3: 0D
 
-Little-endien
-a  : 0D
-a+1: OC
-a+2: 0B
-a+3: 0A
-```
+  Little-endien
+  a  : 0D
+  a+1: OC
+  a+2: 0B
+  a+3: 0A
+  ```
 
-### Beispiele
-```javascript
-const buffer = new ArrayBuffer(21);
-const view = new DataView(buffer);
+  ### Beispiele
+  ```javascript
+  const buffer = new ArrayBuffer(21);
+  const view = new DataView(buffer);
 
-view.setUint8(0, 4);
-view.setUint16(1, 1);
-view.setUint16(3, 1);
-view.setFloat32(5, 0x80);
-view.setFloat32(9, 0x80);
-view.setFloat32(13, 0x80);
-view.setFloat32(17, 0x80);
+  view.setUint8(0, 4);
+  view.setUint16(1, 1);
+  view.setUint16(3, 1);
+  view.setFloat32(5, 0x80);
+  view.setFloat32(9, 0x80);
+  view.setFloat32(13, 0x80);
+  view.setFloat32(17, 0x80);
 
-console.log(`Buffer:`, buffer);
+  console.log(`Buffer:`, buffer);
 
-const dv = new DataView(buffer);
-const vector_length = dv.getUint8(0);
-const width = dv.getUint16(1);
-const height = dv.getUint16(3); // 0+uint8+uint16 = 3 bytes offset
-let littleEndianVectors = new Float32Array(width*height*vector_length);
-let vectors = new Float32Array(width*height*vector_length);
-for (let i=0, off=5; i<vectors.length; i++, off+=4) {
-  littleEndianVectors[i] = dv.getFloat32(off, true);
-  vectors[i] = dv.getFloat32(off, false);
-}
+  const dv = new DataView(buffer);
+  const vector_length = dv.getUint8(0);
+  const width = dv.getUint16(1);
+  const height = dv.getUint16(3); // 0+uint8+uint16 = 3 bytes offset
+  let littleEndianVectors = new Float32Array(width*height*vector_length);
+  let vectors = new Float32Array(width*height*vector_length);
+  for (let i=0, off=5; i<vectors.length; i++, off+=4) {
+    littleEndianVectors[i] = dv.getFloat32(off, true);
+    vectors[i] = dv.getFloat32(off, false);
+  }
 
-console.log(`vector_length: ${vector_length}`);
-console.log(`width: ${width}`);
-console.log(`height: ${height}`);
-console.log(`little endian vectors:`, littleEndianVectors);
-console.log(`vectors:`, vectors);
-```
+  console.log(`vector_length: ${vector_length}`);
+  console.log(`width: ${width}`);
+  console.log(`height: ${height}`);
+  console.log(`little endian vectors:`, littleEndianVectors);
+  console.log(`vectors:`, vectors);
+  ```
 
-![Console log von DataView](console_log_data_view.png)
+  ![Console log von DataView](console_log_data_view.png)
 
 ## Weiterführend
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes)

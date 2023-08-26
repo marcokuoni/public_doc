@@ -214,8 +214,8 @@ const result = multiply(3, 14);
 ```
 
 ## Weiterführend
-* [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/webassembly_modules_import_export)
-* [English Version](https://github.com/marcokuoni/public_doc/tree/main/essays/webassembly_modules_import_export/README.md)
+* [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/2_webassembly_modules_import_export)
+* [English Version](https://github.com/marcokuoni/public_doc/tree/main/essays/2_webassembly_modules_import_export/README.md)
 
 
 Ich bin gerne bereit den Beitrag noch zu präzisieren, erweitern oder zu korrigieren. Schreibt Feedback oder meldet euch bei mir.

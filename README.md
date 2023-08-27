@@ -16,3 +16,21 @@
 | [Docker Deep Dive](./books/docker_deep_dive.md) | Nigel Poulton  | May 2020 | English  | 978-1-5218228-0-7 |
 | [The Kubernetes Book](./books/the_kubernetes_book.md) | Nigel Poulton & Pushkar Joglekar  | Januar 2022 | English  | 979-8-4021537-7-6 |
 |                                   |                |                     |          |                   |
+
+## Tools
+* Tablet: Remarkable
+* OS: Ubuntu 22.04, iOS
+* Browsers: Firefox, Brave, Chrome, Chromium
+* Mailing: Evolution, Proton, Outlook
+* Calendar: Proton
+* Password Manager: Proton
+* ToDo: iOS (Why is there no Proton Solution?)
+* Chats: Slack, Smuxi, Threema, Signal, WhatsApp, Teams, Skype
+* Docker Desktop
+* Visual Code
+* AI: ChatGPT, DeePL
+* VPN: OpenVPN, Proton, Cisco AnyConnect
+* Office: LibreOffice, Microsoft Office
+* News: Medium, NZZ
+* Repositories: GitHub, GitLab, BitBucket
+* Social Media: Mastodon, Twitter, LinkedIn, Xing, Facebook, Instagram, YouTube, Discord, Reddit

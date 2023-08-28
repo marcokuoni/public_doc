@@ -124,13 +124,123 @@ Nach dem vierten Klick auf den Button `Extend` läuft man in einen Bereichsfehle
 ![Range Error in Console](range_error_console.png)
 
 ## Speicher importieren
+```wat
+(module
+    (memory (import "js" "mem") 1)
+    (func (export "fibonacci") (param $n i32)
+        (local $index i32)
+        (local $ptr i32)    
+
+        (i32.store (i32.const 0) (i32.const 0))
+        (i32.store (i32.const 4) (i32.const 1))
+
+        (set_local $index (i32.const 2))
+        (set_local $ptr (i32.const 8))
+
+        (block $break
+            (loop $loop
+                (i32.store
+                    (get_local $ptr)
+                    (i32.add
+                        (i32.load (i32.sub (get_local $ptr) (i32.const 4)))
+                        (i32.load (i32.sub (get_local $ptr) (i32.const 8)))
+                    )
+                )
+                (set_local $index (i32.add (get_local $index) (i32.const 1)))
+                (set_local $ptr (i32.add (get_local $ptr) (i32.const 4)))
+                (br_if $break (i32.ge_u (get_local $index) (get_local $n)))
+                (br $loop)
+            )
+        )
+    )
+)
+```
 
 ## Das gleiche mit Strings
 
-## Fibonacci Umsetzung im Stackautomaten erklärt
+## Fibonacci Umsetzung im Stackautomaten
+Es ist beinahe möglich den Fibonacci Algorithmus für den Stackautomaten 1:1 in JavaScript zu übersetzen. Ein paar Anmerkung:
+* Es wird kein Import benutzt sondern der importierte Speicher mit einem `ArrayBuffer` simuliert. Was grunsätzlich auch im Hintergrund vom WebAssembly verwendet wird.
+* Es können in JavaScript keine GoTo-Anweisungen eingesetzt werden. Um trotzdem etwas aufzuzeigen, wie der Stackautomat funktioniert, wird ein `while(true)` mit einem `break` und `continue` verwendet.
+* Die Positionen im Kommentar werden unten für die Darstellung der Entwicklung des Speichers verwendet.
 
+```javascript
+// import memory js.mem
+// here we simulate it by an array buffer
+const buffer = new ArrayBuffer(10 * 64 * 1024);
+const mem = new DataView(buffer);
 
+function fibonacci(n) {
+    let index, ptr;
 
+    mem.setUint32(0, 0);
+    mem.setUint32(4, 1);
+
+    index = 2;
+    ptr = 8;
+
+    //position 1
+    start: while(true) {
+        mem.setUint32(ptr, mem.getUint32(ptr - 4) + mem.getUint32(ptr - 8));
+
+        index += 1;
+        ptr += 4;
+
+        if(index >= n) {
+            break; 
+        }
+        //position 2
+        continue start;
+    }
+}
+
+fibonacci(10);
+
+for(let i = 0; i < 10; i++) {
+    console.log(`Fibonacci[${i}]: ${mem.getUint32(i * 4)}`);
+}
+```
+
+![Console log der Fibonacci-Simulation](javscript_fibonacci_console.png)
+
+Dabei entwickelt sich der lineare Speicher pro Iteration wie folgt
+
+```
+Byte Nummer
+Inhalt als Dezimalzahl
+
+Position 1:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  0  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0
+
+Position 2:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  1  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0
+
+Position 2:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  1  | 0  0  0  2  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0
+
+Position 2:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  1  | 0  0  0  2  | 0  0  0  3  | 0  0  0  0  | 0  0  0  0  | 0  0  0  0  | 0
+
+Position 2:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  1  | 0  0  0  2  | 0  0  0  3  | 0  0  0  5  | 0  0  0  0  | 0  0  0  0  | 0
+
+Position 2:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  1  | 0  0  0  2  | 0  0  0  3  | 0  0  0  5  | 0  0  0  8  | 0  0  0  0  | 0
+
+Position 2:
+0 1 2 3 | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | 16 17 18 19 | 20 21 22 23 | 24 25 26 27 | 28 29 30 31 | 32
+0 0 0 0 | 0 0 0 1 | 0 0 0  1  | 0  0  0  2  | 0  0  0  3  | 0  0  0  5  | 0  0  0  8  | 0  0  0  13 | 0
+
+.
+.
+.
+```
 
 ## Weiterführend
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes)

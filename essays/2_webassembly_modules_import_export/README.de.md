@@ -101,7 +101,7 @@ Wir benutzen nun das gleiche Modul in einer Webanwendung. Importieren die JavaSc
 
 <head>
     <meta charset="utf-8" />
-    <title>First experiences with WebAssembly</title>
+    <title>WebAssembly Module</title>
 </head>
 
 <body>

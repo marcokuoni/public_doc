@@ -107,7 +107,7 @@ Now we'll use the same module in a web application. We will import the JavaScrip
 
 <head>
     <meta charset="utf-8" />
-    <title>First experiences with WebAssembly</title>
+    <title>WebAssembly Module</title>
 </head>
 
 <body>

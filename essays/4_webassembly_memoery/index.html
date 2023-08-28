@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebAssembly Memory Export</title>
+</head>
+
+<body>
+    <article>
+        <h1>WebAssembly Memory Export</h1>
+        <p>Current Memory instance: <span id="mem"></span></p>
+        <p>Out of page: <span id="pages"></span></p>
+        <p>First Bytes, Uint8Buffer[0-4]: <span id="firstbytes"></span></p>
+        <p>First integer, Uint32Buffer[0]: <span id="firstint"></span></p>
+        <button type="button" id="extend">Extend</button>
+        <p style="color: red" id="error"></p>
+    </article>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        function presentMemory(mem) {
+            const buf = mem.buffer;
+            const firstBytes = new Uint8Array(buf, 0, 4);
+            const firstInt = new Uint32Array(buf, 0, 1);
+            const byteLength = buf.byteLength;
+            const pages = byteLength / (64 * 1024);
+            document.getElementById('mem').textContent = byteLength;
+            document.getElementById('pages').textContent = pages;
+            document.getElementById('firstbytes').textContent = `[${firstBytes[0]}, ${firstBytes[1]}, ${firstBytes[2]}, ${firstBytes[3]}]`;
+            document.getElementById('firstint').textContent = firstInt[0];
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchAndInstantiate('export.wasm')
+                .then(instance => {
+                    const mem = instance.exports.mem;
+
+                    const extendButton = document.getElementById('extend');
+                    extendButton.addEventListener('click', () => {
+                        try {
+                            mem.grow(1);
+                            presentMemory(mem);
+                        } catch (rangeError) {
+                            console.error(`Caught RangeError, no more extending:`, rangeError);
+                            document.getElementById('error').textContent = 'Caught RangeError, no more extending!';
+                            extendButton.disabled = true;
+                        }
+                    });
+                    presentMemory(mem);
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -245,6 +245,63 @@ Epsilonübergänge: Ein NEA kann zusätzlich zu den normalen Übergängen auch E
 Potenzmengenkonstruktion: Ein NEA kann in einen äquivalenten DEA umgewandelt werden. Dazu wird für jeden Zustand des NEA ein Zustand des DEAs definiert. Die Zustände des DEAs sind also die Potenzmenge der Zustände des NEA. Die Zustandsübergangsfunktion des DEAs wird so definiert, dass sie für jeden Zustand des NEA und jedes Eingabesymbol die Menge der Zustände des NEA enthält, in die der NEA mit dem Eingabesymbol wechseln kann. Der Startzustand des DEAs ist der Startzustand des NEA. Die Endzustände des DEAs sind die Zustände des NEA, die einen Endzustand enthalten.
 
 ### Gramatiken
+Gramatiken produzieren Sprachen «Wie werden Wörter gebildet?» anstatt wie bei Automaten analytisch «Wie finde ich heraus, ob ein Wort zur Sprache gehört?»
+Eine Gramatik ist ein 4-Tupel G = (N, Σ, P, S) mit:
+* N: endliche Menge von Nichtterminalsymbolen
+* Σ: endliche Menge von Terminalsymbolen. Um diese von den Nichtterminalsymbolen unterscheiden zu können, muss gelten N ∩ Σ = ∅
+* P: endliche Menge von Produktionen. Jede Produktion ist eine Regel der Form A → w mit A ∈ (N ∪ Σ)^+ und w ∈ (N ∪ Σ)^*
+* S: Startsymbol S ∈ N
+
+Satzform: A → w, dabei heisst die Linke Seite «Kopf» und die rechte Seite «Rumpf». Ein Kopf hat oft mehrere Rümpfe A  → w_1 | w_2 | ... | w_n. 
+Sprache einer Gramatik: L(G) = { w ∈ Σ^* | S ⇒^* w }, wobei ⇒^* heisst mit beliebig viellen Anwendungen von Produktionsregeln (Ableitung). In einem Schritt wäre es S ⇒ w
+
+
+#### Reguläre Gramatiken
+Bei regulären Grammatiken haben alle Produktionsregeln in P eine der folgenden Formen; dabei seien A, B ∈ N und a ∈ Σ:
+* A → ε
+* A → a
+* A → aB
+  
+--> S 114 H_E anstatt S_E Fehler im Buch
+
+Rechtslinear A → aB oder A → a, Linkslinear A → Ba oder A → a (Achtung: Erlaubt man beide Formen wird die Sprache mächtiger)
+Kettenregel: A → B (Das Model wird nicht mächtiger)
+
+### Reguläre Ausdrücke
+Diese kennt man grundsätzlich von der Programmierung.
+Sei Σ ein Alphabet und sei a ∈ Σ ein Symbol dieses Alphabets. Dann gilt:
+* ∅ ist ein regulärer Ausdruck mit L(∅) = ∅
+* ε ist ein regulärer Ausdruck mit L(ε) = {ε}
+* a ist ein regulärer Ausdruck mit L(a) = {a}
+* Sei R ein regulärer Ausdruck. Dann gilt:
+  * R* ist ein regulärer Ausdruck mit L(R*) = L(R)*
+  * (R) ist ein regulärer Ausdruck mit L((R)) = L(R)
+* Seien R und S reguläre Ausdrüke. Dann gilt:
+  * RS ist ein regulärer Ausdruck mit L(RS) = L(R) ∘ L(S)
+  * R + S ist ein regulärer Ausdruck mit L(R + S) = L(R) ∪ L(S)
+
+Vorrang von binären Operationen: Klammer vor kleenescher Hülle (R*) vor Verkettung (RS) vor Vereinigung (R+S)
+
+ACHTUNG: Die meisten Programmiersprachen erlauben zusätzliche Formen von Ausdrücken (Bsp: Prüfen auf sich wiederholende Zeichen), welche die dort verwendete Ausdrüce mächtier machen als die regulären Ausdrücke aus der Theorie.
+
+### Abschlusseigenschaften
+#### Abgeschlossenheit von Mengen unter Operationen
+Eine Menge ist abgeschlossen unter einer Operation, falls die Anwendung dieser Operation auf Elemente der Menge erneut ein Element aus der Menge ergibt.
+* Vereinigung: L_1, L_2 reguläre Sprachen -> L_1 ∪ L_2 ist regulär
+* Konkatenation: L_1, L_2 reguläre Sprachen -> L_1 ∘ L_2 ist regulär
+* Kleenesche Hülle: L reguläre Sprache -> L* ist regulär
+* Komplement: L reguläre Sprache -> L^c ist regulär
+* Schnitt: L_1, L_2 reguläre Sprachen -> L_1 ∩ L_2 ist regulär
+* Differenz: L_1, L_2 reguläre Sprachen -> L_1 \ L_2 ist regulär
+* Spiegelung: L reguläre Sprache -> L^R ist regulär (Spiegelung, die Wörter werden rückwärts notiert)
+* Homomorphismus: L reguläre Sprache -> h(L) ist regulär (Homomorphismus, die Wörter werden nach einer bestimmten Regel umgeschrieben)
+
+### Entscheidungsprobleme auf regulären Sprachen
+* Leerheit: Ist L = ∅? Im DEA gibt es keinen Weg vom Startzustand zu einem Endzustand.
+* Wortproblem: Ist w ∈ L? Im DEA gibt es einen Weg vom Startzustand zu einem Endzustand, der das Wort w akzeptiert.
+* Inklusion: Ist L_1 ⊆ L_2? Wir nehmen uns die Abgeschlossenheit unter Differenz zu nutze und etnscheiden stattdessen L_1 \ L_2 = ∅?
+
+### Äquivalenzklassenzerlegung
 
 
 ## Eigene Rezession

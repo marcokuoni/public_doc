@@ -33,4 +33,4 @@
 * Office: LibreOffice, Microsoft Office
 * News: Medium, NZZ
 * Repositories: GitHub, GitLab, BitBucket
-* Social Media: Mastodon, Twitter, LinkedIn, Xing, Facebook, Instagram, YouTube, Discord, Reddit
+* Social Media: Mastodon, LinkedIn, Facebook, Instagram, YouTube, Discord, Reddit, Twitter, Xing

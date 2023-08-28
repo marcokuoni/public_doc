@@ -167,7 +167,16 @@ console.log(`little endian vectors:`, littleEndianVectors);
 console.log(`vectors:`, vectors);
 ```
 
+### WebAssembly Memory Instances
+Memory in WebAssembly is represented by a contiguous array of bytes. WebAssembly memory is linear, and is bounded by its size in pages, which are 64KB in size. The memory is initialized from the WebAssembly module's memory section. It can be grown by a multiple of its page size by the grow_memory instruction. Memory is shared between WebAssembly and JavaScript. A WebAssembly module instance can import or export a memory. A memory can be imported or exported by at most one module instance.
 
+We can define where the growing should start and what should be the max pages.
+
+#### Exporting Memory
+
+#### Importing Memory
+
+#### Going deeper and using strings
 
 ## Eigene Rezession
 

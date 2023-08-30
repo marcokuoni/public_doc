@@ -303,6 +303,74 @@ Eine Menge ist abgeschlossen unter einer Operation, falls die Anwendung dieser O
 
 ### Äquivalenzklassenzerlegung
 
+#### Zerlegung in Äquivalenzklassen
+Eine Zerlegung einer Menge M ist eine Menge Z ⊆ P(M) mit den folgenden Eigenschaften:
+* ∅ ∉ Z, keine Menge in Z ist leer
+* ⋃ Z = M, die Vereinigung aller Mengen in Z ist M
+* ∀A, B ∈ Z: A ≠ B → A ∩ B = ∅, die Mengen in Z sind paarweise disjunkt
+
+Zusammengenommen wird M also in paarweise disjunkte, nicht leere Mengen zerlegt, deren Vereinigung wieder M ergibt. Jede dieser Mengen ist eine sogenannte Äquivalenzklasse. Dieser Name kommt daher, dass jede Zerlegung mit einer Äquivalenzrelation korrespondiert und umgekehrt.
+Für eine Menge M und die Äquivalenzrelation R ⊆ M × M notieren wir für jedes Element x ∈ M die Äquivalenzklasse, die x enthält, als [x]_R. Es gilt also [x]_R = { y ∈ M | xRy }.
+Die Mächtigkeit von Z, also die Anzahl der Äquivalenzklassen, wird mit |Z| notiert und heisst Index der Äquivalenzklasse.
+
+#### Minimaler Automat
+Ein Automat ist minimal, wenn er keine überflüssigen Zustände hat. Ein Zustand ist überflüssig, wenn er nicht erreichbar ist oder wenn er nicht zu einem Endzustand führt.
+Dies ist eine Art Fingerabdruck für die Sprache. Zwei Automaten sind genau dann äquivalent, wenn sie den gleichen minimalen Automaten haben.
+Bestimmt kann dies werden durch die Äquivalenzklassenzerlegung. Die Zustände sind die Äquivalenzklassen. Der Startzustand ist die Äquivalenzklasse, die den Startzustand des Automaten enthält. Die Endzustände sind die Äquivalenzklassen, die einen Endzustand des Automaten enthalten. Die Zustandsübergangsfunktion ist definiert als δ([q], a) = [δ(q, a)].
+Oder mit der Table-Filling-Algorithmen:
+* Alle Zustandspaare, die sich in der Menge der Endzustände unterscheiden, werden als nicht-äquivalent markiert.
+* Alle Zustandspaare, die sich in der Menge der Endzustände nicht unterscheiden, aber für die es ein Eingabesymbol gibt, für das sich die Zustände unterscheiden, werden als nicht-äquivalent markiert.
+* Dies wird wiederholt, bis keine neuen Zustandspaare mehr als nicht-äquivalent markiert werden.
+* Die Zustände, die nicht als nicht-äquivalent markiert wurden, sind äquivalent.
+
+### Nichreguläre Sprachen
+#### Satz von Myhill-Nerode
+Eine Sprache L über dem Alphabet Σ ist genau dann regulär, wenn die Nerode-Relation bzüglich dieser Sprache einen endlichen Index hat.
+
+#### Nerode-Relation
+Sei L eine Sprache über dem Alphabet Σ. Die Nerode-Relation R_L ist definiert als:
+```
+R_L = { (x, y) ∈ Σ^* × Σ^* | ∀z ∈ Σ^*: xz ∈ L ⇔ yz ∈ L }
+```
+Die Nerode-Relation ist eine Äquivalenzrelation. Die Äquivalenzklassen von R_L heissen Nerode-Klassen. Die Menge der Nerode-Klassen ist eine Zerlegung von Σ^*. Die Mächtigkeit dieser Zerlegung ist der Index der Nerode-Relation.
+
+#### Nerode-Automat
+Der Nerode-Automat ist ein Automat, der die Nerode-Relation als Zustände hat. Der Startzustand ist die Nerode-Klasse, die das leere Wort enthält. Die Endzustände sind die Nerode-Klassen, die ein Wort aus L enthalten. Die Zustandsübergangsfunktion ist definiert als δ([x], a) = [xa]. Der Nerode-Automat ist minimal. 
+
+#### Pumping-Lemma
+Für jede reguläre Sprache L gibt es eine Konstante n ∈ ℕ, sodass sich jedes Wort w ∈ L der Länge |w| ≥ n in drei Teilwörter w = xyz zerlegen lässt mit
+* y ≠ ε
+* |xy| ≤ n und
+* ∀i ∈ ℕ: xy^iz ∈ L
+
+Beweisführung:
+1. Wir zeigen, dass die Sprache L das Pumping-Lemma für reguläre Sprachen nicht erfüllt
+2. Sei dafür n ∈ ℕ eine beliebige Konstante
+3. Wir wählen das Wort w = ... ∈ L mit |w| ≥ n
+4. Sei w = xyz eine beliebige Zerlegung des Wortes mit den Eigenschaften y ≠ ε und |xy| ≤ n
+5. Dann gilt für i = ... jedoch, dass xy^iz ∉ L is, da [Begründung]
+6. Also ist L nichtregulär
+
+Die Begründung in Schritt 5 basiert im Regelfall auf einer Beobachtung, welche Form die Teilwörter x, y, z der Zerlegung haben. In vielen Fällen kommt man dann bereits mit der Wahl von i=0 oder i=2 zum Erfolg.
+
+##### Achtung: Negation von Quantoren
+Die Negation der Aussage ∀x: p(x) ist ∃x: ¬p(x). Umgekehrt ist die Negation von ∃x: p(x) die Aussage ∀x: ¬p(x). Die Negation von ∀x: p(x) ist also nicht ∀x: ¬p(x).
+Im Widerspruch mit dem Pumping-Lemma arbeiten wir eigentlich mit dem negierten Lemma:
+* Das Lemma besagt, es `existiert` ein n, also zeigen wir für `alle` n, dass die Aussage `nicht` gilt. Wir dürfen also kein n wählen, denn die Aussage muss für beliebige Werte von n gelten.
+* Das Lemma gibt vor, dass die Aussage für `alle` Wörter mit der Länge mindestens n gilt, also genügt es zu beweisen, dass `ein` Wort dieser Länge `existiert`, das die Aussage `nicht` erfüllt ist.
+* Im Lemma ist nur gefordert, dass zumindest `eine` Zerlegung mit den angegebenen Eigenschaften `existiert`. Wir beweisen, dass für `alle` beliebigen Zerlegungen zumindest eine der Eigenschaften `nicht` gilt
+
+##### Achtung: Exakte Pumping-Lemmata
+Das hier gezeigte Puming-Lemma gilt nict umgekehrt: Nicht jede Sprache, die sich wie beschrieben aufpumpen lässt, ist automatisch regulär. Im Gegensatz zum Satz von Myhill-Nerode ist das Pumping-Lemma also keine exakte Charakterisierung der Sprachklasse der regulären Sprachen. Es gibt jedoch (hier aus Platzgründen nicht gezeigte) Erweiterungen des Pumping-Lemmas für reguläre Sprachen, die ebenfalls eine «Genau dann, wenn»-Aussage bieten.
+
+#### Beweise mit Abschlusseigenschaften
+Mit den Abschlusseigenchaften von nicht regulären Sprachen können einfach weitere Sprache als nichtregulär eingestufft werden.
+
+1. Angenommen, die Spreache L_1 wäe regulär
+2. Es ist bekannt, dass die Sprache L_2 regulär ist und dass reguläre Srpachen unter der Operation O abgeschlossen sind
+3. Jedoch ist die Sprache L_1 O L_2 bekanntermassen nichtregulär
+4. Also muss die Annahme falsch sein und L_1 ist nichtregulär
+
 
 ## Eigene Rezession
 

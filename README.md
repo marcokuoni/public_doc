@@ -6,7 +6,10 @@
 
 ## Essays
 * [Dependency Injection](./essays/dependency_injection.md)
-* [First experiences with WebAssembly](./essays/first_experiences_with_webassembly/README.md)
+* [First experiences with WebAssembly](./essays/1_first_experiences_with_webassembly/README.md)
+* [WebAssembly Module](./essays/2_webassembly_modules_import_export/README.md)
+* [JavaScript and Bytes](./essays/3_javascript_and_bytes/README.md)
+* [WebAssembly Memory](./essays/4_webassembly_memory/README.md)
 
 ## Books
 | Title                             | Author         | Year                | Language | ISBN              |

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebAssembly Memory String Export</title>
+</head>
+
+<body>
+    <article>
+        <h1>WebAssembly Memory String Export</h1>
+        <p id="hello-world"></p>
+        <p id="emoji"></p>
+    </article>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        function presentString(mem) {
+            const helloWorld = document.getElementById('hello-world');
+            const emoji = document.getElementById('emoji');
+
+            const helloWorldBytes = new Uint8Array(mem.buffer, 0, 14);
+            const emojiBytes = new Uint8Array(mem.buffer, 14, 4);
+
+            const helloWorldString = new TextDecoder('utf8').decode(helloWorldBytes);
+            const emojiString = new TextDecoder('utf8').decode(emojiBytes);
+
+            helloWorld.innerText = helloWorldString;
+            emoji.innerText = emojiString + ' ' + emojiString;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchAndInstantiate('string.wasm')
+                .then(instance => {
+                    const mem = instance.exports.memory;
+                    presentString(mem);
+                });
+        });
+    </script>
+</body>
+
+</html>

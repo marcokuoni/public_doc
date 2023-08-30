@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebAssembly Memory Import</title>
+</head>
+
+<body>
+    <article>
+        <h1>WebAssembly Memory Import</h1>
+        <h2>Fibonacci</h2>
+        <p id="fibonacci-output"></p>
+    </article>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        function presentFibonacci(result, n) {
+            const fibonacciOutput = document.getElementById('fibonacci-output');
+
+            console.log('Memory', result)
+
+            for (let i = 0; i < n; i++) {
+                fibonacciOutput.innerText += `Result ${i}: ${result[i]}\n`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const memory = new WebAssembly.Memory({ initial: 1, maximum: 2});
+
+            const importObject = {
+                env: {
+                    mem: memory
+                }
+            };
+
+            fetchAndInstantiate('fibonacci.wasm', importObject)
+                .then(instance => {
+                    const n = 10;
+                    instance.exports.fibonacci(n);
+                    const result = new Uint32Array(memory.buffer);
+                    presentFibonacci(result, n);
+                });
+        });
+    </script>
+</body>
+
+</html>

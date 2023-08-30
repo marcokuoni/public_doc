@@ -1,6 +1,6 @@
 # WebAssembly Memory
 Zu einem WebAssembly Modul wird ein `ArrayBuffer` (bzw. `SharedArrayBuffer`) verknüpft, der als WebAssembly Speicher dient. Die Speicherinstanz wird entweder vom Modul selbst erstellt oder durch das Gästesystem zur Verfügung gestellt. Diese Instanzen werden gleich wie Funktionen vom Modul importiert oder exportiert. Jede Instanz besteht aus einem linearen Speicherbereich aufgeteilt in 64 KiloByte grosse Seiten (`Pages`).
-> Aktuell ist ein Modul auf eine Speicherinstanz beschränkt. Es ist anzunehmen, dass dies in naher Zukunft angepasst wird.
+> Aktuell ist ein WebAssembly Modul auf eine Speicherinstanz beschränkt. Es ist anzunehmen, dass dies in naher Zukunft angepasst wird.
 
 ## Speicher exportieren
 Ein WebAssembly Modul kann Speicher exportieren und instanzieren, dies hier demonstriert an einem Beispiel.
@@ -124,9 +124,12 @@ Nach dem vierten Klick auf den Button `Extend` läuft man in einen Bereichsfehle
 ![Range Error in Console](range_error_console.png)
 
 ## Speicher importieren
+Von der JavaScript Seite kann *ein* Speicher (`Memory`) dem WebAssembly Modul zur Verfügung gestellt werden (importiert). Was mit dem folgenden WAT Programm eines Fibonacci Algorithmus demostriert wird. Die intepretierung des Stackautomaten Algorithmus ist im letzten Abschnitt dieses Artikels beschrieben.
+
+
 ```wat
 (module
-    (memory (import "js" "mem") 1)
+    (memory (import "env" "mem") 1)
     (func (export "fibonacci") (param $n i32)
         (local $index i32)
         (local $ptr i32)    
@@ -134,21 +137,21 @@ Nach dem vierten Klick auf den Button `Extend` läuft man in einen Bereichsfehle
         (i32.store (i32.const 0) (i32.const 0))
         (i32.store (i32.const 4) (i32.const 1))
 
-        (set_local $index (i32.const 2))
-        (set_local $ptr (i32.const 8))
+        (local.set $index (i32.const 2))
+        (local.set $ptr (i32.const 8))
 
         (block $break
             (loop $loop
                 (i32.store
-                    (get_local $ptr)
+                    (local.get $ptr)
                     (i32.add
-                        (i32.load (i32.sub (get_local $ptr) (i32.const 4)))
-                        (i32.load (i32.sub (get_local $ptr) (i32.const 8)))
+                        (i32.load (i32.sub (local.get $ptr) (i32.const 4)))
+                        (i32.load (i32.sub (local.get $ptr) (i32.const 8)))
                     )
                 )
-                (set_local $index (i32.add (get_local $index) (i32.const 1)))
-                (set_local $ptr (i32.add (get_local $ptr) (i32.const 4)))
-                (br_if $break (i32.ge_u (get_local $index) (get_local $n)))
+                (local.set $index (i32.add (local.get $index) (i32.const 1)))
+                (local.set $ptr (i32.add (local.get $ptr) (i32.const 4)))
+                (br_if $break (i32.ge_u (local.get $index) (local.get $n)))
                 (br $loop)
             )
         )
@@ -156,16 +159,209 @@ Nach dem vierten Klick auf den Button `Extend` läuft man in einen Bereichsfehle
 )
 ```
 
+Kompilieren `wat2wasm fibonacci.wat -o fibonacci.wasm`
+Analysieren `wasm-objdump -x fibonacci.wasm`
+
+```bash
+$ wasm-objdump -x fibonacci.wasm
+
+fibonacci.wasm: file format wasm 0x1
+
+Section Details:
+
+Type[1]:
+ - type[0] (i32) -> nil
+Import[1]:
+ - memory[0] pages: initial=1 <- env.mem
+Function[1]:
+ - func[0] sig=0 <fibonacci>
+Export[1]:
+ - func[0] <fibonacci> -> "fibonacci"
+Code[1]:
+ - func[0] size=77 <fibonacci>
+```
+
+Kurzbeschreibung der Abschnitte:
+* `Type[1]` definiert unseren Funktionstyp mit einem Parameter vom Typ `i32` und ohne Rückgabewert.
+* `Import[1]` importiert eine Speicherinstanz aus dem Namensbereich `env.mem`.
+* `Function[1]` definiert eine Funktion mit dem Typ `0` (siehe `Type[1]`) und dem Namen `fibonacci`.
+* `Export[1]` exportiert die Funktion `fibonacci` mit dem Namen `fibonacci`.
+* `Code[1]` definiert den Code der Funktion `fibonacci` mit einer Grösse von 77 Bytes.
+
+### Gebrauch in einer Webanwendung
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebAssembly Memory Import</title>
+</head>
+
+<body>
+    <article>
+        <h1>WebAssembly Memory Import</h1>
+        <h2>Fibonacci</h2>
+        <p id="fibonacci-output"></p>
+    </article>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        function presentFibonacci(result, n) {
+            const fibonacciOutput = document.getElementById('fibonacci-output');
+
+            console.log('Memory', result)
+
+            for (let i = 0; i < n; i++) {
+                fibonacciOutput.innerText += `Result ${i}: ${result[i]}\n`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const memory = new WebAssembly.Memory({ initial: 1, maximum: 2});
+
+            const importObject = {
+                env: {
+                    mem: memory
+                }
+            };
+
+            fetchAndInstantiate('fibonacci.wasm', importObject)
+                .then(instance => {
+                    const n = 10;
+                    instance.exports.fibonacci(n);
+                    const result = new Uint32Array(memory.buffer);
+                    presentFibonacci(result, n);
+                });
+        });
+    </script>
+</body>
+
+</html>
+```
+
+Anwendung starten `python3 -m http.server`
+Analysieren im Browser `http://localhost:8000`
+
+![Fibonacci in Anwendung](fibonacci.png)
+![Fiboncaci in Console](fibonacci_console.png)
+
+> Es gilt zu beachten, dass das Fibonacci Programm hier nicht wirklich sicher ist und nur zur Demonstration dient. Es wird zum Beispiel nicht geprüft, ob der Speicherbereich überhaupt existiert und ob die Speicherbereiche nicht überschrieben werden.
+
 ## Das gleiche mit Strings
+Wie kann mit Srings gearbeitet werden im Speicher.
+
+```wat
+(module
+    (memory (export "memory") 1)
+    (data (i32.const 0) "Hello, World! 😀")
+)
+```
+
+Kompilieren `wat2wasm string.wat -o string.wasm`
+Analysieren `wasm-objdump -x string.wasm`
+
+```bash
+$ wasm-objdump -x string.wasm
+
+string.wasm:    file format wasm 0x1
+
+Section Details:
+
+Memory[1]:
+ - memory[0] pages: initial=1
+Export[1]:
+ - memory[0] -> "memory"
+Data[1]:
+ - segment[0] memory=0 size=18 - init i32=0
+  - 0000000: 4865 6c6c 6f2c 2057 6f72 6c64 2120 f09f  Hello, World! ..
+  - 0000010: 9880 
+```
+
+Kurzbeschreibung der Abschnitte:
+* `Memory[1]` definiert eine Speicherinstanz mit einer Seite (`Page` von 64 KiloByte).
+* `Export[1]` exportiert die Speicherinstanz mit dem Namen `memory`.
+* `Data[1]` initialisiert den Speicher ab der Adresse `0x0` mit den Bytes `0x48`, `0x65`, `0x6c`, `0x6c`, `0x6f`, `0x2c`, `0x20`, `0x57`, `0x6f`, `0x72`, `0x6c`, `0x64`, `0x21`, `0x20`, `0xf0`, `0x9f`, `0x98`, `0x80`.
+* Die Zeichenkette `Hello, World! 😀` wird als UTF-8 interpretiert und in den Speicher geschrieben. Dies erlaubt daher einen erweiterten Zeichensatz zu ASCII und somit zum Beispiel Emojis zu verwenden.
+
+Offsetberechnung für die Zeichenkette `Hello, World! 😀`:
+* `0x0` bis `0xd` für `Hello, World! ` -> 14 Zeichen an 1 Byte (Gemäss ASCII Zeichensatz)
+* `0xe` bis `0x11` für `😀` -> und 1 Zeichen ([Emoji 0xf0 9f 98 80](https://apps.timwhitlock.info/emoji/tables/unicode)) an 4 Bytes
+
+### Gebrauch in einer Webanwendung
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebAssembly Memory String Export</title>
+</head>
+
+<body>
+    <article>
+        <h1>WebAssembly Memory String Export</h1>
+        <p id="hello-world"></p>
+        <p id="emoji"></p>
+    </article>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        function presentString(mem) {
+            const helloWorld = document.getElementById('hello-world');
+            const emoji = document.getElementById('emoji');
+
+            const helloWorldBytes = new Uint8Array(mem.buffer, 0, 14);
+            const emojiBytes = new Uint8Array(mem.buffer, 14, 4);
+
+            const helloWorldString = new TextDecoder('utf8').decode(helloWorldBytes);
+            const emojiString = new TextDecoder('utf8').decode(emojiBytes);
+
+            helloWorld.innerText = helloWorldString;
+            emoji.innerText = emojiString + ' ' + emojiString;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchAndInstantiate('string.wasm')
+                .then(instance => {
+                    const mem = instance.exports.memory;
+                    presentString(mem);
+                });
+        });
+    </script>
+</body>
+
+</html>
+```
+
+Anwendung starten `python3 -m http.server`
+Analysieren im Browser `http://localhost:8000`
+
+![String in Anwendung](string.png)
 
 ## Fibonacci Umsetzung im Stackautomaten
 Es ist beinahe möglich den Fibonacci Algorithmus für den Stackautomaten 1:1 in JavaScript zu übersetzen. Ein paar Anmerkung:
-* Es wird kein Import benutzt sondern der importierte Speicher mit einem `ArrayBuffer` simuliert. Was grunsätzlich auch im Hintergrund vom WebAssembly verwendet wird.
-* Es können in JavaScript keine GoTo-Anweisungen eingesetzt werden. Um trotzdem etwas aufzuzeigen, wie der Stackautomat funktioniert, wird ein `while(true)` mit einem `break` und `continue` verwendet.
+* Es wird kein Import benutzt sondern der importierte Speicher mit einem `ArrayBuffer` simuliert. Was grundsätzlich auch im Hintergrund vom WebAssembly verwendet wird.
+* Es können in JavaScript keine GoTo-Anweisungen eingesetzt werden. Um trotzdem etwas aufzuzeigen, wie die Schlaufe im Stackautomaten funktioniert, wird ein `while(true)` mit einem `break` und `continue` verwendet.
 * Die Positionen im Kommentar werden unten für die Darstellung der Entwicklung des Speichers verwendet.
+* Die Hilfsvariable index wird zur Zählung der Iterationen verwendet. 
+* Die Hilfsvariable ptr wird verwendet um die Position im Speicher zu halten.
+* Die Integer Resultate (4 Bytes) werden linear im Speicher abgelegt und wir selbst müssen die Positionen dazu wissen und berechnen.
+
+> Beachte: WASM wird in einem virtuellen Stackautomaten ausgeführt. Daher müssen die Werte immer zuerst auf den Stack gelegt werden, bevor sie gelesen, verarbeitet und vom Stack entfernt werden. Das Resultat der Verarbeitung wird anschliessen auch auf den Stack gelegt und kann direkt als Eingabe für den nächsten Schritt dienen. Diese Abläufe sind im WAT-Code gut erkennbar durch die Klammerungen, was hier in der JavaScript Simulation verloren geht.
 
 ```javascript
-// import memory js.mem
+// import memory env.mem
 // here we simulate it by an array buffer
 const buffer = new ArrayBuffer(10 * 64 * 1024);
 const mem = new DataView(buffer);

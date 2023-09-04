@@ -3,7 +3,7 @@ Zu einem WebAssembly Modul wird ein `ArrayBuffer` (bzw. `SharedArrayBuffer`) ver
 > Aktuell ist ein WebAssembly Modul auf eine Speicherinstanz beschränkt. Es ist anzunehmen, dass dies in naher Zukunft angepasst wird.
 
 ## Speicher exportieren
-Ein WebAssembly Modul kann Speicher exportieren und instanzieren, dies hier demonstriert an einem Beispiel.
+Ein WebAssembly Modul kann Speicher exportieren und instanziieren. Was nachfolgend an einem Beispiel demonstriert wird.
 
 ```wat
 (module
@@ -13,6 +13,7 @@ Ein WebAssembly Modul kann Speicher exportieren und instanzieren, dies hier demo
 ```
 
 Kompilieren `wat2wasm export.wat -o export.wasm`
+
 Analysieren `wasm-objdump -x export.wasm`
 
 ```bash
@@ -50,7 +51,7 @@ Kurzbeschreibung der Abschnitte:
     <article>
         <h1>WebAssembly Memory Export</h1>
         <p>Current Memory instance: <span id="mem"></span></p>
-        <p>Out of page: <span id="pages"></span></p>
+        <p>Out of page/s: <span id="pages"></span></p>
         <p>First Bytes, Uint8Buffer[0-4]: <span id="firstbytes"></span></p>
         <p>First integer, Uint32Buffer[0]: <span id="firstint"></span></p>
         <button type="button" id="extend">Extend</button>
@@ -102,14 +103,15 @@ Kurzbeschreibung der Abschnitte:
 ```
 
 Anwendung starten `python3 -m http.server`
+
 Analysieren im Browser `http://localhost:8000`
 
 Falls diese Schritte neu waren, empfehle ich meine älteren Beiträge zu konsultieren:
 * [Erste Erfahrungen mit WebAssembly](https://medium.com/webassembly/first-experiences-with-webassembly-dafb2cf2ab52) gibt eine Einführung und beschreibt den Werkzeugkasten für WebAssembly
-* [WebAssebmly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) erklärt die Module und deren Aufbau (Abschnitte [Sections])
+* [WebAssebmly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) erklärt den Aufbau des WebAssembly Moduls
 * [JavaScript und Bytes](https://medium.com/@marcokuoni/javascript-and-bytes-44a70871986) zeigt wie man in JavaScript mit Bytes arbeiten kann (`ArrayBuffer`, `DataView`)
 
-Beim Aufstarten der Anwendung
+Beim Starten der Anwendung
 ![Anwendung starten](export_start.png)
 
 ![Uint32 Interpretation](uint32.png)
@@ -117,14 +119,16 @@ Beim Aufstarten der Anwendung
 Nach dem Klick auf den Button `Extend` wird der Speicherbereich um eine Seite (`Page`) erweitert. Das heisst der `ArrayBuffer` wird ungültig (detached) und der Inhalt in einen neuen grösseren `ArrayBuffer` kopiert.
 * [Detachment upon growing](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory/grow#detachment_upon_growing)
 * [Alternative: SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer#webassembly_shared_memory)
+
 ![Erste Erweiterung (Klick)](first_extend.png)
 
 Nach dem vierten Klick auf den Button `Extend` läuft man in einen Bereichsfehler (`RangeError`). Dies gemäss der definierten Obergrenze im WAT von vier Seiten (`Pages`).
 ![Range Error in Anwendung](range_error.png)
+
 ![Range Error in Console](range_error_console.png)
 
 ## Speicher importieren
-Von der JavaScript Seite kann *ein* Speicher (`Memory`) dem WebAssembly Modul zur Verfügung gestellt werden (importiert). Was mit dem folgenden WAT Programm eines Fibonacci Algorithmus demostriert wird. Die intepretierung des Stackautomaten Algorithmus ist im letzten Abschnitt dieses Artikels beschrieben.
+Von der JavaScript Seite kann *ein* Speicher (`Memory`) dem WebAssembly Modul zur Verfügung gestellt werden (importiert). Was mit dem folgenden WAT Programm eines Fibonacci Algorithmus demonstriert wird. Die Interpretierung des Fibonacci Stackautomaten Algorithmus ist im letzten Abschnitt dieses Artikels beschrieben.
 
 
 ```wat
@@ -160,6 +164,7 @@ Von der JavaScript Seite kann *ein* Speicher (`Memory`) dem WebAssembly Modul zu
 ```
 
 Kompilieren `wat2wasm fibonacci.wat -o fibonacci.wasm`
+
 Analysieren `wasm-objdump -x fibonacci.wasm`
 
 ```bash
@@ -182,9 +187,9 @@ Code[1]:
 ```
 
 Kurzbeschreibung der Abschnitte:
-* `Type[1]` definiert unseren Funktionstyp mit einem Parameter vom Typ `i32` und ohne Rückgabewert.
+* `Type[1]` definiert unseren Funktionstyp mit einem Input-Parameter vom Typ `i32` und ohne Rückgabewert.
 * `Import[1]` importiert eine Speicherinstanz aus dem Namensbereich `env.mem`.
-* `Function[1]` definiert eine Funktion mit dem Typ `0` (siehe `Type[1]`) und dem Namen `fibonacci`.
+* `Function[1]` definiert eine Funktion mit dem Typ (`signature`) `0` (siehe oben unter `Type[1]`) und dem Namen `fibonacci`.
 * `Export[1]` exportiert die Funktion `fibonacci` mit dem Namen `fibonacci`.
 * `Code[1]` definiert den Code der Funktion `fibonacci` mit einer Grösse von 77 Bytes.
 
@@ -249,6 +254,7 @@ Anwendung starten `python3 -m http.server`
 Analysieren im Browser `http://localhost:8000`
 
 ![Fibonacci in Anwendung](fibonacci.png)
+
 ![Fiboncaci in Console](fibonacci_console.png)
 
 > Es gilt zu beachten, dass das Fibonacci Programm hier nicht wirklich sicher ist und nur zur Demonstration dient. Es wird zum Beispiel nicht geprüft, ob der Speicherbereich überhaupt existiert und ob die Speicherbereiche nicht überschrieben werden.
@@ -264,6 +270,7 @@ Wie kann mit Srings gearbeitet werden im Speicher.
 ```
 
 Kompilieren `wat2wasm string.wat -o string.wasm`
+
 Analysieren `wasm-objdump -x string.wasm`
 
 ```bash
@@ -345,20 +352,21 @@ Offsetberechnung für die Zeichenkette `Hello, World! 😀`:
 ```
 
 Anwendung starten `python3 -m http.server`
+
 Analysieren im Browser `http://localhost:8000`
 
 ![String in Anwendung](string.png)
 
 ## Fibonacci Umsetzung im Stackautomaten
-Es ist beinahe möglich den Fibonacci Algorithmus für den Stackautomaten 1:1 in JavaScript zu übersetzen. Ein paar Anmerkung:
-* Es wird kein Import benutzt sondern der importierte Speicher mit einem `ArrayBuffer` simuliert. Was grundsätzlich auch im Hintergrund vom WebAssembly verwendet wird.
+Hier den Versuch einer Simulation des Stackautomaten Fibonacci Algorithmus in JavaScript zu implementieren. Ein paar Anmerkung:
+* Es wird kein Import benutzt sondern der importierte Speicher mit einem `ArrayBuffer` simuliert. Was auch im Hintergrund vom WebAssembly verwendet wird.
 * Es können in JavaScript keine GoTo-Anweisungen eingesetzt werden. Um trotzdem etwas aufzuzeigen, wie die Schlaufe im Stackautomaten funktioniert, wird ein `while(true)` mit einem `break` und `continue` verwendet.
-* Die Positionen im Kommentar werden unten für die Darstellung der Entwicklung des Speichers verwendet.
-* Die Hilfsvariable index wird zur Zählung der Iterationen verwendet. 
-* Die Hilfsvariable ptr wird verwendet um die Position im Speicher zu halten.
-* Die Integer Resultate (4 Bytes) werden linear im Speicher abgelegt und wir selbst müssen die Positionen dazu wissen und berechnen.
+* Die Positionen in den Kommentaren werden unten für die Darstellung zur Entwicklung des Speichers verwendet.
+* Die Hilfsvariable `index` wird zur Zählung der Iterationen verwendet. 
+* Die Hilfsvariable `ptr` wird verwendet um die Position im Speicher zu halten.
+* Die jeweiligen Integer Resultate (4 Bytes) werden linear im Speicher abgelegt und das Programm selbst muss die Positionen dazu wissen und berechnen.
 
-> Beachte: WASM wird in einem virtuellen Stackautomaten ausgeführt. Daher müssen die Werte immer zuerst auf den Stack gelegt werden, bevor sie gelesen, verarbeitet und vom Stack entfernt werden. Das Resultat der Verarbeitung wird anschliessen auch auf den Stack gelegt und kann direkt als Eingabe für den nächsten Schritt dienen. Diese Abläufe sind im WAT-Code gut erkennbar durch die Klammerungen, was hier in der JavaScript Simulation verloren geht.
+> Beachte: WASM wird in einem virtuellen Stackautomaten ausgeführt. Daher müssen die Werte immer zuerst auf den Stack gelegt werden, bevor sie gelesen, verarbeitet und vom Stack entfernt werden. Das Resultat der Verarbeitung wird anschliessen wieder auf den Stack gelegt und kann direkt als Eingabe für den nächsten Schritt dienen. Diese Abläufe sind im WAT-Code durch die Klammerungen erkennbar, was hier in der JavaScript Simulation verloren geht.
 
 ```javascript
 // import memory env.mem
@@ -439,9 +447,9 @@ Position 2:
 ```
 
 ## Weiterführend
-* [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes)
-* [English Version](https://github.com/marcokuoni/public_doc/tree/main/essays/3_javascript_and_bytes/README.md)
+* [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/4_webassembly_memory)
+* [English Version](https://github.com/marcokuoni/public_doc/tree/main/essays/4_webassembly_memory/README.md)
 
 Ich bin gerne bereit den Beitrag noch zu präzisieren, erweitern oder zu korrigieren. Schreibt ein Feedback oder meldet euch direkt bei mir.
 
-Erstellt von [Marco Kuoni, August 2023](https://marcokuoni.ch)
+Erstellt von [Marco Kuoni, September 2023](https://marcokuoni.ch)

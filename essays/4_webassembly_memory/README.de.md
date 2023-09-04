@@ -106,10 +106,14 @@ Anwendung starten `python3 -m http.server`
 
 Analysieren im Browser `http://localhost:8000`
 
+---
+
 Falls diese Schritte neu waren, empfehle ich meine älteren Beiträge zu konsultieren:
 * [Erste Erfahrungen mit WebAssembly](https://medium.com/webassembly/first-experiences-with-webassembly-dafb2cf2ab52) gibt eine Einführung und beschreibt den Werkzeugkasten für WebAssembly
 * [WebAssebmly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) erklärt den Aufbau des WebAssembly Moduls
 * [JavaScript und Bytes](https://medium.com/@marcokuoni/javascript-and-bytes-44a70871986) zeigt wie man in JavaScript mit Bytes arbeiten kann (`ArrayBuffer`, `DataView`)
+
+---
 
 Beim Starten der Anwendung
 ![Anwendung starten](export_start.png)

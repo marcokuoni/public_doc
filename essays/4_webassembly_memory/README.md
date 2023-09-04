@@ -1,5 +1,5 @@
 # WebAssembly Memory
-A `ArrayBuffer` (or `SharedArrayBuffer`) is associated with a WebAssembly module, which serves as WebAssembly memory. The memory instance is either created by the module itself or provided by the host system. These instances are imported or exported by the module just like functions. Each instance consists of a linear memory divided into 64 kilobyte-sized pages.
+An `ArrayBuffer` (or `SharedArrayBuffer`) is associated with a WebAssembly module, which serves as WebAssembly memory. The memory instance is either created by the module itself or provided by the host system. These instances are imported or exported by the module just like functions. Each instance consists of a linear memory divided into 64 kilobyte-sized pages.
 > Currently, a WebAssembly module is limited to one memory instance only. It is expected that this will be adjusted in the near future.
 
 ## Exporting Memory
@@ -106,14 +106,17 @@ Running the Application `python3 -m http.server`
 
 Analyzing in the Browser `http://localhost:8000`
 
+---
+
 If these steps are new to you, I recommend consulting my earlier posts:
 * [First Experiences with WebAssembly](https://medium.com/webassembly/first-experiences-with-webassembly-dafb2cf2ab52) provides an introduction and describes the toolkit for WebAssembly.
 * [WebAssembly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) explains the structure of the WebAssembly module.
 * [JavaScript and Bytes](https://medium.com/@marcokuoni/javascript-and-bytes-44a70871986) shows how to work with bytes in JavaScript (`ArrayBuffer`, `DataView`).
 
+---
 
 Upon starting the application:
-![Starting the application](export_start.png)
+![Starting the Application](export_start.png)
 
 ![Uint32 Interpretation](uint32.png)
 
@@ -406,7 +409,7 @@ for(let i = 0; i < 10; i++) {
 }
 ```
 
-![The console log of the Fibonacci simulation](javscript_fibonacci_console.png)
+![The Console Log of the Fibonacci Simulation](javscript_fibonacci_console.png)
 
 During each iteration, the linear memory develops as follows:
 ```

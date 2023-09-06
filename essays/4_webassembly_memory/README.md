@@ -370,7 +370,7 @@ Here's an attempt to simulate the stack machine Fibonacci algorithm in JavaScrip
 * The auxiliary variable `ptr` is used to maintain the position in memory.
 * The individual integer results (4 bytes) are linearly stored in memory, and the program itself must know and calculate the positions for them.
 
-> Note: WASM is executed in a virtual stack machine. Therefore, values must always be pushed onto the stack before they are read, processed, and popped from the stack. The result of the processing is then pushed back onto the stack and can be used directly as input for the next step. These processes are recognizable in the WAT code through the parentheses, which are lost in this JavaScript simulation.
+> Note: WASM is executed in a virtual stack machine. Therefore, values must always be pushed onto the stack before they are read, processed, and popped from the stack. The result of the processing is then pushed back onto the stack and can be used directly as input for the next calculation. These processes are recognizable in the WAT code through the parentheses, which are lost in this JavaScript simulation.
 
 ```javascript
 // import memory env.mem

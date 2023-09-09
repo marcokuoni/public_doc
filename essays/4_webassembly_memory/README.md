@@ -449,8 +449,6 @@ Position 2:
 .
 ```
 
-
-
 ## Further Resources
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/4_webassembly_memory)
 * [Deutsche Version](https://github.com/marcokuoni/public_doc/tree/main/essays/4_webassembly_memory/README.de.md)

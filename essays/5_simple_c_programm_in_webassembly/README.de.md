@@ -25,7 +25,7 @@ int main() {
 ### Für das Hostsystem
 Wenn man nur mit Programmiersprachen arbeitet, die direkt interpretiert werden, ist dieser Schritt nicht immer bekannt. Die Programmiersprache C muss zuerst in Maschinencode übersetzt werden, damit dieser ausgeführt werden kann. Hierzu gibt es diverse Compiler, welche dies übernehmen können. In diesem Beispiel verwenden wir den [LLVM Compiler](https://llvm.org), für welchen es diverse Versionen für unterschiedliche Betriebssysteme giebt.
 
-Installieren unter Ubuntu `sudo apt install clang`
+Installieren unter Ubuntu `sudo apt install clang`.
 
 ```bash
 $ clang multiply.c
@@ -128,7 +128,7 @@ Bild von [gopheracademy](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-
 
 Dies kann nun genutzt werden um mit einem WebAssembly Backend mit LLVM WebAssembly Code zu generieren. 
 
-Installieren unter Ubuntu `sudo apt install llvm`, `sudo apt install lld`
+Installieren unter Ubuntu `sudo apt install llvm`, `sudo apt install lld`.
 
 ```bash
 $ llc --version
@@ -180,6 +180,7 @@ Ubuntu LLVM version 14.0.0
     x86        - 32-bit X86: Pentium-Pro and above
     x86-64     - 64-bit X86: EM64T and AMD64
     xcore      - XCore
+
 $ wasm-ld --version
 Ubuntu LLD 14.0.0
 ```
@@ -196,11 +197,11 @@ int multiply(int a, int b) {
 Kompilieren `clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all simple_multiply.c -o multiply.wasm`
 
 Erklärung zu den verwendeten Optionen:
-* `--target=wasm32` gibt an, dass für 32-Bit WebAssembly kompiliert werden soll
-* `-nostdlib` gibt an, dass keine C-Standardbibliothek verwendet werden soll
-* `-Wl,--no-entry` gibt an, dass keine `main` Funktion vorhanden ist
-* `-Wl,--export-all` gibt an, dass alle Funktionen exportiert werden sollen
-* `-o multiply.wasm` gibt an, dass die Ausgabe in die `multiply.wasm` Datei geschrieben werden soll
+* `--target=wasm32` gibt an, dass für 32-Bit WebAssembly kompiliert werden soll.
+* `-nostdlib` gibt an, dass keine C-Standardbibliothek verwendet werden soll.
+* `-Wl,--no-entry` gibt an, dass keine `main` Funktion vorhanden ist.
+* `-Wl,--export-all` gibt an, dass alle Funktionen exportiert werden sollen.
+* `-o multiply.wasm` gibt an, dass die Ausgabe in die `multiply.wasm` Datei geschrieben werden soll.
 
 ```bash
 $ file multiply.wasm
@@ -313,10 +314,10 @@ Analysieren im Browser `http://localhost:8000`
 ---
 
 Falls diese Webanwendung neu war oder noch mehr Interesse am Thema besteht, empfehle ich meine älteren Beiträge zu konsultieren:
-* [Erste Erfahrungen mit WebAssembly](https://medium.com/webassembly/first-experiences-with-webassembly-dafb2cf2ab52) gibt eine Einführung und beschreibt den Werkzeugkasten für WebAssembly
-* [WebAssebmly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) erklärt den Aufbau des WebAssembly Moduls
-* [JavaScript und Bytes](https://medium.com/@marcokuoni/javascript-and-bytes-44a70871986) zeigt wie man in JavaScript mit Bytes arbeiten kann (`ArrayBuffer`, `DataView`)
-* [WebAssembly Memory](https://medium.com/webassembly/webassembly-memory-32bbe210112c) beschreibt den Umgang mit dem Speicher in WebAssembly
+* [Erste Erfahrungen mit WebAssembly](https://medium.com/webassembly/first-experiences-with-webassembly-dafb2cf2ab52) gibt eine Einführung und beschreibt den Werkzeugkasten für WebAssembly.
+* [WebAssebmly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) erklärt den Aufbau des WebAssembly Moduls.
+* [JavaScript und Bytes](https://medium.com/@marcokuoni/javascript-and-bytes-44a70871986) zeigt wie man in JavaScript mit Bytes arbeiten kann (`ArrayBuffer`, `DataView`).
+* [WebAssembly Memory](https://medium.com/webassembly/webassembly-memory-32bbe210112c) beschreibt den Umgang mit dem Speicher in WebAssembly.
 
 ---
 

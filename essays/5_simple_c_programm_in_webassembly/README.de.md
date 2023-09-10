@@ -40,7 +40,7 @@ $ ./a.out
 > Es ist zu beachten, dass der Compiler normalerweise für das Hostsystem kompiliert. Somit kann das Programm nur auf diesem Hostsystem ausgeführt werden.
 
 ### Assembly Code
-Wie es bei WASM das WAT-Format gibt um die Maschinenbefehle für Menschen lesbar zu macht, gibt es auch für C eine ähnliche Sprache. Diese wird als [Assembly Code](https://en.wikipedia.org/wiki/Assembly_language) bezeichnet. Dieser Code kann mit einem Disassembler aus dem Maschinencode generiert werden oder wie hier direkt aus der höheren Sprache per LLVM.
+Wie es bei WebAssembly das WAT-Format gibt um die Maschinenbefehle für Menschen lesbar zu macht, gibt es auch für native Maschinenbefehle eine ähnliche Sprache. Diese wird als [Assembly Code](https://en.wikipedia.org/wiki/Assembly_language) bezeichnet. Dieser Code kann mit einem Disassembler aus dem Maschinencode generiert werden oder wie hier direkt aus der höheren Sprache per LLVM.
 
 ```bash
 $ clang -S multiply.c
@@ -124,7 +124,7 @@ main:                                   # @main
 Die Idee hinter LLVM (früher Low Level Virtual Machine) ist ähnlich wie die von WebAssembly aufgebaut. Verschiedene Frontends für unterschiedliche höhere Sprachen übersetzen in eine LLVM-Zwischensprache. Diese Zwischensprache wird dann auf einer virtuellen Maschine ausgeführt und analysiert beziehungsweise optimiert. Zum Schluss kann dann von verschiedenen Backends in konkrete Maschinencodes übersetzt werden. 
 
 ![LLVM Compiler](llvm_compiler.png)
-Bild von [gopheracademy](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
+Bild von [Gopher Academy Blog](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
 
 Dies kann nun genutzt werden um mit einem WebAssembly Backend mit LLVM WebAssembly Code zu generieren. 
 
@@ -194,7 +194,7 @@ int multiply(int a, int b) {
 }
 ```
 
-Kompilieren `clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all simple_multiply.c -o multiply.wasm`
+Kompilieren `clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all simple_multiply.c -o multiply.wasm`.
 
 Erklärung zu den verwendeten Optionen:
 * `--target=wasm32` gibt an, dass für 32-Bit WebAssembly kompiliert werden soll.
@@ -208,7 +208,7 @@ $ file multiply.wasm
 multiply.wasm: WebAssembly (wasm) binary module version 0x1 (MVP)
 ```
 
-Analysieren `wasm-objdump -x multiply.wasm`
+Analysieren `wasm-objdump -x multiply.wasm`.
 
 ```bash
 $ wasm-objdump -x multiply.wasm
@@ -255,9 +255,9 @@ Custom:
  - name: "producers"
 ```
 
-Die Details zu den einzelnen Sektionen sind in der [WebAssembly Spezifikation](https://webassembly.github.io/spec/core/binary/modules.html#sections) beschrieben und werden hier nicht weiter erläutert.
+Die Details zu den einzelnen Sektionen sind in der [WebAssembly Spezifikation](https://webassembly.github.io/spec/core/binary/modules.html#sections) beschrieben und werden hier nicht weiter erläutert. Man bemerke die Zeile `func[1] <multiply> -> "multiply"` im Abschnitt `Export[9]`. Was uns ermöglicht die Funktion `multiply` in der Webanwendung aufzurufen.
 
-### Gebrauch in einer Webanwendung
+#### Gebrauch in einer Webanwendung
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -305,9 +305,9 @@ Die Details zu den einzelnen Sektionen sind in der [WebAssembly Spezifikation](h
 </html>
 ```
 
-Anwendung starten `python3 -m http.server`
+Anwendung starten `python3 -m http.server`.
 
-Analysieren im Browser `http://localhost:8000`
+Analysieren im Browser `http://localhost:8000`.
 
 ![Resultat der Webanwendung](webapplication.png)
 

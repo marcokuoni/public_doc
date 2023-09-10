@@ -2,7 +2,7 @@
 JavaScript doesn't always make sense for every use case. Other languages can offer advantages in performance, security, or simplicity. Additionally, existing programs in other languages may potentially be used easily.
 
 ## Multiplying in C
-As already mentioned in the previous article, a multiplication function is used as an example.
+As already mentioned in the previous articles, a multiplication function is used as an example.
 
 ```c
 #include <stdio.h>
@@ -37,10 +37,10 @@ $ ./a.out
 2 * 21 = 42
 ```
 
-> It should be noted that the compiler typically compiles for the host system. Thus, the program can only be executed on this host system.
+> It should be noted that the compiler typically compiles for the host system. Thus, the program can only be executed on that host system.
 
 ### Assembly Code
-Just as there is the WAT format in WASM to make machine instructions human-readable, there is a similar language for C as well. This is referred to as [Assembly Code](https://en.wikipedia.org/wiki/Assembly_language). This code can be generated from machine code using a disassembler or, as shown here, directly from the higher-level language using LLVM.
+Just as there is the WAT format in WebAssembly to make machine instructions human-readable, there is a similar language for native machine instructions as well. This is referred as [Assembly Code](https://en.wikipedia.org/wiki/Assembly_language). This code can be generated from machine code using a disassembler or, as shown here, directly from the higher-level language using LLVM.
 
 ```bash
 $ clang -S multiply.c
@@ -123,7 +123,7 @@ main:                                   # @main
 The idea behind LLVM (formerly Low Level Virtual Machine) is structured similarly to WebAssembly. Various frontends for different high-level languages translate into an LLVM intermediate language. This intermediate language is then executed and analyzed or optimized on a virtual machine. Finally, it can be translated into concrete machine code by various backends.
 
 ![LLVM Compiler](llvm_compiler.png)
-Image by [gopheracademy](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
+Image by [Gopher Academy Blog](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
 
 To install LLVM on Ubuntu, use the commands `sudo apt install llvm` and `sudo apt install lld`.
 
@@ -191,7 +191,7 @@ int multiply(int a, int b) {
 }
 ```
 
-Compiling `clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all simple_multiply.c -o multiply.wasm`
+Compiling `clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all simple_multiply.c -o multiply.wasm`.
 
 Explanation of the options used:
 * `--target=wasm32` specifies that it should be compiled for 32-bit WebAssembly.
@@ -205,7 +205,7 @@ $ file multiply.wasm
 multiply.wasm: WebAssembly (wasm) binary module version 0x1 (MVP)
 ```
 
-Analyzing `wasm-objdump -x multiply.wasm`
+Analyzing `wasm-objdump -x multiply.wasm`.
 
 ```bash
 $ wasm-objdump -x multiply.wasm
@@ -252,9 +252,9 @@ Custom:
  - name: "producers"
 ```
 
-The details of the individual sections are described in the [WebAssembly Specification](https://webassembly.github.io/spec/core/binary/modules.html#sections) and are not further explained here.
+The details of the individual sections are described in the [WebAssembly Specification](https://webassembly.github.io/spec/core/binary/modules.html#sections) and are not further explained here. Note the line `func[1] <multiply> -> "multiply"` in section `Export[9]`, which allows us to call the `multiply` function in the web application.
 
-### Usage in a Web Application
+#### Usage in a Web Application
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -302,9 +302,9 @@ The details of the individual sections are described in the [WebAssembly Specifi
 </html>
 ```
 
-Running the Application `python3 -m http.server`
+Running the Application `python3 -m http.server`.
 
-Analyzing in the Browser `http://localhost:8000`
+Analyzing in the Browser `http://localhost:8000`.
 
 ![Result of the Application](webapplication.png)
 

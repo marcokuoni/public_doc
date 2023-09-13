@@ -23,9 +23,13 @@ int main() {
 ## Kompilieren 
 
 ### Für das Hostsystem
-Wenn man nur mit Programmiersprachen arbeitet, die direkt interpretiert werden, ist dieser Schritt nicht immer bekannt. Die Programmiersprache C muss zuerst in Maschinencode übersetzt werden, damit dieser ausgeführt werden kann. Hierzu gibt es diverse Compiler, welche dies übernehmen können. In diesem Beispiel verwenden wir den [LLVM Compiler](https://llvm.org), für welchen es diverse Versionen für unterschiedliche Betriebssysteme giebt.
+Wenn man nur mit Programmiersprachen arbeitet, die direkt interpretiert werden, ist dieser Schritt nicht immer bekannt. Die Programmiersprache C muss zuerst in Maschinencode übersetzt werden, damit dieser ausgeführt werden kann. Hierzu gibt es diverse Compiler, welche dies übernehmen können. In diesem Beispiel verwenden wir den [Clang](https://clang.llvm.org/get_started.html) [LLVM Compiler](https://llvm.org), für welchen es diverse Versionen für unterschiedliche Betriebssysteme giebt.
 
 Installieren unter Ubuntu `sudo apt install clang`.
+
+> Auf Grund des Inputs von Frank Denis über Medium, erläutere ich einen alternativen Weg am Schluss des Artikels mit dem [zig cc Compiler](https://ziglang.org/) als [Ersatz für Clang](https://andrewkelley.me/post/zig-cc-powerful-drop-in-replacement-gcc-clang.html). Der aber zum aktuellen Zeitpunkt noch nicht genau gleich verwendet werden kann und daher empfehle ich für diesen Artikel Clang zu verwenden.
+
+```bash
 
 ```bash
 $ clang multiply.c
@@ -123,7 +127,7 @@ main:                                   # @main
 
 Die Idee hinter LLVM (früher Low Level Virtual Machine) ist ähnlich wie die von WebAssembly aufgebaut. Verschiedene Frontends für unterschiedliche höhere Sprachen übersetzen in eine LLVM-Zwischensprache. Diese Zwischensprache wird dann auf einer virtuellen Maschine ausgeführt und analysiert beziehungsweise optimiert. Zum Schluss kann dann von verschiedenen Backends in konkrete Maschinencodes übersetzt werden. 
 
-![LLVM Compiler](llvm_compiler.png)
+![LLVM Compiler](llvm_compiler.jpg)
 Bild von [Gopher Academy Blog](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
 
 Dies kann nun genutzt werden um mit einem WebAssembly Backend mit LLVM WebAssembly Code zu generieren. 
@@ -310,6 +314,18 @@ Anwendung starten `python3 -m http.server`.
 Analysieren im Browser `http://localhost:8000`.
 
 ![Resultat der Webanwendung](webapplication.png)
+
+
+## Alternativer Weg mit Zig CC Compiler
+Der [zig cc Compiler](https://ziglang.org/) ist ein Drop-In Ersatz für Clang und GCC und besitzt noch keinen stabilen Release. Er ist in der [Zig Programmiersprache geschrieben](https://de.wikipedia.org/wiki/Zig_(Programmiersprache)). Ein Vorteil gegenüber Clang ist, dass er direkt mit SourceCode ausgeliefert wird und dieser erst bei Gebrauch für das Hostsystem gebuildet wird. 
+Clang funktioniert auch auf allen gängigen Plattformen, jedoch wird man eventuell nicht immer die neueste Version für sein Betriebssystem kompiliert bekommen und die Optionen können unter Umständen anders benannt sein. Vielleicht für die Befehle im Artikel müssen clang, llvm oder der Linker (lld) ein Update erhalten damit die Befehle korrekt funktionieren.
+
+Installieren unter Ubuntu `snap install zig --classic --beta` (0.11.0), für on the edge `snap install zig --classic --edge` (0.12.0-dev) oder selbst kompilieren. Die Details findet man hier [ziglang.org/download](https://ziglang.org/download/).
+
+* Um das C-Progamm mit ZIG für das Hostsystem zu kompilieren `zig cc multiply.c`.
+* Assembly Code generieren `zig cc -S multiply.c`.
+
+Beim Kompilieren für die Webanwendung gibt es leider noch Probleme. Gemäss Dokumentation müsste `zig cc simple_multiply.c -target wasm32-freestanding -nostdlib -shared -rdynamic -o multiply.wasm` gleich funktionieren wie `clang simple_multiply.c --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o multiply.wasm`. Dabei steht `-shared` für keine main Funktion `-Wl,--no-entry` und `-rdynamic` für alle Funktionen exportieren `Wl,--export-all`. Leider funktioniert dies aber nicht und die `multiply` Funktion wird nicht exportiert. Ich denke aber, da zig cc noch in der Entwicklung ist, wird dies in Zukunft funktionieren.
 
 ---
 

@@ -23,7 +23,9 @@ int main() {
 ## Compilation
 
 ### For the Host System
-If you are working only with programming languages that are directly interpreted, this step may not always be familiar. The C programming language must first be translated into machine code before it can be executed. There are various compilers that can handle this task. In this example, we are using the [LLVM Compiler](https://llvm.org), for which there are various versions available for different operating systems.
+If you are working only with programming languages that are directly interpreted, this step may not always be familiar. The C programming language must first be translated into machine code before it can be executed. There are various compilers that can handle this task. In this example, we are using the [Clang](https://clang.llvm.org/get_started.html) [LLVM Compiler](https://llvm.org), for which there are various versions available for different operating systems.
+
+> Based on Frank Denis' input via Medium, I explain an alternative approach at the end of the article using the [zig cc Compiler](https://ziglang.org/) as a [replacement for Clang](https://andrewkelley.me/post/zig-cc-powerful-drop-in-replacement-gcc-clang.html). However, it cannot be used exactly the same way at the current time. However, it cannot be used exactly the same way at the current time so i still recommend using Clang.
 
 To install it on Ubuntu, use the command `sudo apt install clang`.
 
@@ -122,7 +124,7 @@ main:                                   # @main
 
 The idea behind LLVM (formerly Low Level Virtual Machine) is structured similarly to WebAssembly. Various frontends for different high-level languages translate into an LLVM intermediate language. This intermediate language is then executed and analyzed or optimized on a virtual machine. Finally, it can be translated into concrete machine code by various backends.
 
-![LLVM Compiler](llvm_compiler.png)
+![LLVM Compiler](llvm_compiler.jpg)
 Image by [Gopher Academy Blog](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
 
 To install LLVM on Ubuntu, use the commands `sudo apt install llvm` and `sudo apt install lld`.
@@ -307,6 +309,17 @@ Running the Application `python3 -m http.server`.
 Analyzing in the Browser `http://localhost:8000`.
 
 ![Result of the Application](webapplication.png)
+
+## Alternative Approach with Zig CC Compiler
+The [zig cc Compiler](https://ziglang.org/) is a drop-in replacement for Clang and GCC and does not yet have a stable release. It's written in the [Zig programming language](https://en.wikipedia.org/wiki/Zig_(programming_language)). One advantage over Clang is that it gets shipped with source code which gets built for the host system only when needed. 
+While Clang works on various platforms, you might not always get the latest version compiled for your operating system, and the options could potentially have different names. Perhaps for the commands in the article to work correctly, clang, llvm, or the linker (lld) may need an update.
+
+To install it on Ubuntu, you can use `snap install zig --classic --beta` (0.11.0) or, for the latest development version, `snap install zig --classic --edge` (0.12.0-dev), or compile it yourself. Details can be found here: [ziglang.org/download](https://ziglang.org/download/).
+
+* To compile the C-Code with ZIG for the host system: `zig cc multiply.c`.
+* To generate assembly code: `zig cc -S multiply.c`.
+
+Unfortunately, there are still issues when compiling it for the web applications. According to the documentation, `zig cc simple_multiply.c -target wasm32-freestanding -nostdlib -shared -rdynamic -o multiply.wasm` should work similarly to `clang simple_multiply.c --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o multiply.wasm`. However, this doesn't work as expected, and the `multiply` function isn't exported. I believe that as Zig CC is still in development, this will likely work in the future.
 
 ---
 

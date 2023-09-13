@@ -329,6 +329,8 @@ Beim Kompilieren für die Webanwendung gibt es leider noch Probleme. Gemäss Dok
 
 Eine mögliche Lösung mit dem ZIG CC wäre in zwei Schritten zu kompilieren `zig cc simple_multiply.c -c -target wasm32-freestanding -nostdlib -o multiply.o`. Wobei `-c` in eine Objekt-Datei kompiliert ohne diese zu linken. Welche dann mit dem [WebAssembly Linker](https://lld.llvm.org/WebAssembly.html) in ein ausführbares WebAssembly gemäss unseren Anwendungsfall übersetzt werden kann `wasm-ld multiply.o --no-entry --export-all -o multiply.wasm`
 
+Den Linker unter Ubuntu installieren `sudo apt install lld`.
+
 ---
 
 Falls diese Webanwendung neu war oder noch mehr Interesse am Thema besteht, empfehle ich meine älteren Beiträge zu konsultieren:

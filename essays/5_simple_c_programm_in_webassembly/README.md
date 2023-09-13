@@ -322,6 +322,9 @@ To install it on Ubuntu, you can use `snap install zig --classic --beta` (0.11.0
 Unfortunately, there are still issues when compiling it for the web applications. According to the documentation, `zig cc simple_multiply.c -target wasm32-freestanding -nostdlib -shared -rdynamic -o multiply.wasm` should work similarly to `clang simple_multiply.c --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o multiply.wasm`. However, this doesn't work as expected, and the `multiply` function isn't exported. I believe that as Zig CC is still in development, this will likely work in the future.
 
 A possible solution with the ZIG CC would be to compile in two steps: `zig cc simple_multiply.c -c -target wasm32-freestanding -nostdlib -o multiply.o`. Where `-c` compiles into an object file without linking it. This can then be translated into an executable WebAssembly according to our use case using the [WebAssembly Linker](https://lld.llvm.org/WebAssembly.html): `wasm-ld multiply.o --no-entry --export-all -o multiply.wasm`.
+
+To install the linker on Ubuntu `sudo apt install lld`.
+
 ---
 
 If this web application is new or if there is more interest in the topic, I recommend consulting my older articles:

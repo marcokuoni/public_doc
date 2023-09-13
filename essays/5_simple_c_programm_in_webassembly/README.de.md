@@ -327,6 +327,8 @@ Installieren unter Ubuntu `snap install zig --classic --beta` (0.11.0), für on 
 
 Beim Kompilieren für die Webanwendung gibt es leider noch Probleme. Gemäss Dokumentation müsste `zig cc simple_multiply.c -target wasm32-freestanding -nostdlib -shared -rdynamic -o multiply.wasm` gleich funktionieren wie `clang simple_multiply.c --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o multiply.wasm`. Dabei steht `-shared` für keine main Funktion `-Wl,--no-entry` und `-rdynamic` für alle Funktionen exportieren `Wl,--export-all`. Leider funktioniert dies aber nicht und die `multiply` Funktion wird nicht exportiert. Ich denke aber, da zig cc noch in der Entwicklung ist, wird dies in Zukunft funktionieren.
 
+Eine mögliche Lösung mit dem ZIG CC wäre in zwei Schritten zu kompilieren `zig cc simple_multiply.c -c -target wasm32-freestanding -nostdlib -o multiply.o`. Wobei `-c` in eine Objekt-Datei kompiliert ohne diese zu linken. Welche dann mit dem [WebAssembly Linker](https://lld.llvm.org/WebAssembly.html) in ein ausführbares WebAssembly gemäss unseren Anwendungsfall übersetzt werden kann `wasm-ld multiply.o --no-entry --export-all -o multiply.wasm`
+
 ---
 
 Falls diese Webanwendung neu war oder noch mehr Interesse am Thema besteht, empfehle ich meine älteren Beiträge zu konsultieren:

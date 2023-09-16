@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>"Hello Wolrd" C++ Program</title>
+</head>
+
+<body>
+    <h1 id="hello-world"></h1>
+    <script>
+        let wasm;
+
+        // If the Webassemby module had been linked with
+        //   --import-memory
+        //
+        // its memory will be provided with
+        //   const wasmMemory = new WebAssembly.Memory({initial:10, maximum:100});
+        //   const memory = new Uint8Array(wasmMemory.buffer);
+        //
+        // But this module is providing its own memory and exporting it.
+        function get_memory() {
+            return new Uint8Array(wasm.instance.exports.memory.buffer);
+        }
+
+        const decoder = new TextDecoder("utf-8");
+
+        function charPtrToString(str) {
+            const memory = get_memory();
+            let length = 0;
+            for (; memory[str + length] !== 0; ++length) { }
+            return decoder.decode(memory.subarray(str, str + length));
+        }
+
+        let printString = function (str) {
+            console.log(str);
+            document.getElementById("hello-world").innerHTML = str;
+        };
+
+        const importObject = {
+            env: {
+                print_string: function (str) {
+                    printString(charPtrToString(str));
+                }
+            }
+        };
+
+        WebAssembly.instantiateStreaming(fetch('hello_world.wasm'), importObject)
+            .then(function (obj) {
+                wasm = obj;
+
+                wasm.instance.exports.helloWorld();
+            });
+    </script>
+</body>
+
+</html>

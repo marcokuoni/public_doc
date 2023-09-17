@@ -1,8 +1,8 @@
 # "Hello World" C++ Program
-Is a simple C++ program, but how do you implement it so that it can be used in a web application as WebAssembly? This article will not delve into the details of C++ and `clang`, or compiling with `Makefile`. It is primarily about highlighting the key points to understand the interaction between C++, WebAssembly, and the web application. But if more explanation is desired here, gladly simply report.
+Is a simple C++ program, but how to implement it so that it can be used in a web application as WebAssembly? This article will not delve into the details of C++ and `clang`, or compiling with `Makefile`. It is primarily about highlighting the key points to understand the interaction between C++, WebAssembly, and the web application. But if more explanation is desired here, gladly simply report.
 
 ## Program
-Here is the program `hello_world.cpp` all the rest you will find on the [GitHub](https://github.com/marcokuoni/public_doc/tree/main/essays/6_hello_world_cpp_programm)
+Here is the program `hello_world.cpp` all the rest will be find on the [GitHub](https://github.com/marcokuoni/public_doc/tree/main/essays/6_hello_world_cpp_programm)
 ```cpp
 #include "nanolibc/libc.h"
 

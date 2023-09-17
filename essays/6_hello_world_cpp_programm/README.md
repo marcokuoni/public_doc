@@ -1,7 +1,8 @@
 # "Hello World" C++ Program
-Is a simple C++ program, but how do you implement it so that it can be used in a web application as WebAssembly? This article will not delve into the details of C++ and `clang`, or compiling with `Makefile`. It is primarily about highlighting the key points to understand the interaction between C++, WebAssembly, and the web application.
+Is a simple C++ program, but how do you implement it so that it can be used in a web application as WebAssembly? This article will not delve into the details of C++ and `clang`, or compiling with `Makefile`. It is primarily about highlighting the key points to understand the interaction between C++, WebAssembly, and the web application. But if more explanation is desired here, gladly simply report.
 
 ## Program
+Here is the program `hello_world.cpp` all the rest you will find on the [GitHub](https://github.com/marcokuoni/public_doc/tree/main/essays/6_hello_world_cpp_programm)
 ```cpp
 #include "nanolibc/libc.h"
 
@@ -70,7 +71,7 @@ clean:
 	rm -f $(OBJ) $(NANOLIBC_OBJ) $(OUTPUT) hello_world.wat
 ```
 
-Under Ubuntu, the following packages need to be installed: sudo apt install clang lld make.
+Under Ubuntu, the following packages need to be installed: `sudo apt install clang lld make`.
 
 ```bash
 $ make
@@ -118,7 +119,7 @@ wasm-ld \
 Analyzing `wasm-objdump -x hello_world.wasm`.
 
 ```bash
-m$ wasm-objdump -x hello_world.wasm
+$ wasm-objdump -x hello_world.wasm
 
 hello_world.wasm:       file format wasm 0x1
 

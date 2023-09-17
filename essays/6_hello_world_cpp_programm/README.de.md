@@ -1,7 +1,8 @@
 # "Hello World" C++ Programm
-Ist ein einfaches C++ Programm, aber wie implementiert man es damit es in einer Webanwendung als WebAssembly verwendet werden kann? Dieser Artikel wird sich nicht um die Details über C++ und `clang` bzw. dem Kompilieren mit `Makefile` kümmern. Es geht vor allem darum, die Schlüsselstellen zu beleuchten um das Zusammenspiel von C++, WebAssebly und der Webanwendung zu verstehen.
+Ist ein einfaches C++ Programm, aber wie implementiert man es damit es in einer Webanwendung als WebAssembly verwendet werden kann? Dieser Artikel wird sich nicht um die Details über C++ und `clang` bzw. dem Kompilieren mit `Makefile` kümmern. Es geht vor allem darum, die Schlüsselstellen zu beleuchten um das Zusammenspiel von C++, WebAssebly und der Webanwendung zu verstehen. Aber wenn hier mehr Erklärung gewünscht ist, gerne einfach melden.
 
 ## Programm
+Dies ist das `hello_world.cpp` Programm und ale weiteren Dateien können unter dem [GitHub](https://github.com/marcokuoni/public_doc/tree/main/essays/6_hello_world_cpp_programm) gefunden werden.
 ```cpp
 #include "nanolibc/libc.h"
 
@@ -118,7 +119,7 @@ wasm-ld \
 Analysieren `wasm-objdump -x hello_world.wasm`.
 
 ```bash
-m$ wasm-objdump -x hello_world.wasm
+$ wasm-objdump -x hello_world.wasm
 
 hello_world.wasm:       file format wasm 0x1
 

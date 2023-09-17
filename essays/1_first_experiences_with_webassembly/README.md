@@ -58,6 +58,8 @@ The online [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/) compile
 
 Or the WebAssembly Binary Toolkit (WABT, pronounced wabbit), which also offers additional tools. To perform the translation, you can enter `wat2wasm multiply.wat` in the terminal. This reduced the size from 155 bytes (WAT) to 46 bytes (WASM) (29.67% of the WAT size).
 
+On Ubuntu, the package `sudo apt install wabt` must be installed.
+
 ## Stack Machine
 wasm3 could be a potential interpreter for WASM, written in C and capable of running on various platforms. This allows executing WASM code in a REPL-style within the command line.
 ```bash

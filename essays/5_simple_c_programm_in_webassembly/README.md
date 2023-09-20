@@ -325,6 +325,8 @@ A possible solution with the ZIG CC would be to compile in two steps: `zig cc si
 
 To install the linker on Ubuntu `sudo apt install lld`.
 
+Or you can choose an explicit export, which will then work directly with ZIG CC: `zig cc simple_multiply.c -target wasm32-freestanding -nostdlib -shared -Wl,--export=multiply -o multiply.wasm`.
+
 ---
 
 If this web application is new or if there is more interest in the topic, I recommend consulting my older articles:

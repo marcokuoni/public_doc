@@ -331,6 +331,8 @@ Eine mögliche Lösung mit dem ZIG CC wäre in zwei Schritten zu kompilieren `zi
 
 Den Linker unter Ubuntu installieren `sudo apt install lld`.
 
+Oder man wählt einen expliziten export, welcher dann auch mit dem ZIG CC direkt funktioniert `zig cc simple_multiply.c -target wasm32-freestanding -nostdlib -shared -Wl,--export=multiply -o multiply.wasm`.
+
 ---
 
 Falls diese Webanwendung neu war oder noch mehr Interesse am Thema besteht, empfehle ich meine älteren Beiträge zu konsultieren:

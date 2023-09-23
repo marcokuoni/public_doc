@@ -310,7 +310,7 @@ Data[2]:
   - 00102c0: 3002 0100                                0...
   ```
 
-  Im Vergleich zu meinen anderen Artikel ist die WebAssembly Datei nun einiges grösser geworden. Jedoch ist es interessant einige Abschnitte zu überfliegen. Im `Export` ist eine `main` Funktion zu finden, welche wie gewohnt von C/C++, als Einstiegspunkt verwendet wird. Im `func[4]` Array befindet sich diese Funktion an der Position 4. Wenn nun der Ablauf des Scripts analysiert wird, kann diese Funktion als Startpunkt verwenden und ins WAT Format gewechselt werden.
+  Im Vergleich zu meinen anderen Artikel ist die WebAssembly Datei nun einiges grösser geworden. Jedoch ist es interessant einige Abschnitte zu beleuchten. Im `Export` ist eine `main` Funktion zu finden, welche wie gewohnt von C/C++, als Einstiegspunkt verwendet wird. Im `func[4]` Array befindet sich diese Funktion an der Position 4. Wenn nun der Ablauf des Scripts analysiert werden möchte, kann diese Funktion als Startpunkt verwendet und ins WAT Format gewechselt werden.
 
   Übersetzen von WebAssembly zu WAT: `wasm2wat hello_webassembly.wasm -o hello_webassembly.wat` 
 
@@ -323,7 +323,7 @@ Data[2]:
     return)
   ```
 
-  Hier wird nun nicht weiter auf die Details eingegangen. Jedoch ist es eindrücklich, wie die gesamte Funktionalität in Stackautomaten Instruktionen aussieht.
+  Hier wird nun nicht weiter auf die Details eingegangen. Jedoch ist es eindrücklich, wie die gesamte Funktionalität in Stackautomaten Instruktionen aussieht. Mehr Details dazu kann auch in meinen älteren Aritkel gefunden werden.
 
 Auf der anderen Seite beim `Import` finden man die Funktion `wasi_snapshot_preview1.fd_write`, welche vom Gästesystem zur Verfügung gestellt werden muss. 
 
@@ -351,13 +351,14 @@ Auszug aus dem `hello_webassembly.js`:
 
 Wie bereits in meinem letzten [Artikel](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea) beschrieben, wird so mit der Aussenwelt kommuniziert und dient dies als Schnittstelle. 
 
-Es soll darauf hingewiesen sein, dass es sich um eine Abstraktion (Sandbox) handelt. Die Funktion `printf` vom C Programm wird nicht auf dem Betriebssystem im klassischen Sinn aufgerufen. Sondern es wird die `_fd_write` importierte Funktion vom JavaScript aufgerufen, welche dann je nach Implementierung die `printf` Funktion umsetzt.
+Es soll darauf hingewiesen sein, dass es sich um eine Abstraktion (Sandbox) handelt. Die Funktion `printf` vom C Programm wird nicht auf dem Betriebssystem im klassischen Sinn aufgerufen. Sondern es wird die vom JavaScript bereitgestellte und vom WebAssembly importierte `_fd_write` Funktion aufgerufen, welche dann je nach Implementierung die `printf` Funktion umsetzt.
 
-In Ecmascript ist dies abhängig vom aufrufenden Interpreter des JavaScripts. Die `printChar` Funktion von der `_fd_write` Funktion beruht am Ende auf folgender Deklaration für den Output `var out = Module['print'] || console.log.bind(console);`. Hier sieht man zudem, dass die Schnittstelle (*Runtime, Sandbox) zum WebAssembly in der JavaScript Datei über eine globale Variable `Module` abstrahiert beziehungsweise zur Verfügung gestellt wird. Dieses `Module` dient als Schnittstelle zwischen WebAssembly und Gästesystem. 
+In Ecmascript ist dies abhängig vom jeweils aufrufenden Interpreter des JavaScripts. Die `printChar` Funktion von der `_fd_write` Funktion beruht am Ende auf folgender Deklaration für den Output `var out = Module['print'] || console.log.bind(console);`. 
+Hier sieht man zudem, dass die Schnittstelle (*Runtime, Sandbox) zum WebAssembly in der JavaScript Datei über eine globale Variable `Module` abstrahiert beziehungsweise zur Verfügung gestellt wird. Dieses `Module` dient als Schnittstelle zwischen WebAssembly und Gästesystem. 
 
 Darüber könnte nun zum Beispiel die `print` Funktion durch eine andere Funktion ersetzt werden. Was zur Folge hätte, dass diese Aufgerufen wird anstelle der Fallback Version mit `console.log`.
 
-> * Gemäss meiner persönlichen Meinung: Bei der JavaScript-Datei handelt es sich um eine Schnittstelle oder Abstraktion. Jedoch wird diese oft auch als Runtime oder Sandbox bezeichnet. In meinen Augen sind diese Begriffe jedoch jeweils nicht ganz optimal gewählt. Vermutlich kommt dies bei Ecmascript vor allem durch Altlasten von der asm.js Zeit. Es handelt sich hier jedoch vielmehr um eine einheitliche Schnittstelle zwischen `WebAssembly` API (die eigentliche Runtime), dem Sandboxing (Import/Export in der WebAssembly Datei) und dem Rest der JavaScript Umgebung.
+> \* Gemäss meiner persönlichen Meinung: Bei der JavaScript-Datei, beziehungsweise der `Module` Variable, handelt es sich um eine Schnittstelle oder Abstraktion. Eine Schnittstelle zwischen `WebAssembly` API (die eigentliche Runtime), dem Sandboxing (Import/Export in der WebAssembly Datei) und dem Rest der JavaScript Umgebung (interagiert mit der `Module` Variable). Diese Datei beziehungsweise Variable wird jedoch oft auch als Runtime oder Sandbox bezeichnet. In meinen Augen sind diese Begriffe nicht optimal gewählt. Bei Ecmascript kommt dies vermutlich von Altlasten der asm.js Zeiten, als es wirklich noch eine Runtime war.
 
 ### Erweiterung
 Ecmascript bietet unterschiedliche Optionen beim Kompilieren an. Welche man zum Beispiel ausnützen kann um die `main` Funktion über einen Button aufrufen zu können.
@@ -371,7 +372,7 @@ Kompilieren: `emcc hello_webassembly.c -s INVOKE_RUN=0 -s EXPORTED_FUNCTIONS=_ma
 > Mit der Option `EXPORTED_FUNCTIONS` können so kommagetrennt auch weitere Funktionen vom WebAssembly direkt exportiert werden. Per Definition muss ein Unterstrich dem Funktionsname vorgestellt werden, damit die `Module` interne Namensgebung korrekt zur WebAssembly Funktion gelinkt werden kann. Zudem wäre in diesem Spezialfall die `main` Funktion bereits als default impliziet in der Liste vorhanden. Also könnte man den Befehl auch kürzen auf `emcc hello_webassembly.c -s INVOKE_RUN=0 -o hello_webassembly_extended.js`
 
 
-> Die Option `EXPORTED_RUNTIME_METHODS`, dient einem anderen Zweck und sollte nicht mit der `EXPORTED_FUNCTIONS` Option verwechselt werden. Die `EXPORTED_RUNTIME_METHODS` Option dient um Methoden von der JavaScript Runtime, also dem `Module` selbst (nicht dem WebAssembly), zu exportieren. Als Beispiel die [ccall Funktion](https://emscripten.org/docs/api_reference/preamble.js.html#calling-compiled-c-functions-from-javascript): `emcc hello_webassembly.c -s INVOKE_RUN=0 -s EXPORTED_RUNTIME_METHODS=ccall -o hello_webassembly_extended.js`, welche dazu dient um kompilierte C Funktionen indirekt aufrufen zu können `Module.ccall("main", "number", [], []);` (siehe Kommentar in der folgenden HTML Datei)
+> Die Option `EXPORTED_RUNTIME_METHODS`, dient einem anderen Zweck und sollte nicht mit der `EXPORTED_FUNCTIONS` Option verwechselt werden. Die `EXPORTED_RUNTIME_METHODS` Option dient um Methoden von der JavaScript Schnittstelle (*Runtime, Sandbox), also dem `Module` selbst (nicht dem WebAssembly), zu exportieren. Als Beispiel die [ccall Funktion](https://emscripten.org/docs/api_reference/preamble.js.html#calling-compiled-c-functions-from-javascript): `emcc hello_webassembly.c -s INVOKE_RUN=0 -s EXPORTED_RUNTIME_METHODS=ccall -o hello_webassembly_extended.js`, welche dazu dient um kompilierte C Funktionen indirekt aufrufen zu können `Module.ccall("main", "number", [], []);` (siehe Kommentar in der folgenden HTML Datei)
 
 > Es ist zudem zu empfehlen bei Herausforderungen oder Fragen das [FAQ](https://emscripten.org/docs/getting_started/FAQ.html) von Emscripten zu konsultieren.
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Emscripten Easy Portability, C/C++ -> WebAssembly</title>
+</head>
+
+<body>
+    <h1>Emscripten Easy Portability, C/C++ -> WebAssembly</h1>
+    <h2>WebAssembly Extended Version</h2>
+    <button id="call-main-button">Call Main</button>
+    <script src="hello_webassembly_extended.js"></script>
+    <script>
+        const callMainButton = document.getElementById("call-main-button");
+        callMainButton.addEventListener("click", function () {
+            // Module.ccall("main", "number", [], []); // When you used EXPORTED_RUNTIME_METHODS=ccall you can call the main function it like this
+            Module._main();
+        });
+    </script>
+</body>
+
+</html>

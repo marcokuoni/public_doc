@@ -1,4 +1,6 @@
-# Emscripten Simple Portability, C/C++ -> WebAssembly
+# Emscripten Simple Portability
+
+## C/C++ → WebAssembly
 Why does achieving simple portability of C/C++ programs to WebAssembly make sense?
 
 There are several reasons for this, some of which are briefly listed here:
@@ -22,7 +24,7 @@ If this is all new territory or if there is a desire to understand the details o
 
 ---
 
-## Hello WebAssembly
+### Hello WebAssembly
 
 To introduce the concept, we will use a very simple C program that will be ported using Emscripten.
 
@@ -75,7 +77,7 @@ To start the application, run `python3 -m http.server`.
 
 Analyze it in the browser by navigating to `http://localhost:8000`.
 
-![Console Log of the web application](console_log.png)
+![Console Log of the Web Application](console_log.png)
 
 ### Interpretation of the Result
 
@@ -318,6 +320,8 @@ In comparison to my other articles, the WebAssembly file has now become consider
 
 To translate you can use the following command: `wasm2wat hello_webassembly.wasm -o hello_webassembly.wat`.
 
+Excerpt from `hello_webassembly.wat`:
+
 ```wat
 ...
   (func (;4;) (type 5) (param i32 i32) (result i32)
@@ -362,7 +366,7 @@ It's important to note that this is an abstraction (sandbox). The `printf` funct
 In Ecmascript, this behavior depends on the specific JavaScript interpreter making the call. The `printChar` function from the `_fd_write` function ultimately relies on the following output declaration: `var out = Module['print'] || console.log.bind(console);`. 
 Here, it's evident that the interface (*runtime, sandbox) to WebAssembly in the JavaScript file is abstracted and provided through a global variable called `Module`. This `Module` serves as the interface between WebAssembly and the rest of the JavaScript program.
 
-Moreover, you can replace the `print` function with another function using this approach. This would result in the replacement function being called instead of the fallback version with `console.log`.
+Moreover, you can replace the `Module['print']` function with another function using this approach. This would result in the replacement function being called instead of the fallback version with `console.log`.
 
 > \* Personal Opinion: Regarding the JavaScript file and the `Module` variable, it indeed functions as an interface or abstraction. It provides an unified interface from the JavaScript environment (interacting with the `Module` variable) to the `WebAssembly` API (the actual runtime), sandboxing (import/export in the WebAssembly file), and potentially used extensions (see the next article). However, this file or variable is often referred to as the runtime or sandbox. In my view, these terms may not be optimally chosen. In Ecmascript, this terminology might stem from legacy practices of the asm.js era when it truly represented a runtime.
 
@@ -374,7 +378,7 @@ Ecmascript offers various compilation options that can be utilized, for example,
 
 As an example, you can prevent the direct startup call of the `main` function (`INVOKE_RUN=0`) and make this method available as `_main` from the `Module` (`EXPORTED_FUNCTIONS=_main`).
 
-Compilation: `emcc hello_webassembly.c -s INVOKE_RUN=0 -s EXPORTED_FUNCTIONS=_main -o hello_webassembly_extended.js`
+Compilation: `emcc hello_webassembly.c -s INVOKE_RUN=0 -s EXPORTED_FUNCTIONS=_main -o hello_webassembly_extended.js`.
 
 > Using the `EXPORTED_FUNCTIONS` option, you can also export additional functions directly from WebAssembly, separated by commas. By convention, an underscore should be prepended to the function name so that the `Module` can correctly link its internal naming to the WebAssembly function. In this specific case, the `main` function is already implicitly present in the list, so the command can be shortened to `emcc hello_webassembly.c -s INVOKE_RUN=0 -o hello_webassembly_extended.js`.
 
@@ -414,7 +418,7 @@ Analyze it in the browser by navigating to `http://localhost:8000/index_extended
 
 ![WebAssembly Extended Version](extended_version.png)
 
-![Console Log after 8 Clicks](console_log_after_click.png)
+![Console Log after 8 Clicks on "Call Main"](console_log_after_click.png)
 
 ## Further Resources
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/7_emscripten_simple_portability)

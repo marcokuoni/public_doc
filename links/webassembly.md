@@ -6,6 +6,7 @@
 * [WebAssembly design](https://github.com/WebAssembly/design/tree/main)
 * [WebAssembly specification](https://webassembly.github.io/spec/core/)
 * [WebAssembly proposal](https://github.com/WebAssembly/proposals)
+* [Internet Computer blockchain](https://internetcomputer.org/docs/current/developer-docs/)
 
 ## History
 * [From wasm.js to WebAssembly] (https://brendaneich.com/2015/06/from-asm-js-to-webassembly/)

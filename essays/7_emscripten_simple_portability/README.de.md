@@ -354,7 +354,7 @@ Auszug aus dem `hello_webassembly.js`:
 ...
 ```
 
-Wie bereits in meinem letzten [Artikel](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea) beschrieben, wird so mit der Aussenwelt kommuniziert und dient dies als Schnittstelle. 
+Wie bereits in meinem letzten [Artikel](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea) beschrieben, wird so mit der Aussenwelt kommuniziert. 
 
 Es soll darauf hingewiesen sein, dass es sich um eine Abstraktion (Sandbox) handelt. Die Funktion `printf` vom C Programm wird nicht auf dem Betriebssystem im klassischen Sinn aufgerufen. Sondern es wird die vom JavaScript bereitgestellte und vom WebAssembly importierte `_fd_write` Funktion aufgerufen, welche dann die jeweilige Implementierung der `printf` Funktion zur Verfügung stellt.
 
@@ -363,7 +363,7 @@ Hier sieht man zudem, dass die Schnittstelle (*Runtime, Sandbox) zum WebAssembly
 
 Darüber könnte nun zum Beispiel die `Module['print']` Funktion durch eine andere Funktion ersetzt werden. Was zur Folge hätte, dass diese Aufgerufen wird anstelle der Fallback Version mit `console.log`.
 
-> \* Persönlichen Meinung: Bei der JavaScript-Datei, beziehungsweise der `Module` Variable, handelt es sich um eine Schnittstelle oder Abstraktion. Eine einheitliche Schnittstelle von der JavaScript Umgebung (interagiert mit der `Module` Variable) zur `WebAssembly` API (die eigentliche Runtime), dem Sandboxing (Import/Export in der WebAssembly Datei) und eventuell genutzten Erweiterungen (siehe nächster Artikel). Diese Datei beziehungsweise Variable wird jedoch oft auch als Runtime oder Sandbox bezeichnet. In meinen Augen sind diese Begriffe nicht optimal gewählt. Bei Ecmascript kommt dies vermutlich von Altlasten der asm.js Zeiten, als es wirklich noch eine Runtime war.
+> \* Persönlichen Meinung: Bei der JavaScript-Datei, beziehungsweise der `Module` Variable, handelt es sich um eine Schnittstelle oder Abstraktion (Runtime-Umgebung). Eine einheitliche Schnittstelle von der JavaScript Umgebung (interagiert mit der `Module` Variable) zur `WebAssembly` API (die eigentliche Runtime), dem Sandboxing (Import/Export in der WebAssembly Datei) und eventuell genutzten Ecmascript Erweiterungen (siehe nächster Artikel). Diese Datei beziehungsweise Variable wird jedoch oft auch als Runtime oder Sandbox bezeichnet. In meinen Augen sind diese Begriffe nicht optimal gewählt. Bei Ecmascript kommt dies vermutlich von Altlasten der asm.js Zeiten, als es wirklich noch eine Runtime war.
 
 ### Erweiterung
 Ecmascript bietet unterschiedliche Optionen beim Kompilieren an. Welche man zum Beispiel ausnützen kann um die `main` Funktion über einen Button aufrufen zu können.

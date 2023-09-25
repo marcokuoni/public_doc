@@ -359,7 +359,7 @@ Excerpt from `hello_webassembly.js`:
 ...
 ```
 
-As described in my previous [article](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea), this is how communication with the outside world takes place, serving as an interface.
+As described in my previous [article](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea), this is how communication with the outside world takes place.
 
 It's important to note that this is an abstraction (sandbox). The `printf` function from the C program is not called on the operating system in the traditional sense. Instead, it invokes the `_fd_write` function provided by JavaScript and imported by WebAssembly, which then offers the respective implementation of the `printf` function.
 
@@ -368,7 +368,7 @@ Here, it's evident that the interface (*runtime, sandbox) to WebAssembly in the 
 
 Moreover, you can replace the `Module['print']` function with another function using this approach. This would result in the replacement function being called instead of the fallback version with `console.log`.
 
-> \* Personal Opinion: Regarding the JavaScript file and the `Module` variable, it indeed functions as an interface or abstraction. It provides an unified interface from the JavaScript environment (interacting with the `Module` variable) to the `WebAssembly` API (the actual runtime), sandboxing (import/export in the WebAssembly file), and potentially used extensions (see the next article). However, this file or variable is often referred to as the runtime or sandbox. In my view, these terms may not be optimally chosen. In Ecmascript, this terminology might stem from legacy practices of the asm.js era when it truly represented a runtime.
+> \* Personal Opinion: Regarding the JavaScript file and the `Module` variable, it indeed functions as an interface or abstraction (runtime enviroment). It provides an unified interface from the JavaScript environment (interacting with the `Module` variable) to the `WebAssembly` API (the actual runtime), sandboxing (import/export in the WebAssembly file), and potentially used Ecmascript extensions (see the next article). However, this file or variable is often referred too as the runtime or sandbox. In my view, these terms may not be optimally chosen. In Ecmascript, this terminology might stem from legacy practices of the asm.js era when it truly represented a runtime.
 
 ### Extension
 Ecmascript offers various compilation options that can be utilized, for example, to trigger the `main` function via a button click.

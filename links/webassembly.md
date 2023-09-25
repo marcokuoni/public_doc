@@ -7,6 +7,9 @@
 * [WebAssembly specification](https://webassembly.github.io/spec/core/)
 * [WebAssembly proposal](https://github.com/WebAssembly/proposals)
 * [Internet Computer blockchain](https://internetcomputer.org/docs/current/developer-docs/)
+* [WebAssembly Component Model](https://component-model.bytecodealliance.org/introduction.html)
+* https://www.fermyon.com/blog/wasmcon-2023-rise-and-realization-of-the-webassembly-component-model
+* [WASMCON 23](https://www.youtube.com/@LinuxfoundationOrg/videos)
 
 ## History
 * [From wasm.js to WebAssembly] (https://brendaneich.com/2015/06/from-asm-js-to-webassembly/)

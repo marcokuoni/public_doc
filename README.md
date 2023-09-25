@@ -13,6 +13,13 @@
 * [Simple C Program in WebAssembly](./essays/5_simple_c_programm_in_webassembly/README.md)
 * ["Hello World" C++ Program](./essays/6_hello_world_cpp_programm/README.md)
 
+### Possible Subjects
+* WebAssembly Docker Container
+* WebAssembly and the Internet Computer
+
+#### Off Topic
+* Javascript generator iterator use case libary
+
 ## Books
 | Title                             | Author         | Year                | Language | ISBN              |
 |-----------------------------------|----------------|---------------------|----------|-------------------|

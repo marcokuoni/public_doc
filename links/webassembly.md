@@ -10,6 +10,7 @@
 * [WebAssembly Component Model](https://component-model.bytecodealliance.org/introduction.html)
 * https://www.fermyon.com/blog/wasmcon-2023-rise-and-realization-of-the-webassembly-component-model
 * [WASMCON 23](https://www.youtube.com/@LinuxfoundationOrg/videos)
+* [Bytecode Alliance](https://bytecodealliance.org/)
 
 ## History
 * [From wasm.js to WebAssembly] (https://brendaneich.com/2015/06/from-asm-js-to-webassembly/)

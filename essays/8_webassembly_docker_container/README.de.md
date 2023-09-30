@@ -5,21 +5,23 @@ Das berühmte Zitat von einem der Erfinder von Docker, Solomon Hykes: «If WASM+
 
 ![Solomon Hykes Twitter Post about WASM](hykes-wasm-1.jpeg)
 
-Es gibt noch eine fortsetzung des Tweets in dem Solomon davon Spricht, dass Docker davon nicht verschwinden wird. Vielmehr werden Windows, Linux und WebAssembly Container zusammen und nebeneinander auf Docker laufen.
+Es gibt noch eine fortsetzenden Tweet in dem Solomon davon Spricht, dass Docker dadurch nicht verschwinden wird. Vielmehr werden Windows, Linux und WebAssembly Container zusammen und nebeneinander auf Docker zum Einsatz kommen.
 
 ![Containers Compared](ContainersCompared.png)
-Bild von [kodekloud](https://kodekloud.com/blog/webassembly-vs-docker/)
+Bild von [Kode Kloud](https://kodekloud.com/blog/webassembly-vs-docker/)
 
-Klassische Docker-Container beziehungsweise deren Inhalt sind für für eine bestimmte Zielarchitekur (arm, x86, usw.) kompiliert und beinhalten verschiedene Betriebssystemkomponenten. Wenn nun eine WebAssembly-Runtime zur Verfügung gestellt wird, können diese Punkte an die Runtime abgeben werden. Als Resultat erhält man einen Container, mit folgenden zusätzlichen Vorteilen:
+Klassische Docker-Container beziehungsweise deren Inhalt sind für für eine bestimmte Zielarchitektur (arm, x86, usw.) kompiliert und beinhalten verschiedene Betriebssystemkomponenten. 
+
+Wenn nun eine WebAssembly-Runtime zur Verfügung steht, können diese Punkte an die Runtime abgeben werden. Als Resultat erhält man einen Container, mit folgenden zusätzlichen Vorteilen:
 * Beinhaltet nur Applikationscode was zu kleineren (Speicher) und sicheren (Angriffsfläche) Containern mit schnelleren Startzeiten führt.
-* Kompatibilität über verschiedene Architekturen und Betriebsystemen hinweg.
+* Kompatibilität über verschiedene Architekturen und Betriebssystemen hinweg.
 
-Inklusiven den bekannten Vorteilen von WebAssembly
+Inklusive den bekannten Vorteilen von WebAssembly
 * Sicherheit: WebAssembly Programme laufen in einer Sandbox. Es ist nicht einfach so möglich auf das Gästesystem oder andere Container zuzugreifen.
 * Performance: WebAssembly kommt kompiliert als Maschinen-Code daher.
 * Und Weiteren, siehe in meinem letzten [Artikel](https://medium.com/webassembly/emscripten-simple-portability-9d3238d99294)
 
-| Aspekt                        | Klassiche                            | WebAssembly Container                                                                             |
+| Aspekt                        | Klassische                            | WebAssembly Container                                                                             |
 | ----------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | Grösse                        | 10 bis 100 Fache an MB               | Einige MB                                                                                         |
 | Startzeiten                   | Sekunden                             | [Millisekunden](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)   |
@@ -29,8 +31,8 @@ Inklusiven den bekannten Vorteilen von WebAssembly
 | Standards                     | [OCI](https://opencontainers.org/)   | [W3C](https://www.w3.org/community/webassembly/) und OCI                                          |
 | System Interaktionen          | Beinhaltet Betriebs- und Dateisystem | Benutzt [WASI](https://wasi.dev/) um aufs Gästesystem zuzugreifen |
 
-Zusammengefasst erhalten wir mit Docker + WebAssembly
-* Gebüdelten Code (Package)
+Zusammengefasst erhält man mit Docker + WebAssembly
+* Gebündelten Code (Package)
 * Fast Native Performance
 * Hohe Sicherheit
 * Hohe Portabilität
@@ -39,9 +41,11 @@ Zusammengefasst erhalten wir mit Docker + WebAssembly
 
 ## Wie?
 ![Docker Wasm](DockerWasmContainer.png)
-Bild von [kodekloud](https://kodekloud.com/blog/webassembly-vs-docker/)
+Bild von [Kode Kloud](https://kodekloud.com/blog/webassembly-vs-docker/)
 
-Nachfolgend werden die einzelnen Schichten kurz erklärt. Dank der breiten Akzeptantz der Standardisierungen rund um Container über [Open Container Initiative](https://opencontainers.org/) und der [Container Runtime containerd](https://containerd.io/) können verschiedene Anwendungen einfach auf diversen Plattformen ausgeführt werden. Standartisierte Schnittstellen für containerd ermöglichen diesen auf Docker, Kubernetes oder weiteren Plattformen auszuführen. Auf der anderen Seite von containerd ermöglichen die Standartisierten Schnittstellen für die Container einfach Applikationen darin zu implementieren und auszuführen.
+Nachfolgend werden die einzelnen Schichten und deren Funktionalität beziehungsweise Aufgaben kurz erklärt. Dank der breiten Akzeptanz der Standardisierungen rund um Container über [Open Container Initiative](https://opencontainers.org/) und der [Container Runtime containerd](https://containerd.io/) können verschiedene Anwendungen einfach auf diversen Plattformen ausgeführt werden. 
+
+Auf einer Seite bieten standardisierte Schnittstellen für containerd, dass dieser auf diversen Plattformen zum Einsatz kommt. Auf der anderen Seite ermöglichen die standardisierten Schnittstellen für die Container das Implementieren und Ausführen von unterschiedliche Anwendungen.
 
 ### Container Engine 
 Dient als Schnittstelle zwischen dem Benutzer und dem Container Manager und bietet weitere higher Level plattformspezifische Funktionalitäten.
@@ -49,14 +53,14 @@ Dient als Schnittstelle zwischen dem Benutzer und dem Container Manager und biet
 Bekannte Container Engines sind Docker, Kubernetes, Podman, CRI-O, usw.
 
 ### Container Manager
-Umfasst das Verwalten von Images (Upload, Download) und Verwalten von Containern (Erstellen, Starten, Stoppen, usw.). Im Grunde alles, was man braucht, um eine Container-Plattform aufzubauen, ohne sich mit den Details des zugrunde liegenden Betriebssystems befassen zu müssen. 
+Umfasst das Verwalten von Images (Upload, Download) und von Containern (Erstellen, Starten, Stoppen, usw.). Im Grunde alles was man braucht, um eine Container-Plattform aufzubauen, ohne sich mit den Details des zugrunde liegenden Betriebssystems befassen zu müssen. 
 
-Bekanntester Container Manager ist containerd unterstützt durch [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd ist ein Open-Source Container Manager (ursprünglich Docker), der weit verbreitet und in Go programmiert ist. Anstatt direkt von Entwicklern verwendet zu werden, ist es so konzipiert, dass es in Systeme wie Docker und Kubernetes eingebettet werden kann.
+Bekanntester Container Manager ist containerd unterstützt durch [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd ist ein Open-Source Container Manager (ursprünglich Docker), der in Go programmiert ist. Anstatt direkt von Entwicklern verwendet zu werden, ist er so konzipiert, dass er in Systeme wie Docker und Kubernetes eingebettet werden kann.
 
 #### Shim
 Ein Shim ist eine Software, die zwischen einem Container Manager (containerd, cri-o, podman, usw.) und einer Container Runtime (runc, crun, wasmedge, usw.) angesiedelt ist und das Integrationsproblem (als Schnittstelle) dieser Gegenstücke löst.
 
-Bekanntester Shim ist containerd-shim. Er wird verwendet, um den Container zu starten und zu überwachen. Es ist ein Prozess, der vom containerd-Daemon gestartet wird und die Verantwortung für die Verwaltung des Lebenszyklus des Containers selbst übernimmt. 
+Bekanntester Shim ist die containerd-shim. Sie wird dazu verwendet um den jeweiligen Container über eine standardisierte Schnittstelle zu verwalten und zu überwachen.
 
 ### Runtime
 Umfasst das Verwalten von Containerprozessen (Erstellen, Starten, Stoppen, usw.) und stellt dazu die Low-Level-Funktionalität bereit.
@@ -65,21 +69,21 @@ Alternativen:
   * [crun](https://github.com/containers/crun) für Linux
   * [gVisor](https://gvisor.dev/) für Linux
   * [firecracker](https://github.com/firecracker-microvm/firecracker-containerd) für microVMs
-  * [wasmedge](https://wasmedge.org/) für WebAssembly (Docker Unterstützt von [Cloud Native Computing Foundation](https://www.cncf.io/))
-  * [slight](https://github.com/deislabs/spiderlightning) für WebAssembly (Docker Unterstützt)
-  * [spin](https://github.com/fermyon/spin) für WebAssembly (Docker Unterstützt)
-  * [wasmtime](https://wasmtime.dev/) für WebAssembly (Docker Unterstützt von [Bytecode Alliance](https://bytecodealliance.org/))
+  * [wasmedge](https://wasmedge.org/) für WebAssembly in Docker vorhanden und durch [Cloud Native Computing Foundation](https://www.cncf.io/) unterstützt
+  * [slight](https://github.com/deislabs/spiderlightning) für WebAssembly in Docker vorhanden
+  * [spin](https://github.com/fermyon/spin) für WebAssembly in Docker vorhanden
+  * [wasmtime](https://wasmtime.dev/) für WebAssembly in Docker vorhanden und erstellt durch [Bytecode Alliance](https://bytecodealliance.org/)
 
 #### WebAssemlby
-Weil die bestehenden Shim-Implementierungen auf artefakte von Betriebssystemen beruht, können diese nicht im gleichen Sinn direkt für WebAssembly Runtimes verwendet werden. Deshalb kommen WebAssembly Runtimes mit eigenen Shims daher.
-Für wasmedge, wasmtime und wasmer gibt es hierzu [runwasi](https://github.com/containerd/runwasi). Die Idee dabei ist, die Shim Schnittstelle zu erweitern und anzupassen um die jeweilige WebAssembly Runtimes zu untertützen beziehungsweise zu implementieren. Runwasi implementiert dabei zwei Modis:
+Weil die bestehenden Shim-Implementierungen auf Artefakten von Betriebssystemen beruht, können diese nicht im gleichen Sinn direkt für WebAssembly Runtimes verwendet werden. Deshalb kommen WebAssembly Runtimes mit eigenen Shims daher.
+Für wasmedge, wasmtime und wasmer gibt es hierzu [runwasi](https://github.com/containerd/runwasi). Die Idee dabei ist, die Shim Schnittstelle so zu implementieren um die jeweilige WebAssembly Runtimes verwenden zu können. Runwasi implementiert dabei zwei Modis:
 * Normal: Ein Shim Prozess pro Container
 * Shared: Ein Manager Service (Container) verwaltet alle Shims im Prozess
 
-## Build mit Docker
+## Docker Desktop Setup
 Zwei Bemerkungen im Vorfeld:
-* Mit Docker Desktop lässt sich auf einfache Art auf verschiedenen Betriebssystemen ein WebAssembly Image builden und als Container starten. Jedoch kann dies auch mit einer standard Docker Installation umgesetzt werden. Weiter Infos unter [alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
-* Weil die Docker Implementerung noch eher neu ist, gibt es immer einmal Probleme. Eine Liste von bekannten Herausforderungen findet sich unter [Known Issues](https://docs.docker.com/desktop/wasm/#known-issues) und zudem einen [Issue Tracker](https://github.com/docker/roadmap/issues/426)
+* Mit Docker Desktop lässt sich auf einfache Art auf verschiedenen Betriebssystemen ein WebAssembly Image builden und als Container starten. Jedoch kann dies auch mit einer Standard Docker Installation umgesetzt werden. Weiter Infos unter [alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
+* Weil die Docker Implementierung noch eher neu ist, gibt es immer einmal Herausforderungen. Daher gibt es eine Liste von bekannten [Known Issues](https://docs.docker.com/desktop/wasm/#known-issues) und einen [Issue Tracker](https://github.com/docker/roadmap/issues/426).
 
 Als erstens muss [Docker Desktop](https://www.docker.com/products/docker-desktop) heruntergeladen werden. Dieser wird unter Ubuntu wie folgt installiert: 
 ```bash
@@ -88,12 +92,13 @@ sudo apt install ./docker-desktop-4.24.0-amd64.deb
 ```
 Hier gilt es zu beachten, dass die aktuellste Docker Version verwendet wird > 4.24.0
 
-Nach der Installation muss noch die Wasm Runtimes aktiviert werden. Dies kann unter Settings -> `Features in development`: `Use containerd for pulling and storing images` und `Enable Wasm` aktiviert werden.
+Nach der Installation muss noch die Wasm Runtime aktiviert werden. Dies kann unter Settings -> `Features in development` gemacht werden. Dazu folgende Optionen aktivieren: `Use containerd for pulling and storing images` und `Enable Wasm`.
+
 ![Enable WebAssembly in Docker Desktop](enable_wasm.png)
 
 ---
 
-Gemäss Dokumentation, müsste der Build bereits funktionieren. Jedoch war dies bei mir nicht der Fall. Meine installierten Builder hatten keine unterstützung für die WASM/WASI Platform.
+Hinweis: Gemäss Dokumentation, müsste der Build bereits funktionieren. Jedoch war dies bei mir nicht der Fall. Meine installierten Builder hatten keine Unterstützung für die WASM/WASI Plattform.
 ```bash
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT STATUS  BUILDKIT             PLATFORMS
@@ -121,8 +126,8 @@ desktop-linux   docker
 ```
 
 ---
-
-Wir benutzen als Demostration ein einfaches Rust Programm
+## Docker Build
+Nachfolgend als Demonstration ein einfaches Rust Programm
 
 ```rust
 fn main() {
@@ -175,30 +180,32 @@ ENTRYPOINT [ "/hello.wasm" ]
 COPY --link --from=build /src/target/wasm32-wasi/release/hello.wasm /hello.wasm
 ```
 
-Bis auf die letzen drei Zeilen, werden die Befehle nur dazu verwendet um das Rust Programm im Docker Container zu WebAssembly zu kompilieren. Die letzen drei Zeilen sind für das WebAssembly Image verantwortlich. Wir kopieren das kompilierte Programm in den Container und definieren den Entrypoint.
+Bis auf die letzten drei Zeilen, werden die Befehle nur dazu verwendet um das Rust Programm im Docker Container zu WebAssembly zu kompilieren. Die letzten drei Zeilen sind für das WebAssembly Image verantwortlich. ES kopiert das kompilierte Programm in den Container und definieren den Entrypoint.
 
-Dies starten wir nun mit folgendem Befehl: `docker buildx build --load --platform wasi/wasm -t demo/hello_webassembly .`.
+Den effektiven Buildprozes wird mit folgendem Befehl gestartets: `docker buildx build --load --platform wasi/wasm -t demo/hello_webassembly .`.
 
 ----
 
-Ich musste unter `Features in development` für die `Builds View` ausschalten, damit das Image erschien.
+Ich musste unter `Features in development` die `Builds View` ausschalten, damit das Image erschien.
 ![Builds view](builds_view.png)
 
 ----
 
 ![WebAssembly Image](image.png)
 
-Damit wurde nun ein Image für die Platform WASM erstellt mit einer Grösse von 2.52 MB.
+Damit wurde nun ein Image für die Plattform WASM erstellt mit einer Grösse von 2.52 MB.
 
-## Run mit Docker
+## Docker Run
 Nun kann das Image mit folgendem Befehl gestartet werden:
 ```bash
 $ docker run --rm --runtime=io.containerd.wasmedge.v1 --platform=wasi/wasm demo/rust_hello
 Hello WebAssembly in Docker!
 ```
 
-## Compose mit Docker
-WebAssembly Container können nun auch zusammen mit anderen Container wie gewohnt mit Docker Compose werwendet werden und im Verbund agieren.
+## Docker Compose
+WebAssembly Container können auch zusammen mit anderen Container wie gewohnt mit Docker Compose verwendet werden und im Verbund agieren.
+
+Beispielhaft ein `docker-compose.yml`:
 
 ```
 services:
@@ -209,7 +216,7 @@ services:
     runtime: io.containerd.wasmedge.v1
 ```
 
-Und dann über `docker compose up` gestartet werden.
+Welches über `docker compose up` gestartet wird.
 
 ![WebAssembly with Docker Compose](docker_compose.png)
 
@@ -217,7 +224,7 @@ Und dann über `docker compose up` gestartet werden.
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/7_emscripten_simple_portability)
 * [English Version](https://github.com/marcokuoni/public_doc/tree/main/essays/7_emscripten_simple_portability/README.md)
 
-Als Grundlage für diesen Artikel dienten diverse Quellen. Eine Liste der Quellen findet sich hier wo man auch noch weiter Handson Beispiele findet:
+Als Grundlage für diesen Artikel dienten diverse Quellen. Eine Liste der Quellen findet sich hier wo man auch noch weitere Beispiele findet:
 * [Docker Blog: Build, Share, and Run WebAssembly Apps Using Docker](https://www.docker.com/blog/build-share-run-webassembly-apps-docker/)
 * [Docker Blog: Why Containers and WebAssembly Work Well Together](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)
 * [Docker Blog: Introducing the Docker+Wasm Technical Preview](https://www.docker.com/blog/introducing-the-dockerwasm-technical-preview/)

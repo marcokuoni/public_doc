@@ -41,79 +41,193 @@ Zusammengefasst erhalten wir mit Docker + WebAssembly
 ![Docker Wasm](DockerWasmContainer.png)
 Bild von [kodekloud](https://kodekloud.com/blog/webassembly-vs-docker/)
 
+Nachfolgend werden die einzelnen Schichten kurz erklärt. Dank der breiten Akzeptantz der Standardisierungen rund um Container über [Open Container Initiative](https://opencontainers.org/) und der [Container Runtime containerd](https://containerd.io/) können verschiedene Anwendungen einfach auf diversen Plattformen ausgeführt werden. Standartisierte Schnittstellen für containerd ermöglichen diesen auf Docker, Kubernetes oder weiteren Plattformen auszuführen. Auf der anderen Seite von containerd ermöglichen die Standartisierten Schnittstellen für die Container einfach Applikationen darin zu implementieren und auszuführen.
 
+### Container Engine 
+Dient als Schnittstelle zwischen dem Benutzer und dem Container Manager und bietet weitere higher Level plattformspezifische Funktionalitäten.
 
+Bekannte Container Engines sind Docker, Kubernetes, Podman, CRI-O, usw.
 
+### Container Manager
+Umfasst das Verwalten von Images (Upload, Download) und Verwalten von Containern (Erstellen, Starten, Stoppen, usw.). Im Grunde alles, was man braucht, um eine Container-Plattform aufzubauen, ohne sich mit den Details des zugrunde liegenden Betriebssystems befassen zu müssen. 
 
-How?
-containerd
-In the simplest terms, containerd is a broadly-adopted open container runtime. It manages the complete container lifecycle of its host system! This includes pulling and pushing images as well as handling the starting and stopping of containers. Not to mention, containerd is a low-level brick in the container experience. Rather than being used directly by developers, it’s designed to be embedded into systems like Docker and Kubernetes.
+Bekanntester Container Manager ist containerd unterstützt durch [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd ist ein Open-Source Container Manager (ursprünglich Docker), der weit verbreitet und in Go programmiert ist. Anstatt direkt von Entwicklern verwendet zu werden, ist es so konzipiert, dass es in Systeme wie Docker und Kubernetes eingebettet werden kann.
 
+#### Shim
+Ein Shim ist eine Software, die zwischen einem Container Manager (containerd, cri-o, podman, usw.) und einer Container Runtime (runc, crun, wasmedge, usw.) angesiedelt ist und das Integrationsproblem (als Schnittstelle) dieser Gegenstücke löst.
 
-    runc
-    Lowest-level 🔩 The low-level container runtime. runc is a low-level container runtime. It uses the native features of Linux to create and run containers. It follows the OCI standard, and it includes libcontainer, a Go library for creating containers.
-    runc provides all of the low-level functionality for containers, interacting with existing low-level Linux features, like namespaces and control groups. It uses these features to create and run container processes.
-    alternativen:
-        * crun https://github.com/containers/crun
-        * firecracker https://github.com/firecracker-microvm/firecracker-containerd
-        * gVisor https://gvisor.dev/
+Bekanntester Shim ist containerd-shim. Er wird verwendet, um den Container zu starten und zu überwachen. Es ist ein Prozess, der vom containerd-Daemon gestartet wird und die Verantwortung für die Verwaltung des Lebenszyklus des Containers selbst übernimmt. 
 
-wasmedge
+### Runtime
+Umfasst das Verwalten von Containerprozessen (Erstellen, Starten, Stoppen, usw.) und stellt dazu die Low-Level-Funktionalität bereit.
+[Runc](https://github.com/opencontainers/runc) als Beispiel einer Runtime für Linux interagiert mit bestehenden Low-Level-Linux-Funktionen, wie Namespaces und Control Groups. Dabei folgt er dem [OCI-Standard](https://opencontainers.org/) und enthält libcontainer, eine Go-Bibliothek zur Erstellung von Containern.
+Alternativen:
+  * [crun](https://github.com/containers/crun) für Linux
+  * [gVisor](https://gvisor.dev/) für Linux
+  * [firecracker](https://github.com/firecracker-microvm/firecracker-containerd) für microVMs
+  * [wasmedge](https://wasmedge.org/) für WebAssembly (Docker Unterstützt von [Cloud Native Computing Foundation](https://www.cncf.io/))
+  * [slight](https://github.com/deislabs/spiderlightning) für WebAssembly (Docker Unterstützt)
+  * [spin](https://github.com/fermyon/spin) für WebAssembly (Docker Unterstützt)
+  * [wasmtime](https://wasmtime.dev/) für WebAssembly (Docker Unterstützt von [Bytecode Alliance](https://bytecodealliance.org/))
 
-alternativen:   
-* wasmtime
+#### WebAssemlby
+Weil die bestehenden Shim-Implementierungen auf artefakte von Betriebssystemen beruht, können diese nicht im gleichen Sinn direkt für WebAssembly Runtimes verwendet werden. Deshalb kommen WebAssembly Runtimes mit eigenen Shims daher.
+Für wasmedge, wasmtime und wasmer gibt es hierzu [runwasi](https://github.com/containerd/runwasi). Die Idee dabei ist, die Shim Schnittstelle zu erweitern und anzupassen um die jeweilige WebAssembly Runtimes zu untertützen beziehungsweise zu implementieren. Runwasi implementiert dabei zwei Modis:
+* Normal: Ein Shim Prozess pro Container
+* Shared: Ein Manager Service (Container) verwaltet alle Shims im Prozess
 
+## Build mit Docker
+Zwei Bemerkungen im Vorfeld:
+* Mit Docker Desktop lässt sich auf einfache Art auf verschiedenen Betriebssystemen ein WebAssembly Image builden und als Container starten. Jedoch kann dies auch mit einer standard Docker Installation umgesetzt werden. Weiter Infos unter [alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
+* Weil die Docker Implementerung noch eher neu ist, gibt es immer einmal Probleme. Eine Liste von bekannten Herausforderungen findet sich unter [Known Issues](https://docs.docker.com/desktop/wasm/#known-issues) und zudem einen [Issue Tracker](https://github.com/docker/roadmap/issues/426)
 
-* Containerd Runtime OCI-compatible (Standartisierte container schnittstelle: https://opencontainers.org/). containerd-shim können zusammen mit containerd-wasi-shim benutzt werden. Diese dienen als Schnittstelle zwischen Containerd und den Runtimes. runc für Linux und wasmedge (*) für wasm
+Als erstens muss [Docker Desktop](https://www.docker.com/products/docker-desktop) heruntergeladen werden. Dieser wird unter Ubuntu wie folgt installiert: 
+```bash
+sudo chmod +x ./docker-desktop-4.24.0-amd64.deb
+sudo apt install ./docker-desktop-4.24.0-amd64.deb
+```
+Hier gilt es zu beachten, dass die aktuellste Docker Version verwendet wird > 4.24.0
 
-Not Beta but enable
-* only docker desktop, not desktop (https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
-* its beta
-* Known Issues: https://docs.docker.com/desktop/wasm/#known-issues  
+Nach der Installation muss noch die Wasm Runtimes aktiviert werden. Dies kann unter Settings -> `Features in development`: `Use containerd for pulling and storing images` und `Enable Wasm` aktiviert werden.
+![Enable WebAssembly in Docker Desktop](enable_wasm.png)
 
-Build
+---
 
-Run
+Gemäss Dokumentation, müsste der Build bereits funktionieren. Jedoch war dies bei mir nicht der Fall. Meine installierten Builder hatten keine unterstützung für die WASM/WASI Platform.
+```bash
+$ docker buildx ls
+NAME/NODE       DRIVER/ENDPOINT STATUS  BUILDKIT             PLATFORMS
+default         docker                                       
+  default       default         running v0.11.6+616c3f613b54 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
+desktop-linux * docker                                       
+  desktop-linux desktop-linux   running v0.12.2              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
+```
 
-compose
+Daher habe ich mit folgendem Befehl einen neuen Builder erstellt: 
+```bash
+docker buildx create --name wasm-builder --platform wasi/wasm
+docker buildx use wasm-builder
+```
 
+```bash
+$ docker buildx ls
+NAME/NODE       DRIVER/ENDPOINT  STATUS   BUILDKIT             PLATFORMS
+wasm-builder *  docker-container                               
+  wasm-builder0 desktop-linux    inactive                      wasi/wasm*
+default         docker                                         
+  default       default          running  v0.11.6+616c3f613b54 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
+desktop-linux   docker                                         
+  desktop-linux desktop-linux    running  v0.12.2              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
+```
 
-What if this manifest file contained a list of manifests, so that the Docker Engine could pick the one that it matches at runtime? That’s exactly how the manifest is built for a multi-arch image. This type of manifest is called a manifest list.    
+---
 
+Wir benutzen als Demostration ein einfaches Rust Programm
 
+```rust
+fn main() {
+  let s : &str = "Hello WebAssembly in Docker!";
+  println!("{}", s);
+}
 
-What is the expected contents of a docker image? An application + all supporting libraries and any other required files.
-What does that normally mean in practice? Basically a trimmed down Linux userland + the application.
+```
 
-Of course not every single file is architecture specific, but the binaries and libraries were compiled for some specific architecture (this is obviously the case whether they were placed in a docker image or not).
+Dies zusammen mit folgendem `Cargo.toml`:
 
+```toml
+[package]
+name = "hello"
+version = "0.1.0"
+authors = ["Marco Kuoni"]
+edition = "2021"
 
+[[bin]]
+name = "hello"
+path = "src/main.rs"
 
+[dependencies]
+```
 
+Und folgendem `Dockerfile`:
 
-WasmEdge implements the WASI standard that gives you access to the outside world. There is still active work happening on this specification. You can follow Wasm spec work more broadly as it happens under the Bytecode Alliance.
+```dockerfile
+# syntax=docker/dockerfile:1
 
---platform=wasi/wasm32 – This specifies the architecture of the image we want to use. By leveraging a Wasm architecture, we don’t need to build separate images for the different architectures. The Wasm runtime will do the final step of converting the Wasm binary to machine instructions.
+FROM --platform=$BUILDPLATFORM rust:1.64 AS buildbase
+WORKDIR /src
+RUN <<EOT bash
+    set -ex
+    apt-get update
+    apt-get install -y \
+        git \
+        clang
+    rustup target add wasm32-wasi
+EOT
 
-We see Wasm as a complementary technology to Linux containers where developers can choose which technology they use (or both!) depending on the use case. And as the community explores what’s possible with Wasm, we want to help make Wasm applications easier to develop, build, and run using the experience and tools you know and love.
+FROM buildbase AS build
+COPY Cargo.toml .
+COPY src ./src 
+# Build the Wasm binary
+RUN cargo build --target wasm32-wasi --release
 
-It is essential to create a Docker image that matches the correct system architecture such as Intel, ARM 0r AMD. For example, if you are running Raspberry Pi OS with Docker, you must create a Docker image for your C program based on a Linux image and compile it for ARM processor architecture. otherwise, the container will not run correctly.
+FROM scratch
+ENTRYPOINT [ "/hello.wasm" ]
+COPY --link --from=build /src/target/wasm32-wasi/release/hello.wasm /hello.wasm
+```
 
-https://www.docker.com/blog/build-share-run-webassembly-apps-docker/
-Structure Image: https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/
-https://www.docker.com/blog/docker-wasm-technical-preview/
-Pros: https://medium.com/@guglielmino/docker-webassembly-a-quick-intro-730c38e8390c
-https://kodekloud.com/blog/webassembly-vs-docker/
-Runtimes: https://docs.docker.com/desktop/wasm/
-https://www.docker.com/blog/docker-wasm-technical-preview/?ref=kodekloud.com
-The containerd shim for WasmEdge: https://github.com/second-state/runwasi
-Roadmap: https://github.com/docker/roadmap/issues/426
+Bis auf die letzen drei Zeilen, werden die Befehle nur dazu verwendet um das Rust Programm im Docker Container zu WebAssembly zu kompilieren. Die letzen drei Zeilen sind für das WebAssembly Image verantwortlich. Wir kopieren das kompilierte Programm in den Container und definieren den Entrypoint.
 
-php https://wasmlabs.dev/articles/docker-without-containers/
+Dies starten wir nun mit folgendem Befehl: `docker buildx build --load --platform wasi/wasm -t demo/hello_webassembly .`.
+
+----
+
+Ich musste unter `Features in development` für die `Builds View` ausschalten, damit das Image erschien.
+![Builds view](builds_view.png)
+
+----
+
+![WebAssembly Image](image.png)
+
+Damit wurde nun ein Image für die Platform WASM erstellt mit einer Grösse von 2.52 MB.
+
+## Run mit Docker
+Nun kann das Image mit folgendem Befehl gestartet werden:
+```bash
+$ docker run --rm --runtime=io.containerd.wasmedge.v1 --platform=wasi/wasm demo/rust_hello
+Hello WebAssembly in Docker!
+```
+
+## Compose mit Docker
+WebAssembly Container können nun auch zusammen mit anderen Container wie gewohnt mit Docker Compose werwendet werden und im Verbund agieren.
+
+```
+services:
+  server:
+    image: demo/rust_hello_compose
+    build:
+      context: .
+    runtime: io.containerd.wasmedge.v1
+```
+
+Und dann über `docker compose up` gestartet werden.
+
+![WebAssembly with Docker Compose](docker_compose.png)
 
 ## Weiterführend
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/7_emscripten_simple_portability)
 * [English Version](https://github.com/marcokuoni/public_doc/tree/main/essays/7_emscripten_simple_portability/README.md)
+
+Als Grundlage für diesen Artikel dienten diverse Quellen. Eine Liste der Quellen findet sich hier wo man auch noch weiter Handson Beispiele findet:
+* [Docker Blog: Build, Share, and Run WebAssembly Apps Using Docker](https://www.docker.com/blog/build-share-run-webassembly-apps-docker/)
+* [Docker Blog: Why Containers and WebAssembly Work Well Together](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)
+* [Docker Blog: Introducing the Docker+Wasm Technical Preview](https://www.docker.com/blog/introducing-the-dockerwasm-technical-preview/)
+* [Docker Desktop Dokumentation: Wasm](https://docs.docker.com/desktop/wasm/)
+* [Docker Dokumentation: Alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
+* [Medium: Docker + WebAssembly: a quick intro](https://medium.com/@guglielmino/docker-webassembly-a-quick-intro-730c38e8390c)
+* [KodeKloud: WebAssembly vs Docker: Exploring their Connection and Potential](https://kodekloud.com/blog/webassembly-vs-docker/)
+* [GitHub: Runwasi](https://github.com/second-state/runwasi)
+* [GitHub: Issues - Docker+Wasm Integration](https://github.com/docker/roadmap/issues/426)
+* [Wasm Labs: WebAssembly - Docker without containers!](https://wasmlabs.dev/articles/docker-without-containers/)
 
 Ich bin gerne bereit den Artikel noch zu präzisieren, erweitern oder zu korrigieren. Schreibt ein Feedback oder meldet euch direkt bei mir.
 

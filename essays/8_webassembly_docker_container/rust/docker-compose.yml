@@ -1,0 +1,6 @@
+services:
+  server:
+    image: demo/rust_hello_compose
+    build:
+      context: .
+    runtime: io.containerd.wasmedge.v1

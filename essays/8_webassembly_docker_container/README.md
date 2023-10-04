@@ -1,4 +1,5 @@
 # WebAssembly Docker Container
+**Content:** [Theory: Why?](#why) | [Theory: How?](#how) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Further Resources](#further-resources)
 
 ## Why?
 The famous quote from one of the inventors of Docker, Solomon Hykes: "If WASM+WASI existed in 2008, we wouldn’t have needed to created Docker."
@@ -21,7 +22,7 @@ Including the well-known advantages of WebAssembly itself:
 * Performance: WebAssembly is compiled to machine code.
 * And more, as seen in my latest [article](https://medium.com/webassembly/emscripten-simple-portability-9d3238d99294).
 
-| Aspect                       | Classic                               | WebAssembly Container                                                                              |
+| Aspect                       | Classic                               | WebAssembly Containers                                                                              |
 | ---------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | Size                         | A factor of 10 to 100 MBs             | A few MB                                                                                          |
 | Startup Times                | Seconds                               | [Milliseconds](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)   |
@@ -32,12 +33,12 @@ Including the well-known advantages of WebAssembly itself:
 | System Interactions          | Includes OS and file system           | Uses [WASI](https://wasi.dev/) to access the host system                                           |
 
 In summary, with Docker + WebAssembly, you get:
-- Bundled code (Package)
-- Near-native performance
-- High security
-- High portability
-- Runtime isolation
-- Fast startup time
+* Bundled code (Package)
+* Near-native performance
+* High security
+* High portability
+* Runtime isolation
+* Fast startup time
 
 ## How?
 ![Docker WASM](DockerWasmContainer.png)
@@ -45,26 +46,26 @@ Image by [Kode Kloud](https://kodekloud.com/blog/webassembly-vs-docker/)
 
 Below the individual layers will be briefly explained and their functionality or tasks. Thanks to the widespread acceptance of standardizations and the open-source mindset around containers through the [Open Container Initiative](https://opencontainers.org/) and the [Container Runtime containerd](https://containerd.io/), various applications can easily run on different platforms.
 
-On one side, standardized interfaces for containerd allow it to be used on various platforms. And on the other End, standardized interfaces for containers enable the implementation and execution of different applications.
+On one side, standardized interfaces for containerd allows it to be used on various platforms. And on the other End, standardized interfaces for containers enable the implementation and execution of different applications.
 
 ### Container Engine
-Serves as an interface between administrators and the container manager, providing additional higher-level platform-specific functionalities.
+Serves as an interface between administrators and the container manager. It also provides additional higher-level platform-specific functionalities.
 
 Well-known container engines include Docker, Kubernetes, Podman, CRI-O, and more.
 
 ### Container Manager
 Involves the management of images (upload, download) and containers (creation, start, stop, etc.). Essentially, it provides everything needed to build a container platform without having to deal with the details of the underlying operating system.
 
-The most well-known container manager is containerd, supported by the [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd is an open-source container manager (originally Docker) programmed in Go. Instead of being used directly by developers, it is designed to be embedded in systems like Docker and Kubernetes.
+The most well-known container manager is containerd, supported by the [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd is an open-source container manager (originally Docker) programmed in Go. Instead of being used directly by developers, it is designed to be embedded in systems like Docker, Kubernetes and so on.
 
-#### Shim
+### Shim
 A shim is a software positioned between a container manager (containerd, cri-o, podman, etc.) and a container runtime (runc, crun, wasmedge, etc.) that solves the integration problem (as an interface) between these counterparts.
 
 The most well-known shim is containerd-shim. It is used to manage and monitor the respective container via a standardized interface.
 
 ### Runtime
 Involves managing container processes (creation, start, stop, etc.) and provides low-level functionality for this purpose.
-As an example of a runtime for Linux, [Runc](https://github.com/opencontainers/runc) interacts with existing low-level Linux features such as namespaces and control groups. It follows the [OCI standard](https://opencontainers.org/) and includes libcontainer, a Go library for creating containers.
+As an example of a runtime for Linux, [Runc](https://github.com/opencontainers/runc) interacts with existing low-level Linux features such as namespaces and control groups. It follows the [OCI standard](https://opencontainers.org/) and includes [libcontainer](https://github.com/opencontainers/runc/tree/main/libcontainer), a Go library for creating containers.
 Alternatives:
   * [crun](https://github.com/containers/crun) for Linux
   * [gVisor](https://gvisor.dev/) for Linux
@@ -201,7 +202,8 @@ The actual build process is initiated with the following command: `docker buildx
 ---
 
 **Note:** I had to disable the 'Builds View' under 'Features in development' for the image to appear.
-![Builds view](builds_view.png)
+
+![Disable Builds View](builds_view.png)
 
 ---
 
@@ -242,7 +244,7 @@ Which can be started with `docker compose up`.
 This article is based on various sources. A list of these sources can be found below, where you can also find more examples:
 * [Docker Blog: Build, Share, and Run WebAssembly Apps Using Docker](https://www.docker.com/blog/build-share-run-webassembly-apps-docker/)
 * [Docker Blog: Why Containers and WebAssembly Work Well Together](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)
-* [Docker Blog: Introducing the Docker+Wasm Technical Preview](https://www.docker.com/blog/introducing-the-dockerwasm-technical-preview/)
+* [Docker Blog: Introducing the Docker+Wasm Technical Preview](https://www.docker.com/blog/docker-wasm-technical-preview/)
 * [Docker Desktop Documentation: Wasm](https://docs.docker.com/desktop/wasm/)
 * [Docker Documentation: Alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
 * [Medium: Docker + WebAssembly: a quick intro](https://medium.com/@guglielmino/docker-webassembly-a-quick-intro-730c38e8390c)

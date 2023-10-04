@@ -1,4 +1,5 @@
 # WebAssembly Docker Container
+**Inhalt:** [Theorie: Warum?](#warum) | [Theorie: Wie?](#wie) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Weiterführend](#weiterführend)
 
 ## Warum?
 Das berühmte Zitat von einem der Erfinder von Docker, Solomon Hykes: «If WASM+WASI existed in 2008, we wouldn’t have needed to created Docker» - «Wenn WASM+WASI 2008 existiert hätte, hätten wir Docker nicht erfinden müssen».
@@ -55,16 +56,16 @@ Bekannte Container Engines sind Docker, Kubernetes, Podman, CRI-O, usw.
 ### Container Manager
 Umfasst das Verwalten von Images (Upload, Download) und von Containern (Erstellen, Starten, Stoppen, usw.). Im Grunde alles was man braucht, um eine Container-Plattform aufzubauen, ohne sich mit den Details des zugrunde liegenden Betriebssystems befassen zu müssen. 
 
-Bekanntester Container Manager ist containerd unterstützt durch [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd ist ein Open-Source Container Manager (ursprünglich Docker), der in Go programmiert ist. Anstatt direkt von Entwicklern verwendet zu werden, ist er so konzipiert, dass er in Systeme wie Docker und Kubernetes eingebettet werden kann.
+Bekanntester Container Manager ist containerd unterstützt durch [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd ist ein Open-Source Container Manager (ursprünglich Docker), der in Go programmiert ist. Anstatt direkt von Entwicklern verwendet zu werden, ist er so konzipiert, dass er in Systeme wie Docker, Kubernetes und Weiteren eingebettet werden kann.
 
-#### Shim
+### Shim
 Ein Shim ist eine Software, die zwischen einem Container Manager (containerd, cri-o, podman, usw.) und einer Container Runtime (runc, crun, wasmedge, usw.) angesiedelt ist und das Integrationsproblem (als Schnittstelle) dieser Gegenstücke löst.
 
 Bekanntester Shim ist die containerd-shim. Sie wird dazu verwendet um den jeweiligen Container über eine standardisierte Schnittstelle zu verwalten und zu überwachen.
 
 ### Runtime
 Umfasst das Verwalten von Containerprozessen (Erstellen, Starten, Stoppen, usw.) und stellt dazu die Low-Level-Funktionalität bereit.
-[Runc](https://github.com/opencontainers/runc) als Beispiel einer Runtime für Linux interagiert mit bestehenden Low-Level-Linux-Funktionen, wie Namespaces und Control Groups. Dabei folgt er dem [OCI-Standard](https://opencontainers.org/) und enthält libcontainer, eine Go-Bibliothek zur Erstellung von Containern.
+[Runc](https://github.com/opencontainers/runc) als Beispiel einer Runtime für Linux interagiert mit bestehenden Low-Level-Linux-Funktionen, wie Namespaces und Control Groups. Dabei folgt er dem [OCI-Standard](https://opencontainers.org/) und enthält [libcontainer](https://github.com/opencontainers/runc/tree/main/libcontainer), eine Go-Bibliothek zur Erstellung von Containern.
 Alternativen:
   * [crun](https://github.com/containers/crun) für Linux
   * [gVisor](https://gvisor.dev/) für Linux
@@ -201,7 +202,8 @@ Der effektive Buildprozess wird mit dem folgendem Befehl gestartet: `docker buil
 ----
 
 **Hinweis:** Ich musste unter `Features in development` die `Builds View` ausschalten, damit das Image erschien.
-![Builds view](builds_view.png)
+
+![Disable Builds View](builds_view.png)
 
 ----
 
@@ -242,7 +244,7 @@ Welches über `docker compose up` gestartet wird.
 Als Grundlage für diesen Artikel dienten diverse Quellen. Eine Liste der Quellen findet sich nachfolgend, wo man auch weitere Beispiele findet:
 * [Docker Blog: Build, Share, and Run WebAssembly Apps Using Docker](https://www.docker.com/blog/build-share-run-webassembly-apps-docker/)
 * [Docker Blog: Why Containers and WebAssembly Work Well Together](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)
-* [Docker Blog: Introducing the Docker+Wasm Technical Preview](https://www.docker.com/blog/introducing-the-dockerwasm-technical-preview/)
+* [Docker Blog: Introducing the Docker+Wasm Technical Preview](https://www.docker.com/blog/docker-wasm-technical-preview/)
 * [Docker Desktop Dokumentation: Wasm](https://docs.docker.com/desktop/wasm/)
 * [Docker Dokumentation: Alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
 * [Medium: Docker + WebAssembly: a quick intro](https://medium.com/@guglielmino/docker-webassembly-a-quick-intro-730c38e8390c)

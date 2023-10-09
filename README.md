@@ -12,6 +12,8 @@
 * [WebAssembly Memory](./essays/4_webassembly_memory/README.md)
 * [Simple C Program in WebAssembly](./essays/5_simple_c_programm_in_webassembly/README.md)
 * ["Hello World" C++ Program](./essays/6_hello_world_cpp_programm/README.md)
+* [Emscripten Simple Portability](./essays/7_emscripten_simple_portability/README.md)
+* [WebAssembly Docker Container](./essays/8_webassembly_docker_container/README.md)
 
 ### Possible Subjects
 * WebAssembly Docker Container

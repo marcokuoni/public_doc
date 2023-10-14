@@ -1,0 +1,11 @@
+[package]
+name = "fibonacci"
+version = "0.1.0"
+authors = ["Marco Kuoni"]
+edition = "2021"
+
+[[bin]]
+name = "fibonacci"
+path = "src/fibonacci.rs"
+
+[dependencies]

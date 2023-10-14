@@ -25,7 +25,7 @@ Including the well-known advantages of WebAssembly itself:
 | Aspect                       | Classic                               | WebAssembly Containers                                                                              |
 | ---------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | Size                         | A factor of 10 to 100 MBs             | A few MB                                                                                          |
-| Startup Times                | Seconds                               | [Milliseconds](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)   |
+| Startup Times ([Performance](#performance))               | Seconds                               | [Milliseconds](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)   |
 | Performance Speed            | Far from Native                       | Close to Native                                                                                   |
 | Runs in Web Browser          | No                                    | Yes                                                                                               |
 | Cross Platform / Portability | No                                    | Yes                                                                                               |
@@ -34,11 +34,11 @@ Including the well-known advantages of WebAssembly itself:
 
 In summary, with Docker + WebAssembly, you get:
 * Bundled code (Package)
-* Near-native performance
+* Potential closer to native performance
 * High security
 * High portability
 * Runtime isolation
-* Fast startup time
+* Potential startup time
 
 ## How?
 ![Docker WASM](DockerWasmContainer.png)
@@ -197,7 +197,7 @@ COPY --link --from=build /src/target/wasm32-wasi/release/hello.wasm /hello.wasm
 
 Apart from the last three lines, the commands are used solely to compile the Rust program into WebAssembly within a Docker container. The final three lines are responsible for creating the WebAssembly image by copying the compiled program into the container and defining the entry point.
 
-The actual build process is initiated with the following command: `docker buildx build --load --platform wasi/wasm -t demo/hello_webassembly .`.
+The actual build process is initiated with the following command: `docker buildx build --load --platform wasi/wasm -t demo/rust_hello .`.
 
 ---
 

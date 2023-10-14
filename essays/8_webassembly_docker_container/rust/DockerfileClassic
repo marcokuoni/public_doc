@@ -1,0 +1,9 @@
+FROM rust:1.64
+
+WORKDIR /src/main.rs
+COPY Cargo.toml .
+COPY src ./src
+
+RUN cargo install --path .
+
+CMD ["hello"]

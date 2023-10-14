@@ -25,7 +25,7 @@ Inklusive den bekannten Vorteilen von WebAssembly selbst:
 | Aspekt                        | Klassische                            | WebAssembly Container                                                                             |
 | ----------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | Grösse                        | 10 bis 100 Fache an MB               | Einige MB                                                                                         |
-| Startzeiten                   | Sekunden                             | [Millisekunden](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)   |
+| Startzeiten ([Performance](#performance))                  | Sekunden                             | [Millisekunden](https://www.docker.com/blog/why-containers-and-webassembly-work-well-together/)   |
 | Performance Geschwindigkeit   | Weit Weg von Native                  | Nahe an Native                                                                                    |
 | Läuft in Webbrowser           | Nein                                 | Ja                                                                                                |
 | Cross Platform / Portabilität | Nein                                 | Ja                                                                                                |
@@ -34,11 +34,11 @@ Inklusive den bekannten Vorteilen von WebAssembly selbst:
 
 Zusammengefasst erhält man mit Docker + WebAssembly
 * Gebündelten Code (Package)
-* Fast Native Performance
+* Potentiell näher bei nativer Performance
 * Hohe Sicherheit
 * Hohe Portabilität
 * Runtime Isolation
-* Schnelle Startzeit
+* Potentiell schnellere Startzeit
 
 ## Wie?
 ![Docker WASM](DockerWasmContainer.png)
@@ -197,7 +197,7 @@ COPY --link --from=build /src/target/wasm32-wasi/release/hello.wasm /hello.wasm
 
 Bis auf die letzten drei Zeilen, werden die Befehle nur dazu verwendet um das Rust Programm im Docker Container zu WebAssembly zu kompilieren. Die letzten drei Zeilen sind für das WebAssembly Image verantwortlich. In dem es das kompilierte Programm in den Container kopiert und den Entrypoint definiert.
 
-Der effektive Buildprozess wird mit dem folgendem Befehl gestartet: `docker buildx build --load --platform wasi/wasm -t demo/hello_webassembly .`.
+Der effektive Buildprozess wird mit dem folgendem Befehl gestartet: `docker buildx build --load --platform wasi/wasm -t demo/rust_hello .`.
 
 ----
 
@@ -236,6 +236,183 @@ services:
 Welches über `docker compose up` gestartet wird.
 
 ![WebAssembly with Docker Compose](docker_compose.png)
+
+## Performance
+Ich möchte mich an dieser Stelle bei [Thomas Bocek](https://youtu.be/0uo37PAondM?feature=shared&t=178) bedanken für die Erwähnung dieses Artikels. Im spezielen auch die Erwähnung seiner Bedenken bezüglich der Performance von WebAssembly in Docker. Ich möchte daher hier kurz auf die drei erwähnten Punkte eingehen:
+* Startzeit
+* Image Grösse
+* Portabilität
+
+Zum aktuellen Zeitpunkt und gemäss meinem aktuellen Wissen, gebe ich Thomas Bocek in allen drei Punkten gerne recht. Wir haben erst gerade in den letzten drei Tagen am [CG Hybrid Meeting](https://github.com/WebAssembly/meetings/blob/main/main/2023/CG-10.md) diverse Beispiele und Banchmarks gesehen. Was ausser Frage steht ist Portabilität und Sicherheit. Ganz klar Sicherheit wird und ist immer ein Thema, aber das Level ist hoch. Um das Thema nur ganz kurz anzuschneiden, hier zwei zufällige Beispiele vom [Reasearch Day](https://www.cs.cmu.edu/~wasm/wasm-research-day-2023.html) am letzten Freitag:
+* [Shravan Ravi Narayan](https://shravanrn.com/) sprach über die Einschränkung von [Spectre Attacke](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) bei WebAssembly. 
+* [Arjun Ramesh](https://users.ece.cmu.edu/~arjunr2/) und [Tianshu Huang](https://tianshu.io/) über plattformübergreifende Instrumentierung, die einzigartige Einblicke in das Programmverhalten liefern kann.
+
+Die Aussage über Image Grösse und Startup kommt als Konsequenz einer [Lightweight Virtualisierung (FaaS)](https://en.wikipedia.org/wiki/Function_as_a_service), welche den Fokus hat jeglicher Overhead von klassischen Containern zu vermeiden. Hierzu empfehle ich folgendes Video zu [WebAssembly und Containers](https://www.youtube.com/watch?v=OGcm3rHg630), welches die WebAssembly Runtime Spin benutzt. Jedoch ist es natürlich ganz klar ein unfairer Vergleich, einzelne kleine Services in WebAssembly 1:1 mit komplexeren Containern zu vergleichen.
+
+Trotzdem konnte ich es nicht lassen und wollte ganz kurz Vergleichswerte kreieren. Dabei habe ich zweimal das gleiche `fibonacci.rs` Programm klassisch und als WebAssembly Container gebildet. 
+
+```rust
+fn fibonacci(n: u64) -> u64 {
+    if n == 0 {
+        return 0;
+    } else if n == 1 {
+        return 1;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+
+fn main() {
+    println!("Starting");
+    let n = 35; // Change this to the desired Fibonacci number you want to compute
+    let result = fibonacci(n);
+    println!("Fibonacci({}) = {}", n, result);
+    println!("Stopped");
+}
+```
+
+Und dies mit folgdenem Code ausgewertet:
+
+```bash
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <command> <num_runs>"
+    exit 1
+fi
+
+command_to_measure="$1"
+num_runs=$2
+
+total_execution_time=0
+total_startup_time=0
+total_runtime_time=0
+total_shutdown_time=0
+
+for ((i=1; i<=$num_runs; i++)); do
+    start_time=$(date +%s.%N)
+    started_time=$(date +%s.%N)
+    stopped_time=$(date +%s.%N)
+
+    $command_to_measure  | while IFS= read -r line; do 
+            case "$line" in
+                "Starting")
+                    started_time=$(date +%s.%N)                
+                ;;
+                "Stopped")
+                    stopped_time=$(date +%s.%N)                
+                ;;
+                *)
+                # echo "$line"
+                ;;
+            esac
+        done
+    end_time=$(date +%s.%N)
+
+    execution_time=$(echo "$end_time - $start_time" | bc -l)
+    startup_time=$(echo "$started_time - $start_time" | bc -l)
+    runtime_time=$(echo "$stopped_time - $started_time" | bc -l)
+    shutdown_time=$(echo "$end_time - $stopped_time" | bc -l)
+    total_execution_time=$(echo "$total_execution_time + $execution_time" | bc -l)
+    total_startup_time=$(echo "$total_startup_time + $startup_time" | bc -l)
+    total_runtime_time=$(echo "$total_runtime_time + $runtime_time" | bc -l)
+    total_shutdown_time=$(echo "$total_shutdown_time + $shutdown_time" | bc -l)
+done
+
+avg_total_execution_time=$(echo "$total_execution_time / $num_runs" | bc -l)
+avg_total_startup_time=$(echo "$total_startup_time / $num_runs" | bc -l)
+avg_total_runtime_time=$(echo "$total_runtime_time / $num_runs" | bc -l)
+avg_total_shutdown_time=$(echo "$total_shutdown_time / $num_runs" | bc -l)
+echo "Average execution time over $num_runs runs: $avg_total_execution_time seconds"
+echo "Average startup time over $num_runs runs: $avg_total_startup_time seconds"
+echo "Average run time over $num_runs runs: $avg_total_runtime_time seconds"
+echo "Average shutdown time over $num_runs runs: $avg_total_shutdown_time seconds"
+
+```
+
+Gemäss meinen Analysen, verwenden beide von mir verwendeten Runtimes (JIT)[https://en.wikipedia.org/wiki/Just-in-time_compilation] theoretisch müsste aber (AOT)[https://en.wikipedia.org/wiki/Ahead-of-time_compilation] gemäss [Ablaufdiagramm](https://wasmedge.org/docs/contribute/internal) von zum Beispiel WasmEdge ebenfalls möglich sein. 
+
+> Leider konnte ich die Runtimes Spin und Slight wie auch eine Wastime Vorkompilierung hier nicht berücksichtigen, weil `println` damit aus dem Stand noch nicht unterstützt wird.
+
+### Build
+Hier fällt vorneweg ganz klar auf, dass der Build von klassischen Containern deutlich langsamer ist.
+`docker buildx build --load -f DockerfileClassic -t demo/fibonacci_classic .`
+`docker buildx build --load --platform wasi/wasm -t demo/fibonacci_webassembly .`
+`docker buildx build --load -f DockerfileCompile -t demo/fibonacci_webassembly_compile .`
+
+![Memory Space](memory_space.png)
+Das Image `demo/fibonacci_webassembly_compile` ist hierbei ein Wasmtime AOT Image. Was selbstverständlich ein Teil der Portablilität in dieser Art der Umsetzung zu nichte macht. Jedoch auf Grund der Grösse zum Beispiel bei einem [Embedded Anwendungsfall](https://de.wikipedia.org/wiki/Embedded_Software_Engineering) (IoT) durchaus Sinn machen könnte.
+
+### Run
+```bash
+$ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmtime.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 1
+Average execution time over 1 runs: .92003518600000000000 seconds
+Average startup time over 1 runs: .00223248300000000000 seconds
+Average run time over 1 runs: .00182017000000000000 seconds
+Average shutdown time over 1 runs: .91598253300000000000 seconds
+```
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmtime.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 50
+Average execution time over 50 runs: .79499581630000000000 seconds
+Average startup time over 50 runs: .00152502634000000000 seconds
+Average run time over 50 runs: .00146761514000000000 seconds
+Average shutdown time over 50 runs: .79200317482000000000 seconds
+```
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmedge.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 1
+Average execution time over 1 runs: 9.29828315900000000000 seconds
+Average startup time over 1 runs: .00253460300000000000 seconds
+Average run time over 1 runs: .00334101000000000000 seconds
+Average shutdown time over 1 runs: 9.29240754600000000000 seconds
+```
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmedge.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 50
+Average execution time over 50 runs: 9.19518831752000000000 seconds
+Average startup time over 50 runs: .00185933672000000000 seconds
+Average run time over 50 runs: .00179162598000000000 seconds
+Average shutdown time over 50 runs: 9.19153735482000000000 seconds
+```
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm demo/fibonacci_classic" 1
+Average execution time over 1 runs: .65099649100000000000 seconds
+Average startup time over 1 runs: .00220626700000000000 seconds
+Average run time over 1 runs: .00316228900000000000 seconds
+Average shutdown time over 1 runs: .64562793500000000000 seconds
+```
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm demo/fibonacci_classic" 50
+Average execution time over 50 runs: .57311583626000000000 seconds
+Average startup time over 50 runs: .00151897690000000000 seconds
+Average run time over 50 runs: .00152541990000000000 seconds
+Average shutdown time over 50 runs: .57007143946000000000 seconds
+```
+
+Dies ergibt für Wasmtime verglichen mit der klassichen Variante im Mittel über 50 Messungen:
+* Execution: 38% langsamer
+* Startup: 0.4% langsamer
+* Runtime: 3.8% schneller
+* Shutdown: 38 % langsamer
+
+Und für WasmEdge:
+* Execution: 1504% langsamer
+* Startup: 22% langsamer
+* Runtime: 17% langsamer
+* Shutdown: 1512% langsamer
+
+### Fazit
+Dies soll keine Wissenschaftliche Abhandlung darstellen, jedoch einwenig ein Gefühl dafür vermitteln. 
+
+Was für mich auffällig ist:
+* Das Image ist deutlich kleiner
+* Wasmtime im Vergleich zur klassischen Variante ist nur minimal langsamer. Hier fällt auf, dass nach mehrfacher Wiederholung das WebAssembly für den Fibonacci-Algo sogar immer etwas schneller.
+* Die WebAssembly Runtimes haben noch grosse Unterschiede in der Performance
+
+Zeit ist aktuell etwas knapp, jedoch werde ich versuchen diesem Thema noch mehr Aufmerksamkeit zu schenken. Gerne bin ich auch offen für weitere Inputs oder Fragen.
 
 ## Weiterführend
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/8_webassembly_docker_container)

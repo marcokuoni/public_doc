@@ -1,5 +1,5 @@
 # WebAssembly Docker Container
-**Inhalt:** [Theorie: Warum?](#warum) | [Theorie: Wie?](#wie) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Weiterführend](#weiterführend)
+**Inhalt:** [Theorie: Warum?](#warum) | [Theorie: Wie?](#wie) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Performance](#performance) | [Weiterführend](#weiterführend)
 
 ## Warum?
 Das berühmte Zitat von einem der Erfinder von Docker, Solomon Hykes: «If WASM+WASI existed in 2008, we wouldn’t have needed to created Docker» - «Wenn WASM+WASI 2008 existiert hätte, hätten wir Docker nicht erfinden müssen».
@@ -338,9 +338,9 @@ Die verwendeten WebAssembly Runtimes verwenden (JIT)[https://en.wikipedia.org/wi
 > Leider konnte ich die Runtimes Spin und Slight wie auch eine Wastime Vorkompilierung hier nicht berücksichtigen, weil `println` damit aus dem Stand nicht funktionierte.
 
 ### Build
-`docker buildx build --load -f DockerfileClassic -t demo/fibonacci_classic .`
-`docker buildx build --load --platform wasi/wasm -t demo/fibonacci_webassembly .`
-`docker buildx build --load -f DockerfileCompile -t demo/fibonacci_webassembly_compile .`
+* `docker buildx build --load -f DockerfileClassic -t demo/fibonacci_classic .`
+* `docker buildx build --load --platform wasi/wasm -t demo/fibonacci_webassembly .`
+* `docker buildx build --load -f DockerfileCompile -t demo/fibonacci_webassembly_compile .`
 
 ![Memory Space](memory_space.png)
 Das Image `demo/fibonacci_webassembly_compile` ist hierbei ein Wasmtime AOT Image. Was zu Einschränkungen in der Portabililität führt. Jedoch auf Grund der Grösse zum Beispiel bei einem [Embedded Anwendungsfall](https://de.wikipedia.org/wiki/Embedded_Software_Engineering) (IoT) durchaus Sinn machen könnte.

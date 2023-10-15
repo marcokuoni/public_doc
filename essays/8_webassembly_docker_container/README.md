@@ -1,5 +1,5 @@
 # WebAssembly Docker Container
-**Content:** [Theory: Why?](#why) | [Theory: How?](#how) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Further Resources](#further-resources)
+**Content:** [Theory: Why?](#why) | [Theory: How?](#how) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Performance](#performance) | [Further Resources](#further-resources)
 
 ## Why?
 The famous quote from one of the inventors of Docker, Solomon Hykes: "If WASM+WASI existed in 2008, we wouldn’t have needed to created Docker."
@@ -245,8 +245,8 @@ I would like to take this opportunity to thank [Thomas Bocek](https://youtu.be/0
 
 As of my current knowledge, I wholeheartedly agree with Thomas Bocek on all three points. In the past three days during the [CG Hybrid Meeting](https://github.com/WebAssembly/meetings/blob/main/main/2023/CG-10.md), we have seen various examples and benchmarks. What is beyond dispute is portability and security. Security is, of course, always a concern, but the level is already quite high. To touch on the topic briefly, here are two random examples from the [Research Day](https://www.cs.cmu.edu/~wasm/wasm-research-day-2023.html) after the CG Meeting:
 
-- [Shravan Ravi Narayan](https://shravanrn.com/) discussed the resistance of [Spectre Attacks](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) in WebAssembly on modern CPUs.
-- [Arjun Ramesh](https://users.ece.cmu.edu/~arjunr2/) and [Tianshu Huang](https://tianshu.io/) presented cross-platform instrumentation that can provide unique insights into program behavior.
+* [Shravan Ravi Narayan](https://shravanrn.com/) discussed the resistance of [Spectre Attacks](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) in WebAssembly on modern CPUs.
+* [Arjun Ramesh](https://users.ece.cmu.edu/~arjunr2/) and [Tianshu Huang](https://tianshu.io/) presented cross-platform instrumentation that can provide unique insights into program behavior.
 
 The statements regarding image size and startup time are a consequence of [Lightweight Virtualization (FaaS)](https://en.wikipedia.org/wiki/Function_as_a_service), which aims to eliminate any overhead from traditional containers. This involves virtualizing the application at a higher level, breaking down the traditional container into smaller functional units per container. Additionally, the WebAssembly Container allows for the removal of the inner container Linux environment. I recommend watching the following video on [WebAssembly and Containers](https://www.youtube.com/watch?v=OGcm3rHg630), which uses the WebAssembly Runtime Spin and demonstrates the idea. However, it's important to note that it's an unfair comparison to directly equate smaller WebAssembly service containers with more complex application containers. Based solely on size and the code contained within, it should be possible to achieve faster startup times for WebAssembly containers compared to traditional containers.
 
@@ -338,9 +338,9 @@ The WebAssembly runtimes used employ [Just-in-time (JIT)](https://en.wikipedia.o
 > Unfortunately, I couldn't take into account the Runtimes Spin and Slight, as well as precompilation with Wastime, because `println` didn't work out of the box with them.
 
 ### Build
-`docker buildx build --load -f DockerfileClassic -t demo/fibonacci_classic .`
-`docker buildx build --load --platform wasi/wasm -t demo/fibonacci_webassembly .`
-`docker buildx build --load -f DockerfileCompile -t demo/fibonacci_webassembly_compile .`
+* `docker buildx build --load -f DockerfileClassic -t demo/fibonacci_classic .`
+* `docker buildx build --load --platform wasi/wasm -t demo/fibonacci_webassembly .`
+* `docker buildx build --load -f DockerfileCompile -t demo/fibonacci_webassembly_compile .`
 
 ![Memory Space](memory_space.png)
 The image `demo/fibonacci_webassembly_compile` is a Wasmtime AOT Image, which leads to limitations in portability. However, due to its size, it could make sense in certain scenarios, such as an [Embedded Application](https://en.wikipedia.org/wiki/Embedded_Software_Engineering) (IoT) use case.
@@ -394,7 +394,7 @@ Average run time over 50 runs: .00152541990000000000 seconds
 Average shutdown time over 50 runs: .57007143946000000000 seconds
 ```
 
-This results in the following performance comparison between Wasmtime and the classic variant, based on an average of over 50 measurements:
+This results in the following performance comparison between the classic variant, based on an average of over 50 measurements:
 
 **Wasmtime:**
 * Execution: 38% slower
@@ -411,9 +411,9 @@ This results in the following performance comparison between Wasmtime and the cl
 ### Conclusion
 This is not intended to be a scientific dissertation but rather to provide a sense of the differences. What stands out to me is:
 
-- The WebAssembly image is significantly smaller.
-- Wasmtime is only marginally slower compared to the classic variant. Interestingly, a clear difference is especially noticeable when exiting the `main` function.
-- WebAssembly runtimes still exhibit significant differences in performance.
+* The WebAssembly image is significantly smaller.
+* Wasmtime is only marginally slower compared to the classic variant. Interestingly, a clear difference is especially noticeable when exiting the `main` function.
+* WebAssembly runtimes still exhibit significant differences in performance.
 
 Time is currently a bit limited, but I will try to give more attention to this topic. I'm also open to further inputs or questions. As mentioned at the beginning, I see a strong push for benchmarks in the community, so we will likely receive better tools and analyses in the near future.
 

@@ -19,7 +19,7 @@ Wenn nun eine WebAssembly-Runtime zur Verfügung steht, können diese Punkte an 
 
 Inklusive den bekannten Vorteilen von WebAssembly selbst:
 * Sicherheit: WebAssembly Programme laufen in einer Sandbox. Es ist nicht direkt möglich auf das Hostsystem oder andere Container zuzugreifen.
-* Performance: WebAssembly kommt kompiliert als Maschinen-Code daher.
+* Performance: WebAssembly kommt kompiliert als WebAssembly-Maschinen-Code daher.
 * Und Weiteren, siehe in meinem letzten [Artikel](https://medium.com/webassembly/emscripten-simple-portability-9d3238d99294)
 
 | Aspekt                        | Klassische                            | WebAssembly Container                                                                             |
@@ -238,18 +238,21 @@ Welches über `docker compose up` gestartet wird.
 ![WebAssembly with Docker Compose](docker_compose.png)
 
 ## Performance
-Ich möchte mich an dieser Stelle bei [Thomas Bocek](https://youtu.be/0uo37PAondM?feature=shared&t=178) bedanken für die Erwähnung dieses Artikels. Im spezielen auch die Erwähnung seiner Bedenken bezüglich der Performance von WebAssembly in Docker. Ich möchte daher hier kurz auf die drei erwähnten Punkte eingehen:
+Ich möchte mich an dieser Stelle bei [Thomas Bocek](https://youtu.be/0uo37PAondM?feature=shared&t=178) bedanken für die Erwähnung dieses Artikels. Im speziellen auch die Erwähnung seiner Bedenken bezüglich der Performance von WebAssembly in Docker. 
+Daher gehe ich hier kurz auf die drei erwähnten Punkte ein:
 * Startzeit
 * Image Grösse
 * Portabilität
 
-Zum aktuellen Zeitpunkt und gemäss meinem aktuellen Wissen, gebe ich Thomas Bocek in allen drei Punkten gerne recht. Wir haben erst gerade in den letzten drei Tagen am [CG Hybrid Meeting](https://github.com/WebAssembly/meetings/blob/main/main/2023/CG-10.md) diverse Beispiele und Banchmarks gesehen. Was ausser Frage steht ist Portabilität und Sicherheit. Ganz klar Sicherheit wird und ist immer ein Thema, aber das Level ist hoch. Um das Thema nur ganz kurz anzuschneiden, hier zwei zufällige Beispiele vom [Reasearch Day](https://www.cs.cmu.edu/~wasm/wasm-research-day-2023.html) am letzten Freitag:
-* [Shravan Ravi Narayan](https://shravanrn.com/) sprach über die Einschränkung von [Spectre Attacke](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) bei WebAssembly. 
+Zum aktuellen Zeitpunkt und gemäss meinem aktuellen Wissen, stimme ich Thomas Bocek in allen drei Punkten gerne zu. Wir haben erst gerade in den letzten drei Tagen am [CG Hybrid Meeting](https://github.com/WebAssembly/meetings/blob/main/main/2023/CG-10.md) diverse Beispiele und Benchmarks gesehen. Was ausser Frage steht ist Portabilität und Sicherheit. Ganz klar Sicherheit wird und ist immer ein Thema, aber das Level ist bereits hoch. Um das Thema nur ganz kurz anzuschneiden, hier zwei zufällige Beispiele vom [Reasearch Day](https://www.cs.cmu.edu/~wasm/wasm-research-day-2023.html) nach dem CG Meeting:
+* [Shravan Ravi Narayan](https://shravanrn.com/) sprach über die Einschränkung von [Spectre Attackes](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) bei WebAssembly auf modernen CPUs. 
 * [Arjun Ramesh](https://users.ece.cmu.edu/~arjunr2/) und [Tianshu Huang](https://tianshu.io/) über plattformübergreifende Instrumentierung, die einzigartige Einblicke in das Programmverhalten liefern kann.
 
-Die Aussage über Image Grösse und Startup kommt als Konsequenz einer [Lightweight Virtualisierung (FaaS)](https://en.wikipedia.org/wiki/Function_as_a_service), welche den Fokus hat jeglicher Overhead von klassischen Containern zu vermeiden. Hierzu empfehle ich folgendes Video zu [WebAssembly und Containers](https://www.youtube.com/watch?v=OGcm3rHg630), welches die WebAssembly Runtime Spin benutzt. Jedoch ist es natürlich ganz klar ein unfairer Vergleich, einzelne kleine Services in WebAssembly 1:1 mit komplexeren Containern zu vergleichen.
+Die Aussage über Image Grösse und Startup kommt als Konsequenz einer [Lightweight Virtualisierung (FaaS)](https://en.wikipedia.org/wiki/Function_as_a_service), welche den Fokus hat jeglichen Overhead von klassischen Containern zu vermeiden. Das heisst die Applikation auf einem höheren Level zu virtualisieren und damit den klassischen Container aufzuteilen in kleinere Funktionseinheiten pro Container. Plus kann zusätzlich in WebAssembly Containern auf die komplette in Container Linux Umgebung verzichtet werden. Hierzu empfehle ich folgendes Video zu [WebAssembly und Containers](https://www.youtube.com/watch?v=OGcm3rHg630), welches die WebAssembly Runtime Spin benutzt und dies in Anwendung aufzeigt. Jedoch ist es natürlich ein unfairer Vergleich, kleinere WebAssembly Service Containern mit komplexeren Applikations Containern zu vergleichen. Aber alleine auf Grundlage der Grösse und der daraus enthaltenen Codes sollte es möglich sein die Startupzeit eines WebAssembly Containers unter die eines klassischen Containers zu bringen.
 
-Trotzdem konnte ich es nicht lassen und wollte ganz kurz Vergleichswerte kreieren. Dabei habe ich zweimal das gleiche `fibonacci.rs` Programm klassisch und als WebAssembly Container gebildet. 
+Ich komme aus dem Embedded-Bereich und eine klassische Diskusion ist welche Realtime ist schneller. Ähnliche Diskusionen fallen mir bei WebAssembly über native Implementierungen auf. Nehmen wir das Beispiel von Docker. Es wird im Container WebAssembly-Maschinen-Code ausgeliefert. Welcher von der WebAssembly Runtime in Maschinen-Code für die hardware Maschine umgewandelt wird. Bei all diesen Schritten gibt es nun noch Kompromisse zu treffen um dies zu realiseren. Jedoch sieht man Bestrebungen bis auf die Hardware runter um diese möglichst zu eliminieren und somit WebAssembly einen nativen Support zu ermöglichen und so ein schnelleres Nativ zu erreichen.
+
+Ich konnte es nicht lassen und habe ganz kurz Vergleichswerte kreiert. Dabei habe ich zweimal das gleiche `fibonacci.rs` Programm klassisch und als WebAssembly Container gebildet. 
 
 ```rust
 fn fibonacci(n: u64) -> u64 {
@@ -264,14 +267,14 @@ fn fibonacci(n: u64) -> u64 {
 
 fn main() {
     println!("Starting");
-    let n = 35; // Change this to the desired Fibonacci number you want to compute
+    let n = 35;
     let result = fibonacci(n);
     println!("Fibonacci({}) = {}", n, result);
     println!("Stopped");
 }
 ```
 
-Und dies mit folgdenem Code ausgewertet:
+Und dies mit folgendem Code ausgewertet:
 
 ```bash
 #!/bin/bash
@@ -330,18 +333,17 @@ echo "Average shutdown time over $num_runs runs: $avg_total_shutdown_time second
 
 ```
 
-Gemäss meinen Analysen, verwenden beide von mir verwendeten Runtimes (JIT)[https://en.wikipedia.org/wiki/Just-in-time_compilation] theoretisch müsste aber (AOT)[https://en.wikipedia.org/wiki/Ahead-of-time_compilation] gemäss [Ablaufdiagramm](https://wasmedge.org/docs/contribute/internal) von zum Beispiel WasmEdge ebenfalls möglich sein. 
+Die verwendeten WebAssembly Runtimes verwenden (JIT)[https://en.wikipedia.org/wiki/Just-in-time_compilation] theoretisch müsste aber (AOT)[https://en.wikipedia.org/wiki/Ahead-of-time_compilation] gemäss [Ablaufdiagramm](https://wasmedge.org/docs/contribute/internal) von zum Beispiel WasmEdge ebenfalls möglich sein. 
 
-> Leider konnte ich die Runtimes Spin und Slight wie auch eine Wastime Vorkompilierung hier nicht berücksichtigen, weil `println` damit aus dem Stand noch nicht unterstützt wird.
+> Leider konnte ich die Runtimes Spin und Slight wie auch eine Wastime Vorkompilierung hier nicht berücksichtigen, weil `println` damit aus dem Stand nicht funktionierte.
 
 ### Build
-Hier fällt vorneweg ganz klar auf, dass der Build von klassischen Containern deutlich langsamer ist.
 `docker buildx build --load -f DockerfileClassic -t demo/fibonacci_classic .`
 `docker buildx build --load --platform wasi/wasm -t demo/fibonacci_webassembly .`
 `docker buildx build --load -f DockerfileCompile -t demo/fibonacci_webassembly_compile .`
 
 ![Memory Space](memory_space.png)
-Das Image `demo/fibonacci_webassembly_compile` ist hierbei ein Wasmtime AOT Image. Was selbstverständlich ein Teil der Portablilität in dieser Art der Umsetzung zu nichte macht. Jedoch auf Grund der Grösse zum Beispiel bei einem [Embedded Anwendungsfall](https://de.wikipedia.org/wiki/Embedded_Software_Engineering) (IoT) durchaus Sinn machen könnte.
+Das Image `demo/fibonacci_webassembly_compile` ist hierbei ein Wasmtime AOT Image. Was zu Einschränkungen in der Portabililität führt. Jedoch auf Grund der Grösse zum Beispiel bei einem [Embedded Anwendungsfall](https://de.wikipedia.org/wiki/Embedded_Software_Engineering) (IoT) durchaus Sinn machen könnte.
 
 ### Run
 ```bash
@@ -392,27 +394,28 @@ Average run time over 50 runs: .00152541990000000000 seconds
 Average shutdown time over 50 runs: .57007143946000000000 seconds
 ```
 
-Dies ergibt für Wasmtime verglichen mit der klassichen Variante im Mittel über 50 Messungen:
+Dies Resultiert in folgende Perfomancevergleiche verglichen mit der klassischen Variante im Mittel über 50 Messungen:
+**Wastime:**
 * Execution: 38% langsamer
 * Startup: 0.4% langsamer
 * Runtime: 3.8% schneller
 * Shutdown: 38 % langsamer
 
-Und für WasmEdge:
+**WasmEdge:**
 * Execution: 1504% langsamer
 * Startup: 22% langsamer
 * Runtime: 17% langsamer
 * Shutdown: 1512% langsamer
 
 ### Fazit
-Dies soll keine Wissenschaftliche Abhandlung darstellen, jedoch einwenig ein Gefühl dafür vermitteln. 
+Dies soll keine Wissenschaftliche Abhandlung darstellen, jedoch ein wenig ein Gefühl für die Unterschiede vermitteln. 
 
 Was für mich auffällig ist:
-* Das Image ist deutlich kleiner
-* Wasmtime im Vergleich zur klassischen Variante ist nur minimal langsamer. Hier fällt auf, dass nach mehrfacher Wiederholung das WebAssembly für den Fibonacci-Algo sogar immer etwas schneller.
+* Das WebAssembly Image ist deutlich kleiner
+* Wasmtime im Vergleich zur klassischen Variante ist nur minimal langsamer. Interessanterweise ist vor allem beim Verlassen der `main` Funktion ein klarer unterschied zu spüren.
 * Die WebAssembly Runtimes haben noch grosse Unterschiede in der Performance
 
-Zeit ist aktuell etwas knapp, jedoch werde ich versuchen diesem Thema noch mehr Aufmerksamkeit zu schenken. Gerne bin ich auch offen für weitere Inputs oder Fragen.
+Zeit ist aktuell etwas knapp, jedoch werde ich versuchen diesem Thema noch mehr Aufmerksamkeit zu schenken. Gerne bin ich auch offen für weitere Inputs oder Fragen. Wie schon einleitend erwähnt, sehe ich grosse Bestrebungen nach Banchmarks in der Community und daher werden wir bestimmt in nächster Zeit noch bessere Tools und Auswertungen erhalten.
 
 ## Weiterführend
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/8_webassembly_docker_container)

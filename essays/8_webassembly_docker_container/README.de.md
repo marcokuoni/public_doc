@@ -363,17 +363,6 @@ Average shutdown time over 50 runs: .79200317482000000000 seconds
 ```
 
 ```bash
-$ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmtime.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 5000
-
-Average execution time over 5000 runs: .86158419502540000000 seconds
-Average startup time over 5000 runs: .00110639370920000000 seconds
-Average run time over 5000 runs: .00110670086200000000 seconds
-Average shutdown time over 5000 runs: .85937110045420000000 seconds
-```
-
-![Monitoring 5000 on i9](image-1.png)
-
-```bash
 $ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmedge.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 1
 Average execution time over 1 runs: 9.29828315900000000000 seconds
 Average startup time over 1 runs: .00253460300000000000 seconds
@@ -405,14 +394,6 @@ Average run time over 50 runs: .00152541990000000000 seconds
 Average shutdown time over 50 runs: .57007143946000000000 seconds
 ```
 
-```bash
-$ ./measureAvgTime.sh "docker run --rm demo/fibonacci_classic" 5000
-Average execution time over 5000 runs: .59495869612380000000 seconds
-Average startup time over 5000 runs: .00135375017460000000 seconds
-Average run time over 5000 runs: .00132145809240000000 seconds
-Average shutdown time over 5000 runs: .59228348785680000000 seconds
-```
-
 Dies Resultiert in folgende Perfomancevergleiche verglichen mit der klassischen Variante im Mittel über 50 Messungen:
 **Wasmtime 50:**
 * Execution: 38% langsamer
@@ -425,6 +406,26 @@ Dies Resultiert in folgende Perfomancevergleiche verglichen mit der klassischen 
 * Startup: 22% langsamer
 * Runtime: 17% langsamer
 * Shutdown: 1512% langsamer
+* 
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmtime.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 5000
+
+Average execution time over 5000 runs: .86158419502540000000 seconds
+Average startup time over 5000 runs: .00110639370920000000 seconds
+Average run time over 5000 runs: .00110670086200000000 seconds
+Average shutdown time over 5000 runs: .85937110045420000000 seconds
+```
+
+```bash
+$ ./measureAvgTime.sh "docker run --rm demo/fibonacci_classic" 5000
+Average execution time over 5000 runs: .59495869612380000000 seconds
+Average startup time over 5000 runs: .00135375017460000000 seconds
+Average run time over 5000 runs: .00132145809240000000 seconds
+Average shutdown time over 5000 runs: .59228348785680000000 seconds
+```
+
+![Monitoring 5000 on i9](monitoring-5000.png)
 
 **Wasmtime 5000:**
 * Execution: 45% langsamer

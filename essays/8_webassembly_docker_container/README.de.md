@@ -458,6 +458,8 @@ Als Grundlage für diesen Artikel dienten diverse Quellen. Eine Liste der Quelle
 * [GitHub: Runwasi](https://github.com/second-state/runwasi)
 * [GitHub: Issues - Docker+Wasm Integration](https://github.com/docker/roadmap/issues/426)
 * [Wasm Labs: WebAssembly - Docker without containers!](https://wasmlabs.dev/articles/docker-without-containers/)
+* [Benchmak](https://www.secondstate.io/articles/ssvm-performance/)
+* [WebAssembly on the server-side](https://medium.com/wasm/webassembly-on-the-server-side-c584f874b4a3)
 
 Ich bin gerne bereit den Artikel zu präzisieren, erweitern oder zu korrigieren. Schreibt ein Feedback oder meldet euch direkt bei mir.
 

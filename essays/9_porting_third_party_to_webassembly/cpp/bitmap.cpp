@@ -216,14 +216,9 @@ void fractal()
    }
 }
 
-int main(int argc, char **argv)
+extern "C"
+void build_bitmap(int choosen)
 {
-   int choosen = 0;
-   if(argc > 1)
-   {
-      choosen = std::atoi(argv[1]);
-   }
-
    switch(choosen) {
       case 1:
          cartesian();
@@ -232,9 +227,19 @@ int main(int argc, char **argv)
          fractal();
          break;
       default:
-         printf("Usage: %s [1|2]\n", argv[0]);
          break;
    }
+}
+
+int main(int argc, char **argv)
+{
+   int choosen = 0;
+   if(argc > 1)
+   {
+      choosen = std::atoi(argv[1]);
+   }
+
+   build_bitmap(choosen);
    
    return 0;
 }

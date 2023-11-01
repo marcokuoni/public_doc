@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Porting Third Party to WebAssembly</title>
+</head>
+
+<body>
+    <h1>Porting Third Party to WebAssembly</h1>
+    <button id="create">Create Bitmaps</button><br><br>
+    <canvas id="output"></canvas>
+    <script src="bitmap.js"></script>
+    <script src="bitmap_image.js"></script>
+    <script>
+        const callMainButton = document.getElementById("create");
+        callMainButton.addEventListener("click", function () {
+            // call build_bitmap with cwrap
+            const build_bitmap = Module.cwrap("build_bitmap", "number", ["number"]);
+            build_bitmap(1);
+
+            // or the exported build_bitmap
+            Module._build_bitmap(2);
+
+            // or the main function
+            // Module.callMain(["1"]);
+
+            const canvas = document.getElementById("output");
+            const ctx = canvas.getContext("2d");
+
+            const image = FS.readFile("./mandelbrot_set_vga.bmp");
+            const bmp = getBMP(image.buffer);
+            const imageData = convertToImageData(bmp);
+
+            canvas.width = bmp.infoHeader.biWidth;
+            canvas.height = bmp.infoHeader.biHeight;
+
+            ctx.putImageData(imageData, 0, 0);
+
+            console.log(image)
+        });
+    </script>
+</body>
+
+</html>

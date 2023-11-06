@@ -83,7 +83,7 @@ Which can be executed using the `make` command. The resulting executable file, `
 
 This will then generate the respective bitmap images.
 
-![As an Example Mandelbrot](./mandelbrot_set_vga.bmp)
+![As an Example Mandelbrot](./mandelbrot_set_vga.png)
 
 ### WebAssembly
 Now, the Makefile can be easily modified to use the Emscripten compiler and compile into WebAssembly.

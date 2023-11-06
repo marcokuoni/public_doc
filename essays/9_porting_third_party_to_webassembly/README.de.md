@@ -83,7 +83,7 @@ Welches über den Befehl `make` ausgeführt werden kann. Die dadurch entstandene
 
 Was dann die jeweiligen Bitmap-Bilder erzeugt.
 
-![As an Example Mandelbrot](./mandelbrot_set_vga.bmp)
+![As an Example Mandelbrot](./mandelbrot_set_vga.png)
 
 ### WebAssembly
 Nun kann das Makefile leicht angepasst werden, damit es den Emscripten Compiler verwendet und in WebAssembly kompiliert.

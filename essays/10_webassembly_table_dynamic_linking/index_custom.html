@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebAssembly Table Dynamic Linking</title>
+</head>
+
+<body>
+    <h1>WebAssembly Table Dynamic Linking</h1>
+    <h2>Multiply</h2>
+    <form id="mul">
+        <input type="number" name="a" value="3">
+        <input type="number" name="b" value="14">
+        <button type="submit">Multiply</button>
+        <output name="output"></output>
+    </form>
+
+    <h2>Divide</h2>
+    <form id="div">
+        <input type="number" name="a" value="84">
+        <input type="number" name="b" value="2">
+        <button type="submit">Divide</button>
+        <output name="output"></output>
+    </form>
+    <script>
+        function fetchAndInstantiate(url, importObject) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+        }
+
+        const mathTbl = new WebAssembly.Table({
+            initial: 2,
+            element: 'anyfunc'
+        });
+
+        const importObject = {
+            env: {
+                math_tbl: mathTbl
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const formMul = document.querySelector('form#mul');
+            const formDiv = document.querySelector('form#div');
+
+            formMul.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const form = event.target;
+                const formData = new FormData(form);
+
+                const a = formData.get('a');
+                const b = formData.get('b');
+
+                Promise.all([
+                    fetchAndInstantiate('math_ext.wasm', importObject),
+                    fetchAndInstantiate('math_custom.wasm', importObject)
+                ]).then(instances => {
+                    form.output.value = instances[1].exports.mul_cust(a, b);
+                });
+            });
+
+            formDiv.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const form = event.target;
+                const formData = new FormData(form);
+
+                const a = formData.get('a');
+                const b = formData.get('b');
+
+                Promise.all([
+                    fetchAndInstantiate('math_ext.wasm', importObject),
+                    fetchAndInstantiate('math_custom.wasm', importObject)
+                ]).then(instances => {
+                    form.output.value = instances[1].exports.div_cust(a, b);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

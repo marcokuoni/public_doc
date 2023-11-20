@@ -69,11 +69,11 @@ This can now be used in a web application.
 
 <head>
     <meta charset="utf-8" />
-    <title>WebAssembly Table Dynamic Linking</title>
+    <title>WebAssembly Table, Dynamic Linking</title>
 </head>
 
 <body>
-    <h1>WebAssembly Table Dynamic Linking</h1>
+    <h1>WebAssembly Table, Dynamic Linking</h1>
     <h2>Multiply</h2>
     <form id="mul">
         <input type="number" name="a" value="3">
@@ -257,11 +257,11 @@ Code[2]:
 
 <head>
     <meta charset="utf-8" />
-    <title>WebAssembly Table Dynamic Linking</title>
+    <title>WebAssembly Table, Dynamic Linking</title>
 </head>
 
 <body>
-    <h1>WebAssembly Table Dynamic Linking</h1>
+    <h1>WebAssembly Table, Dynamic Linking</h1>
     <h2>Multiply</h2>
     <form id="mul">
         <input type="number" name="a" value="3">
@@ -341,11 +341,11 @@ Code[2]:
 </html>
 ```
 
-Start the application with `python3 -m http.server`.
+    Start the application with `python3 -m http.server`.
 
-Analyze in the browser at `http://localhost:8000/index_custom.html`.
+    Analyze in the browser at `http://localhost:8000/index_custom.html`.
 
-The result looks the same as in the previous example. However, now the table is provided by the host system ([WebAssembly API](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Table)), and it needs to be ensured with `Promise.all` that the mathematics module is loaded and initialized when using the application module.
+    The result looks the same as in the previous example. However, now the table is provided by the host system ([WebAssembly API](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Table)), and it needs to be ensured with `Promise.all` that the mathematics module is loaded and initialized when using the application module.
 
 ## Further Resources
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/10_webassembly_table_dynamic_linking)

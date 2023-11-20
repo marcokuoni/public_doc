@@ -31,6 +31,7 @@
                 .then(results => results.instance);
         }
 
+        //table where the two function references are saved and shared
         const mathTbl = new WebAssembly.Table({
             initial: 2,
             element: 'anyfunc'
@@ -58,6 +59,7 @@
                     fetchAndInstantiate('math_ext.wasm', importObject),
                     fetchAndInstantiate('math_custom.wasm', importObject)
                 ]).then(instances => {
+                    //index 1 ist the math_custom.wasm instance
                     form.output.value = instances[1].exports.mul_cust(a, b);
                 });
             });
@@ -74,6 +76,7 @@
                     fetchAndInstantiate('math_ext.wasm', importObject),
                     fetchAndInstantiate('math_custom.wasm', importObject)
                 ]).then(instances => {
+                    //index 1 ist the math_custom.wasm instance
                     form.output.value = instances[1].exports.div_cust(a, b);
                 });
             });

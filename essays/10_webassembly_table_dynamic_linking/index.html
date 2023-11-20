@@ -47,6 +47,7 @@
                     .then(instance => {
                         const mathTbl = instance.exports.math_tbl;
 
+                        //table index 0 is multiply as elem initialized it
                         form.output.value = mathTbl.get(0)(a, b);
                     });
             });
@@ -63,6 +64,7 @@
                     .then(instance => {
                         const mathTbl = instance.exports.math_tbl;
 
+                        //table index 1 is division as elem initialized it
                         form.output.value = mathTbl.get(1)(a, b);
                     });
             });

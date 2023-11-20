@@ -15,6 +15,7 @@
 * [Emscripten Simple Portability](./essays/7_emscripten_simple_portability/README.md)
 * [WebAssembly Docker Container](./essays/8_webassembly_docker_container/README.md)
 * [Porting Third Party to WebAssembly](./essays/9_porting_third_party_to_webassembly/README.md)
+* [WebAssembly Table, Dynamic Linking](./essays/10_webassembly_table_dynamic_linking/README.md)
 
 ### Possible Subjects
 * WebAssembly Docker Container

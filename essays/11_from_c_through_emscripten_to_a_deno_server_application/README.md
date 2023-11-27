@@ -105,7 +105,7 @@ Code[16]:
 Interesting at this point are the designations `mul` and `div` of the exported functions under `Export[14]`. These are now used in the Deno server application.
 
 ## Deno Server Application
-```javascript
+```typescript
 import { serve } from "https://deno.land/std/http/server.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
 
@@ -139,7 +139,7 @@ Listening on http://localhost:8000/
 
 Calling the server: `http://localhost:8000/?a=14&b=3`
 
-![Webapplication](webapplication.png)
+![Web Application](webapplication.png)
 
 Short Explanation:
 * First, the WebAssembly module is loaded from the filesystem and instantiated.

@@ -105,7 +105,7 @@ Code[16]:
 Interessant an dieser Stelle sind die Bezeichnungen `mul` und `div` der exportierten Funktionen unter `Export[14]`. Diese werden nun in der Deno Serverapplikation verwendet.
 
 ## Deno Serverapplikation
-```javascript
+```typescript
 import { serve } from "https://deno.land/std/http/server.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
 

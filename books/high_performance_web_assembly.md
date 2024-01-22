@@ -1,5 +1,5 @@
 # High-Performance Computing with Web Assembly
-## Eigene Rezession
+## Rezession
 Das Buch behandelt das Thema oberflächlich und hebt nur wenig konkrete Information hervor, obwohl die einzelnen Kapitel gut gewählt sind. Die Anwendung von WebAssembly wird nur selten präzise dargestellt und verschwindet gegen Ende sogar gänzlich. Kapitel wiederholen sich und bieten stets denselben Informationsgehalt. Insgesamt lässt sich positiv festhalten, dass das Buch vor allem aufzeigt, wo WebAssembly potenziell eingesetzt werden kann.
 
 Das Layout wirkt minderwertig umgesetzt, mit einer übermäßig großen Schrift und unsauber formatierten Codebeispielen sowie anderen Elementen. Die Typografie wurde in weiten Teilen vernachlässigt.

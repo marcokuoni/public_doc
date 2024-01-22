@@ -17,6 +17,7 @@
 * [Porting Third Party to WebAssembly](./essays/9_porting_third_party_to_webassembly/README.md)
 * [WebAssembly Table, Dynamic Linking](./essays/10_webassembly_table_dynamic_linking/README.md)
 * [From C through Emscripten to a Deno Server Application](./essays/11_from_c_through_emscripten_to_a_deno_server_application/README.md)
+* [Rust and WebAssembly](./essays/12_rust_and_webassembly/README.md)
 
 ### Possible Subjects
 * WebAssembly Docker Container

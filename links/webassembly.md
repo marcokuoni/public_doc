@@ -28,6 +28,7 @@
 * [Effect Handlers for WebAssembly](https://wasmfx.dev/)
 * [wasm2c](https://github.com/WebAssembly/wabt/blob/main/wasm2c/README.md)
 * [Wasm Runtimes](https://github.com/appcypher/awesome-wasm-runtimes)
+* [The State of WebAssembly – 2023 and 2024](https://platform.uno/blog/state-of-webassembly-2023-2024/)
 
 # Quantum
 * [Toutorial: IBM QSC](https://learning.quantum-computing.ibm.com/course/practical-introduction-to-quantum-safe-cryptography)

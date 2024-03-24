@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Hello wasm-bindgen</title>
+</head>
+
+<body>
+    <script type="module">
+        import init, { greet } from './hello-wasm-bindgen/pkg/hello_wasm_bindgen.js';
+        init().then(() => {
+            greet('Rust');
+        });
+    </script>
+</body>
+
+</html>

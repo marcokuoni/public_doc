@@ -48,7 +48,7 @@ Try to run a WebAssembly module directly. We'll use wasm3, but the same can be d
 ---
 
 If Rust in WebAssembly is new to you or you're more interested in the topic, I recommend consulting my older posts:
-* [Simple Rust Program in WebAssembly](https://medium.com/webassembly/simple-rust-program-in-webassembly-8561efd81b9f) Simple guide on how to use Rust in a web application
+* [Simple Rust Program in WebAssembly](https://medium.com/webassembly/simple-rust-program-in-webassembly-8561efd81b9f): Simple guide on how to use Rust in a web application
 
 ---
 
@@ -198,7 +198,7 @@ Hello, WASI!
 
 ---
 
-Compilation to WASI code is offered for various programming languages. As an example for C/C++, [wasienv](https://github.com/wasienv/wasienv)
+Compilation to WASI code is offered for various programming languages. As an example for C/C++, [wasienv](https://github.com/wasienv/wasienv).
 
 WASI applications can be run on various platforms, including Node.js, Deno, [Browser](https://dev.to/ndesmic/building-a-minimal-wasi-polyfill-for-browsers-4nel), etc.
 
@@ -208,4 +208,4 @@ WASI applications can be run on various platforms, including Node.js, Deno, [Bro
 
 I am happy to clarify, expand, or correct the article. Write feedback or contact me directly.
 
-Created by [Marco Kuoni, October 2024](https://marcokuoni.ch)
+Created by [Marco Kuoni, September 2024](https://marcokuoni.ch)

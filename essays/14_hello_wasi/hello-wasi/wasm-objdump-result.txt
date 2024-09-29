@@ -1,0 +1,1209 @@
+
+hello-wasi.wasm:	file format wasm 0x1
+
+Section Details:
+
+Type[18]:
+ - type[0] () -> nil
+ - type[1] (i32) -> nil
+ - type[2] (i32, i32) -> nil
+ - type[3] (i32) -> i32
+ - type[4] (i32, i32) -> i32
+ - type[5] (i32, i32, i32) -> nil
+ - type[6] (i32, i32, i32) -> i32
+ - type[7] (i32, i32, i32, i32) -> i32
+ - type[8] () -> i32
+ - type[9] (i32, i32, i32, i32) -> nil
+ - type[10] (i32, i32, i32, i32, i32) -> i32
+ - type[11] (i32, i32, i32, i32, i32, i32) -> nil
+ - type[12] (i32, i32, i32, i32, i32) -> nil
+ - type[13] (i32, i32, i32, i32, i32, i32, i32) -> nil
+ - type[14] (i32, i32, i32, i32, i32, i32) -> i32
+ - type[15] (i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32) -> i32
+ - type[16] (i32, i32, i32, i32, i32, i32, i32) -> i32
+ - type[17] (i64, i32, i32) -> i32
+Import[4]:
+ - func[0] sig=7 <_ZN4wasi13lib_generated22wasi_snapshot_preview18fd_write17haeb8e9d471da6707E> <- wasi_snapshot_preview1.fd_write
+ - func[1] sig=4 <__imported_wasi_snapshot_preview1_environ_get> <- wasi_snapshot_preview1.environ_get
+ - func[2] sig=4 <__imported_wasi_snapshot_preview1_environ_sizes_get> <- wasi_snapshot_preview1.environ_sizes_get
+ - func[3] sig=1 <__imported_wasi_snapshot_preview1_proc_exit> <- wasi_snapshot_preview1.proc_exit
+Function[204]:
+ - func[4] sig=0 <__wasm_call_ctors>
+ - func[5] sig=0 <_start>
+ - func[6] sig=1 <_ZN3std10sys_common9backtrace28__rust_begin_short_backtrace17h90275821610c977eE>
+ - func[7] sig=3 <_ZN3std2rt10lang_start28_$u7b$$u7b$closure$u7d$$u7d$17h077ef646d308a78dE>
+ - func[8] sig=3 <_ZN4core3ops8function6FnOnce40call_once$u7b$$u7b$vtable.shim$u7d$$u7d$17h7be2897f107f95f6E>
+ - func[9] sig=1 <_ZN4core3ptr85drop_in_place$LT$std..rt..lang_start$LT$$LP$$RP$$GT$..$u7b$$u7b$closure$u7d$$u7d$$GT$17hd02ca6a3ba2a3b9bE>
+ - func[10] sig=0 <_ZN10hello_wasi4main17h913399cd9566c9a2E>
+ - func[11] sig=8 <__main_void>
+ - func[12] sig=4 <__rust_alloc>
+ - func[13] sig=5 <__rust_dealloc>
+ - func[14] sig=7 <__rust_realloc>
+ - func[15] sig=2 <__rust_alloc_error_handler>
+ - func[16] sig=2 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h7f8bb40b25299cafE>
+ - func[17] sig=2 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h938e86217e215310E>
+ - func[18] sig=2 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17he5441c1d9b190c30E>
+ - func[19] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h19d1bedcded163baE>
+ - func[20] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h71dbe98eb6598ee3E>
+ - func[21] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha38c075d2207182cE>
+ - func[22] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha6eb5464aedf67c2E>
+ - func[23] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hc8e1e9dbb04b2765E>
+ - func[24] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hdefc3bb6466ea6ecE>
+ - func[25] sig=4 <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h66ab416b22b39001E>
+ - func[26] sig=4 <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17he7ea6c651aa99070E>
+ - func[27] sig=4 <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..Debug$u20$for$u20$usize$GT$3fmt17hfcaec1ac65661375E>
+ - func[28] sig=4 <_ZN4core3fmt5Write10write_char17h10db998c64a1b8a8E>
+ - func[29] sig=9 <_ZN61_$LT$std..io..stdio..StdoutLock$u20$as$u20$std..io..Write$GT$9write_all17h7c67a0a258557271E>
+ - func[30] sig=4 <_ZN4core3fmt5Write10write_char17h8709d740213ccfb5E>
+ - func[31] sig=6 <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17ha9c076a7f851cce3E>
+ - func[32] sig=4 <_ZN4core3fmt5Write10write_char17h8ae716af604963fbE>
+ - func[33] sig=5 <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve21do_reserve_and_handle17h8ec58651a822ff36E>
+ - func[34] sig=4 <_ZN4core3fmt5Write9write_fmt17h0ebcf53cdf77c413E>
+ - func[35] sig=4 <_ZN4core3fmt5Write9write_fmt17h2342adb37d334e13E>
+ - func[36] sig=4 <_ZN4core3fmt5Write9write_fmt17h7c226abad34feb4aE>
+ - func[37] sig=4 <_ZN4core3fmt5Write9write_fmt17h830607d21a1e3bc7E>
+ - func[38] sig=1 <_ZN3std9panicking12default_hook17h5ea3d96f939eb926E>
+ - func[39] sig=1 <_ZN4core3ptr122drop_in_place$LT$$RF$alloc..boxed..Box$LT$dyn$u20$core..error..Error$u2b$core..marker..Sync$u2b$core..marker..Send$GT$$GT$17hf0cab6db6a16f6ceE>
+ - func[40] sig=8 <_ZN3std9panicking11panic_count17is_zero_slow_path17h058647db203a6950E>
+ - func[41] sig=1 <_ZN4core3ptr29drop_in_place$LT$$LP$$RP$$GT$17he283db0efa6571e5E>
+ - func[42] sig=1 <_ZN5alloc4sync16Arc$LT$T$C$A$GT$9drop_slow17h15e8cf530b12392dE>
+ - func[43] sig=1 <_ZN4core3ptr42drop_in_place$LT$alloc..string..String$GT$17h616c79c17e32097eE>
+ - func[44] sig=1 <_ZN4core3ptr46drop_in_place$LT$alloc..vec..Vec$LT$u8$GT$$GT$17h911667843ae61ca3E>
+ - func[45] sig=1 <_ZN4core3ptr77drop_in_place$LT$std..panicking..begin_panic_handler..FormatStringPayload$GT$17h8f3f87f42c776f64E>
+ - func[46] sig=2 <_ZN4core3ptr81drop_in_place$LT$core..result..Result$LT$$LP$$RP$$C$std..io..error..Error$GT$$GT$17h185ca5c71da925a9E>
+ - func[47] sig=1 <_ZN4core3ptr88drop_in_place$LT$std..io..Write..write_fmt..Adapter$LT$alloc..vec..Vec$LT$u8$GT$$GT$$GT$17h0ed5ef914ded7c06E>
+ - func[48] sig=8 <_ZN4core4cell4once17OnceCell$LT$T$GT$15get_or_try_init13outlined_call17hc9cc5c626d3314b0E>
+ - func[49] sig=0 <_ZN3std6thread8ThreadId3new9exhausted17h3cb49e3864673182E>
+ - func[50] sig=2 <_ZN4core9panicking13assert_failed17h87dc52ca11cec106E>
+ - func[51] sig=4 <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$10write_char17hb1580b52dfe1ffe2E>
+ - func[52] sig=2 <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$16reserve_for_push17h7ce823f3dbad85e8E>
+ - func[53] sig=6 <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$9write_str17h234601e565911284E>
+ - func[54] sig=1 <_ZN5alloc4sync16Arc$LT$T$C$A$GT$9drop_slow17hcaecea73054931a5E>
+ - func[55] sig=9 <_ZN5alloc7raw_vec11finish_grow17hf00ee3d7bed86468E>
+ - func[56] sig=4 <_ZN60_$LT$alloc..string..String$u20$as$u20$core..fmt..Display$GT$3fmt17he2ff96daad140fd7E>
+ - func[57] sig=4 <_ZN64_$LT$core..str..error..Utf8Error$u20$as$u20$core..fmt..Debug$GT$3fmt17hc2eb1971d67b39ddE>
+ - func[58] sig=4 <_ZN70_$LT$core..result..Result$LT$T$C$E$GT$$u20$as$u20$core..fmt..Debug$GT$3fmt17h3b729a5e78abfd41E>
+ - func[59] sig=1 <_ZN3std3sys3pal4wasi4once4Once4call17he8c808415c6a3882E>
+ - func[60] sig=10 <_ZN3std2rt19lang_start_internal17h6e3277ad053d0a93E>
+ - func[61] sig=5 <_ZN3std2io5Write9write_fmt17h19d11065a15ea442E>
+ - func[62] sig=0 <_ZN3std3sys3pal4wasi14abort_internal17h344806bd7992567fE>
+ - func[63] sig=1 <_ZN3std3env11current_dir17h73941462c7dc8987E>
+ - func[64] sig=5 <_ZN3std3env7_var_os17h0d81192f18ddbbabE>
+ - func[65] sig=5 <_ZN3std3sys3pal6common14small_c_string24run_with_cstr_allocating17h48c31727082578deE>
+ - func[66] sig=4 <_ZN60_$LT$std..io..error..Error$u20$as$u20$core..fmt..Display$GT$3fmt17h7d29108005f5cf7cE>
+ - func[67] sig=9 <_ZN3std2io8buffered9bufwriter18BufWriter$LT$W$GT$14write_all_cold17h07475d8a7afa9855E>
+ - func[68] sig=2 <_ZN3std3sys3pal4wasi2os12error_string17h8b0f5b8722bede7cE>
+ - func[69] sig=9 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5write17h395d9fdc04410166E>
+ - func[70] sig=9 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$14write_vectored17h71822c1b17f508e3E>
+ - func[71] sig=3 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$17is_write_vectored17hb36b96070dfd67fcE>
+ - func[72] sig=9 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$9write_all17h1fc2a18960bac7e8E>
+ - func[73] sig=2 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5flush17h83a531a1cc5ebd68E>
+ - func[74] sig=9 <_ZN3std2io5Write18write_all_vectored17h2f5e84652203c263E>
+ - func[75] sig=0 <_ZN3std4sync9once_lock17OnceLock$LT$T$GT$10initialize17h358fd119fce15d8eE>
+ - func[76] sig=5 <_ZN61_$LT$$RF$std..io..stdio..Stdout$u20$as$u20$std..io..Write$GT$9write_fmt17h91f39f2657a185a8E>
+ - func[77] sig=3 <_ZN3std2io5stdio31print_to_buffer_if_capture_used17hbbe1a93aaef4b9ffE>
+ - func[78] sig=1 <_ZN3std2io5stdio6_print17h4d800a6a414961edE>
+ - func[79] sig=9 <_ZN3std2io5Write9write_all17h5238d4bddd0472c0E>
+ - func[80] sig=9 <_ZN3std2io5Write18write_all_vectored17hd17534881881ccc2E>
+ - func[81] sig=5 <_ZN3std2io5Write9write_fmt17h8f84af346862e5e5E>
+ - func[82] sig=6 <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17h5faaab5b0e44d8f8E>
+ - func[83] sig=6 <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17he6af0fe5c3176078E>
+ - func[84] sig=8 <_ZN3std5panic19get_backtrace_style17h5a31f8023c9cfe5bE>
+ - func[85] sig=0 <_ZN3std7process5abort17h462615d6e4937679E>
+ - func[86] sig=1 <_ZN3std3sys3pal4wasi4once4Once4call17h897e7010252689a0E>
+ - func[87] sig=1 <_ZN3std4sync9once_lock17OnceLock$LT$T$GT$10initialize17h867d5bbf51c25cbeE>
+ - func[88] sig=1 <_ZN3std3sys3pal4wasi4once4Once4call17h229fb96d9e5a370aE>
+ - func[89] sig=9 <_ZN3std10sys_common9backtrace5print17h6ef4aae6b28fd1efE>
+ - func[90] sig=4 <_ZN91_$LT$std..sys_common..backtrace.._print..DisplayBacktrace$u20$as$u20$core..fmt..Display$GT$3fmt17hd49264c6ea1c5bceE>
+ - func[91] sig=1 <_ZN3std10sys_common9backtrace26__rust_end_short_backtrace17hcba90238777b2b4cE>
+ - func[92] sig=1 <_ZN3std9panicking19begin_panic_handler28_$u7b$$u7b$closure$u7d$$u7d$17h5fdc94785d7c0886E>
+ - func[93] sig=2 <_ZN3std5alloc24default_alloc_error_hook17he2f2c8c2851e98ceE>
+ - func[94] sig=4 <__rdl_alloc>
+ - func[95] sig=5 <__rdl_dealloc>
+ - func[96] sig=7 <__rdl_realloc>
+ - func[97] sig=5 <_ZN3std9panicking12default_hook28_$u7b$$u7b$closure$u7d$$u7d$17h8264d5ee7895c8beE>
+ - func[98] sig=1 <rust_begin_unwind>
+ - func[99] sig=2 <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17h9ab27e1a7551ba29E>
+ - func[100] sig=2 <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17hbdcff6b86df5ca44E>
+ - func[101] sig=2 <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17hefbc9efed4fc7fc4E>
+ - func[102] sig=2 <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17h8d191b502b0aa21aE>
+ - func[103] sig=11 <_ZN3std9panicking20rust_panic_with_hook17h3759da73fa5f7eb3E>
+ - func[104] sig=2 <rust_panic>
+ - func[105] sig=9 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5write17h1f742fd19c904b8bE>
+ - func[106] sig=9 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$14write_vectored17h0f29361df2ee4decE>
+ - func[107] sig=3 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$17is_write_vectored17h2bfee70e9bf8ae59E>
+ - func[108] sig=2 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5flush17h733851f05ab34320E>
+ - func[109] sig=2 <_ZN3std5alloc8rust_oom17h0a982edf77badc16E>
+ - func[110] sig=2 <__rg_oom>
+ - func[111] sig=4 <__rust_start_panic>
+ - func[112] sig=9 <_ZN4wasi13lib_generated8fd_write17h316121dfa3928462E>
+ - func[113] sig=3 <malloc>
+ - func[114] sig=3 <dlmalloc>
+ - func[115] sig=1 <free>
+ - func[116] sig=1 <dlfree>
+ - func[117] sig=4 <calloc>
+ - func[118] sig=4 <realloc>
+ - func[119] sig=2 <dispose_chunk>
+ - func[120] sig=4 <internal_memalign>
+ - func[121] sig=4 <aligned_alloc>
+ - func[122] sig=1 <_Exit>
+ - func[123] sig=0 <__wasilibc_ensure_environ>
+ - func[124] sig=0 <__wasilibc_initialize_environ>
+ - func[125] sig=4 <__wasi_environ_get>
+ - func[126] sig=4 <__wasi_environ_sizes_get>
+ - func[127] sig=1 <__wasi_proc_exit>
+ - func[128] sig=0 <abort>
+ - func[129] sig=4 <getcwd>
+ - func[130] sig=3 <sbrk>
+ - func[131] sig=3 <getenv>
+ - func[132] sig=0 <dummy>
+ - func[133] sig=0 <__wasm_call_dtors>
+ - func[134] sig=6 <memcmp>
+ - func[135] sig=6 <memcpy>
+ - func[136] sig=6 <memmove>
+ - func[137] sig=6 <memset>
+ - func[138] sig=4 <__strchrnul>
+ - func[139] sig=4 <__stpcpy>
+ - func[140] sig=4 <strcpy>
+ - func[141] sig=3 <strdup>
+ - func[142] sig=4 <dummy>
+ - func[143] sig=4 <__lctrans>
+ - func[144] sig=3 <strerror>
+ - func[145] sig=6 <strerror_r>
+ - func[146] sig=3 <strlen>
+ - func[147] sig=6 <strncmp>
+ - func[148] sig=1 <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h6c88c77c7d034c43E>
+ - func[149] sig=4 <_ZN69_$LT$core..alloc..layout..LayoutError$u20$as$u20$core..fmt..Debug$GT$3fmt17h61a09053ee910807E>
+ - func[150] sig=9 <_ZN5alloc7raw_vec11finish_grow17h834c09c84d950070E>
+ - func[151] sig=2 <_ZN5alloc5alloc18handle_alloc_error17h45266c138ba4387bE>
+ - func[152] sig=0 <_ZN5alloc7raw_vec17capacity_overflow17h7e859c8361d5c944E>
+ - func[153] sig=2 <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$16reserve_for_push17he07040098339ea95E>
+ - func[154] sig=5 <_ZN72_$LT$$RF$str$u20$as$u20$alloc..ffi..c_str..CString..new..SpecNewImpl$GT$13spec_new_impl17hbefe64b6f7d4e2b4E>
+ - func[155] sig=2 <_ZN5alloc3ffi5c_str7CString19_from_vec_unchecked17heb7d840c2780413fE>
+ - func[156] sig=5 <_ZN5alloc4sync32arcinner_layout_for_value_layout17hbf982f94b72cc326E>
+ - func[157] sig=4 <_ZN4core3ops8function6FnOnce9call_once17h262ff3c3349297a5E>
+ - func[158] sig=1 <_ZN4core3ptr25drop_in_place$LT$char$GT$17h0482a437e7e3d29fE>
+ - func[159] sig=1 <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h8aea71b9b5b79fd9E>
+ - func[160] sig=2 <_ZN4core9panicking9panic_fmt17h914f6a419f7cf5c5E>
+ - func[161] sig=5 <_ZN4core5slice5index26slice_start_index_len_fail17he1ac0ba3b983c433E>
+ - func[162] sig=5 <_ZN4core5slice5index24slice_end_index_len_fail17h04ae788d5f9f8c03E>
+ - func[163] sig=6 <_ZN4core3fmt9Formatter3pad17h409ee46ea2c40143E>
+ - func[164] sig=5 <_ZN4core9panicking5panic17h51a130ea32126af8E>
+ - func[165] sig=4 <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$u32$GT$3fmt17h7e7ec712599d55cbE>
+ - func[166] sig=6 <_ZN4core3fmt5write17h4c15d9118bb9210dE>
+ - func[167] sig=2 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17hba899d400a5f1fc1E>
+ - func[168] sig=4 <_ZN63_$LT$core..cell..BorrowMutError$u20$as$u20$core..fmt..Debug$GT$3fmt17hc65825a402931268E>
+ - func[169] sig=1 <_ZN4core4cell22panic_already_borrowed17h8f7ff7589a693565E>
+ - func[170] sig=5 <_ZN4core3ffi5c_str4CStr19from_bytes_with_nul17h1b0f112884c75bdcE>
+ - func[171] sig=5 <_ZN4core3str8converts9from_utf817hbb7065b38999e3e7E>
+ - func[172] sig=10 <_ZN4core3fmt8builders11DebugStruct5field17h9d202ecba0e5e671E>
+ - func[173] sig=4 <_ZN4core3fmt3num3imp51_$LT$impl$u20$core..fmt..Display$u20$for$u20$u8$GT$3fmt17he57d35c7d25e0efeE>
+ - func[174] sig=12 <_ZN4core6result13unwrap_failed17h2573b74413321d45E>
+ - func[175] sig=1 <_ZN4core6option13unwrap_failed17h93224de5e35b7d7aE>
+ - func[176] sig=5 <_ZN4core6option13expect_failed17h18e4ba7b3d31ef50E>
+ - func[177] sig=4 <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h6043785ab89a4757E>
+ - func[178] sig=4 <_ZN70_$LT$core..panic..location..Location$u20$as$u20$core..fmt..Display$GT$3fmt17hc2cfb992c770308dE>
+ - func[179] sig=4 <_ZN73_$LT$core..panic..panic_info..PanicInfo$u20$as$u20$core..fmt..Display$GT$3fmt17hd9d4cd355d62d090E>
+ - func[180] sig=4 <_ZN4core3fmt3num53_$LT$impl$u20$core..fmt..LowerHex$u20$for$u20$i32$GT$3fmt17hab82dd548a22ac76E>
+ - func[181] sig=13 <_ZN4core9panicking19assert_failed_inner17h3996787dac4cce97E>
+ - func[182] sig=4 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h2608fd854f4ff4d0E>
+ - func[183] sig=4 <_ZN59_$LT$core..fmt..Arguments$u20$as$u20$core..fmt..Display$GT$3fmt17hc69d9a032c2fd70fE>
+ - func[184] sig=6 <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$9write_str17h5c443aa8f1a4e46bE>
+ - func[185] sig=4 <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$10write_char17h8d6b697bf2e8e383E>
+ - func[186] sig=6 <_ZN4core3fmt8builders10DebugTuple5field17ha605a3caa1435805E>
+ - func[187] sig=6 <_ZN4core3fmt8builders8DebugSet5entry17h785cb09bdac47528E>
+ - func[188] sig=3 <_ZN4core3fmt8builders9DebugList6finish17h5e5cf1afe06d4b43E>
+ - func[189] sig=14 <_ZN4core3fmt9Formatter12pad_integral17h750e0cd9d987003fE>
+ - func[190] sig=4 <_ZN4core3fmt5Write9write_fmt17h70e1c403fabf6382E>
+ - func[191] sig=4 <_ZN4core3str5count14do_count_chars17hdf63e309cd2e5d34E>
+ - func[192] sig=10 <_ZN4core3fmt9Formatter12pad_integral12write_prefix17h23a25e3c0fc25861E>
+ - func[193] sig=6 <_ZN4core3fmt9Formatter9write_str17heb7d2219b191e6fcE>
+ - func[194] sig=4 <_ZN4core3fmt9Formatter9write_fmt17hf6054aea360e1a05E>
+ - func[195] sig=15 <_ZN4core3fmt9Formatter26debug_struct_field2_finish17h91d66b9c5c96ab39E>
+ - func[196] sig=10 <_ZN4core3fmt9Formatter25debug_tuple_field1_finish17h10c8286f8f8a54d4E>
+ - func[197] sig=16 <_ZN4core3fmt9Formatter25debug_tuple_field2_finish17h5cd6061639b50ae8E>
+ - func[198] sig=2 <_ZN4core3fmt9Formatter10debug_list17hcb96645a67c7c63dE>
+ - func[199] sig=4 <_ZN43_$LT$bool$u20$as$u20$core..fmt..Display$GT$3fmt17h4fd390093020262cE>
+ - func[200] sig=6 <_ZN42_$LT$str$u20$as$u20$core..fmt..Display$GT$3fmt17hc15d6a66023f5977E>
+ - func[201] sig=9 <_ZN4core5slice6memchr14memchr_aligned17hff2bb2b602f3b91fE>
+ - func[202] sig=9 <_ZN4core5slice6memchr7memrchr17ha4fa9e0d7802a72dE>
+ - func[203] sig=4 <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..UpperHex$u20$for$u20$i8$GT$3fmt17hc7549de659658c91E>
+ - func[204] sig=4 <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..LowerHex$u20$for$u20$i8$GT$3fmt17hd53191ea701f919bE>
+ - func[205] sig=17 <_ZN4core3fmt3num3imp7fmt_u6417h3b9e567436868822E>
+ - func[206] sig=4 <_ZN4core3fmt3num53_$LT$impl$u20$core..fmt..UpperHex$u20$for$u20$i32$GT$3fmt17h5dfb2852a3ae3e33E>
+ - func[207] sig=4 <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$i32$GT$3fmt17h0792b346629bbebfE>
+Table[1]:
+ - table[0] type=funcref initial=75 max=75
+Memory[1]:
+ - memory[0] pages: initial=17
+Global[1]:
+ - global[0] i32 mutable=1 <__stack_pointer> - init i32=1048576
+Export[3]:
+ - memory[0] -> "memory"
+ - func[5] <_start> -> "_start"
+ - func[11] <__main_void> -> "__main_void"
+Elem[1]:
+ - segment[0] flags=0 table=0 count=74 - init i32=1
+  - elem[1] = func[10] <_ZN10hello_wasi4main17h913399cd9566c9a2E>
+  - elem[2] = func[9] <_ZN4core3ptr85drop_in_place$LT$std..rt..lang_start$LT$$LP$$RP$$GT$..$u7b$$u7b$closure$u7d$$u7d$$GT$17hd02ca6a3ba2a3b9bE>
+  - elem[3] = func[8] <_ZN4core3ops8function6FnOnce40call_once$u7b$$u7b$vtable.shim$u7d$$u7d$17h7be2897f107f95f6E>
+  - elem[4] = func[7] <_ZN3std2rt10lang_start28_$u7b$$u7b$closure$u7d$$u7d$17h077ef646d308a78dE>
+  - elem[5] = func[58] <_ZN70_$LT$core..result..Result$LT$T$C$E$GT$$u20$as$u20$core..fmt..Debug$GT$3fmt17h3b729a5e78abfd41E>
+  - elem[6] = func[207] <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$i32$GT$3fmt17h0792b346629bbebfE>
+  - elem[7] = func[56] <_ZN60_$LT$alloc..string..String$u20$as$u20$core..fmt..Display$GT$3fmt17he2ff96daad140fd7E>
+  - elem[8] = func[25] <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h66ab416b22b39001E>
+  - elem[9] = func[66] <_ZN60_$LT$std..io..error..Error$u20$as$u20$core..fmt..Display$GT$3fmt17h7d29108005f5cf7cE>
+  - elem[10] = func[90] <_ZN91_$LT$std..sys_common..backtrace.._print..DisplayBacktrace$u20$as$u20$core..fmt..Display$GT$3fmt17hd49264c6ea1c5bceE>
+  - elem[11] = func[165] <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$u32$GT$3fmt17h7e7ec712599d55cbE>
+  - elem[12] = func[26] <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17he7ea6c651aa99070E>
+  - elem[13] = func[179] <_ZN73_$LT$core..panic..panic_info..PanicInfo$u20$as$u20$core..fmt..Display$GT$3fmt17hd9d4cd355d62d090E>
+  - elem[14] = func[93] <_ZN3std5alloc24default_alloc_error_hook17he2f2c8c2851e98ceE>
+  - elem[15] = func[39] <_ZN4core3ptr122drop_in_place$LT$$RF$alloc..boxed..Box$LT$dyn$u20$core..error..Error$u2b$core..marker..Sync$u2b$core..marker..Send$GT$$GT$17hf0cab6db6a16f6ceE>
+  - elem[16] = func[20] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h71dbe98eb6598ee3E>
+  - elem[17] = func[23] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hc8e1e9dbb04b2765E>
+  - elem[18] = func[27] <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..Debug$u20$for$u20$usize$GT$3fmt17hfcaec1ac65661375E>
+  - elem[19] = func[19] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h19d1bedcded163baE>
+  - elem[20] = func[21] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha38c075d2207182cE>
+  - elem[21] = func[22] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha6eb5464aedf67c2E>
+  - elem[22] = func[24] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hdefc3bb6466ea6ecE>
+  - elem[23] = func[47] <_ZN4core3ptr88drop_in_place$LT$std..io..Write..write_fmt..Adapter$LT$alloc..vec..Vec$LT$u8$GT$$GT$$GT$17h0ed5ef914ded7c06E>
+  - elem[24] = func[31] <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17ha9c076a7f851cce3E>
+  - elem[25] = func[30] <_ZN4core3fmt5Write10write_char17h8709d740213ccfb5E>
+  - elem[26] = func[37] <_ZN4core3fmt5Write9write_fmt17h830607d21a1e3bc7E>
+  - elem[27] = func[43] <_ZN4core3ptr42drop_in_place$LT$alloc..string..String$GT$17h616c79c17e32097eE>
+  - elem[28] = func[53] <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$9write_str17h234601e565911284E>
+  - elem[29] = func[51] <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$10write_char17hb1580b52dfe1ffe2E>
+  - elem[30] = func[34] <_ZN4core3fmt5Write9write_fmt17h0ebcf53cdf77c413E>
+  - elem[31] = func[83] <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17he6af0fe5c3176078E>
+  - elem[32] = func[32] <_ZN4core3fmt5Write10write_char17h8ae716af604963fbE>
+  - elem[33] = func[36] <_ZN4core3fmt5Write9write_fmt17h7c226abad34feb4aE>
+  - elem[34] = func[82] <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17h5faaab5b0e44d8f8E>
+  - elem[35] = func[28] <_ZN4core3fmt5Write10write_char17h10db998c64a1b8a8E>
+  - elem[36] = func[35] <_ZN4core3fmt5Write9write_fmt17h2342adb37d334e13E>
+  - elem[37] = func[44] <_ZN4core3ptr46drop_in_place$LT$alloc..vec..Vec$LT$u8$GT$$GT$17h911667843ae61ca3E>
+  - elem[38] = func[69] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5write17h395d9fdc04410166E>
+  - elem[39] = func[70] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$14write_vectored17h71822c1b17f508e3E>
+  - elem[40] = func[71] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$17is_write_vectored17hb36b96070dfd67fcE>
+  - elem[41] = func[73] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5flush17h83a531a1cc5ebd68E>
+  - elem[42] = func[72] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$9write_all17h1fc2a18960bac7e8E>
+  - elem[43] = func[80] <_ZN3std2io5Write18write_all_vectored17hd17534881881ccc2E>
+  - elem[44] = func[81] <_ZN3std2io5Write9write_fmt17h8f84af346862e5e5E>
+  - elem[45] = func[41] <_ZN4core3ptr29drop_in_place$LT$$LP$$RP$$GT$17he283db0efa6571e5E>
+  - elem[46] = func[105] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5write17h1f742fd19c904b8bE>
+  - elem[47] = func[106] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$14write_vectored17h0f29361df2ee4decE>
+  - elem[48] = func[107] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$17is_write_vectored17h2bfee70e9bf8ae59E>
+  - elem[49] = func[108] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5flush17h733851f05ab34320E>
+  - elem[50] = func[79] <_ZN3std2io5Write9write_all17h5238d4bddd0472c0E>
+  - elem[51] = func[74] <_ZN3std2io5Write18write_all_vectored17h2f5e84652203c263E>
+  - elem[52] = func[61] <_ZN3std2io5Write9write_fmt17h19d11065a15ea442E>
+  - elem[53] = func[17] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h938e86217e215310E>
+  - elem[54] = func[16] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h7f8bb40b25299cafE>
+  - elem[55] = func[101] <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17hefbc9efed4fc7fc4E>
+  - elem[56] = func[102] <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17h8d191b502b0aa21aE>
+  - elem[57] = func[45] <_ZN4core3ptr77drop_in_place$LT$std..panicking..begin_panic_handler..FormatStringPayload$GT$17h8f3f87f42c776f64E>
+  - elem[58] = func[99] <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17h9ab27e1a7551ba29E>
+  - elem[59] = func[100] <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17hbdcff6b86df5ca44E>
+  - elem[60] = func[18] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17he5441c1d9b190c30E>
+  - elem[61] = func[57] <_ZN64_$LT$core..str..error..Utf8Error$u20$as$u20$core..fmt..Debug$GT$3fmt17hc2eb1971d67b39ddE>
+  - elem[62] = func[148] <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h6c88c77c7d034c43E>
+  - elem[63] = func[149] <_ZN69_$LT$core..alloc..layout..LayoutError$u20$as$u20$core..fmt..Debug$GT$3fmt17h61a09053ee910807E>
+  - elem[64] = func[157] <_ZN4core3ops8function6FnOnce9call_once17h262ff3c3349297a5E>
+  - elem[65] = func[168] <_ZN63_$LT$core..cell..BorrowMutError$u20$as$u20$core..fmt..Debug$GT$3fmt17hc65825a402931268E>
+  - elem[66] = func[182] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h2608fd854f4ff4d0E>
+  - elem[67] = func[177] <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h6043785ab89a4757E>
+  - elem[68] = func[183] <_ZN59_$LT$core..fmt..Arguments$u20$as$u20$core..fmt..Display$GT$3fmt17hc69d9a032c2fd70fE>
+  - elem[69] = func[159] <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h8aea71b9b5b79fd9E>
+  - elem[70] = func[167] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17hba899d400a5f1fc1E>
+  - elem[71] = func[158] <_ZN4core3ptr25drop_in_place$LT$char$GT$17h0482a437e7e3d29fE>
+  - elem[72] = func[184] <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$9write_str17h5c443aa8f1a4e46bE>
+  - elem[73] = func[185] <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$10write_char17h8d6b697bf2e8e383E>
+  - elem[74] = func[190] <_ZN4core3fmt5Write9write_fmt17h70e1c403fabf6382E>
+Code[204]:
+ - func[4] size=2 <__wasm_call_ctors>
+ - func[5] size=68 <_start>
+ - func[6] size=11 <_ZN3std10sys_common9backtrace28__rust_begin_short_backtrace17h90275821610c977eE>
+ - func[7] size=15 <_ZN3std2rt10lang_start28_$u7b$$u7b$closure$u7d$$u7d$17h077ef646d308a78dE>
+ - func[8] size=15 <_ZN4core3ops8function6FnOnce40call_once$u7b$$u7b$vtable.shim$u7d$$u7d$17h7be2897f107f95f6E>
+ - func[9] size=2 <_ZN4core3ptr85drop_in_place$LT$std..rt..lang_start$LT$$LP$$RP$$GT$..$u7b$$u7b$closure$u7d$$u7d$$GT$17hd02ca6a3ba2a3b9bE>
+ - func[10] size=82 <_ZN10hello_wasi4main17h913399cd9566c9a2E>
+ - func[11] size=70 <__main_void>
+ - func[12] size=19 <__rust_alloc>
+ - func[13] size=15 <__rust_dealloc>
+ - func[14] size=23 <__rust_realloc>
+ - func[15] size=13 <__rust_alloc_error_handler>
+ - func[16] size=32 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h7f8bb40b25299cafE>
+ - func[17] size=32 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h938e86217e215310E>
+ - func[18] size=33 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17he5441c1d9b190c30E>
+ - func[19] size=136 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h19d1bedcded163baE>
+ - func[20] size=68 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h71dbe98eb6598ee3E>
+ - func[21] size=111 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha38c075d2207182cE>
+ - func[22] size=18 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha6eb5464aedf67c2E>
+ - func[23] size=15 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hc8e1e9dbb04b2765E>
+ - func[24] size=89 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hdefc3bb6466ea6ecE>
+ - func[25] size=20 <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h66ab416b22b39001E>
+ - func[26] size=15 <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17he7ea6c651aa99070E>
+ - func[27] size=61 <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..Debug$u20$for$u20$usize$GT$3fmt17hfcaec1ac65661375E>
+ - func[28] size=403 <_ZN4core3fmt5Write10write_char17h10db998c64a1b8a8E>
+ - func[29] size=1278 <_ZN61_$LT$std..io..stdio..StdoutLock$u20$as$u20$std..io..Write$GT$9write_all17h7c67a0a258557271E>
+ - func[30] size=262 <_ZN4core3fmt5Write10write_char17h8709d740213ccfb5E>
+ - func[31] size=307 <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17ha9c076a7f851cce3E>
+ - func[32] size=322 <_ZN4core3fmt5Write10write_char17h8ae716af604963fbE>
+ - func[33] size=226 <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve21do_reserve_and_handle17h8ec58651a822ff36E>
+ - func[34] size=18 <_ZN4core3fmt5Write9write_fmt17h0ebcf53cdf77c413E>
+ - func[35] size=18 <_ZN4core3fmt5Write9write_fmt17h2342adb37d334e13E>
+ - func[36] size=18 <_ZN4core3fmt5Write9write_fmt17h7c226abad34feb4aE>
+ - func[37] size=18 <_ZN4core3fmt5Write9write_fmt17h830607d21a1e3bc7E>
+ - func[38] size=1128 <_ZN3std9panicking12default_hook17h5ea3d96f939eb926E>
+ - func[39] size=2 <_ZN4core3ptr122drop_in_place$LT$$RF$alloc..boxed..Box$LT$dyn$u20$core..error..Error$u2b$core..marker..Sync$u2b$core..marker..Send$GT$$GT$17hf0cab6db6a16f6ceE>
+ - func[40] size=12 <_ZN3std9panicking11panic_count17is_zero_slow_path17h058647db203a6950E>
+ - func[41] size=2 <_ZN4core3ptr29drop_in_place$LT$$LP$$RP$$GT$17he283db0efa6571e5E>
+ - func[42] size=103 <_ZN5alloc4sync16Arc$LT$T$C$A$GT$9drop_slow17h15e8cf530b12392dE>
+ - func[43] size=32 <_ZN4core3ptr42drop_in_place$LT$alloc..string..String$GT$17h616c79c17e32097eE>
+ - func[44] size=32 <_ZN4core3ptr46drop_in_place$LT$alloc..vec..Vec$LT$u8$GT$$GT$17h911667843ae61ca3E>
+ - func[45] size=45 <_ZN4core3ptr77drop_in_place$LT$std..panicking..begin_panic_handler..FormatStringPayload$GT$17h8f3f87f42c776f64E>
+ - func[46] size=97 <_ZN4core3ptr81drop_in_place$LT$core..result..Result$LT$$LP$$RP$$C$std..io..error..Error$GT$$GT$17h185ca5c71da925a9E>
+ - func[47] size=103 <_ZN4core3ptr88drop_in_place$LT$std..io..Write..write_fmt..Adapter$LT$alloc..vec..Vec$LT$u8$GT$$GT$$GT$17h0ed5ef914ded7c06E>
+ - func[48] size=222 <_ZN4core4cell4once17OnceCell$LT$T$GT$15get_or_try_init13outlined_call17hc9cc5c626d3314b0E>
+ - func[49] size=78 <_ZN3std6thread8ThreadId3new9exhausted17h3cb49e3864673182E>
+ - func[50] size=78 <_ZN4core9panicking13assert_failed17h87dc52ca11cec106E>
+ - func[51] size=367 <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$10write_char17hb1580b52dfe1ffe2E>
+ - func[52] size=224 <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$16reserve_for_push17h7ce823f3dbad85e8E>
+ - func[53] size=75 <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$9write_str17h234601e565911284E>
+ - func[54] size=87 <_ZN5alloc4sync16Arc$LT$T$C$A$GT$9drop_slow17hcaecea73054931a5E>
+ - func[55] size=223 <_ZN5alloc7raw_vec11finish_grow17hf00ee3d7bed86468E>
+ - func[56] size=20 <_ZN60_$LT$alloc..string..String$u20$as$u20$core..fmt..Display$GT$3fmt17he2ff96daad140fd7E>
+ - func[57] size=97 <_ZN64_$LT$core..str..error..Utf8Error$u20$as$u20$core..fmt..Debug$GT$3fmt17hc2eb1971d67b39ddE>
+ - func[58] size=121 <_ZN70_$LT$core..result..Result$LT$T$C$E$GT$$u20$as$u20$core..fmt..Debug$GT$3fmt17h3b729a5e78abfd41E>
+ - func[59] size=803 <_ZN3std3sys3pal4wasi4once4Once4call17he8c808415c6a3882E>
+ - func[60] size=604 <_ZN3std2rt19lang_start_internal17h6e3277ad053d0a93E>
+ - func[61] size=219 <_ZN3std2io5Write9write_fmt17h19d11065a15ea442E>
+ - func[62] size=9 <_ZN3std3sys3pal4wasi14abort_internal17h344806bd7992567fE>
+ - func[63] size=407 <_ZN3std3env11current_dir17h73941462c7dc8987E>
+ - func[64] size=432 <_ZN3std3env7_var_os17h0d81192f18ddbbabE>
+ - func[65] size=300 <_ZN3std3sys3pal6common14small_c_string24run_with_cstr_allocating17h48c31727082578deE>
+ - func[66] size=397 <_ZN60_$LT$std..io..error..Error$u20$as$u20$core..fmt..Display$GT$3fmt17h7d29108005f5cf7cE>
+ - func[67] size=588 <_ZN3std2io8buffered9bufwriter18BufWriter$LT$W$GT$14write_all_cold17h07475d8a7afa9855E>
+ - func[68] size=333 <_ZN3std3sys3pal4wasi2os12error_string17h8b0f5b8722bede7cE>
+ - func[69] size=87 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5write17h395d9fdc04410166E>
+ - func[70] size=343 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$14write_vectored17h71822c1b17f508e3E>
+ - func[71] size=4 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$17is_write_vectored17hb36b96070dfd67fcE>
+ - func[72] size=80 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$9write_all17h1fc2a18960bac7e8E>
+ - func[73] size=9 <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5flush17h83a531a1cc5ebd68E>
+ - func[74] size=765 <_ZN3std2io5Write18write_all_vectored17h2f5e84652203c263E>
+ - func[75] size=81 <_ZN3std4sync9once_lock17OnceLock$LT$T$GT$10initialize17h358fd119fce15d8eE>
+ - func[76] size=447 <_ZN61_$LT$$RF$std..io..stdio..Stdout$u20$as$u20$std..io..Write$GT$9write_fmt17h91f39f2657a185a8E>
+ - func[77] size=617 <_ZN3std2io5stdio31print_to_buffer_if_capture_used17hbbe1a93aaef4b9ffE>
+ - func[78] size=260 <_ZN3std2io5stdio6_print17h4d800a6a414961edE>
+ - func[79] size=207 <_ZN3std2io5Write9write_all17h5238d4bddd0472c0E>
+ - func[80] size=991 <_ZN3std2io5Write18write_all_vectored17hd17534881881ccc2E>
+ - func[81] size=219 <_ZN3std2io5Write9write_fmt17h8f84af346862e5e5E>
+ - func[82] size=189 <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17h5faaab5b0e44d8f8E>
+ - func[83] size=80 <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17he6af0fe5c3176078E>
+ - func[84] size=260 <_ZN3std5panic19get_backtrace_style17h5a31f8023c9cfe5bE>
+ - func[85] size=9 <_ZN3std7process5abort17h462615d6e4937679E>
+ - func[86] size=271 <_ZN3std3sys3pal4wasi4once4Once4call17h897e7010252689a0E>
+ - func[87] size=85 <_ZN3std4sync9once_lock17OnceLock$LT$T$GT$10initialize17h867d5bbf51c25cbeE>
+ - func[88] size=234 <_ZN3std3sys3pal4wasi4once4Once4call17h229fb96d9e5a370aE>
+ - func[89] size=307 <_ZN3std10sys_common9backtrace5print17h6ef4aae6b28fd1efE>
+ - func[90] size=353 <_ZN91_$LT$std..sys_common..backtrace.._print..DisplayBacktrace$u20$as$u20$core..fmt..Display$GT$3fmt17hd49264c6ea1c5bceE>
+ - func[91] size=11 <_ZN3std10sys_common9backtrace26__rust_end_short_backtrace17hcba90238777b2b4cE>
+ - func[92] size=211 <_ZN3std9panicking19begin_panic_handler28_$u7b$$u7b$closure$u7d$$u7d$17h5fdc94785d7c0886E>
+ - func[93] size=454 <_ZN3std5alloc24default_alloc_error_hook17he2f2c8c2851e98ceE>
+ - func[94] size=59 <__rdl_alloc>
+ - func[95] size=10 <__rdl_dealloc>
+ - func[96] size=109 <__rdl_realloc>
+ - func[97] size=720 <_ZN3std9panicking12default_hook28_$u7b$$u7b$closure$u7d$$u7d$17h8264d5ee7895c8beE>
+ - func[98] size=82 <rust_begin_unwind>
+ - func[99] size=285 <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17h9ab27e1a7551ba29E>
+ - func[100] size=169 <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17hbdcff6b86df5ca44E>
+ - func[101] size=88 <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17hefbc9efed4fc7fc4E>
+ - func[102] size=20 <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17h8d191b502b0aa21aE>
+ - func[103] size=1176 <_ZN3std9panicking20rust_panic_with_hook17h3759da73fa5f7eb3E>
+ - func[104] size=136 <rust_panic>
+ - func[105] size=108 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5write17h1f742fd19c904b8bE>
+ - func[106] size=94 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$14write_vectored17h0f29361df2ee4decE>
+ - func[107] size=4 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$17is_write_vectored17h2bfee70e9bf8ae59E>
+ - func[108] size=9 <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5flush17h733851f05ab34320E>
+ - func[109] size=42 <_ZN3std5alloc8rust_oom17h0a982edf77badc16E>
+ - func[110] size=13 <__rg_oom>
+ - func[111] size=4 <__rust_start_panic>
+ - func[112] size=93 <_ZN4wasi13lib_generated8fd_write17h316121dfa3928462E>
+ - func[113] size=10 <malloc>
+ - func[114] size=6535 <dlmalloc>
+ - func[115] size=10 <free>
+ - func[116] size=1697 <dlfree>
+ - func[117] size=107 <calloc>
+ - func[118] size=1129 <realloc>
+ - func[119] size=1617 <dispose_chunk>
+ - func[120] size=429 <internal_memalign>
+ - func[121] size=31 <aligned_alloc>
+ - func[122] size=11 <_Exit>
+ - func[123] size=25 <__wasilibc_ensure_environ>
+ - func[124] size=192 <__wasilibc_initialize_environ>
+ - func[125] size=17 <__wasi_environ_get>
+ - func[126] size=17 <__wasi_environ_sizes_get>
+ - func[127] size=11 <__wasi_proc_exit>
+ - func[128] size=4 <abort>
+ - func[129] size=99 <getcwd>
+ - func[130] size=78 <sbrk>
+ - func[131] size=153 <getenv>
+ - func[132] size=2 <dummy>
+ - func[133] size=14 <__wasm_call_dtors>
+ - func[134] size=73 <memcmp>
+ - func[135] size=998 <memcpy>
+ - func[136] size=1216 <memmove>
+ - func[137] size=392 <memset>
+ - func[138] size=353 <__strchrnul>
+ - func[139] size=373 <__stpcpy>
+ - func[140] size=15 <strcpy>
+ - func[141] size=46 <strdup>
+ - func[142] size=4 <dummy>
+ - func[143] size=12 <__lctrans>
+ - func[144] size=85 <strerror>
+ - func[145] size=94 <strerror_r>
+ - func[146] size=177 <strlen>
+ - func[147] size=143 <strncmp>
+ - func[148] size=2 <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h6c88c77c7d034c43E>
+ - func[149] size=18 <_ZN69_$LT$core..alloc..layout..LayoutError$u20$as$u20$core..fmt..Debug$GT$3fmt17h61a09053ee910807E>
+ - func[150] size=242 <_ZN5alloc7raw_vec11finish_grow17h834c09c84d950070E>
+ - func[151] size=13 <_ZN5alloc5alloc18handle_alloc_error17h45266c138ba4387bE>
+ - func[152] size=78 <_ZN5alloc7raw_vec17capacity_overflow17h7e859c8361d5c944E>
+ - func[153] size=224 <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$16reserve_for_push17he07040098339ea95E>
+ - func[154] size=453 <_ZN72_$LT$$RF$str$u20$as$u20$alloc..ffi..c_str..CString..new..SpecNewImpl$GT$13spec_new_impl17hbefe64b6f7d4e2b4E>
+ - func[155] size=368 <_ZN5alloc3ffi5c_str7CString19_from_vec_unchecked17heb7d840c2780413fE>
+ - func[156] size=151 <_ZN5alloc4sync32arcinner_layout_for_value_layout17hbf982f94b72cc326E>
+ - func[157] size=13 <_ZN4core3ops8function6FnOnce9call_once17h262ff3c3349297a5E>
+ - func[158] size=2 <_ZN4core3ptr25drop_in_place$LT$char$GT$17h0482a437e7e3d29fE>
+ - func[159] size=2 <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h8aea71b9b5b79fd9E>
+ - func[160] size=76 <_ZN4core9panicking9panic_fmt17h914f6a419f7cf5c5E>
+ - func[161] size=135 <_ZN4core5slice5index26slice_start_index_len_fail17he1ac0ba3b983c433E>
+ - func[162] size=135 <_ZN4core5slice5index24slice_end_index_len_fail17h04ae788d5f9f8c03E>
+ - func[163] size=978 <_ZN4core3fmt9Formatter3pad17h409ee46ea2c40143E>
+ - func[164] size=84 <_ZN4core9panicking5panic17h51a130ea32126af8E>
+ - func[165] size=17 <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$u32$GT$3fmt17h7e7ec712599d55cbE>
+ - func[166] size=737 <_ZN4core3fmt5write17h4c15d9118bb9210dE>
+ - func[167] size=33 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17hba899d400a5f1fc1E>
+ - func[168] size=33 <_ZN63_$LT$core..cell..BorrowMutError$u20$as$u20$core..fmt..Debug$GT$3fmt17hc65825a402931268E>
+ - func[169] size=94 <_ZN4core4cell22panic_already_borrowed17h8f7ff7589a693565E>
+ - func[170] size=437 <_ZN4core3ffi5c_str4CStr19from_bytes_with_nul17h1b0f112884c75bdcE>
+ - func[171] size=756 <_ZN4core3str8converts9from_utf817hbb7065b38999e3e7E>
+ - func[172] size=484 <_ZN4core3fmt8builders11DebugStruct5field17h9d202ecba0e5e671E>
+ - func[173] size=17 <_ZN4core3fmt3num3imp51_$LT$impl$u20$core..fmt..Display$u20$for$u20$u8$GT$3fmt17he57d35c7d25e0efeE>
+ - func[174] size=153 <_ZN4core6result13unwrap_failed17h2573b74413321d45E>
+ - func[175] size=19 <_ZN4core6option13unwrap_failed17h93224de5e35b7d7aE>
+ - func[176] size=108 <_ZN4core6option13expect_failed17h18e4ba7b3d31ef50E>
+ - func[177] size=20 <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h6043785ab89a4757E>
+ - func[178] size=168 <_ZN70_$LT$core..panic..location..Location$u20$as$u20$core..fmt..Display$GT$3fmt17hc2cfb992c770308dE>
+ - func[179] size=435 <_ZN73_$LT$core..panic..panic_info..PanicInfo$u20$as$u20$core..fmt..Display$GT$3fmt17hd9d4cd355d62d090E>
+ - func[180] size=176 <_ZN4core3fmt3num53_$LT$impl$u20$core..fmt..LowerHex$u20$for$u20$i32$GT$3fmt17hab82dd548a22ac76E>
+ - func[181] size=473 <_ZN4core9panicking19assert_failed_inner17h3996787dac4cce97E>
+ - func[182] size=24 <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h2608fd854f4ff4d0E>
+ - func[183] size=23 <_ZN59_$LT$core..fmt..Arguments$u20$as$u20$core..fmt..Display$GT$3fmt17hc69d9a032c2fd70fE>
+ - func[184] size=580 <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$9write_str17h5c443aa8f1a4e46bE>
+ - func[185] size=88 <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$10write_char17h8d6b697bf2e8e383E>
+ - func[186] size=375 <_ZN4core3fmt8builders10DebugTuple5field17ha605a3caa1435805E>
+ - func[187] size=377 <_ZN4core3fmt8builders8DebugSet5entry17h785cb09bdac47528E>
+ - func[188] size=58 <_ZN4core3fmt8builders9DebugList6finish17h5e5cf1afe06d4b43E>
+ - func[189] size=813 <_ZN4core3fmt9Formatter12pad_integral17h750e0cd9d987003fE>
+ - func[190] size=18 <_ZN4core3fmt5Write9write_fmt17h70e1c403fabf6382E>
+ - func[191] size=896 <_ZN4core3str5count14do_count_chars17hdf63e309cd2e5d34E>
+ - func[192] size=74 <_ZN4core3fmt9Formatter12pad_integral12write_prefix17h23a25e3c0fc25861E>
+ - func[193] size=29 <_ZN4core3fmt9Formatter9write_str17heb7d2219b191e6fcE>
+ - func[194] size=23 <_ZN4core3fmt9Formatter9write_fmt17hf6054aea360e1a05E>
+ - func[195] size=244 <_ZN4core3fmt9Formatter26debug_struct_field2_finish17h91d66b9c5c96ab39E>
+ - func[196] size=261 <_ZN4core3fmt9Formatter25debug_tuple_field1_finish17h10c8286f8f8a54d4E>
+ - func[197] size=271 <_ZN4core3fmt9Formatter25debug_tuple_field2_finish17h5cd6061639b50ae8E>
+ - func[198] size=58 <_ZN4core3fmt9Formatter10debug_list17hcb96645a67c7c63dE>
+ - func[199] size=45 <_ZN43_$LT$bool$u20$as$u20$core..fmt..Display$GT$3fmt17h4fd390093020262cE>
+ - func[200] size=14 <_ZN42_$LT$str$u20$as$u20$core..fmt..Display$GT$3fmt17hc15d6a66023f5977E>
+ - func[201] size=292 <_ZN4core5slice6memchr14memchr_aligned17hff2bb2b602f3b91fE>
+ - func[202] size=355 <_ZN4core5slice6memchr7memrchr17ha4fa9e0d7802a72dE>
+ - func[203] size=176 <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..UpperHex$u20$for$u20$i8$GT$3fmt17hc7549de659658c91E>
+ - func[204] size=177 <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..LowerHex$u20$for$u20$i8$GT$3fmt17hd53191ea701f919bE>
+ - func[205] size=361 <_ZN4core3fmt3num3imp7fmt_u6417h3b9e567436868822E>
+ - func[206] size=175 <_ZN4core3fmt3num53_$LT$impl$u20$core..fmt..UpperHex$u20$for$u20$i32$GT$3fmt17h5dfb2852a3ae3e33E>
+ - func[207] size=37 <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$i32$GT$3fmt17h0792b346629bbebfE>
+Data[2]:
+ - segment[0] <.rodata> memory=0 size=7192 - init i32=1048576
+  - 0100000: 0200 0000 0400 0000 0400 0000 0300 0000  ................
+  - 0100010: 0400 0000 0400 0000 4865 6c6c 6f2c 2057  ........Hello, W
+  - 0100020: 4153 4921 0a00 0000 1800 1000 0d00 0000  ASI!............
+  - 0100030: 2829 0000 0f00 0000 0400 0000 0400 0000  ()..............
+  - 0100040: 1000 0000 7265 656e 7472 616e 7420 696e  ....reentrant in
+  - 0100050: 6974 0000 4400 1000 0e00 0000 2f72 7573  it..D......./rus
+  - 0100060: 7463 2f61 6564 6431 3733 6132 6330 3836  tc/aedd173a2c086
+  - 0100070: 6535 3538 6332 6236 3664 3337 3433 6233  e558c2b66d3743b3
+  - 0100080: 3434 6639 3737 3632 3161 372f 6c69 6272  44f977621a7/libr
+  - 0100090: 6172 792f 636f 7265 2f73 7263 2f63 656c  ary/core/src/cel
+  - 01000a0: 6c2f 6f6e 6365 2e72 7300 0000 5c00 1000  l/once.rs...\...
+  - 01000b0: 4d00 0000 d900 0000 4200 0000 006d 6964  M.......B....mid
+  - 01000c0: 203e 206c 656e 0000 bd00 1000 0900 0000   > len..........
+  - 01000d0: 0f00 0000 0400 0000 0400 0000 1100 0000  ................
+  - 01000e0: 696e 7465 726e 616c 2065 7272 6f72 3a20  internal error: 
+  - 01000f0: 656e 7465 7265 6420 756e 7265 6163 6861  entered unreacha
+  - 0100100: 626c 6520 636f 6465 2f72 7573 7463 2f61  ble code/rustc/a
+  - 0100110: 6564 6431 3733 6132 6330 3836 6535 3538  edd173a2c086e558
+  - 0100120: 6332 6236 3664 3337 3433 6233 3434 6639  c2b66d3743b344f9
+  - 0100130: 3737 3632 3161 372f 6c69 6272 6172 792f  77621a7/library/
+  - 0100140: 616c 6c6f 632f 7372 632f 7665 632f 6d6f  alloc/src/vec/mo
+  - 0100150: 642e 7273 0801 1000 4c00 0000 2708 0000  d.rs....L...'...
+  - 0100160: 2400 0000 4e75 6c45 7272 6f72 0f00 0000  $...NulError....
+  - 0100170: 0400 0000 0400 0000 1200 0000 0f00 0000  ................
+  - 0100180: 0400 0000 0400 0000 1300 0000 5574 6638  ............Utf8
+  - 0100190: 4572 726f 7276 616c 6964 5f75 705f 746f  Errorvalid_up_to
+  - 01001a0: 6572 726f 725f 6c65 6e00 0000 0f00 0000  error_len.......
+  - 01001b0: 0400 0000 0400 0000 1400 0000 4e6f 6e65  ............None
+  - 01001c0: 536f 6d65 4f6b 4572 7200 0000 0f00 0000  SomeOkErr.......
+  - 01001d0: 0400 0000 0400 0000 1500 0000 0f00 0000  ................
+  - 01001e0: 0400 0000 0400 0000 1600 0000 1700 0000  ................
+  - 01001f0: 0c00 0000 0400 0000 1800 0000 1900 0000  ................
+  - 0100200: 1a00 0000 1b00 0000 0c00 0000 0400 0000  ................
+  - 0100210: 1c00 0000 1d00 0000 1e00 0000 1700 0000  ................
+  - 0100220: 0c00 0000 0400 0000 1f00 0000 2000 0000  ............ ...
+  - 0100230: 2100 0000 1700 0000 0c00 0000 0400 0000  !...............
+  - 0100240: 2200 0000 2300 0000 2400 0000 6d61 696e  "...#...$...main
+  - 0100250: 6661 7461 6c20 7275 6e74 696d 6520 6572  fatal runtime er
+  - 0100260: 726f 723a 2075 6e77 7261 7020 6661 696c  ror: unwrap fail
+  - 0100270: 6564 3a20 4353 7472 696e 673a 3a6e 6577  ed: CString::new
+  - 0100280: 2822 6d61 696e 2229 203d 200a 5002 1000  ("main") = .P...
+  - 0100290: 3b00 0000 8b02 1000 0100 0000 6c69 6272  ;...........libr
+  - 01002a0: 6172 792f 7374 642f 7372 632f 7274 2e72  ary/std/src/rt.r
+  - 01002b0: 7300 0000 9c02 1000 1500 0000 7200 0000  s...........r...
+  - 01002c0: 0d00 0000 6c69 6272 6172 792f 7374 642f  ....library/std/
+  - 01002d0: 7372 632f 7468 7265 6164 2f6d 6f64 2e72  src/thread/mod.r
+  - 01002e0: 7366 6169 6c65 6420 746f 2067 656e 6572  sfailed to gener
+  - 01002f0: 6174 6520 756e 6971 7565 2074 6872 6561  ate unique threa
+  - 0100300: 6420 4944 3a20 6269 7473 7061 6365 2065  d ID: bitspace e
+  - 0100310: 7868 6175 7374 6564 e102 1000 3700 0000  xhausted....7...
+  - 0100320: c402 1000 1d00 0000 9804 0000 0d00 0000  ................
+  - 0100330: 5255 5354 5f42 4143 4b54 5241 4345 6361  RUST_BACKTRACEca
+  - 0100340: 6c6c 6564 2060 5265 7375 6c74 3a3a 756e  lled `Result::un
+  - 0100350: 7772 6170 2829 6020 6f6e 2061 6e20 6045  wrap()` on an `E
+  - 0100360: 7272 6020 7661 6c75 6566 6169 6c65 6420  rr` valuefailed 
+  - 0100370: 746f 2077 7269 7465 2074 6865 2062 7566  to write the buf
+  - 0100380: 6665 7265 6420 6461 7461 0000 6903 1000  fered data..i...
+  - 0100390: 2100 0000 1700 0000 4400 1000 0000 0000  !.......D.......
+  - 01003a0: 6c69 6272 6172 792f 7374 642f 7372 632f  library/std/src/
+  - 01003b0: 696f 2f62 7566 6665 7265 642f 6c69 6e65  io/buffered/line
+  - 01003c0: 7772 6974 6572 7368 696d 2e72 7300 0000  writershim.rs...
+  - 01003d0: a003 1000 2d00 0000 0101 0000 2900 0000  ....-.......)...
+  - 01003e0: 656e 7469 7479 206e 6f74 2066 6f75 6e64  entity not found
+  - 01003f0: 7065 726d 6973 7369 6f6e 2064 656e 6965  permission denie
+  - 0100400: 6463 6f6e 6e65 6374 696f 6e20 7265 6675  dconnection refu
+  - 0100410: 7365 6463 6f6e 6e65 6374 696f 6e20 7265  sedconnection re
+  - 0100420: 7365 7468 6f73 7420 756e 7265 6163 6861  sethost unreacha
+  - 0100430: 626c 656e 6574 776f 726b 2075 6e72 6561  blenetwork unrea
+  - 0100440: 6368 6162 6c65 636f 6e6e 6563 7469 6f6e  chableconnection
+  - 0100450: 2061 626f 7274 6564 6e6f 7420 636f 6e6e   abortednot conn
+  - 0100460: 6563 7465 6461 6464 7265 7373 2069 6e20  ectedaddress in 
+  - 0100470: 7573 6561 6464 7265 7373 206e 6f74 2061  useaddress not a
+  - 0100480: 7661 696c 6162 6c65 6e65 7477 6f72 6b20  vailablenetwork 
+  - 0100490: 646f 776e 6272 6f6b 656e 2070 6970 6565  downbroken pipee
+  - 01004a0: 6e74 6974 7920 616c 7265 6164 7920 6578  ntity already ex
+  - 01004b0: 6973 7473 6f70 6572 6174 696f 6e20 776f  istsoperation wo
+  - 01004c0: 756c 6420 626c 6f63 6b6e 6f74 2061 2064  uld blocknot a d
+  - 01004d0: 6972 6563 746f 7279 6973 2061 2064 6972  irectoryis a dir
+  - 01004e0: 6563 746f 7279 6469 7265 6374 6f72 7920  ectorydirectory 
+  - 01004f0: 6e6f 7420 656d 7074 7972 6561 642d 6f6e  not emptyread-on
+  - 0100500: 6c79 2066 696c 6573 7973 7465 6d20 6f72  ly filesystem or
+  - 0100510: 2073 746f 7261 6765 206d 6564 6975 6d66   storage mediumf
+  - 0100520: 696c 6573 7973 7465 6d20 6c6f 6f70 206f  ilesystem loop o
+  - 0100530: 7220 696e 6469 7265 6374 696f 6e20 6c69  r indirection li
+  - 0100540: 6d69 7420 2865 2e67 2e20 7379 6d6c 696e  mit (e.g. symlin
+  - 0100550: 6b20 6c6f 6f70 2973 7461 6c65 206e 6574  k loop)stale net
+  - 0100560: 776f 726b 2066 696c 6520 6861 6e64 6c65  work file handle
+  - 0100570: 696e 7661 6c69 6420 696e 7075 7420 7061  invalid input pa
+  - 0100580: 7261 6d65 7465 7269 6e76 616c 6964 2064  rameterinvalid d
+  - 0100590: 6174 6174 696d 6564 206f 7574 7772 6974  atatimed outwrit
+  - 01005a0: 6520 7a65 726f 6e6f 2073 746f 7261 6765  e zerono storage
+  - 01005b0: 2073 7061 6365 7365 656b 206f 6e20 756e   spaceseek on un
+  - 01005c0: 7365 656b 6162 6c65 2066 696c 6566 696c  seekable filefil
+  - 01005d0: 6573 7973 7465 6d20 7175 6f74 6120 6578  esystem quota ex
+  - 01005e0: 6365 6564 6564 6669 6c65 2074 6f6f 206c  ceededfile too l
+  - 01005f0: 6172 6765 7265 736f 7572 6365 2062 7573  argeresource bus
+  - 0100600: 7965 7865 6375 7461 626c 6520 6669 6c65  yexecutable file
+  - 0100610: 2062 7573 7964 6561 646c 6f63 6b63 726f   busydeadlockcro
+  - 0100620: 7373 2d64 6576 6963 6520 6c69 6e6b 206f  ss-device link o
+  - 0100630: 7220 7265 6e61 6d65 746f 6f20 6d61 6e79  r renametoo many
+  - 0100640: 206c 696e 6b73 696e 7661 6c69 6420 6669   linksinvalid fi
+  - 0100650: 6c65 6e61 6d65 6172 6775 6d65 6e74 206c  lenameargument l
+  - 0100660: 6973 7420 746f 6f20 6c6f 6e67 6f70 6572  ist too longoper
+  - 0100670: 6174 696f 6e20 696e 7465 7272 7570 7465  ation interrupte
+  - 0100680: 6475 6e73 7570 706f 7274 6564 756e 6578  dunsupportedunex
+  - 0100690: 7065 6374 6564 2065 6e64 206f 6620 6669  pected end of fi
+  - 01006a0: 6c65 6f75 7420 6f66 206d 656d 6f72 796f  leout of memoryo
+  - 01006b0: 7468 6572 2065 7272 6f72 756e 6361 7465  ther erroruncate
+  - 01006c0: 676f 7269 7a65 6420 6572 726f 7220 286f  gorized error (o
+  - 01006d0: 7320 6572 726f 7220 2900 0000 4400 1000  s error )...D...
+  - 01006e0: 0000 0000 cd06 1000 0b00 0000 d806 1000  ................
+  - 01006f0: 0100 0000 6c69 6272 6172 792f 7374 642f  ....library/std/
+  - 0100700: 7372 632f 696f 2f73 7464 696f 2e72 7300  src/io/stdio.rs.
+  - 0100710: f406 1000 1b00 0000 8702 0000 1300 0000  ................
+  - 0100720: f406 1000 1b00 0000 f402 0000 1400 0000  ................
+  - 0100730: 6661 696c 6564 2070 7269 6e74 696e 6720  failed printing 
+  - 0100740: 746f 203a 2000 0000 3007 1000 1300 0000  to : ...0.......
+  - 0100750: 4307 1000 0200 0000 f406 1000 1b00 0000  C...............
+  - 0100760: 0604 0000 0900 0000 7374 646f 7574 6c69  ........stdoutli
+  - 0100770: 6272 6172 792f 7374 642f 7372 632f 696f  brary/std/src/io
+  - 0100780: 2f6d 6f64 2e72 7361 6476 616e 6369 6e67  /mod.rsadvancing
+  - 0100790: 2069 6f20 736c 6963 6573 2062 6579 6f6e   io slices beyon
+  - 01007a0: 6420 7468 6569 7220 6c65 6e67 7468 0000  d their length..
+  - 01007b0: 8707 1000 2700 0000 6e07 1000 1900 0000  ....'...n.......
+  - 01007c0: c905 0000 0d00 0000 6e07 1000 1900 0000  ........n.......
+  - 01007d0: c705 0000 2000 0000 6661 696c 6564 2074  .... ...failed t
+  - 01007e0: 6f20 7772 6974 6520 7768 6f6c 6520 6275  o write whole bu
+  - 01007f0: 6666 6572 d807 1000 1c00 0000 1700 0000  ffer............
+  - 0100800: 6e07 1000 1900 0000 b106 0000 2400 0000  n...........$...
+  - 0100810: 666f 726d 6174 7465 7220 6572 726f 7200  formatter error.
+  - 0100820: 1008 1000 0f00 0000 2800 0000 6c69 6272  ........(...libr
+  - 0100830: 6172 792f 7374 642f 7372 632f 7061 6e69  ary/std/src/pani
+  - 0100840: 632e 7273 2c08 1000 1800 0000 f500 0000  c.rs,...........
+  - 0100850: 1200 0000 6675 6c6c 6c69 6272 6172 792f  ....fulllibrary/
+  - 0100860: 7374 642f 7372 632f 7379 6e63 2f6f 6e63  std/src/sync/onc
+  - 0100870: 652e 7273 5808 1000 1c00 0000 9500 0000  e.rsX...........
+  - 0100880: 3200 0000 5808 1000 1c00 0000 d000 0000  2...X...........
+  - 0100890: 1400 0000 5808 1000 1c00 0000 d000 0000  ....X...........
+  - 01008a0: 3100 0000 6c6f 636b 2063 6f75 6e74 206f  1...lock count o
+  - 01008b0: 7665 7266 6c6f 7720 696e 2072 6565 6e74  verflow in reent
+  - 01008c0: 7261 6e74 206d 7574 6578 6c69 6272 6172  rant mutexlibrar
+  - 01008d0: 792f 7374 642f 7372 632f 7379 6e63 2f72  y/std/src/sync/r
+  - 01008e0: 656d 7574 6578 2e72 7300 0000 ca08 1000  emutex.rs.......
+  - 01008f0: 1f00 0000 9100 0000 0e00 0000 6669 6c65  ............file
+  - 0100900: 206e 616d 6520 636f 6e74 6169 6e65 6420   name contained 
+  - 0100910: 616e 2075 6e65 7870 6563 7465 6420 4e55  an unexpected NU
+  - 0100920: 4c20 6279 7465 0000 fc08 1000 2a00 0000  L byte......*...
+  - 0100930: 1400 0000 0000 0000 0200 0000 2809 1000  ............(...
+  - 0100940: 7374 6163 6b20 6261 636b 7472 6163 653a  stack backtrace:
+  - 0100950: 0a00 0000 4009 1000 1100 0000 6e6f 7465  ....@.......note
+  - 0100960: 3a20 536f 6d65 2064 6574 6169 6c73 2061  : Some details a
+  - 0100970: 7265 206f 6d69 7474 6564 2c20 7275 6e20  re omitted, run 
+  - 0100980: 7769 7468 2060 5255 5354 5f42 4143 4b54  with `RUST_BACKT
+  - 0100990: 5241 4345 3d66 756c 6c60 2066 6f72 2061  RACE=full` for a
+  - 01009a0: 2076 6572 626f 7365 2062 6163 6b74 7261   verbose backtra
+  - 01009b0: 6365 2e0a 5c09 1000 5800 0000 6661 7461  ce..\...X...fata
+  - 01009c0: 6c20 7275 6e74 696d 6520 6572 726f 723a  l runtime error:
+  - 01009d0: 2061 7373 6572 7469 6f6e 2066 6169 6c65   assertion faile
+  - 01009e0: 643a 2074 6872 6561 645f 696e 666f 2e73  d: thread_info.s
+  - 01009f0: 7461 636b 5f67 7561 7264 2e67 6574 2829  tack_guard.get()
+  - 0100a00: 2e69 735f 6e6f 6e65 2829 2026 2620 7468  .is_none() && th
+  - 0100a10: 7265 6164 5f69 6e66 6f2e 7468 7265 6164  read_info.thread
+  - 0100a20: 2e67 6574 2829 2e69 735f 6e6f 6e65 2829  .get().is_none()
+  - 0100a30: 0a00 0000 bc09 1000 7500 0000 6d65 6d6f  ........u...memo
+  - 0100a40: 7279 2061 6c6c 6f63 6174 696f 6e20 6f66  ry allocation of
+  - 0100a50: 2020 6279 7465 7320 6661 696c 6564 0a00    bytes failed..
+  - 0100a60: 3c0a 1000 1500 0000 510a 1000 0e00 0000  <.......Q.......
+  - 0100a70: 2062 7974 6573 2066 6169 6c65 6400 0000   bytes failed...
+  - 0100a80: 3c0a 1000 1500 0000 700a 1000 0d00 0000  <.......p.......
+  - 0100a90: 6c69 6272 6172 792f 7374 642f 7372 632f  library/std/src/
+  - 0100aa0: 616c 6c6f 632e 7273 900a 1000 1800 0000  alloc.rs........
+  - 0100ab0: 6201 0000 0900 0000 6c69 6272 6172 792f  b.......library/
+  - 0100ac0: 7374 642f 7372 632f 7061 6e69 636b 696e  std/src/panickin
+  - 0100ad0: 672e 7273 426f 783c 6479 6e20 416e 793e  g.rsBox<dyn Any>
+  - 0100ae0: 3c75 6e6e 616d 6564 3e00 0000 2500 0000  <unnamed>...%...
+  - 0100af0: 0c00 0000 0400 0000 2600 0000 2700 0000  ........&...'...
+  - 0100b00: 2800 0000 2900 0000 2a00 0000 2b00 0000  (...)...*...+...
+  - 0100b10: 2c00 0000 2d00 0000 0000 0000 0100 0000  ,...-...........
+  - 0100b20: 2e00 0000 2f00 0000 3000 0000 3100 0000  ..../...0...1...
+  - 0100b30: 3200 0000 3300 0000 3400 0000 7468 7265  2...3...4...thre
+  - 0100b40: 6164 2027 2720 7061 6e69 636b 6564 2061  ad '' panicked a
+  - 0100b50: 7420 3a0a 3c0b 1000 0800 0000 440b 1000  t :.<.......D...
+  - 0100b60: 0e00 0000 520b 1000 0200 0000 8b02 1000  ....R...........
+  - 0100b70: 0100 0000 6e6f 7465 3a20 7275 6e20 7769  ....note: run wi
+  - 0100b80: 7468 2060 5255 5354 5f42 4143 4b54 5241  th `RUST_BACKTRA
+  - 0100b90: 4345 3d31 6020 656e 7669 726f 6e6d 656e  CE=1` environmen
+  - 0100ba0: 7420 7661 7269 6162 6c65 2074 6f20 6469  t variable to di
+  - 0100bb0: 7370 6c61 7920 6120 6261 636b 7472 6163  splay a backtrac
+  - 0100bc0: 650a 0000 740b 1000 4e00 0000 b80a 1000  e...t...N.......
+  - 0100bd0: 1c00 0000 8602 0000 1e00 0000 1b00 0000  ................
+  - 0100be0: 0c00 0000 0400 0000 3500 0000 0f00 0000  ........5.......
+  - 0100bf0: 0800 0000 0400 0000 3600 0000 0f00 0000  ........6.......
+  - 0100c00: 0800 0000 0400 0000 3700 0000 3800 0000  ........7...8...
+  - 0100c10: 3900 0000 1000 0000 0400 0000 3a00 0000  9...........:...
+  - 0100c20: 3b00 0000 2d00 0000 0000 0000 0100 0000  ;...-...........
+  - 0100c30: 3c00 0000 0a70 616e 6963 6b65 6420 6166  <....panicked af
+  - 0100c40: 7465 7220 7061 6e69 633a 3a61 6c77 6179  ter panic::alway
+  - 0100c50: 735f 6162 6f72 7428 292c 2061 626f 7274  s_abort(), abort
+  - 0100c60: 696e 672e 0a00 0000 4400 1000 0000 0000  ing.....D.......
+  - 0100c70: 340c 1000 3100 0000 7468 7265 6164 2070  4...1...thread p
+  - 0100c80: 616e 6963 6b65 6420 7768 696c 6520 7072  anicked while pr
+  - 0100c90: 6f63 6573 7369 6e67 2070 616e 6963 2e20  ocessing panic. 
+  - 0100ca0: 6162 6f72 7469 6e67 2e0a 0000 780c 1000  aborting....x...
+  - 0100cb0: 3200 0000 7468 7265 6164 2063 6175 7365  2...thread cause
+  - 0100cc0: 6420 6e6f 6e2d 756e 7769 6e64 696e 6720  d non-unwinding 
+  - 0100cd0: 7061 6e69 632e 2061 626f 7274 696e 672e  panic. aborting.
+  - 0100ce0: 0a00 0000 b40c 1000 2d00 0000 6661 7461  ........-...fata
+  - 0100cf0: 6c20 7275 6e74 696d 6520 6572 726f 723a  l runtime error:
+  - 0100d00: 2066 6169 6c65 6420 746f 2069 6e69 7469   failed to initi
+  - 0100d10: 6174 6520 7061 6e69 632c 2065 7272 6f72  ate panic, error
+  - 0100d20: 2000 0000 ec0c 1000 3500 0000 8b02 1000   .......5.......
+  - 0100d30: 0100 0000 6164 7661 6e63 696e 6720 496f  ....advancing Io
+  - 0100d40: 536c 6963 6520 6265 796f 6e64 2069 7473  Slice beyond its
+  - 0100d50: 206c 656e 6774 6800 340d 1000 2300 0000   length.4...#...
+  - 0100d60: 6c69 6272 6172 792f 7374 642f 7372 632f  library/std/src/
+  - 0100d70: 7379 732f 7061 6c2f 7761 7369 2f69 6f2e  sys/pal/wasi/io.
+  - 0100d80: 7273 0000 600d 1000 2200 0000 1700 0000  rs..`...".......
+  - 0100d90: 0d00 0000 0f00 0000 0800 0000 0400 0000  ................
+  - 0100da0: 3d00 0000 6c69 6272 6172 792f 7374 642f  =...library/std/
+  - 0100db0: 7372 632f 7379 732f 7061 6c2f 7761 7369  src/sys/pal/wasi
+  - 0100dc0: 2f6f 732e 7273 0000 a40d 1000 2200 0000  /os.rs......"...
+  - 0100dd0: 4300 0000 3600 0000 7374 7265 7272 6f72  C...6...strerror
+  - 0100de0: 5f72 2066 6169 6c75 7265 0000 d80d 1000  _r failure......
+  - 0100df0: 1200 0000 a40d 1000 2200 0000 4100 0000  ........"...A...
+  - 0100e00: 0d00 0000 6361 6e6e 6f74 2072 6563 7572  ....cannot recur
+  - 0100e10: 7369 7665 6c79 2061 6371 7569 7265 206d  sively acquire m
+  - 0100e20: 7574 6578 040e 1000 2000 0000 6c69 6272  utex.... ...libr
+  - 0100e30: 6172 792f 7374 642f 7372 632f 7379 732f  ary/std/src/sys/
+  - 0100e40: 7061 6c2f 7761 7369 2f2e 2e2f 756e 7375  pal/wasi/../unsu
+  - 0100e50: 7070 6f72 7465 642f 6c6f 636b 732f 6d75  pported/locks/mu
+  - 0100e60: 7465 782e 7273 0000 2c0e 1000 3a00 0000  tex.rs..,...:...
+  - 0100e70: 1400 0000 0900 0000 6661 7461 6c20 7275  ........fatal ru
+  - 0100e80: 6e74 696d 6520 6572 726f 723a 2072 776c  ntime error: rwl
+  - 0100e90: 6f63 6b20 6c6f 636b 6564 2066 6f72 2077  ock locked for w
+  - 0100ea0: 7269 7469 6e67 0a00 780e 1000 2f00 0000  riting..x.../...
+  - 0100eb0: 4f6e 6365 2069 6e73 7461 6e63 6520 6861  Once instance ha
+  - 0100ec0: 7320 7072 6576 696f 7573 6c79 2062 6565  s previously bee
+  - 0100ed0: 6e20 706f 6973 6f6e 6564 0000 b00e 1000  n poisoned......
+  - 0100ee0: 2a00 0000 6f6e 652d 7469 6d65 2069 6e69  *...one-time ini
+  - 0100ef0: 7469 616c 697a 6174 696f 6e20 6d61 7920  tialization may 
+  - 0100f00: 6e6f 7420 6265 2070 6572 666f 726d 6564  not be performed
+  - 0100f10: 2072 6563 7572 7369 7665 6c79 e40e 1000   recursively....
+  - 0100f20: 3800 0000 1000 0000 1100 0000 1200 0000  8...............
+  - 0100f30: 1000 0000 1000 0000 1300 0000 1200 0000  ................
+  - 0100f40: 0d00 0000 0e00 0000 1500 0000 0c00 0000  ................
+  - 0100f50: 0b00 0000 1500 0000 1500 0000 0f00 0000  ................
+  - 0100f60: 0e00 0000 1300 0000 2600 0000 3800 0000  ........&...8...
+  - 0100f70: 1900 0000 1700 0000 0c00 0000 0900 0000  ................
+  - 0100f80: 0a00 0000 1000 0000 1700 0000 1900 0000  ................
+  - 0100f90: 0e00 0000 0d00 0000 1400 0000 0800 0000  ................
+  - 0100fa0: 1b00 0000 0e00 0000 1000 0000 1600 0000  ................
+  - 0100fb0: 1500 0000 0b00 0000 1600 0000 0d00 0000  ................
+  - 0100fc0: 0b00 0000 1300 0000 e003 1000 f003 1000  ................
+  - 0100fd0: 0104 1000 1304 1000 2304 1000 3304 1000  ........#...3...
+  - 0100fe0: 4604 1000 5804 1000 6504 1000 7304 1000  F...X...e...s...
+  - 0100ff0: 8804 1000 9404 1000 9f04 1000 b404 1000  ................
+  - 0101000: c904 1000 d804 1000 e604 1000 f904 1000  ................
+  - 0101010: 1f05 1000 5705 1000 7005 1000 8705 1000  ....W...p.......
+  - 0101020: 9305 1000 9c05 1000 a605 1000 b605 1000  ................
+  - 0101030: cd05 1000 e605 1000 f405 1000 0106 1000  ................
+  - 0101040: 1506 1000 1d06 1000 3806 1000 4606 1000  ........8...F...
+  - 0101050: 5606 1000 6c06 1000 8106 1000 8c06 1000  V...l...........
+  - 0101060: a206 1000 af06 1000 ba06 1000 2f00 5375  ............/.Su
+  - 0101070: 6363 6573 7300 496c 6c65 6761 6c20 6279  ccess.Illegal by
+  - 0101080: 7465 2073 6571 7565 6e63 6500 446f 6d61  te sequence.Doma
+  - 0101090: 696e 2065 7272 6f72 0052 6573 756c 7420  in error.Result 
+  - 01010a0: 6e6f 7420 7265 7072 6573 656e 7461 626c  not representabl
+  - 01010b0: 6500 4e6f 7420 6120 7474 7900 5065 726d  e.Not a tty.Perm
+  - 01010c0: 6973 7369 6f6e 2064 656e 6965 6400 4f70  ission denied.Op
+  - 01010d0: 6572 6174 696f 6e20 6e6f 7420 7065 726d  eration not perm
+  - 01010e0: 6974 7465 6400 4e6f 2073 7563 6820 6669  itted.No such fi
+  - 01010f0: 6c65 206f 7220 6469 7265 6374 6f72 7900  le or directory.
+  - 0101100: 4e6f 2073 7563 6820 7072 6f63 6573 7300  No such process.
+  - 0101110: 4669 6c65 2065 7869 7374 7300 5661 6c75  File exists.Valu
+  - 0101120: 6520 746f 6f20 6c61 7267 6520 666f 7220  e too large for 
+  - 0101130: 6461 7461 2074 7970 6500 4e6f 2073 7061  data type.No spa
+  - 0101140: 6365 206c 6566 7420 6f6e 2064 6576 6963  ce left on devic
+  - 0101150: 6500 4f75 7420 6f66 206d 656d 6f72 7900  e.Out of memory.
+  - 0101160: 5265 736f 7572 6365 2062 7573 7900 496e  Resource busy.In
+  - 0101170: 7465 7272 7570 7465 6420 7379 7374 656d  terrupted system
+  - 0101180: 2063 616c 6c00 5265 736f 7572 6365 2074   call.Resource t
+  - 0101190: 656d 706f 7261 7269 6c79 2075 6e61 7661  emporarily unava
+  - 01011a0: 696c 6162 6c65 0049 6e76 616c 6964 2073  ilable.Invalid s
+  - 01011b0: 6565 6b00 4372 6f73 732d 6465 7669 6365  eek.Cross-device
+  - 01011c0: 206c 696e 6b00 5265 6164 2d6f 6e6c 7920   link.Read-only 
+  - 01011d0: 6669 6c65 2073 7973 7465 6d00 4469 7265  file system.Dire
+  - 01011e0: 6374 6f72 7920 6e6f 7420 656d 7074 7900  ctory not empty.
+  - 01011f0: 436f 6e6e 6563 7469 6f6e 2072 6573 6574  Connection reset
+  - 0101200: 2062 7920 7065 6572 004f 7065 7261 7469   by peer.Operati
+  - 0101210: 6f6e 2074 696d 6564 206f 7574 0043 6f6e  on timed out.Con
+  - 0101220: 6e65 6374 696f 6e20 7265 6675 7365 6400  nection refused.
+  - 0101230: 486f 7374 2069 7320 756e 7265 6163 6861  Host is unreacha
+  - 0101240: 626c 6500 4164 6472 6573 7320 696e 2075  ble.Address in u
+  - 0101250: 7365 0042 726f 6b65 6e20 7069 7065 0049  se.Broken pipe.I
+  - 0101260: 2f4f 2065 7272 6f72 004e 6f20 7375 6368  /O error.No such
+  - 0101270: 2064 6576 6963 6520 6f72 2061 6464 7265   device or addre
+  - 0101280: 7373 004e 6f20 7375 6368 2064 6576 6963  ss.No such devic
+  - 0101290: 6500 4e6f 7420 6120 6469 7265 6374 6f72  e.Not a director
+  - 01012a0: 7900 4973 2061 2064 6972 6563 746f 7279  y.Is a directory
+  - 01012b0: 0054 6578 7420 6669 6c65 2062 7573 7900  .Text file busy.
+  - 01012c0: 4578 6563 2066 6f72 6d61 7420 6572 726f  Exec format erro
+  - 01012d0: 7200 496e 7661 6c69 6420 6172 6775 6d65  r.Invalid argume
+  - 01012e0: 6e74 0041 7267 756d 656e 7420 6c69 7374  nt.Argument list
+  - 01012f0: 2074 6f6f 206c 6f6e 6700 5379 6d62 6f6c   too long.Symbol
+  - 0101300: 6963 206c 696e 6b20 6c6f 6f70 0046 696c  ic link loop.Fil
+  - 0101310: 656e 616d 6520 746f 6f20 6c6f 6e67 0054  ename too long.T
+  - 0101320: 6f6f 206d 616e 7920 6f70 656e 2066 696c  oo many open fil
+  - 0101330: 6573 2069 6e20 7379 7374 656d 004e 6f20  es in system.No 
+  - 0101340: 6669 6c65 2064 6573 6372 6970 746f 7273  file descriptors
+  - 0101350: 2061 7661 696c 6162 6c65 0042 6164 2066   available.Bad f
+  - 0101360: 696c 6520 6465 7363 7269 7074 6f72 004e  ile descriptor.N
+  - 0101370: 6f20 6368 696c 6420 7072 6f63 6573 7300  o child process.
+  - 0101380: 4261 6420 6164 6472 6573 7300 4669 6c65  Bad address.File
+  - 0101390: 2074 6f6f 206c 6172 6765 0054 6f6f 206d   too large.Too m
+  - 01013a0: 616e 7920 6c69 6e6b 7300 4e6f 206c 6f63  any links.No loc
+  - 01013b0: 6b73 2061 7661 696c 6162 6c65 0052 6573  ks available.Res
+  - 01013c0: 6f75 7263 6520 6465 6164 6c6f 636b 2077  ource deadlock w
+  - 01013d0: 6f75 6c64 206f 6363 7572 0053 7461 7465  ould occur.State
+  - 01013e0: 206e 6f74 2072 6563 6f76 6572 6162 6c65   not recoverable
+  - 01013f0: 0050 7265 7669 6f75 7320 6f77 6e65 7220  .Previous owner 
+  - 0101400: 6469 6564 004f 7065 7261 7469 6f6e 2063  died.Operation c
+  - 0101410: 616e 6365 6c65 6400 4675 6e63 7469 6f6e  anceled.Function
+  - 0101420: 206e 6f74 2069 6d70 6c65 6d65 6e74 6564   not implemented
+  - 0101430: 004e 6f20 6d65 7373 6167 6520 6f66 2064  .No message of d
+  - 0101440: 6573 6972 6564 2074 7970 6500 4964 656e  esired type.Iden
+  - 0101450: 7469 6669 6572 2072 656d 6f76 6564 004c  tifier removed.L
+  - 0101460: 696e 6b20 6861 7320 6265 656e 2073 6576  ink has been sev
+  - 0101470: 6572 6564 0050 726f 746f 636f 6c20 6572  ered.Protocol er
+  - 0101480: 726f 7200 4261 6420 6d65 7373 6167 6500  ror.Bad message.
+  - 0101490: 4e6f 7420 6120 736f 636b 6574 0044 6573  Not a socket.Des
+  - 01014a0: 7469 6e61 7469 6f6e 2061 6464 7265 7373  tination address
+  - 01014b0: 2072 6571 7569 7265 6400 4d65 7373 6167   required.Messag
+  - 01014c0: 6520 746f 6f20 6c61 7267 6500 5072 6f74  e too large.Prot
+  - 01014d0: 6f63 6f6c 2077 726f 6e67 2074 7970 6520  ocol wrong type 
+  - 01014e0: 666f 7220 736f 636b 6574 0050 726f 746f  for socket.Proto
+  - 01014f0: 636f 6c20 6e6f 7420 6176 6169 6c61 626c  col not availabl
+  - 0101500: 6500 5072 6f74 6f63 6f6c 206e 6f74 2073  e.Protocol not s
+  - 0101510: 7570 706f 7274 6564 004e 6f74 2073 7570  upported.Not sup
+  - 0101520: 706f 7274 6564 0041 6464 7265 7373 2066  ported.Address f
+  - 0101530: 616d 696c 7920 6e6f 7420 7375 7070 6f72  amily not suppor
+  - 0101540: 7465 6420 6279 2070 726f 746f 636f 6c00  ted by protocol.
+  - 0101550: 4164 6472 6573 7320 6e6f 7420 6176 6169  Address not avai
+  - 0101560: 6c61 626c 6500 4e65 7477 6f72 6b20 6973  lable.Network is
+  - 0101570: 2064 6f77 6e00 4e65 7477 6f72 6b20 756e   down.Network un
+  - 0101580: 7265 6163 6861 626c 6500 436f 6e6e 6563  reachable.Connec
+  - 0101590: 7469 6f6e 2072 6573 6574 2062 7920 6e65  tion reset by ne
+  - 01015a0: 7477 6f72 6b00 436f 6e6e 6563 7469 6f6e  twork.Connection
+  - 01015b0: 2061 626f 7274 6564 004e 6f20 6275 6666   aborted.No buff
+  - 01015c0: 6572 2073 7061 6365 2061 7661 696c 6162  er space availab
+  - 01015d0: 6c65 0053 6f63 6b65 7420 6973 2063 6f6e  le.Socket is con
+  - 01015e0: 6e65 6374 6564 0053 6f63 6b65 7420 6e6f  nected.Socket no
+  - 01015f0: 7420 636f 6e6e 6563 7465 6400 4f70 6572  t connected.Oper
+  - 0101600: 6174 696f 6e20 616c 7265 6164 7920 696e  ation already in
+  - 0101610: 2070 726f 6772 6573 7300 4f70 6572 6174   progress.Operat
+  - 0101620: 696f 6e20 696e 2070 726f 6772 6573 7300  ion in progress.
+  - 0101630: 5374 616c 6520 6669 6c65 2068 616e 646c  Stale file handl
+  - 0101640: 6500 5175 6f74 6120 6578 6365 6564 6564  e.Quota exceeded
+  - 0101650: 004d 756c 7469 686f 7020 6174 7465 6d70  .Multihop attemp
+  - 0101660: 7465 6400 4361 7061 6269 6c69 7469 6573  ted.Capabilities
+  - 0101670: 2069 6e73 7566 6669 6369 656e 7400 0000   insufficient...
+  - 0101680: 0000 7502 4e00 d601 e204 b904 1801 8e05  ..u.N...........
+  - 0101690: ed02 1604 f200 9703 0103 3805 af01 8201  ..........8.....
+  - 01016a0: 4f03 2f04 1e00 d405 a200 1203 1e03 c201  O./.............
+  - 01016b0: de03 0800 ac05 0001 6402 f101 6505 3402  ........d...e.4.
+  - 01016c0: 8c02 cf02 2d03 4c04 e305 9f02 f804 1c05  ....-.L.........
+  - 01016d0: 0805 b102 4b05 1502 7800 5202 3c03 f103  ....K...x.R.<...
+  - 01016e0: e400 c303 7d04 cc00 aa03 7905 2402 6e01  ....}.....y.$.n.
+  - 01016f0: 6d03 2204 ab04 4400 fb01 ae00 8303 6000  m."...D.......`.
+  - 0101700: e501 0704 9404 5e04 2b00 5801 3901 9200  ......^.+.X.9...
+  - 0101710: c205 9b01 4302 4601 f605 0000 4c61 796f  ....C.F.....Layo
+  - 0101720: 7574 4572 726f 726c 6962 7261 7279 2f61  utErrorlibrary/a
+  - 0101730: 6c6c 6f63 2f73 7263 2f72 6177 5f76 6563  lloc/src/raw_vec
+  - 0101740: 2e72 7363 6170 6163 6974 7920 6f76 6572  .rscapacity over
+  - 0101750: 666c 6f77 4317 1000 1100 0000 2717 1000  flowC.......'...
+  - 0101760: 1c00 0000 3a02 0000 0500 0000 6c69 6272  ....:.......libr
+  - 0101770: 6172 792f 616c 6c6f 632f 7372 632f 6666  ary/alloc/src/ff
+  - 0101780: 692f 635f 7374 722e 7273 0000 6c17 1000  i/c_str.rs..l...
+  - 0101790: 1e00 0000 1b01 0000 3700 0000 6361 6c6c  ........7...call
+  - 01017a0: 6564 2060 5265 7375 6c74 3a3a 756e 7772  ed `Result::unwr
+  - 01017b0: 6170 2829 6020 6f6e 2061 6e20 6045 7272  ap()` on an `Err
+  - 01017c0: 6020 7661 6c75 6500 3e00 0000 0000 0000  ` value.>.......
+  - 01017d0: 0100 0000 3f00 0000 6c69 6272 6172 792f  ....?...library/
+  - 01017e0: 616c 6c6f 632f 7372 632f 7379 6e63 2e72  alloc/src/sync.r
+  - 01017f0: 7300 0000 d817 1000 1900 0000 7501 0000  s...........u...
+  - 0101800: 3200 0000 2942 6f72 726f 774d 7574 4572  2...)BorrowMutEr
+  - 0101810: 726f 7261 6c72 6561 6479 2062 6f72 726f  roralready borro
+  - 0101820: 7765 643a 2000 0000 1318 1000 1200 0000  wed: ...........
+  - 0101830: 0418 1000 0000 0000 3a5b 6361 6c6c 6564  ........:[called
+  - 0101840: 2060 4f70 7469 6f6e 3a3a 756e 7772 6170   `Option::unwrap
+  - 0101850: 2829 6020 6f6e 2061 2060 4e6f 6e65 6020  ()` on a `None` 
+  - 0101860: 7661 6c75 6500 0000 0418 1000 0000 0000  value...........
+  - 0101870: 3818 1000 0100 0000 3818 1000 0100 0000  8.......8.......
+  - 0101880: 7061 6e69 636b 6564 2061 7420 3a0a 0000  panicked at :...
+  - 0101890: 4500 0000 0000 0000 0100 0000 4600 0000  E...........F...
+  - 01018a0: 3d3d 213d 6d61 7463 6865 7361 7373 6572  ==!=matchesasser
+  - 01018b0: 7469 6f6e 2060 6c65 6674 2020 7269 6768  tion `left  righ
+  - 01018c0: 7460 2066 6169 6c65 640a 2020 6c65 6674  t` failed.  left
+  - 01018d0: 3a20 0a20 7269 6768 743a 2000 ab18 1000  : . right: .....
+  - 01018e0: 1000 0000 bb18 1000 1700 0000 d218 1000  ................
+  - 01018f0: 0900 0000 2072 6967 6874 6020 6661 696c  .... right` fail
+  - 0101900: 6564 3a20 0a20 206c 6566 743a 2000 0000  ed: .  left: ...
+  - 0101910: ab18 1000 1000 0000 f418 1000 1000 0000  ................
+  - 0101920: 0419 1000 0900 0000 d218 1000 0900 0000  ................
+  - 0101930: 3a20 0000 0418 1000 0000 0000 3019 1000  : ..........0...
+  - 0101940: 0200 0000 4700 0000 0c00 0000 0400 0000  ....G...........
+  - 0101950: 4800 0000 4900 0000 4a00 0000 2020 2020  H...I...J...    
+  - 0101960: 207b 202c 2020 7b0a 2c0a 7d20 7d28 280a   { ,  {.,.} }((.
+  - 0101970: 2c0a 5d6c 6962 7261 7279 2f63 6f72 652f  ,.]library/core/
+  - 0101980: 7372 632f 666d 742f 6e75 6d2e 7273 0000  src/fmt/num.rs..
+  - 0101990: 7319 1000 1b00 0000 6900 0000 1700 0000  s.......i.......
+  - 01019a0: 3078 3030 3031 3032 3033 3034 3035 3036  0x00010203040506
+  - 01019b0: 3037 3038 3039 3130 3131 3132 3133 3134  0708091011121314
+  - 01019c0: 3135 3136 3137 3138 3139 3230 3231 3232  1516171819202122
+  - 01019d0: 3233 3234 3235 3236 3237 3238 3239 3330  2324252627282930
+  - 01019e0: 3331 3332 3333 3334 3335 3336 3337 3338  3132333435363738
+  - 01019f0: 3339 3430 3431 3432 3433 3434 3435 3436  3940414243444546
+  - 0101a00: 3437 3438 3439 3530 3531 3532 3533 3534  4748495051525354
+  - 0101a10: 3535 3536 3537 3538 3539 3630 3631 3632  5556575859606162
+  - 0101a20: 3633 3634 3635 3636 3637 3638 3639 3730  6364656667686970
+  - 0101a30: 3731 3732 3733 3734 3735 3736 3737 3738  7172737475767778
+  - 0101a40: 3739 3830 3831 3832 3833 3834 3835 3836  7980818283848586
+  - 0101a50: 3837 3838 3839 3930 3931 3932 3933 3934  8788899091929394
+  - 0101a60: 3935 3936 3937 3938 3939 6661 6c73 6574  9596979899falset
+  - 0101a70: 7275 656c 6962 7261 7279 2f63 6f72 652f  ruelibrary/core/
+  - 0101a80: 7372 632f 736c 6963 652f 6d65 6d63 6872  src/slice/memchr
+  - 0101a90: 2e72 7300 731a 1000 2000 0000 9f00 0000  .rs.s... .......
+  - 0101aa0: 0900 0000 731a 1000 2000 0000 8300 0000  ....s... .......
+  - 0101ab0: 1e00 0000 7261 6e67 6520 7374 6172 7420  ....range start 
+  - 0101ac0: 696e 6465 7820 206f 7574 206f 6620 7261  index  out of ra
+  - 0101ad0: 6e67 6520 666f 7220 736c 6963 6520 6f66  nge for slice of
+  - 0101ae0: 206c 656e 6774 6820 b41a 1000 1200 0000   length ........
+  - 0101af0: c61a 1000 2200 0000 7261 6e67 6520 656e  ...."...range en
+  - 0101b00: 6420 696e 6465 7820 f81a 1000 1000 0000  d index ........
+  - 0101b10: c61a 1000 2200 0000 0101 0101 0101 0101  ...."...........
+  - 0101b20: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b30: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b40: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b50: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b60: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b70: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b80: 0101 0101 0101 0101 0101 0101 0101 0101  ................
+  - 0101b90: 0101 0101 0101 0101 0000 0000 0000 0000  ................
+  - 0101ba0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+  - 0101bb0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+  - 0101bc0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+  - 0101bd0: 0000 0000 0000 0000 0000 0202 0202 0202  ................
+  - 0101be0: 0202 0202 0202 0202 0202 0202 0202 0202  ................
+  - 0101bf0: 0202 0202 0202 0202 0303 0303 0303 0303  ................
+  - 0101c00: 0303 0303 0303 0303 0404 0404 0400 0000  ................
+  - 0101c10: 0000 0000 0000 0000                      ........
+ - segment[1] <.data> memory=0 size=12 - init i32=1055768
+  - 0101c18: 0100 0000 ffff ffff 6c10 1000            ........l...
+Custom:
+ - name: ".debug_abbrev"
+Custom:
+ - name: ".debug_info"
+Custom:
+ - name: ".debug_ranges"
+Custom:
+ - name: ".debug_str"
+Custom:
+ - name: ".debug_line"
+Custom:
+ - name: "name"
+ - func[0] <_ZN4wasi13lib_generated22wasi_snapshot_preview18fd_write17haeb8e9d471da6707E>
+ - func[1] <__imported_wasi_snapshot_preview1_environ_get>
+ - func[2] <__imported_wasi_snapshot_preview1_environ_sizes_get>
+ - func[3] <__imported_wasi_snapshot_preview1_proc_exit>
+ - func[4] <__wasm_call_ctors>
+ - func[5] <_start>
+ - func[6] <_ZN3std10sys_common9backtrace28__rust_begin_short_backtrace17h90275821610c977eE>
+ - func[7] <_ZN3std2rt10lang_start28_$u7b$$u7b$closure$u7d$$u7d$17h077ef646d308a78dE>
+ - func[8] <_ZN4core3ops8function6FnOnce40call_once$u7b$$u7b$vtable.shim$u7d$$u7d$17h7be2897f107f95f6E>
+ - func[9] <_ZN4core3ptr85drop_in_place$LT$std..rt..lang_start$LT$$LP$$RP$$GT$..$u7b$$u7b$closure$u7d$$u7d$$GT$17hd02ca6a3ba2a3b9bE>
+ - func[10] <_ZN10hello_wasi4main17h913399cd9566c9a2E>
+ - func[11] <__main_void>
+ - func[12] <__rust_alloc>
+ - func[13] <__rust_dealloc>
+ - func[14] <__rust_realloc>
+ - func[15] <__rust_alloc_error_handler>
+ - func[16] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h7f8bb40b25299cafE>
+ - func[17] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17h938e86217e215310E>
+ - func[18] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17he5441c1d9b190c30E>
+ - func[19] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h19d1bedcded163baE>
+ - func[20] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h71dbe98eb6598ee3E>
+ - func[21] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha38c075d2207182cE>
+ - func[22] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17ha6eb5464aedf67c2E>
+ - func[23] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hc8e1e9dbb04b2765E>
+ - func[24] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17hdefc3bb6466ea6ecE>
+ - func[25] <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h66ab416b22b39001E>
+ - func[26] <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17he7ea6c651aa99070E>
+ - func[27] <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..Debug$u20$for$u20$usize$GT$3fmt17hfcaec1ac65661375E>
+ - func[28] <_ZN4core3fmt5Write10write_char17h10db998c64a1b8a8E>
+ - func[29] <_ZN61_$LT$std..io..stdio..StdoutLock$u20$as$u20$std..io..Write$GT$9write_all17h7c67a0a258557271E>
+ - func[30] <_ZN4core3fmt5Write10write_char17h8709d740213ccfb5E>
+ - func[31] <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17ha9c076a7f851cce3E>
+ - func[32] <_ZN4core3fmt5Write10write_char17h8ae716af604963fbE>
+ - func[33] <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve21do_reserve_and_handle17h8ec58651a822ff36E>
+ - func[34] <_ZN4core3fmt5Write9write_fmt17h0ebcf53cdf77c413E>
+ - func[35] <_ZN4core3fmt5Write9write_fmt17h2342adb37d334e13E>
+ - func[36] <_ZN4core3fmt5Write9write_fmt17h7c226abad34feb4aE>
+ - func[37] <_ZN4core3fmt5Write9write_fmt17h830607d21a1e3bc7E>
+ - func[38] <_ZN3std9panicking12default_hook17h5ea3d96f939eb926E>
+ - func[39] <_ZN4core3ptr122drop_in_place$LT$$RF$alloc..boxed..Box$LT$dyn$u20$core..error..Error$u2b$core..marker..Sync$u2b$core..marker..Send$GT$$GT$17hf0cab6db6a16f6ceE>
+ - func[40] <_ZN3std9panicking11panic_count17is_zero_slow_path17h058647db203a6950E>
+ - func[41] <_ZN4core3ptr29drop_in_place$LT$$LP$$RP$$GT$17he283db0efa6571e5E>
+ - func[42] <_ZN5alloc4sync16Arc$LT$T$C$A$GT$9drop_slow17h15e8cf530b12392dE>
+ - func[43] <_ZN4core3ptr42drop_in_place$LT$alloc..string..String$GT$17h616c79c17e32097eE>
+ - func[44] <_ZN4core3ptr46drop_in_place$LT$alloc..vec..Vec$LT$u8$GT$$GT$17h911667843ae61ca3E>
+ - func[45] <_ZN4core3ptr77drop_in_place$LT$std..panicking..begin_panic_handler..FormatStringPayload$GT$17h8f3f87f42c776f64E>
+ - func[46] <_ZN4core3ptr81drop_in_place$LT$core..result..Result$LT$$LP$$RP$$C$std..io..error..Error$GT$$GT$17h185ca5c71da925a9E>
+ - func[47] <_ZN4core3ptr88drop_in_place$LT$std..io..Write..write_fmt..Adapter$LT$alloc..vec..Vec$LT$u8$GT$$GT$$GT$17h0ed5ef914ded7c06E>
+ - func[48] <_ZN4core4cell4once17OnceCell$LT$T$GT$15get_or_try_init13outlined_call17hc9cc5c626d3314b0E>
+ - func[49] <_ZN3std6thread8ThreadId3new9exhausted17h3cb49e3864673182E>
+ - func[50] <_ZN4core9panicking13assert_failed17h87dc52ca11cec106E>
+ - func[51] <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$10write_char17hb1580b52dfe1ffe2E>
+ - func[52] <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$16reserve_for_push17h7ce823f3dbad85e8E>
+ - func[53] <_ZN58_$LT$alloc..string..String$u20$as$u20$core..fmt..Write$GT$9write_str17h234601e565911284E>
+ - func[54] <_ZN5alloc4sync16Arc$LT$T$C$A$GT$9drop_slow17hcaecea73054931a5E>
+ - func[55] <_ZN5alloc7raw_vec11finish_grow17hf00ee3d7bed86468E>
+ - func[56] <_ZN60_$LT$alloc..string..String$u20$as$u20$core..fmt..Display$GT$3fmt17he2ff96daad140fd7E>
+ - func[57] <_ZN64_$LT$core..str..error..Utf8Error$u20$as$u20$core..fmt..Debug$GT$3fmt17hc2eb1971d67b39ddE>
+ - func[58] <_ZN70_$LT$core..result..Result$LT$T$C$E$GT$$u20$as$u20$core..fmt..Debug$GT$3fmt17h3b729a5e78abfd41E>
+ - func[59] <_ZN3std3sys3pal4wasi4once4Once4call17he8c808415c6a3882E>
+ - func[60] <_ZN3std2rt19lang_start_internal17h6e3277ad053d0a93E>
+ - func[61] <_ZN3std2io5Write9write_fmt17h19d11065a15ea442E>
+ - func[62] <_ZN3std3sys3pal4wasi14abort_internal17h344806bd7992567fE>
+ - func[63] <_ZN3std3env11current_dir17h73941462c7dc8987E>
+ - func[64] <_ZN3std3env7_var_os17h0d81192f18ddbbabE>
+ - func[65] <_ZN3std3sys3pal6common14small_c_string24run_with_cstr_allocating17h48c31727082578deE>
+ - func[66] <_ZN60_$LT$std..io..error..Error$u20$as$u20$core..fmt..Display$GT$3fmt17h7d29108005f5cf7cE>
+ - func[67] <_ZN3std2io8buffered9bufwriter18BufWriter$LT$W$GT$14write_all_cold17h07475d8a7afa9855E>
+ - func[68] <_ZN3std3sys3pal4wasi2os12error_string17h8b0f5b8722bede7cE>
+ - func[69] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5write17h395d9fdc04410166E>
+ - func[70] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$14write_vectored17h71822c1b17f508e3E>
+ - func[71] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$17is_write_vectored17hb36b96070dfd67fcE>
+ - func[72] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$9write_all17h1fc2a18960bac7e8E>
+ - func[73] <_ZN3std2io5impls74_$LT$impl$u20$std..io..Write$u20$for$u20$alloc..vec..Vec$LT$u8$C$A$GT$$GT$5flush17h83a531a1cc5ebd68E>
+ - func[74] <_ZN3std2io5Write18write_all_vectored17h2f5e84652203c263E>
+ - func[75] <_ZN3std4sync9once_lock17OnceLock$LT$T$GT$10initialize17h358fd119fce15d8eE>
+ - func[76] <_ZN61_$LT$$RF$std..io..stdio..Stdout$u20$as$u20$std..io..Write$GT$9write_fmt17h91f39f2657a185a8E>
+ - func[77] <_ZN3std2io5stdio31print_to_buffer_if_capture_used17hbbe1a93aaef4b9ffE>
+ - func[78] <_ZN3std2io5stdio6_print17h4d800a6a414961edE>
+ - func[79] <_ZN3std2io5Write9write_all17h5238d4bddd0472c0E>
+ - func[80] <_ZN3std2io5Write18write_all_vectored17hd17534881881ccc2E>
+ - func[81] <_ZN3std2io5Write9write_fmt17h8f84af346862e5e5E>
+ - func[82] <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17h5faaab5b0e44d8f8E>
+ - func[83] <_ZN80_$LT$std..io..Write..write_fmt..Adapter$LT$T$GT$$u20$as$u20$core..fmt..Write$GT$9write_str17he6af0fe5c3176078E>
+ - func[84] <_ZN3std5panic19get_backtrace_style17h5a31f8023c9cfe5bE>
+ - func[85] <_ZN3std7process5abort17h462615d6e4937679E>
+ - func[86] <_ZN3std3sys3pal4wasi4once4Once4call17h897e7010252689a0E>
+ - func[87] <_ZN3std4sync9once_lock17OnceLock$LT$T$GT$10initialize17h867d5bbf51c25cbeE>
+ - func[88] <_ZN3std3sys3pal4wasi4once4Once4call17h229fb96d9e5a370aE>
+ - func[89] <_ZN3std10sys_common9backtrace5print17h6ef4aae6b28fd1efE>
+ - func[90] <_ZN91_$LT$std..sys_common..backtrace.._print..DisplayBacktrace$u20$as$u20$core..fmt..Display$GT$3fmt17hd49264c6ea1c5bceE>
+ - func[91] <_ZN3std10sys_common9backtrace26__rust_end_short_backtrace17hcba90238777b2b4cE>
+ - func[92] <_ZN3std9panicking19begin_panic_handler28_$u7b$$u7b$closure$u7d$$u7d$17h5fdc94785d7c0886E>
+ - func[93] <_ZN3std5alloc24default_alloc_error_hook17he2f2c8c2851e98ceE>
+ - func[94] <__rdl_alloc>
+ - func[95] <__rdl_dealloc>
+ - func[96] <__rdl_realloc>
+ - func[97] <_ZN3std9panicking12default_hook28_$u7b$$u7b$closure$u7d$$u7d$17h8264d5ee7895c8beE>
+ - func[98] <rust_begin_unwind>
+ - func[99] <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17h9ab27e1a7551ba29E>
+ - func[100] <_ZN102_$LT$std..panicking..begin_panic_handler..FormatStringPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17hbdcff6b86df5ca44E>
+ - func[101] <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$8take_box17hefbc9efed4fc7fc4E>
+ - func[102] <_ZN99_$LT$std..panicking..begin_panic_handler..StaticStrPayload$u20$as$u20$core..panic..PanicPayload$GT$3get17h8d191b502b0aa21aE>
+ - func[103] <_ZN3std9panicking20rust_panic_with_hook17h3759da73fa5f7eb3E>
+ - func[104] <rust_panic>
+ - func[105] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5write17h1f742fd19c904b8bE>
+ - func[106] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$14write_vectored17h0f29361df2ee4decE>
+ - func[107] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$17is_write_vectored17h2bfee70e9bf8ae59E>
+ - func[108] <_ZN69_$LT$std..sys..pal..wasi..stdio..Stderr$u20$as$u20$std..io..Write$GT$5flush17h733851f05ab34320E>
+ - func[109] <_ZN3std5alloc8rust_oom17h0a982edf77badc16E>
+ - func[110] <__rg_oom>
+ - func[111] <__rust_start_panic>
+ - func[112] <_ZN4wasi13lib_generated8fd_write17h316121dfa3928462E>
+ - func[113] <malloc>
+ - func[114] <dlmalloc>
+ - func[115] <free>
+ - func[116] <dlfree>
+ - func[117] <calloc>
+ - func[118] <realloc>
+ - func[119] <dispose_chunk>
+ - func[120] <internal_memalign>
+ - func[121] <aligned_alloc>
+ - func[122] <_Exit>
+ - func[123] <__wasilibc_ensure_environ>
+ - func[124] <__wasilibc_initialize_environ>
+ - func[125] <__wasi_environ_get>
+ - func[126] <__wasi_environ_sizes_get>
+ - func[127] <__wasi_proc_exit>
+ - func[128] <abort>
+ - func[129] <getcwd>
+ - func[130] <sbrk>
+ - func[131] <getenv>
+ - func[132] <dummy>
+ - func[133] <__wasm_call_dtors>
+ - func[134] <memcmp>
+ - func[135] <memcpy>
+ - func[136] <memmove>
+ - func[137] <memset>
+ - func[138] <__strchrnul>
+ - func[139] <__stpcpy>
+ - func[140] <strcpy>
+ - func[141] <strdup>
+ - func[142] <dummy>
+ - func[143] <__lctrans>
+ - func[144] <strerror>
+ - func[145] <strerror_r>
+ - func[146] <strlen>
+ - func[147] <strncmp>
+ - func[148] <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h6c88c77c7d034c43E>
+ - func[149] <_ZN69_$LT$core..alloc..layout..LayoutError$u20$as$u20$core..fmt..Debug$GT$3fmt17h61a09053ee910807E>
+ - func[150] <_ZN5alloc7raw_vec11finish_grow17h834c09c84d950070E>
+ - func[151] <_ZN5alloc5alloc18handle_alloc_error17h45266c138ba4387bE>
+ - func[152] <_ZN5alloc7raw_vec17capacity_overflow17h7e859c8361d5c944E>
+ - func[153] <_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$16reserve_for_push17he07040098339ea95E>
+ - func[154] <_ZN72_$LT$$RF$str$u20$as$u20$alloc..ffi..c_str..CString..new..SpecNewImpl$GT$13spec_new_impl17hbefe64b6f7d4e2b4E>
+ - func[155] <_ZN5alloc3ffi5c_str7CString19_from_vec_unchecked17heb7d840c2780413fE>
+ - func[156] <_ZN5alloc4sync32arcinner_layout_for_value_layout17hbf982f94b72cc326E>
+ - func[157] <_ZN4core3ops8function6FnOnce9call_once17h262ff3c3349297a5E>
+ - func[158] <_ZN4core3ptr25drop_in_place$LT$char$GT$17h0482a437e7e3d29fE>
+ - func[159] <_ZN4core3ptr37drop_in_place$LT$core..fmt..Error$GT$17h8aea71b9b5b79fd9E>
+ - func[160] <_ZN4core9panicking9panic_fmt17h914f6a419f7cf5c5E>
+ - func[161] <_ZN4core5slice5index26slice_start_index_len_fail17he1ac0ba3b983c433E>
+ - func[162] <_ZN4core5slice5index24slice_end_index_len_fail17h04ae788d5f9f8c03E>
+ - func[163] <_ZN4core3fmt9Formatter3pad17h409ee46ea2c40143E>
+ - func[164] <_ZN4core9panicking5panic17h51a130ea32126af8E>
+ - func[165] <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$u32$GT$3fmt17h7e7ec712599d55cbE>
+ - func[166] <_ZN4core3fmt5write17h4c15d9118bb9210dE>
+ - func[167] <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$7type_id17hba899d400a5f1fc1E>
+ - func[168] <_ZN63_$LT$core..cell..BorrowMutError$u20$as$u20$core..fmt..Debug$GT$3fmt17hc65825a402931268E>
+ - func[169] <_ZN4core4cell22panic_already_borrowed17h8f7ff7589a693565E>
+ - func[170] <_ZN4core3ffi5c_str4CStr19from_bytes_with_nul17h1b0f112884c75bdcE>
+ - func[171] <_ZN4core3str8converts9from_utf817hbb7065b38999e3e7E>
+ - func[172] <_ZN4core3fmt8builders11DebugStruct5field17h9d202ecba0e5e671E>
+ - func[173] <_ZN4core3fmt3num3imp51_$LT$impl$u20$core..fmt..Display$u20$for$u20$u8$GT$3fmt17he57d35c7d25e0efeE>
+ - func[174] <_ZN4core6result13unwrap_failed17h2573b74413321d45E>
+ - func[175] <_ZN4core6option13unwrap_failed17h93224de5e35b7d7aE>
+ - func[176] <_ZN4core6option13expect_failed17h18e4ba7b3d31ef50E>
+ - func[177] <_ZN44_$LT$$RF$T$u20$as$u20$core..fmt..Display$GT$3fmt17h6043785ab89a4757E>
+ - func[178] <_ZN70_$LT$core..panic..location..Location$u20$as$u20$core..fmt..Display$GT$3fmt17hc2cfb992c770308dE>
+ - func[179] <_ZN73_$LT$core..panic..panic_info..PanicInfo$u20$as$u20$core..fmt..Display$GT$3fmt17hd9d4cd355d62d090E>
+ - func[180] <_ZN4core3fmt3num53_$LT$impl$u20$core..fmt..LowerHex$u20$for$u20$i32$GT$3fmt17hab82dd548a22ac76E>
+ - func[181] <_ZN4core9panicking19assert_failed_inner17h3996787dac4cce97E>
+ - func[182] <_ZN42_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$3fmt17h2608fd854f4ff4d0E>
+ - func[183] <_ZN59_$LT$core..fmt..Arguments$u20$as$u20$core..fmt..Display$GT$3fmt17hc69d9a032c2fd70fE>
+ - func[184] <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$9write_str17h5c443aa8f1a4e46bE>
+ - func[185] <_ZN68_$LT$core..fmt..builders..PadAdapter$u20$as$u20$core..fmt..Write$GT$10write_char17h8d6b697bf2e8e383E>
+ - func[186] <_ZN4core3fmt8builders10DebugTuple5field17ha605a3caa1435805E>
+ - func[187] <_ZN4core3fmt8builders8DebugSet5entry17h785cb09bdac47528E>
+ - func[188] <_ZN4core3fmt8builders9DebugList6finish17h5e5cf1afe06d4b43E>
+ - func[189] <_ZN4core3fmt9Formatter12pad_integral17h750e0cd9d987003fE>
+ - func[190] <_ZN4core3fmt5Write9write_fmt17h70e1c403fabf6382E>
+ - func[191] <_ZN4core3str5count14do_count_chars17hdf63e309cd2e5d34E>
+ - func[192] <_ZN4core3fmt9Formatter12pad_integral12write_prefix17h23a25e3c0fc25861E>
+ - func[193] <_ZN4core3fmt9Formatter9write_str17heb7d2219b191e6fcE>
+ - func[194] <_ZN4core3fmt9Formatter9write_fmt17hf6054aea360e1a05E>
+ - func[195] <_ZN4core3fmt9Formatter26debug_struct_field2_finish17h91d66b9c5c96ab39E>
+ - func[196] <_ZN4core3fmt9Formatter25debug_tuple_field1_finish17h10c8286f8f8a54d4E>
+ - func[197] <_ZN4core3fmt9Formatter25debug_tuple_field2_finish17h5cd6061639b50ae8E>
+ - func[198] <_ZN4core3fmt9Formatter10debug_list17hcb96645a67c7c63dE>
+ - func[199] <_ZN43_$LT$bool$u20$as$u20$core..fmt..Display$GT$3fmt17h4fd390093020262cE>
+ - func[200] <_ZN42_$LT$str$u20$as$u20$core..fmt..Display$GT$3fmt17hc15d6a66023f5977E>
+ - func[201] <_ZN4core5slice6memchr14memchr_aligned17hff2bb2b602f3b91fE>
+ - func[202] <_ZN4core5slice6memchr7memrchr17ha4fa9e0d7802a72dE>
+ - func[203] <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..UpperHex$u20$for$u20$i8$GT$3fmt17hc7549de659658c91E>
+ - func[204] <_ZN4core3fmt3num52_$LT$impl$u20$core..fmt..LowerHex$u20$for$u20$i8$GT$3fmt17hd53191ea701f919bE>
+ - func[205] <_ZN4core3fmt3num3imp7fmt_u6417h3b9e567436868822E>
+ - func[206] <_ZN4core3fmt3num53_$LT$impl$u20$core..fmt..UpperHex$u20$for$u20$i32$GT$3fmt17h5dfb2852a3ae3e33E>
+ - func[207] <_ZN4core3fmt3num3imp52_$LT$impl$u20$core..fmt..Display$u20$for$u20$i32$GT$3fmt17h0792b346629bbebfE>
+ - global[0] <__stack_pointer>
+ - dataseg[0] <.rodata>
+ - dataseg[1] <.data>
+Custom:
+ - name: "producers"
+Custom:
+ - name: "target_features"
+  - [+] bulk-memory
+  - [+] mutable-globals
+  - [+] sign-ext

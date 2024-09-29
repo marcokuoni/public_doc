@@ -19,6 +19,7 @@
 * [From C through Emscripten to a Deno Server Application](./essays/11_from_c_through_emscripten_to_a_deno_server_application/README.md)
 * [Simple Rust Program in WebAssembly](./essays/12_simple_rust_program_in_webassembly/README.md)
 * [Hello wasm-bindgen](./essays/13_hello_wasm_bindgen/README.md)
+* [Hello WASI](./essays/14_hello_wasi/README.md)
 
 ### Possible Subjects
 * WebAssembly Docker Container

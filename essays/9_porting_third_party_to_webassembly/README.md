@@ -120,6 +120,7 @@ clean:
 ```
 
 ---
+
 If Emscripten is not installed, please refer to my [other article](https://medium.com/webassembly/emscripten-simple-portability-9d3238d99294) or follow the instructions at [Emscripten Documentation](https://emscripten.org/docs/getting_started/downloads.html). For Ubuntu, you can install Emscripten with the command: `sudo apt install emscripten`.
 
 ---

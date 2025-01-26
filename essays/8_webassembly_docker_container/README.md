@@ -18,7 +18,7 @@ reference-section-title: Further Resources
 ## Why?
 The famous quote from one of the inventors of Docker, Solomon Hykes: "If WASM+WASI existed in 2008, we wouldn’t have needed to created Docker."
 
-![Solomon Hykes Twitter Post about WASM](hykes-wasm-1.jpeg)
+![Solomon Hykes Twitter Post about WASM](hykes-wasm-1.jpg)
 
 There is a follow-up tweet in which Solomon talks about Docker not disappearing as a result. Instead, Windows, Linux, and WebAssembly containers will be used together and side by side with Docker.
 

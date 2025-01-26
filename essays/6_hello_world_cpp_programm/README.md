@@ -1,5 +1,5 @@
 ---
-title: '"Hello World" C++ Progra'
+title: '"Hello World" C++ Program'
 subtitle: 'Is a simple C++ program, but how to implement it so that it can be used in a web application as WebAssembly?'
 author: Marco Kuoni
 date: 2023-09-18T00:00:00+0100

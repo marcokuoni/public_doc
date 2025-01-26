@@ -1,3 +1,17 @@
+---
+title: 'Simple Rust Program in WebAssembly'
+subtitle: 'An easy guide from Rust to WebAssembly and its use in a web application…'
+author: Marco Kuoni
+date: 2024-03-06T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  An easy guide from Rust to WebAssembly and its use in a web application…
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # Simple Rust Program in WebAssembly
 This guide does not cover the details of Rust or its installation. Since Rust is LLVM-based, it theoretically only needs a backend for WebAssembly. The backend is included in the Rust standard library.
 
@@ -6,7 +20,7 @@ This guide does not cover the details of Rust or its installation. Since Rust is
 If LLVM is new or there is further interest in the topic, I recommend consulting my previous posts:
 * [Simple C Program in WebAssembly](https://medium.com/webassembly/simple-c-program-in-webassembly-1a7b148293c2) provides an introduction to LLVM, among other things.
 * [First Experiences with WebAssembly](https://medium.com/webassembly/first-experiences-with-webassembly-dafb2cf2ab52) already uses wasm3 in a REPL-style.
-  
+
 ---
 
 ```bash
@@ -39,8 +53,8 @@ The `#[no_mangle]` annotation prevents Rust from altering the name of the functi
 To compile and run the program with the default backend, the following commands are used:
 
 ```bash
-$ rustc multiply.rs 
-$ ./multiply 
+$ rustc multiply.rs
+$ ./multiply
 2 * 21 = 42
 ```
 

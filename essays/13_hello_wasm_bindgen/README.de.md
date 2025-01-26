@@ -1,3 +1,17 @@
+---
+title: 'Hallo wasm-bindgen'
+subtitle: 'Wasm-bindgen ist ein Tool, das die Kommunikation zwischen Rust und JavaScript vereinfacht…'
+author: Marco Kuoni
+date: 2024-03-27T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Wasm-bindgen ist ein Tool, das die Kommunikation zwischen Rust und JavaScript vereinfacht…
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # Hallo wasm-bindgen
 Wasm-bindgen ist ein Werkzeug, das die Kommunikation zwischen Rust und JavaScript vereinfacht. Es ermöglicht das Aufrufen von JavaScript-Funktionen aus Rust und umgekehrt und vereinfacht die Übergabe von Daten zwischen diesen Sprachen. Eigentlich ist es nicht nur für Rust gedacht, aber es ist die Sprache, die am besten mit wasm-bindgen funktioniert.
 
@@ -50,7 +64,7 @@ crate-type = ["cdylib"]
 wasm-bindgen = "0.2.92"
 ```
 
-Kurzerklärung: 
+Kurzerklärung:
 * `create-type = ["cdylib"]` definiert, dass eine dynamische C Bibliothek erstellt wird.
 * `wasm-bindgen = "0.2.92"` definiert die Version von wasm-bindgen.
 
@@ -85,9 +99,9 @@ $ wasm-pack build --target web
 
 Installieren von wasm-pack: `curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh`
 
-Dies hat uns ein `pkg` Verzeichnis erstellt, in dem sich eine package.json Datei für die Projektdefinition, die WebAssembly Datei, die JavaScript Datei und Typendefinitionen für Typescript befinden. 
+Dies hat uns ein `pkg` Verzeichnis erstellt, in dem sich eine package.json Datei für die Projektdefinition, die WebAssembly Datei, die JavaScript Datei und Typendefinitionen für Typescript befinden.
 
-Analysieren: 
+Analysieren:
 
 ```bash
 $ wasm-objdump -x hello_wasm_bindgen_bg.wasm

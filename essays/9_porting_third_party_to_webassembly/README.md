@@ -1,3 +1,17 @@
+---
+title: 'Porting Third Party to WebAssembly'
+subtitle: 'The idea is to take an application (as it could exist in a C++ library) and port it to WebAssembly'
+author: Marco Kuoni
+date: 2023-11-06T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  The idea is to take an application (as it could exist in a C++ library) and port it to WebAssembly
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # Porting Third Party to WebAssembly
 The idea of this article is to take a more complex application (as it could exist in a C++ library) and port it to WebAssembly. In this process, the application is first compiled into native machine code and executed directly on the operating system. Then, in a second step, the same application is compiled into WebAssembly and used in a web application.
 
@@ -47,7 +61,7 @@ int main(int argc, char **argv)
    }
 
    build_bitmap(choosen);
-   
+
    return 0;
 }
 

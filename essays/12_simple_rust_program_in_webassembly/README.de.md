@@ -1,5 +1,19 @@
+---
+title: 'Hallo WASI'
+subtitle: 'Die Einführung von WASI, das praktische Beispiel und die wichtigsten Vorteile der Verwendung von WASI mit WebAssembly.'
+author: Marco Kuoni
+date: 2024-09-29T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Die Einführung von WASI, das praktische Beispiel und die wichtigsten Vorteile der Verwendung von WASI mit WebAssembly.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # Ein einfaches Rust Programm in WebAssembly
-Es wird hier nicht auf die Details von Rust oder dessen Installation eingegangen. Weil Rust LLVM basiert ist, braucht es theoretisch nur ein Backend für WebAssembly. Das Backend ist in der Rust Standardbibliothek enthalten. 
+Es wird hier nicht auf die Details von Rust oder dessen Installation eingegangen. Weil Rust LLVM basiert ist, braucht es theoretisch nur ein Backend für WebAssembly. Das Backend ist in der Rust Standardbibliothek enthalten.
 
 ---
 
@@ -39,8 +53,8 @@ Die `#[no_mangle]`-Annotation verhindert, dass der Name der Funktion von Rust ve
 Um das Programm mit dem default Backend zu kompilieren und auszuführen, werden folgende Befehle verwendet:
 
 ```bash
-$ rustc multiply.rs 
-$ ./multiply 
+$ rustc multiply.rs
+$ ./multiply
 2 * 21 = 42
 ```
 

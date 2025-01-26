@@ -1,3 +1,16 @@
+---
+title: 'Hello WASI'
+subtitle: 'The introduction to WASI, the practical example, and the key benefits of using WASI with WebAssembly.'
+author: Marco Kuoni
+date: 2024-09-29T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  The introduction to WASI, the practical example, and the key benefits of using WASI with WebAssembly.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
 # Hello WASI
 Some functionalities are more difficult to achieve in WebAssembly due to imposed security goals. The language does not rely on the security mechanisms of the host system, as is the case with most others. Therefore, access to the file system, memory, and other resources must be explicitly allowed. This excludes many unrecognized attack vectors.
 

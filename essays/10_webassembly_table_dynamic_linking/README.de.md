@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Tabelle, dynamisches Linken'
+subtitle: 'Über den Abschnitt «Table», der für das dynamische Linking verantwortlich ist.'
+author: Marco Kuoni
+date: 2023-11-20T00:00:00+01000
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Über den Abschnitt «Table», der für das dynamische Linking verantwortlich ist.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # WebAssembly Tabelle, dynamisches Linken
 Ein Thema aus dem Artikel [WebAssebmly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) fehlt noch. Dabei geht es um den Abschnitt `Table`, welcher für das dynamische Linken zuständig ist.
 Mit dem Ansatz des dynamischen Linken kann einem Modul zur Laufzeit verknüpft/gelinkt werden. Als Beispiel kann so ein zentralisiertes Bibliotheks-Modul erstellt werden, welches von verschiedenen anderen Modulen eingebunden und verwendet wird. Damit können die Eigenschaften des zentralisierten Moduls angepasst werden, ohne dass die anderen Module neu kompiliert werden müssen. Damit wird Code Duplikationen vermieden, Speicherplatz reduziert und die Wartbarkeit verbessert.
@@ -36,7 +50,7 @@ Kompilieren: `wat2wasm math.wat`
 Analysieren: `wasm-objdump -x math.wasm`
 
 ```bash
-$ wasm-objdump -x math.wasm 
+$ wasm-objdump -x math.wasm
 
 math.wasm:      file format wasm 0x1
 
@@ -60,7 +74,7 @@ Code[2]:
  - func[1] size=7
 ```
 
-Dies kann nun in einer Webanwendung verwendet werden 
+Dies kann nun in einer Webanwendung verwendet werden
 
 ```html
 <!DOCTYPE html>
@@ -171,7 +185,7 @@ Kurbeschreibung:
 * `import` importiert die Tabelle vom Gästesystem mit einer Grösse von 2 und dem Typ `funcref`
 * `elem` im Unterschied zu vorher nun einzeln ausgeführt mit unterschiedlichen Startindizes. Die Referenzen zu den Funktionen werden so in der übergebenen Tabelle initialisiert.
 * Im Modul wird somit nur indirekt exportiert. Die Funktionen können nur über die Tabelle aufgerufen werden.
-  
+
 Kompilieren: `wat2wasm math_ext.wat`
 
 Analysieren: `wasm-objdump -x math_ext.wasm`
@@ -228,7 +242,7 @@ Kompilieren: `wat2wasm math_custom.wat`
 Analysieren: `wasm-objdump -x math_custom.wasm`
 
 ```bash
-$ wasm-objdump -x math_custom.wasm 
+$ wasm-objdump -x math_custom.wasm
 
 math_custom.wasm:       file format wasm 0x1
 

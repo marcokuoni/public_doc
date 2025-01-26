@@ -1,3 +1,16 @@
+---
+title: 'Hello WASI'
+subtitle: 'The introduction to WASI, the practical example, and the key benefits of using WASI with WebAssembly.'
+author: Marco Kuoni
+date: 2024-09-29T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  The introduction to WASI, the practical example, and the key benefits of using WASI with WebAssembly.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
 # Hello wasm-bindgen
 Wasm-bindgen is a tool that simplifies communication between Rust and JavaScript. It enables calling JavaScript functions from Rust and vice versa, simplifying the transfer of data between these languages. Actually, it's not exclusively for Rust, but Rust works best with wasm-bindgen.
 

@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Memory'
+subtitle: 'Wie der Speicher in WebAssembly mit der Umgebung (Host) zusammenarbeitet.'
+author: Marco Kuoni
+date: 2023-09-06T00:00:00+010
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Wie der Speicher in WebAssembly mit der Umgebung (Host) zusammenarbeitet.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # WebAssembly Memory
 Zu einem WebAssembly Modul wird ein `ArrayBuffer` (bzw. `SharedArrayBuffer`) verknüpft, der als WebAssembly Speicher dient. Die Speicherinstanz wird entweder vom Modul selbst erstellt oder durch das Gästesystem zur Verfügung gestellt. Diese Instanzen werden gleich wie Funktionen vom Modul importiert oder exportiert. Jede Instanz besteht aus einem linearen Speicherbereich aufgeteilt in 64 KiloByte grosse Seiten (`Pages`).
 > Aktuell ist ein WebAssembly Modul auf eine Speicherinstanz beschränkt. Es ist anzunehmen, dass dies in naher Zukunft angepasst wird.
@@ -29,7 +43,7 @@ Export[1]:
  - memory[0] -> "mem"
 Data[1]:
  - segment[0] memory=0 size=3 - init i32=1
-  - 0000001: 0102 03   
+  - 0000001: 0102 03
 ```
 
 Kurzbeschreibung der Abschnitte:
@@ -140,7 +154,7 @@ Von der JavaScript Seite kann *ein* Speicher (`Memory`) dem WebAssembly Modul zu
     (memory (import "env" "mem") 1)
     (func (export "fibonacci") (param $n i32)
         (local $index i32)
-        (local $ptr i32)    
+        (local $ptr i32)
 
         (i32.store (i32.const 0) (i32.const 0))
         (i32.store (i32.const 4) (i32.const 1))
@@ -291,7 +305,7 @@ Export[1]:
 Data[1]:
  - segment[0] memory=0 size=18 - init i32=0
   - 0000000: 4865 6c6c 6f2c 2057 6f72 6c64 2120 f09f  Hello, World! ..
-  - 0000010: 9880 
+  - 0000010: 9880
 ```
 
 Kurzbeschreibung der Abschnitte:
@@ -366,7 +380,7 @@ Hier den Versuch einer Simulation des Stackautomaten Fibonacci Algorithmus in Ja
 * Es wird kein Import benutzt sondern der importierte Speicher mit einem `ArrayBuffer` simuliert. Was auch im Hintergrund vom WebAssembly verwendet wird.
 * Es können in JavaScript keine GoTo-Anweisungen eingesetzt werden. Um trotzdem etwas aufzuzeigen, wie die Schlaufe im Stackautomaten funktioniert, wird ein `while(true)` mit einem `break` und `continue` verwendet.
 * Die Positionen in den Kommentaren werden unten für die Darstellung zur Entwicklung des Speichers verwendet.
-* Die Hilfsvariable `index` wird zur Zählung der Iterationen verwendet. 
+* Die Hilfsvariable `index` wird zur Zählung der Iterationen verwendet.
 * Die Hilfsvariable `ptr` wird verwendet um die Position im Speicher zu halten.
 * Die jeweiligen Integer Resultate (4 Bytes) werden linear im Speicher abgelegt und das Programm selbst muss die Positionen dazu wissen und berechnen.
 
@@ -395,7 +409,7 @@ function fibonacci(n) {
         ptr += 4;
 
         if(index >= n) {
-            break; 
+            break;
         }
         //position 2
         continue start;

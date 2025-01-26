@@ -1,3 +1,17 @@
+---
+title: 'Simple C Program in WebAssembly'
+subtitle: 'Other languages can offer advantages in performance, security, simplicity, or just cause of existing code.'
+author: Marco Kuoni
+date: 2023-09-10T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  Other languages can offer advantages in performance, security, simplicity, or just cause of existing code.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # Simple C Program in WebAssembly
 JavaScript doesn't always make sense for every use case. Other languages can offer advantages in performance, security, or simplicity. Additionally, existing programs in other languages may potentially be used easily.
 
@@ -119,7 +133,7 @@ main:                                   # @main
         .addrsig_sym printf
 ```
 
-### LLVM 
+### LLVM
 * [Wikipedia](https://en.wikipedia.org/wiki/LLVM)
 
 The idea behind LLVM (formerly Low Level Virtual Machine) is structured similarly to WebAssembly. Various frontends for different high-level languages translate into an LLVM intermediate language. This intermediate language is then executed and analyzed or optimized on a virtual machine. Finally, it can be translated into concrete machine code by various backends.
@@ -132,7 +146,7 @@ To install LLVM on Ubuntu, use the commands `sudo apt install llvm` and `sudo ap
 ```bash
 $ llc --version
 Ubuntu LLVM version 14.0.0
-  
+
   Optimized build.
   Default target: x86_64-pc-linux-gnu
   Host CPU: skylake
@@ -311,7 +325,7 @@ Analyzing in the Browser `http://localhost:8000`.
 ![Result of the Application](webapplication.png)
 
 ## Alternative Approach with Zig CC Compiler
-The [zig cc Compiler](https://ziglang.org/) is a drop-in replacement for Clang and GCC and does not yet have a stable release. It's written in the [Zig programming language](https://en.wikipedia.org/wiki/Zig_(programming_language)). One advantage over Clang is that it gets shipped with source code which gets built for the host system only when needed. 
+The [zig cc Compiler](https://ziglang.org/) is a drop-in replacement for Clang and GCC and does not yet have a stable release. It's written in the [Zig programming language](https://en.wikipedia.org/wiki/Zig_(programming_language)). One advantage over Clang is that it gets shipped with source code which gets built for the host system only when needed.
 While Clang works on various platforms, you might not always get the latest version compiled for your operating system, and the options could potentially have different names. Perhaps for the commands in the article to work correctly, clang, llvm, or the linker (lld) may need an update.
 
 To install it on Ubuntu, you can use `snap install zig --classic --beta` (0.11.0) or, for the latest development version, `snap install zig --classic --edge` (0.12.0-dev), or compile it yourself. Details can be found here: [ziglang.org/download](https://ziglang.org/download/).
@@ -334,7 +348,7 @@ If this web application is new or if there is more interest in the topic, I reco
 * [WebAssembly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) explains the structure of the WebAssembly module.
 * [JavaScript and Bytes](https://medium.com/@marcokuoni/javascript-and-bytes-44a70871986) shows how to work with bytes in JavaScript (`ArrayBuffer`, `DataView`).
 * [WebAssembly Memory](https://medium.com/webassembly/webassembly-memory-32bbe210112c) Describes the handling of memory in WebAssembly.
-  
+
 ---
 
 ## Further Resources

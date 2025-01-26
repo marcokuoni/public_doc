@@ -1,3 +1,17 @@
+---
+title: 'Ein einfaches C Programm in WebAssembly'
+subtitle: 'Andere Sprachen können Vorteile in Bezug auf Leistung, Sicherheit, Einfachheit oder aufgrund vorhandenen Codes bieten.'
+author: Marco Kuoni
+date: 2023-09-10T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Andere Sprachen können Vorteile in Bezug auf Leistung, Sicherheit, Einfachheit oder aufgrund vorhandenen Codes bieten.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # Ein einfaches C Programm in WebAssembly
 JavaScript macht nicht für jeden Anwendungsfall immer Sinn. Andere Sprachen können Vorteile in Performance, Sicherheit oder Einfachheit bieten. Zudem können eventuell bereits existierende Programme in anderen Sprachen einfach genutzt werden.
 
@@ -20,7 +34,7 @@ int main() {
 }
 ```
 
-## Kompilieren 
+## Kompilieren
 
 ### Für das Hostsystem
 Wenn man nur mit Programmiersprachen arbeitet, die direkt interpretiert werden, ist dieser Schritt nicht immer bekannt. Die Programmiersprache C muss zuerst in Maschinencode übersetzt werden, damit dieser ausgeführt werden kann. Hierzu gibt es diverse Compiler, welche dies übernehmen können. In diesem Beispiel verwenden wir den [Clang](https://clang.llvm.org/get_started.html) [LLVM Compiler](https://llvm.org), für welchen es diverse Versionen für unterschiedliche Betriebssysteme giebt.
@@ -121,23 +135,23 @@ main:                                   # @main
         .addrsig_sym printf
 ```
 
-### LLVM 
+### LLVM
 * [Wikipedia English](https://en.wikipedia.org/wiki/LLVM)
 * [Wikipedia Deutsch](https://de.m.wikipedia.org/wiki/LLVM)
 
-Die Idee hinter LLVM (früher Low Level Virtual Machine) ist ähnlich wie die von WebAssembly aufgebaut. Verschiedene Frontends für unterschiedliche höhere Sprachen übersetzen in eine LLVM-Zwischensprache. Diese Zwischensprache wird dann auf einer virtuellen Maschine ausgeführt und analysiert beziehungsweise optimiert. Zum Schluss kann dann von verschiedenen Backends in konkrete Maschinencodes übersetzt werden. 
+Die Idee hinter LLVM (früher Low Level Virtual Machine) ist ähnlich wie die von WebAssembly aufgebaut. Verschiedene Frontends für unterschiedliche höhere Sprachen übersetzen in eine LLVM-Zwischensprache. Diese Zwischensprache wird dann auf einer virtuellen Maschine ausgeführt und analysiert beziehungsweise optimiert. Zum Schluss kann dann von verschiedenen Backends in konkrete Maschinencodes übersetzt werden.
 
 ![LLVM Compiler](llvm_compiler.jpg)
 Bild von [Gopher Academy Blog](https://blog.gopheracademy.com/advent-2018/llvm-ir-and-go/)
 
-Dies kann nun genutzt werden um mit einem WebAssembly Backend mit LLVM WebAssembly Code zu generieren. 
+Dies kann nun genutzt werden um mit einem WebAssembly Backend mit LLVM WebAssembly Code zu generieren.
 
 Installieren unter Ubuntu `sudo apt install llvm`, `sudo apt install lld`.
 
 ```bash
 $ llc --version
 Ubuntu LLVM version 14.0.0
-  
+
   Optimized build.
   Default target: x86_64-pc-linux-gnu
   Host CPU: skylake
@@ -317,7 +331,7 @@ Analysieren im Browser `http://localhost:8000`.
 
 
 ## Alternativer Weg mit Zig CC Compiler
-Der [zig cc Compiler](https://ziglang.org/) ist ein Drop-In Ersatz für Clang und GCC und besitzt noch keinen stabilen Release. Er ist in der [Zig Programmiersprache geschrieben](https://de.wikipedia.org/wiki/Zig_(Programmiersprache)). Ein Vorteil gegenüber Clang ist, dass er direkt mit SourceCode ausgeliefert wird und dieser erst bei Gebrauch für das Hostsystem gebuildet wird. 
+Der [zig cc Compiler](https://ziglang.org/) ist ein Drop-In Ersatz für Clang und GCC und besitzt noch keinen stabilen Release. Er ist in der [Zig Programmiersprache geschrieben](https://de.wikipedia.org/wiki/Zig_(Programmiersprache)). Ein Vorteil gegenüber Clang ist, dass er direkt mit SourceCode ausgeliefert wird und dieser erst bei Gebrauch für das Hostsystem gebuildet wird.
 Clang funktioniert auch auf allen gängigen Plattformen, jedoch wird man eventuell nicht immer die neueste Version für sein Betriebssystem kompiliert bekommen und die Optionen können unter Umständen anders benannt sein. Vielleicht für die Befehle im Artikel müssen clang, llvm oder der Linker (lld) ein Update erhalten damit die Befehle korrekt funktionieren.
 
 Installieren unter Ubuntu `snap install zig --classic --beta` (0.11.0), für on the edge `snap install zig --classic --edge` (0.12.0-dev) oder selbst kompilieren. Die Details findet man hier [ziglang.org/download](https://ziglang.org/download/).

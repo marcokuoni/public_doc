@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ./pandoc-medium.sh --output ./out.html ./example.md
+# ./pandoc-medium.sh --output /srv/marcokuoni/data/app/project/public/blog/example.html ./example.md
 # Transforms Markdown format to html for use with md-publisher.
 # Requires pandoc, pandoc-crossref, and pandoc-citeproc
 # # See https://pandoc.org/MANUAL.html#extension-yaml_metadata_block

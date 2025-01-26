@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Memory'
+subtitle: 'How the memory in WebAssembly works together with the environment (host).'
+author: Marco Kuoni
+date: 2023-09-06T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  How the memory in WebAssembly works together with the environment (host).
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # WebAssembly Memory
 An `ArrayBuffer` (or `SharedArrayBuffer`) is associated with a WebAssembly module, which serves as WebAssembly memory. The memory instance is either created by the module itself or provided by the host system. These instances are imported or exported by the module just like functions. Each instance consists of a linear memory divided into 64 kilobyte-sized pages.
 > Currently, a WebAssembly module is limited to one memory instance only. It is expected that this will be adjusted in the near future.
@@ -29,7 +43,7 @@ Export[1]:
  - memory[0] -> "mem"
 Data[1]:
  - segment[0] memory=0 size=3 - init i32=1
-  - 0000001: 0102 03   
+  - 0000001: 0102 03
 ```
 
 Here's a brief description of the sections:
@@ -139,7 +153,7 @@ From the JavaScript side, *one* memory can be provided (imported) to the WebAsse
     (memory (import "env" "mem") 1)
     (func (export "fibonacci") (param $n i32)
         (local $index i32)
-        (local $ptr i32)    
+        (local $ptr i32)
 
         (i32.store (i32.const 0) (i32.const 0))
         (i32.store (i32.const 4) (i32.const 1))
@@ -291,7 +305,7 @@ Export[1]:
 Data[1]:
  - segment[0] memory=0 size=18 - init i32=0
   - 0000000: 4865 6c6c 6f2c 2057 6f72 6c64 2120 f09f  Hello, World! ..
-  - 0000010: 9880 
+  - 0000010: 9880
 ```
 
 Here's a brief description of the sections:
@@ -361,7 +375,7 @@ Analyzing in the Browser `http://localhost:8000`
 
 ![String in Application](string.png)
 
-## Fibonacci Implementation in the Stack Machine 
+## Fibonacci Implementation in the Stack Machine
 Here's an attempt to simulate the stack machine Fibonacci algorithm in JavaScript. Some notes:
 * No import is used; instead, the imported memory is simulated using an `ArrayBuffer`, which is also used in the background by WebAssembly.
 * JavaScript doesn't support GoTo statements. To demonstrate how the loop works in the stack machine, a `while(true)` loop with `break` and `continue` statements is used.
@@ -395,7 +409,7 @@ function fibonacci(n) {
         ptr += 4;
 
         if(index >= n) {
-            break; 
+            break;
         }
         //position 2
         continue start;

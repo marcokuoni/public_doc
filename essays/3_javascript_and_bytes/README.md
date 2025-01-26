@@ -1,3 +1,17 @@
+---
+title: 'JavaScript and Bytes'
+subtitle: 'Communication with the outer world. To have control over memory and data types. '
+author: Marco Kuoni
+date: 2023-08-26T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  Communication with the outer world. To have control over memory and data types.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # JavaScript and Bytes
 ## Communication with the outer world. To have control over memory and data types
 
@@ -5,8 +19,8 @@ JavaScript abstracts the memory and the data types. For instance, if we take the
 
 ![Array Buffer from mozilla.org](array_buffer.png)
 
-To achieve a maximum level of flexibility and efficiency, the implementation was divided into a buffer and views. 
-A buffer (implemented through the `ArrayBuffer` object) is an object that represents a data block of a defined size. It doesn't have a format (interpretation) and doesn't provide a mechanism to access its content directly. 
+To achieve a maximum level of flexibility and efficiency, the implementation was divided into a buffer and views.
+A buffer (implemented through the `ArrayBuffer` object) is an object that represents a data block of a defined size. It doesn't have a format (interpretation) and doesn't provide a mechanism to access its content directly.
 To access the memory content of a buffer, a view must be used. A view provides context – that is, a data type, a starting offset, and a number of elements – that converts the data into an actual typed array.
 
 ## Array Buffer
@@ -20,7 +34,7 @@ The `ArrayBuffer` has special mechanisms to influence its size or transfer its c
 * [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)
 * [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays)
 
-These provide a way to interpret and manipulate raw data in memory (which is represented in the form of an `ArrayBuffer`). 
+These provide a way to interpret and manipulate raw data in memory (which is represented in the form of an `ArrayBuffer`).
 The following types are available:
 * `Int8Array` 8-bit signed integer
 * `Uint8Array` 8-bit unsigned integer

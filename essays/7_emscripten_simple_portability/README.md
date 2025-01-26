@@ -1,3 +1,17 @@
+---
+title: 'Emscripten Simple Portability'
+subtitle: 'C/C++ → WebAssembly'
+author: Marco Kuoni
+date: 2023-09-25T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  C/C++ → WebAssembly
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # Emscripten Simple Portability
 
 ## C/C++ → WebAssembly
@@ -330,7 +344,7 @@ Excerpt from `hello_webassembly.wat`:
     local.set 2
     local.get 2
     return)
-... 
+...
 ```
 
 Here, we won't delve further into the details. However, it's impressive to see how the entire functionality looks in stack machine instructions. More details can also be found in my older articles.
@@ -363,7 +377,7 @@ As described in my previous [article](https://medium.com/webassembly/hello-world
 
 It's important to note that this is an abstraction (sandbox). The `printf` function from the C program is not called on the operating system in the traditional sense. Instead, it invokes the `_fd_write` function provided by JavaScript and imported by WebAssembly, which then offers the respective implementation of the `printf` function.
 
-In Ecmascript, this behavior depends on the specific JavaScript interpreter making the call. The `printChar` function from the `_fd_write` function ultimately relies on the following output declaration: `var out = Module['print'] || console.log.bind(console);`. 
+In Ecmascript, this behavior depends on the specific JavaScript interpreter making the call. The `printChar` function from the `_fd_write` function ultimately relies on the following output declaration: `var out = Module['print'] || console.log.bind(console);`.
 Here, it's evident that the interface (*runtime, sandbox) to WebAssembly in the JavaScript file is abstracted and provided through a global variable called `Module`. This `Module` serves as the interface between WebAssembly and the rest of the JavaScript program.
 
 Moreover, you can replace the `Module['print']` function with another function using this approach. This would result in the replacement function being called instead of the fallback version with `console.log`.

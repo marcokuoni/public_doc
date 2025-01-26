@@ -1,3 +1,17 @@
+---
+title: 'First Experiences with WebAssembly'
+subtitle: 'This idea abstracts the programming language from the target platform. But this is only one advantage of the solution. Among other things, this allows to combine different programming languages, to increase security and efficiency and much more.'
+author: Marco Kuoni
+date: 2023-08-14T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  This idea abstracts the programming language from the target platform. But this is only one advantage of the solution. Among other things, this allows to combine different programming languages, to increase security and efficiency and much more.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # First Experiences with WebAssembly
 
 ## Basic Idea and First Steps

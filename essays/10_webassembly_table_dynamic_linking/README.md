@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Table, Dynamic Linking'
+subtitle: 'About the `Table` section, which is responsible for dynamic linking.'
+author: Marco Kuoni
+date: 2023-11-20T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  About the `Table` section, which is responsible for dynamic linking.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # WebAssembly Table, Dynamic Linking
 One topic from the article [WebAssembly Module](https://medium.com/webassembly/webassembly-module-146783e725d9) is still missing. This concerns the `Table` section, which is responsible for dynamic linking.
 
@@ -37,7 +51,7 @@ Compile: `wat2wasm math.wat`
 Analysis: `wasm-objdump -x math.wasm`
 
 ```bash
-$ wasm-objdump -x math.wasm 
+$ wasm-objdump -x math.wasm
 
 math.wasm:      file format wasm 0x1
 
@@ -200,7 +214,7 @@ Code[2]:
  - func[0] size=7
  - func[1] size=7
  ```
- 
+
  ### Application Module
 ```wat
 (module
@@ -229,7 +243,7 @@ Compile: `wat2wasm math_custom.wat`
 Analyze: `wasm-objdump -x math_custom.wasm`
 
 ```bash
-$ wasm-objdump -x math_custom.wasm 
+$ wasm-objdump -x math_custom.wasm
 
 math_custom.wasm:       file format wasm 0x1
 

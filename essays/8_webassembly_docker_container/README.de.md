@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Docker Container'
+subtitle: 'Von der Theorie zur Praxis'
+author: Marco Kuoni
+date: 2023-10-04T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Von der Theorie zur Praxis
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # WebAssembly Docker Container
 **Inhalt:** [Theorie: Warum?](#warum) | [Theorie: Wie?](#wie) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Performance](#performance) | [Weiterführend](#weiterführend)
 
@@ -11,7 +25,7 @@ Es gibt einen fortsetzenden Tweet in dem Solomon davon Spricht, dass Docker dadu
 ![Containers Compared](ContainersCompared.png)
 Bild von [Kode Kloud](https://kodekloud.com/blog/webassembly-vs-docker/)
 
-Klassische Docker-Container beziehungsweise deren Inhalt sind für für eine bestimmte Zielarchitektur (arm, x86, usw.) kompiliert und beinhalten verschiedene Betriebssystemkomponenten. 
+Klassische Docker-Container beziehungsweise deren Inhalt sind für für eine bestimmte Zielarchitektur (arm, x86, usw.) kompiliert und beinhalten verschiedene Betriebssystemkomponenten.
 
 Wenn nun eine WebAssembly-Runtime zur Verfügung steht, können diese Punkte an die Runtime abgeben werden. Als Resultat erhält man einen Container, mit folgenden zusätzlichen Vorteilen:
 * Beinhaltet nur Applikationscode was zu kleineren (Speicher) und sicheren (Angriffsfläche) Containern mit schnelleren Startzeiten führt.
@@ -44,17 +58,17 @@ Zusammengefasst erhält man mit Docker + WebAssembly
 ![Docker WASM](DockerWasmContainer.png)
 Bild von [Kode Kloud](https://kodekloud.com/blog/webassembly-vs-docker/)
 
-Nachfolgend werden die einzelnen Schichten und deren Funktionalität beziehungsweise Aufgaben kurz erklärt. Dank der breiten Akzeptanz der Standardisierungen und des Open-Source Gedanken rund um Container über [Open Container Initiative](https://opencontainers.org/) und der [Container Runtime containerd](https://containerd.io/) können verschiedene Anwendungen einfach auf verschiedenen Plattformen ausgeführt werden. 
+Nachfolgend werden die einzelnen Schichten und deren Funktionalität beziehungsweise Aufgaben kurz erklärt. Dank der breiten Akzeptanz der Standardisierungen und des Open-Source Gedanken rund um Container über [Open Container Initiative](https://opencontainers.org/) und der [Container Runtime containerd](https://containerd.io/) können verschiedene Anwendungen einfach auf verschiedenen Plattformen ausgeführt werden.
 
 Auf der einen Seite bieten standardisierte Schnittstellen für containerd, dass dieser auf diversen Plattformen zum Einsatz kommt. Auf der anderen Seite ermöglichen die standardisierten Schnittstellen für die Container das Implementieren und Ausführen von unterschiedliche Anwendungen.
 
-### Container Engine 
+### Container Engine
 Dient als Schnittstelle zwischen den Administratoren und dem Container Manager und bietet weitere higher Level plattformspezifische Funktionalitäten.
 
 Bekannte Container Engines sind Docker, Kubernetes, Podman, CRI-O, usw.
 
 ### Container Manager
-Umfasst das Verwalten von Images (Upload, Download) und von Containern (Erstellen, Starten, Stoppen, usw.). Im Grunde alles was man braucht, um eine Container-Plattform aufzubauen, ohne sich mit den Details des zugrunde liegenden Betriebssystems befassen zu müssen. 
+Umfasst das Verwalten von Images (Upload, Download) und von Containern (Erstellen, Starten, Stoppen, usw.). Im Grunde alles was man braucht, um eine Container-Plattform aufzubauen, ohne sich mit den Details des zugrunde liegenden Betriebssystems befassen zu müssen.
 
 Bekanntester Container Manager ist containerd unterstützt durch [Cloud Native Computing Foundation](https://www.cncf.io/). Containerd ist ein Open-Source Container Manager (ursprünglich Docker), der in Go programmiert ist. Anstatt direkt von Entwicklern verwendet zu werden, ist er so konzipiert, dass er in Systeme wie Docker, Kubernetes und Weiteren eingebettet werden kann.
 
@@ -77,7 +91,7 @@ Alternativen:
 
 #### WebAssemlby
 Weil die bestehenden Shim-Implementierungen auf Artefakten von Betriebssystemen beruht, können diese nicht im gleichen Sinn direkt für WebAssembly Runtimes verwendet werden. Deshalb kommen WebAssembly Runtimes gebündelt mit eigenen Shims daher.
-Für wasmedge, wasmtime und wasmer gibt es hierzu [runwasi](https://github.com/containerd/runwasi). 
+Für wasmedge, wasmtime und wasmer gibt es hierzu [runwasi](https://github.com/containerd/runwasi).
 
 Runwasi implementiert dabei zwei Modis:
 * Normal: Ein Shim Prozess pro Container
@@ -88,7 +102,7 @@ Zwei Bemerkungen im Vorfeld:
 * Mit Docker Desktop lässt sich auf einfache Art in verschiedenen Betriebssystemen ein WebAssembly Image builden und als Container starten. Jedoch kann dies auch mit einer standard Docker Installation umgesetzt werden. Weiter Infos unter [alternative Runtimes](https://docs.docker.com/engine/alternative-runtimes/#wasmtime)
 * Weil die Docker Implementierung eher neu ist, können Herausforderungen auftreten. Daher gibt es eine Liste von bekannten [Known Issues](https://docs.docker.com/desktop/wasm/#known-issues) und einen [Issue Tracker](https://github.com/docker/roadmap/issues/426).
 
-Als erstens muss [Docker Desktop](https://www.docker.com/products/docker-desktop) heruntergeladen werden. Dieser wird unter Ubuntu wie folgt installiert: 
+Als erstens muss [Docker Desktop](https://www.docker.com/products/docker-desktop) heruntergeladen werden. Dieser wird unter Ubuntu wie folgt installiert:
 
 ```bash
 sudo chmod +x ./docker-desktop-4.24.0-amd64.deb
@@ -115,13 +129,13 @@ Nach der Installation muss die WASM Runtime aktiviert werden. Was mit folgenden 
 ```bash
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT STATUS  BUILDKIT             PLATFORMS
-default         docker                                       
+default         docker
   default       default         running v0.11.6+616c3f613b54 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
-desktop-linux * docker                                       
+desktop-linux * docker
   desktop-linux desktop-linux   running v0.12.2              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
 ```
 
-Daher habe ich mit folgendem Befehl einen neuen Builder erstellt: 
+Daher habe ich mit folgendem Befehl einen neuen Builder erstellt:
 
 ```bash
 docker buildx create --name wasm-builder --platform wasi/wasm
@@ -131,11 +145,11 @@ docker buildx use wasm-builder
 ```bash
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT  STATUS   BUILDKIT             PLATFORMS
-wasm-builder *  docker-container                               
+wasm-builder *  docker-container
   wasm-builder0 desktop-linux    inactive                      wasi/wasm*
-default         docker                                         
+default         docker
   default       default          running  v0.11.6+616c3f613b54 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
-desktop-linux   docker                                         
+desktop-linux   docker
   desktop-linux desktop-linux    running  v0.12.2              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
 ```
 
@@ -186,7 +200,7 @@ EOT
 
 FROM buildbase AS build
 COPY Cargo.toml .
-COPY src ./src 
+COPY src ./src
 # Build the Wasm binary
 RUN cargo build --target wasm32-wasi --release
 
@@ -238,21 +252,21 @@ Welches über `docker compose up` gestartet wird.
 ![WebAssembly with Docker Compose](docker_compose.png)
 
 ## Performance
-Ich möchte mich an dieser Stelle bei [Thomas Bocek](https://youtu.be/0uo37PAondM?feature=shared&t=178) bedanken für die Erwähnung dieses Artikels. Im speziellen auch die Erwähnung seiner Bedenken bezüglich der Performance von WebAssembly in Docker. 
+Ich möchte mich an dieser Stelle bei [Thomas Bocek](https://youtu.be/0uo37PAondM?feature=shared&t=178) bedanken für die Erwähnung dieses Artikels. Im speziellen auch die Erwähnung seiner Bedenken bezüglich der Performance von WebAssembly in Docker.
 Daher gehe ich hier kurz auf die drei erwähnten Punkte ein:
 * Startzeit
 * Image Grösse
 * Portabilität
 
 Zum aktuellen Zeitpunkt und gemäss meinem aktuellen Wissen, stimme ich Thomas Bocek in allen drei Punkten gerne zu. Wir haben erst gerade in den letzten drei Tagen am [CG Hybrid Meeting](https://github.com/WebAssembly/meetings/blob/main/main/2023/CG-10.md) diverse Beispiele und Benchmarks gesehen. Was ausser Frage steht ist Portabilität und Sicherheit. Ganz klar Sicherheit wird und ist immer ein Thema, aber das Level ist bereits hoch. Um das Thema nur ganz kurz anzuschneiden, hier zwei zufällige Beispiele vom [Reasearch Day](https://www.cs.cmu.edu/~wasm/wasm-research-day-2023.html) nach dem CG Meeting:
-* [Shravan Ravi Narayan](https://shravanrn.com/) sprach über die Einschränkung von [Spectre Attackes](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) bei WebAssembly auf modernen CPUs. 
+* [Shravan Ravi Narayan](https://shravanrn.com/) sprach über die Einschränkung von [Spectre Attackes](https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)) bei WebAssembly auf modernen CPUs.
 * [Arjun Ramesh](https://users.ece.cmu.edu/~arjunr2/) und [Tianshu Huang](https://tianshu.io/) über plattformübergreifende Instrumentierung, die einzigartige Einblicke in das Programmverhalten liefern kann.
 
 Die Aussage über Image Grösse und Startup kommt als Konsequenz einer [Lightweight Virtualisierung (FaaS)](https://en.wikipedia.org/wiki/Function_as_a_service), welche den Fokus hat jeglichen Overhead von klassischen Containern zu vermeiden. Das heisst die Applikation auf einem höheren Level zu virtualisieren und damit den klassischen Container aufzuteilen in kleinere Funktionseinheiten pro Container. Plus kann zusätzlich in WebAssembly Containern auf die komplette in Container Linux Umgebung verzichtet werden. Hierzu empfehle ich folgendes Video zu [WebAssembly und Containers](https://www.youtube.com/watch?v=OGcm3rHg630), welches die WebAssembly Runtime Spin benutzt und dies in Anwendung aufzeigt. Jedoch ist es natürlich ein unfairer Vergleich, kleinere WebAssembly Service Containern mit komplexeren Applikations Containern zu vergleichen. Aber alleine auf Grundlage der Grösse und der daraus enthaltenen Codes sollte es möglich sein die Startupzeit eines WebAssembly Containers unter die eines klassischen Containers zu bringen.
 
 Ich komme aus dem Embedded-Bereich und eine klassische Diskusion ist welche Realtime ist schneller. Ähnliche Diskusionen fallen mir bei WebAssembly über native Implementierungen auf. Nehmen wir das Beispiel von Docker. Es wird im Container WebAssembly-Maschinen-Code ausgeliefert. Welcher von der WebAssembly Runtime in Maschinen-Code für die hardware Maschine umgewandelt wird. Bei all diesen Schritten gibt es nun noch Kompromisse zu treffen um dies zu realiseren. Jedoch sieht man Bestrebungen bis auf die Hardware runter um diese möglichst zu eliminieren und somit WebAssembly einen nativen Support zu ermöglichen und so ein schnelleres Nativ zu erreichen.
 
-Ich konnte es nicht lassen und habe ganz kurz Vergleichswerte kreiert. Dabei habe ich zweimal das gleiche `fibonacci.rs` Programm klassisch und als WebAssembly Container gebildet. 
+Ich konnte es nicht lassen und habe ganz kurz Vergleichswerte kreiert. Dabei habe ich zweimal das gleiche `fibonacci.rs` Programm klassisch und als WebAssembly Container gebildet.
 
 ```rust
 fn fibonacci(n: u64) -> u64 {
@@ -297,13 +311,13 @@ for ((i=1; i<=$num_runs; i++)); do
     started_time=$(date +%s.%N)
     stopped_time=$(date +%s.%N)
 
-    $command_to_measure  | while IFS= read -r line; do 
+    $command_to_measure  | while IFS= read -r line; do
             case "$line" in
                 "Starting")
-                    started_time=$(date +%s.%N)                
+                    started_time=$(date +%s.%N)
                 ;;
                 "Stopped")
-                    stopped_time=$(date +%s.%N)                
+                    stopped_time=$(date +%s.%N)
                 ;;
                 *)
                 # echo "$line"
@@ -333,7 +347,7 @@ echo "Average shutdown time over $num_runs runs: $avg_total_shutdown_time second
 
 ```
 
-Die verwendeten WebAssembly Runtimes verwenden (JIT)[https://en.wikipedia.org/wiki/Just-in-time_compilation] theoretisch müsste aber (AOT)[https://en.wikipedia.org/wiki/Ahead-of-time_compilation] gemäss [Ablaufdiagramm](https://wasmedge.org/docs/contribute/internal) von zum Beispiel WasmEdge ebenfalls möglich sein. 
+Die verwendeten WebAssembly Runtimes verwenden (JIT)[https://en.wikipedia.org/wiki/Just-in-time_compilation] theoretisch müsste aber (AOT)[https://en.wikipedia.org/wiki/Ahead-of-time_compilation] gemäss [Ablaufdiagramm](https://wasmedge.org/docs/contribute/internal) von zum Beispiel WasmEdge ebenfalls möglich sein.
 
 > Leider konnte ich die Runtimes Spin und Slight wie auch eine Wastime Vorkompilierung hier nicht berücksichtigen, weil `println` damit aus dem Stand nicht funktionierte.
 
@@ -406,7 +420,7 @@ Dies Resultiert in folgende Perfomancevergleiche verglichen mit der klassischen 
 * Startup: 22% langsamer
 * Runtime: 17% langsamer
 * Shutdown: 1512% langsamer
-* 
+*
 
 ```bash
 $ ./measureAvgTime.sh "docker run --rm --runtime=io.containerd.wasmtime.v1 --platform=wasi/wasm demo/fibonacci_webassembly" 5000
@@ -434,7 +448,7 @@ Average shutdown time over 5000 runs: .59228348785680000000 seconds
 * Shutdown: 45% langsamer
 
 ### Fazit
-Dies soll keine Wissenschaftliche Abhandlung darstellen, jedoch ein wenig ein Gefühl für die Unterschiede vermitteln. 
+Dies soll keine Wissenschaftliche Abhandlung darstellen, jedoch ein wenig ein Gefühl für die Unterschiede vermitteln.
 
 Was für mich auffällig ist:
 * Das WebAssembly Image ist deutlich kleiner

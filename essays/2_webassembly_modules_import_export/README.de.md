@@ -1,8 +1,22 @@
+---
+title: 'WebAssebmly Module'
+subtitle: 'WebAssembly-Programme sind in Modulen organisiert, die die Einheit zum Veröffentlichen, Laden und Kompilierung darstellen. Ein Modul sammelt Definitionen für Typen, Funktionen, Tabellen, Speicher und globale Variablen. Darüber hinaus kann es Importe und Exporte deklarieren, Initialisierungen für Daten- und Elementsegmente oder einer Startfunktion bereitstellen.'
+author: Marco Kuoni
+date: 2023-08-23T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  WebAssembly-Programme sind in Modulen organisiert, die die Einheit zum Veröffentlichen, Laden und Kompilierung darstellen. Ein Modul sammelt Definitionen für Typen, Funktionen, Tabellen, Speicher und globale Variablen. Darüber hinaus kann es Importe und Exporte deklarieren, Initialisierungen für Daten- und Elementsegmente oder einer Startfunktion bereitstellen.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # WebAssebmly Module
 WebAssembly-Programme sind in Modulen organisiert, die die Einheit zum Veröffentlichen, Laden und Kompilierung darstellen. Ein Modul sammelt Definitionen für Typen, Funktionen, Tabellen, Speicher und globale Variablen. Darüber hinaus kann es Importe und Exporte deklarieren, Initialisierungen für Daten- und Elementsegmente oder einer Startfunktion bereitstellen.
 
 Aufbau des Beitrags:
-1. Theorie 
+1. Theorie
 2. Analyse
 3. Praxis
 
@@ -14,7 +28,7 @@ Auf die Identifikation folgen die verschiedenen Modul Abschnitte (Sections). Jed
 
 ID | Name | Beschreibung
 ---|------|------------
-0 | Custom | Benutzerdefinierter Bereich, der für Debugging, Metadaten oder Erweiterungen von Drittanbietern verwendet werden kann. Wird von der WebAssembly Sprache ignoriert  
+0 | Custom | Benutzerdefinierter Bereich, der für Debugging, Metadaten oder Erweiterungen von Drittanbietern verwendet werden kann. Wird von der WebAssembly Sprache ignoriert
 1 | Type | Definiert alle Funktionstypen im Modul
 2 | Import | Importiert Funktionen, globale Variablen, Tabellen und Speicher in das Modul
 3 | Function | Definiert alle Funktionssignaturen im Modul (Referenziert dazu andere Abschnitte)
@@ -170,7 +184,7 @@ Um die Anwendung zu testen verwenden wir `python3 -m http.server`, somit kann da
 
 ![Screenshot der Applikation](website.png)
 
-> Es gilt zu beachten, dass das Hostprogramm dem WebAssembly Modul die benötigten Funktionen zur Verfügung stellen muss, damit es mit der Aussenwelt kommunizieren kann. Das gleiche gilt auch für die Speicherbereiche, welche vom Modul verwendet werden.  
+> Es gilt zu beachten, dass das Hostprogramm dem WebAssembly Modul die benötigten Funktionen zur Verfügung stellen muss, damit es mit der Aussenwelt kommunizieren kann. Das gleiche gilt auch für die Speicherbereiche, welche vom Modul verwendet werden.
 
 ### Erweiterung 1
 Um zu sehen was ein WebAssembly Modul importiert bzw. exportiert kann mit der JavaScript API dies ausgegeben werden.
@@ -198,7 +212,7 @@ Auch wenn das für kleinere Module ein möglicher Weg ist, gibt es die bessere L
 })();
 ```
 
-Damit ist der Code nach dem Herunterladen direkt validiert und bereit. 
+Damit ist der Code nach dem Herunterladen direkt validiert und bereit.
 Leider gibt es aktuell noch keinen Standard um WebAssembly Module auch zu cachen. Dies wird aber die Startzeit dann nochmals verbessern und vermeidet unnötiges mehrfaches Herunterladen.
 
 Zudem kann man an dieser Stelle ein in Bearbeitung befindendes Proposal für eine ECMAScript Modul Integration erwähnen.
@@ -206,7 +220,7 @@ Zudem kann man an dieser Stelle ein in Bearbeitung befindendes Proposal für ein
 * Lin Clark: [WebAssembly ES module integration](https://www.youtube.com/watch?v=qR_b5gajwug&themeRefresh=1)
 
 Dies würde erlauben, WebAssembly Module wie folgt in JavaScript zu werden.
-  
+
 ```js
 import { multiply } from './multiply.wasm';
 

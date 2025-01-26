@@ -1,3 +1,16 @@
+---
+title: 'From C through Emscripten to a Deno Server Application'
+subtitle: 'It is interesting to replace Node.js/Deno C/C++ addons with WebAssembly modules (portability, libraries, multilingualism)'
+author: Marco Kuoni
+date: 2023-11-27T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  It is interesting to replace Node.js/Deno C/C++ addons with WebAssembly modules (portability, libraries, multilingualism)
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
 # From C through Emscripten to a Deno Server Application
 [WebAssembly for Node.js](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly) has been on the road for almost as long as the implementation in the web browser. It is interesting to replace [C/C++ Addons](https://nodejs.org/dist/latest-v20.x/docs/api/addons.html) with WebAssembly modules. These C/C++ Addons are compiled into specific machine code using [node-gyp](https://github.com/nodejs/node-gyp), which complicates the portability of the addon, making a WebAssembly implementation attractive. Especially when, for example, using [Wasmtime](https://docs.wasmtime.dev/) with [WASI](https://wasi.dev/) (WebAssembly System Interface), so you can access system functions. WebAssembly Modules also allows the use of various alternative programming languages such as [Rust](https://www.rust-lang.org/), [Go](https://golang.org/), or [AssemblyScript](https://www.assemblyscript.org/).
 
@@ -29,7 +42,7 @@ Analysis in WebAssembly Text Format: `wasm2wat a.out.wasm > a.out.wat`
 Or alternatively:
 
 ```bash
-$ wasm-objdump -x a.out.wasm 
+$ wasm-objdump -x a.out.wasm
 
 a.out.wasm:     file format wasm 0x1
 
@@ -159,7 +172,7 @@ A brief note on the experimental implementation of [ES6 WebAssembly Modules](htt
 
 ```javascript
 import * as M from './module.wasm';
-console.log(M); 
+console.log(M);
 ```
 
 I am open to refining, expanding, or correcting the article. Feel free to provide a feedback or get in touch with me.

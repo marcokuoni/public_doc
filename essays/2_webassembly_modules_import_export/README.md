@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Module'
+subtitle: 'WebAssembly programs are organized into modules, which represent the unit for publishing, loading, and compilation. A module gathers definitions for types, functions, tables, memory, and global variables. Furthermore, it can declare imports and exports, provide initializations for data and element segments, or a startup function.'
+author: Marco Kuoni
+date: 2023-08-23T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  WebAssembly programs are organized into modules, which represent the unit for publishing, loading, and compilation. A module gathers definitions for types, functions, tables, memory, and global variables. Furthermore, it can declare imports and exports, provide initializations for data and element segments, or a startup function.
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # WebAssembly Module
 WebAssembly programs are organized into modules, which represent the unit for publishing, loading, and compilation. A module gathers definitions for types, functions, tables, memory, and global variables. Furthermore, it can declare imports and exports, provide initializations for data and element segments, or a startup function.
 
@@ -54,10 +68,10 @@ Example of a WebAssembly module:
 )
 ```
 
-This is translated into WASM along with debugging information using the following command: 
-`wat2wasm multiply.wat -o multiply.wasm --debug-names`. 
+This is translated into WASM along with debugging information using the following command:
+`wat2wasm multiply.wat -o multiply.wasm --debug-names`.
 
-The result can now be analyzed using the following command: 
+The result can now be analyzed using the following command:
 ```bash
 $ wasm-objdump -x multiply.wasm
 
@@ -91,7 +105,7 @@ Custom:
  - func[2] local[1] <b>
 ```
 
- Alternatively, you can visualize the module in a [WebAssembly Code Explorer](https://wasdk.github.io/wasmcodeexplorer/). 
+ Alternatively, you can visualize the module in a [WebAssembly Code Explorer](https://wasdk.github.io/wasmcodeexplorer/).
 
 ![WebAssembly Code Explorer](webassembly_code_explorer.png)
 > The color markings and interactions with the bytes can help you identify the different sections.
@@ -192,7 +206,7 @@ WebAssembly.compileStreaming(fetch('multiply.wasm'))
 ![Console log of Import/Export](webassembly_import_export.png)
 
 ### Extension 2
-Using the ArrayBuffer approach is not the most efficient way to work with WebAssembly. This method requires loading all the data over the network before we can compile it. 
+Using the ArrayBuffer approach is not the most efficient way to work with WebAssembly. This method requires loading all the data over the network before we can compile it.
 While this might be a viable approach for smaller modules, a better solution is available through streaming.
 
 ```js
@@ -204,7 +218,7 @@ While this might be a viable approach for smaller modules, a better solution is 
 })();
 ```
 
-This way, the code is validated and ready for execution as soon as it's downloaded. 
+This way, the code is validated and ready for execution as soon as it's downloaded.
 Unfortunately, there isn't a standardized way to cache WebAssembly modules at the moment. However, implementing such caching mechanisms in the future will further improve startup times and prevent unnecessary repeated downloads.
 
 Additionally, it's worth mentioning an ongoing proposal for ECMAScript module integration, which aims to enhance the integration of WebAssembly modules into JavaScript applications.

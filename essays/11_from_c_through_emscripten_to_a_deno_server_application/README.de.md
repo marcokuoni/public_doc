@@ -1,3 +1,17 @@
+---
+title: 'Von C über Emscripten zur Deno Serverapplikation'
+subtitle: 'Es ist interessant, Node.js/Deno C/C++-Addons durch WebAssembly-Module zu ersetzen (Portabilität, Bibliotheken, Mehrsprachigkeit).'
+author: Marco Kuoni
+date: 2023-11-27T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Es ist interessant, Node.js/Deno C/C++-Addons durch WebAssembly-Module zu ersetzen (Portabilität, Bibliotheken, Mehrsprachigkeit).
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # Von C über Emscripten zur Deno Serverapplikation
 [WebAssembly für Node.js](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly) ist fast gleich lange unterwegs wie die Implementierung im Webbrowser. Dabei ist es interessant die [C/C++ Addons](https://nodejs.org/dist/latest-v20.x/docs/api/addons.html) durch WebAssembly Module zu ersetzen. Diese C/C++ Addons werden über den [node-gyp](https://github.com/nodejs/node-gyp) in spezifischen Maschinencode kompiliert, was die Portabilität des Addons erschwert und daher eine WebAssembly Umsetzung attraktiv macht. Im speziellen wenn man zum Beispiel über [Wasmtime](https://docs.wasmtime.dev/) mit [WASI](https://wasi.dev/) (WebAssembly System Interface) auch auf die Systemfunktionen zugreifen kann. Zudem ermöglichen WebAssembly Module den Einsatz von diversen alternativen Programmiersprachen wie [Rust](https://www.rust-lang.org/), [Go](https://golang.org/) oder [AssemblyScript](https://www.assemblyscript.org/).
 
@@ -22,14 +36,14 @@ int div(int a, int b) {
 
 Komplilieren des C Programms mit Emscripten: `emcc math.c`
 
-Dies erstellt zwei Dateien `a.out.js` und `a.out.wasm`. Wobei hier nun nur das WebAssembly Modul benötigt wird. Die JavaScript Datei könnte als alternative direkt verwendet werden. Was zum Beispiel in anderen Artikeln wie [Porting Third Party to WebAssembly](https://medium.com/webassembly/porting-third-party-to-webassembly-46c2e4eb8cbe) zu finden ist. 
+Dies erstellt zwei Dateien `a.out.js` und `a.out.wasm`. Wobei hier nun nur das WebAssembly Modul benötigt wird. Die JavaScript Datei könnte als alternative direkt verwendet werden. Was zum Beispiel in anderen Artikeln wie [Porting Third Party to WebAssembly](https://medium.com/webassembly/porting-third-party-to-webassembly-46c2e4eb8cbe) zu finden ist.
 
 Analyse in WebAssembly Text Format: `wasm2wat a.out.wasm > a.out.wat`
 
 Oder über:
 
 ```bash
-$ wasm-objdump -x a.out.wasm 
+$ wasm-objdump -x a.out.wasm
 
 a.out.wasm:     file format wasm 0x1
 
@@ -158,7 +172,7 @@ Kleiner Hinweis auf die experimentelle Implementierung von [ES6 WebAssembly Modu
 
 ```javascript
 import * as M from './module.wasm';
-console.log(M); 
+console.log(M);
 ```
 
 Ich bin gerne bereit den Artikel zu präzisieren, erweitern oder zu korrigieren. Schreibt ein Feedback oder meldet euch direkt bei mir.

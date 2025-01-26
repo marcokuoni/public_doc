@@ -1,11 +1,25 @@
+---
+title: 'JavaScript und Bytes'
+subtitle: 'Kommunikation mit der Aussenwelt. Kontrolle über Speicher und Datentypen haben.'
+author: Marco Kuoni
+date: 2023-08-26T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Kommunikation mit der Aussenwelt. Kontrolle über Speicher und Datentypen haben.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # JavaScript und Bytes
 ## Kommunizieren mit der Aussenwelt. Kontrolle über den Speicher und die Datentypen
 JavaScript abstrahiert den Speicher und die Datentypen. Wenn wir zum Beispiel den Standard Array-Typ nehmen, so können die einzelnen Elemente beliebige Datentypen besitzen und deren Abbildung im Speicher ist nicht definiert. Dies gilt nicht nur für die komplexen Datentypen, sondern auch für die Einfachen wie zum Beispiel `number`. Will man nun aber über gewisse APIs kommunizieren (Filesystem, Webworker, WebAssembly...),  so muss die Byte-Anordnung beim Austausch sicher gestellt werden. Damit die Daten von beiden Parteien wieder korrekt interpretiert werden können. Daher hat das WebGL-Komittee die typisierten Arrays entwickelt.
 
 ![Array Buffer von mozilla.org](array_buffer.png)
 
-Um ein Maximum an Flexibilität und Effizienz zu erreichen, wurde die Implementierung in einen Buffer und Views (Ansichten) aufgeteilt. 
-Ein Buffer (implementiert durch das `ArrayBuffer`-Objekt) ist ein Objekt, das einen Datenblock definierter Grösse darstellt. Er hat kein Format (Interpretierung) und bietet keinen Mechanismus für einen Zugriff auf seinen Inhalt. 
+Um ein Maximum an Flexibilität und Effizienz zu erreichen, wurde die Implementierung in einen Buffer und Views (Ansichten) aufgeteilt.
+Ein Buffer (implementiert durch das `ArrayBuffer`-Objekt) ist ein Objekt, das einen Datenblock definierter Grösse darstellt. Er hat kein Format (Interpretierung) und bietet keinen Mechanismus für einen Zugriff auf seinen Inhalt.
 Um auf den Speicherinhalt eines Buffers zuzugreifen, muss eine Ansicht verwenden werden. Eine Ansicht bietet einen Kontext - das heißt, einen Datentyp, einen Startoffset und eine Anzahl von Elementen - der die Daten in ein tatsächliches typisiertes Array umwandelt.
 
 ## Array Buffer
@@ -19,7 +33,7 @@ Der `ArrayBuffer` hat spezielle Mechanismen um seine Grösse zu beeinflussen ode
 * [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)
 * [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays)
 
-Diese ermöglichen einen Weg um die Rohdaten im Speicher (welche in Form vom `ArrayBuffer` repräsentiert werden) zu interpretieren und zu manipulieren. 
+Diese ermöglichen einen Weg um die Rohdaten im Speicher (welche in Form vom `ArrayBuffer` repräsentiert werden) zu interpretieren und zu manipulieren.
 Folgende Typen sind verfügbar:
 * `Int8Array` 8-bit signed integer
 * `Uint8Array` 8-bit unsigned integer

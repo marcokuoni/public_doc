@@ -1,6 +1,20 @@
+---
+title: 'Emscripten einfache Portabilität'
+subtitle: 'C/C++ → WebAssembly'
+author: Marco Kuoni
+date: 2023-09-25T00:00:00+01000
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  C/C++ → WebAssembly
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # Emscripten einfache Portabilität
 ## C/C++ → WebAssembly
-Warum macht eine einfache Portabilität von C/C++ Programmen zu WebAssembly Sinn? 
+Warum macht eine einfache Portabilität von C/C++ Programmen zu WebAssembly Sinn?
 
 Es gibt hierzu diverse Gründe, einige sind hier kurz aufgezählt:
 * Es gibt bereits grosse Bibliotheken an bestehenden C/C++ Programmen.
@@ -313,7 +327,7 @@ Data[2]:
 
 Im Vergleich zu meinen anderen Artikel ist die WebAssembly Datei nun einiges grösser geworden. Jedoch ist es interessant einige Abschnitte zu beleuchten. Im `Export` ist eine `main` Funktion zu finden, welche wie gewohnt von C/C++, als Einstiegspunkt verwendet wird. Im `func[4]` Array befindet sich diese Funktion an der Position 4. Wenn nun der Ablauf des Scripts analysiert werden möchte, kann diese Funktion als Startpunkt verwendet und ins WAT Format gewechselt werden.
 
-Übersetzen von WebAssembly zu WAT: `wasm2wat hello_webassembly.wasm -o hello_webassembly.wat`. 
+Übersetzen von WebAssembly zu WAT: `wasm2wat hello_webassembly.wasm -o hello_webassembly.wat`.
 
 Auszug aus dem `hello_webassembly.wat`:
 
@@ -330,7 +344,7 @@ Auszug aus dem `hello_webassembly.wat`:
 
 Hier wird nun nicht weiter auf die Details eingegangen. Jedoch ist es eindrücklich, wie die gesamte Funktionalität in Stackautomaten Instruktionen aussieht. Mehr Details dazu kann auch in meinen älteren Aritkel gefunden werden.
 
-Auf der anderen Seite beim `Import` finden man die Funktion `wasi_snapshot_preview1.fd_write`, welche vom Gästesystem zur Verfügung gestellt werden muss. 
+Auf der anderen Seite beim `Import` finden man die Funktion `wasi_snapshot_preview1.fd_write`, welche vom Gästesystem zur Verfügung gestellt werden muss.
 
 Auszug aus dem `hello_webassembly.js`:
 
@@ -354,12 +368,12 @@ Auszug aus dem `hello_webassembly.js`:
 ...
 ```
 
-Wie bereits in meinem letzten [Artikel](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea) beschrieben, wird so mit der Aussenwelt kommuniziert. 
+Wie bereits in meinem letzten [Artikel](https://medium.com/webassembly/hello-world-c-program-4b85d3f8fbea) beschrieben, wird so mit der Aussenwelt kommuniziert.
 
 Es soll darauf hingewiesen sein, dass es sich um eine Abstraktion (Sandbox) handelt. Die Funktion `printf` vom C Programm wird nicht auf dem Betriebssystem im klassischen Sinn aufgerufen. Sondern es wird die vom JavaScript bereitgestellte und vom WebAssembly importierte `_fd_write` Funktion aufgerufen, welche dann die jeweilige Implementierung der `printf` Funktion zur Verfügung stellt.
 
-In Ecmascript ist dies abhängig vom jeweils aufrufenden Interpreter des JavaScripts. Die `printChar` Funktion von der `_fd_write` Funktion beruht am Ende auf folgender Deklaration für den Output `var out = Module['print'] || console.log.bind(console);`. 
-Hier sieht man zudem, dass die Schnittstelle (*Runtime, Sandbox) zum WebAssembly in der JavaScript Datei über eine globale Variable `Module` abstrahiert beziehungsweise zur Verfügung gestellt wird. Dieses `Module` dient als Schnittstelle zwischen WebAssembly und dem Rest des JavaScript Programmes. 
+In Ecmascript ist dies abhängig vom jeweils aufrufenden Interpreter des JavaScripts. Die `printChar` Funktion von der `_fd_write` Funktion beruht am Ende auf folgender Deklaration für den Output `var out = Module['print'] || console.log.bind(console);`.
+Hier sieht man zudem, dass die Schnittstelle (*Runtime, Sandbox) zum WebAssembly in der JavaScript Datei über eine globale Variable `Module` abstrahiert beziehungsweise zur Verfügung gestellt wird. Dieses `Module` dient als Schnittstelle zwischen WebAssembly und dem Rest des JavaScript Programmes.
 
 Darüber könnte nun zum Beispiel die `Module['print']` Funktion durch eine andere Funktion ersetzt werden. Was zur Folge hätte, dass diese Aufgerufen wird anstelle der Fallback Version mit `console.log`.
 

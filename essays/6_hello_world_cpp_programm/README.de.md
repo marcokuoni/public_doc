@@ -1,3 +1,17 @@
+---
+title: '"Hello World" C++ Programm'
+subtitle: 'Es ist ein einfaches C++-Programm, aber wie kann man es so implementieren, dass es in einer Webanwendung als WebAssembly verwendet werden kann?'
+author: Marco Kuoni
+date: 2023-09-18T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Es ist ein einfaches C++-Programm, aber wie kann man es so implementieren, dass es in einer Webanwendung als WebAssembly verwendet werden kann?
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # "Hello World" C++ Programm
 Ist ein einfaches C++ Programm, aber wie implementiert man es damit es in einer Webanwendung als WebAssembly verwendet werden kann? Dieser Artikel wird sich nicht um die Details über C++ und `clang` bzw. dem Kompilieren mit `Makefile` kümmern. Es geht vor allem darum, die Schlüsselstellen zu beleuchten um das Zusammenspiel von C++, WebAssebly und der Webanwendung zu verstehen. Aber wenn hier mehr Erklärung gewünscht ist, gerne einfach melden.
 
@@ -18,10 +32,10 @@ Kurzbeschreibung:
 * `#define` definiert das `WASM_EXPORT` Makro. Welches verwendet wird um die Funktionen im WebAssembly zu exportieren, damit diese von der Webanwendung verwendet werden kann. Mehr dazu in der [WebAssembly Linker Dokumentation](https://lld.llvm.org/WebAssembly.html) unter `--export-dynamic`
 
 ### Compilieren
-Mit dem Befehl `make` wird das Programm kompiliert. Wobei dieser das folgende `Makefile` verwendet. 
+Mit dem Befehl `make` wird das Programm kompiliert. Wobei dieser das folgende `Makefile` verwendet.
 
 ```makefile
-DEPS = 
+DEPS =
 OBJ = hello_world.o
 NANOLIBC_OBJ = $(patsubst %.cpp,%.o,$(wildcard nanolibc/*.cpp))
 OUTPUT = hello_world.wasm
@@ -197,7 +211,7 @@ Data[1]:
   - 0000410: 6370 7000 4d65 6d6f 7279 2064 756d 7000  cpp.Memory dump.
   - 0000420: 6f6c 645f 7369 7a65 203d 3d20 6375 7272  old_size == curr
   - 0000430: 656e 742d 3e73 697a 6520 2b20 7369 7a65  ent->size + size
-  - 0000440: 6f66 284d 656d 6f72 7942 6c6f 636b 2920  of(MemoryBlock) 
+  - 0000440: 6f66 284d 656d 6f72 7942 6c6f 636b 2920  of(MemoryBlock)
   - 0000450: 2b20 6e65 7874 2d3e 7369 7a65 0048 656c  + next->size.Hel
   - 0000460: 6c6f 2057 6f72 6c64 0062 6c6f 636b 2d3e  lo World.block->
   - 0000470: 7374 6174 6520 3d3d 204d 656d 6f72 7942  state == MemoryB
@@ -211,7 +225,7 @@ Data[1]:
   - 00004f0: 616b 206d 656d 6f72 7920 7573 6167 653a  ak memory usage:
   - 0000500: 2025 3964 2062 7974 6573 2e0a 0020 2054   %9d bytes...  T
   - 0000510: 6f74 2e20 6d65 6d6f 7279 2075 7361 6765  ot. memory usage
-  - 0000520: 3a20 2539 6420 6279 7465 732e 0a00 2020  : %9d bytes...  
+  - 0000520: 3a20 2539 6420 6279 7465 732e 0a00 2020  : %9d bytes...
   - 0000530: 4375 722e 206d 656d 6f72 7920 7573 6167  Cur. memory usag
   - 0000540: 653a 2025 3964 2062 7974 6573 2e0a 004d  e: %9d bytes...M
   - 0000550: 656d 6f72 7920 6572 726f 7220 6174 2025  emory error at %
@@ -221,7 +235,7 @@ Data[1]:
 ```
 
 Kurz ein paar Hinweise:
-* `Import[1]` erwartet den Import der `env.print_string` Funktion. 
+* `Import[1]` erwartet den Import der `env.print_string` Funktion.
 * `Export[6]`: Neben `memory` wird auch die `helloWorld` Funktion exportiert.
 * `Data[1]`: Der fixe String `Hello World` ist im Segment unter Adresszeile `0000450` und `0000460` zu finden.
 

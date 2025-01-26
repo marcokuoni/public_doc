@@ -1,3 +1,17 @@
+---
+title: 'WebAssembly Docker Container'
+subtitle: 'From Theory to Handson'
+author: Marco Kuoni
+date: 2023-10-04T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: en-US
+abstract: |
+  From Theory to Handson
+email: mail@marcokuoni.ch
+reference-section-title: Further Resources
+---
+
+
 # WebAssembly Docker Container
 **Content:** [Theory: Why?](#why) | [Theory: How?](#how) | [Docker Desktop Setup](#docker-desktop-setup) | [Docker Build](#docker-build) | [Docker Run](#docker-run) | [Docker Compose](#docker-compose) | [Performance](#performance) | [Further Resources](#further-resources)
 
@@ -115,9 +129,9 @@ Once Docker Desktop is installed, you need to activate the WASM Runtime. This ca
 ```bash
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT STATUS  BUILDKIT             PLATFORMS
-default         docker                                       
+default         docker
   default       default         running v0.11.6+616c3f613b54 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
-desktop-linux * docker                                       
+desktop-linux * docker
   desktop-linux desktop-linux   running v0.12.2              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
 ```
 
@@ -131,11 +145,11 @@ docker buildx use wasm-builder
 ```bash
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT  STATUS   BUILDKIT             PLATFORMS
-wasm-builder *  docker-container                               
+wasm-builder *  docker-container
   wasm-builder0 desktop-linux    inactive                      wasi/wasm*
-default         docker                                         
+default         docker
   default       default          running  v0.11.6+616c3f613b54 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
-desktop-linux   docker                                         
+desktop-linux   docker
   desktop-linux desktop-linux    running  v0.12.2              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
 ```
 
@@ -186,7 +200,7 @@ EOT
 
 FROM buildbase AS build
 COPY Cargo.toml .
-COPY src ./src 
+COPY src ./src
 # Build the Wasm binary
 RUN cargo build --target wasm32-wasi --release
 
@@ -297,13 +311,13 @@ for ((i=1; i<=$num_runs; i++)); do
     started_time=$(date +%s.%N)
     stopped_time=$(date +%s.%N)
 
-    $command_to_measure  | while IFS= read -r line; do 
+    $command_to_measure  | while IFS= read -r line; do
             case "$line" in
                 "Starting")
-                    started_time=$(date +%s.%N)                
+                    started_time=$(date +%s.%N)
                 ;;
                 "Stopped")
-                    stopped_time=$(date +%s.%N)                
+                    stopped_time=$(date +%s.%N)
                 ;;
                 *)
                 # echo "$line"
@@ -432,7 +446,7 @@ Average shutdown time over 5000 runs: .59228348785680000000 seconds
 * Startup: 18% faster
 * Runtime: 16% faster
 * Shutdown: 45% slower
-  
+
 ### Conclusion
 This is not intended to be a scientific dissertation but rather to provide a sense of the differences. What stands out to me is:
 

@@ -1,8 +1,22 @@
-    # Porting Third Party to WebAssembly
-    Die Idee dieses Artikels ist, dass eine komplexere Applikation (wie sie in einer C++ Bibliothek bestehen könnte) genommen und in WebAssembly portiert wird. Dabei wird die Applikation zuerst in nativen Maschinencode kompiliert und direkt auf dem Betriebssystem ausführt. Danach in einem zweiten Schritt wird die gleiche Applikation in WebAssembly kompiliert und in einer Webanwendung verwendet.
+---
+title: 'Portierung Third Party nach WebAssembly'
+subtitle: 'Die Idee ist, eine Anwendung (wie sie in einer C++-Bibliothek existieren könnte) zu nehmen und sie nach WebAssembly zu portieren.'
+author: Marco Kuoni
+date: 2023-11-06T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Die Idee ist, eine Anwendung (wie sie in einer C++-Bibliothek existieren könnte) zu nehmen und sie nach WebAssembly zu portieren.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
 
-    ## Bitmap Applikation
-    Die Applikation benutzt die `bitmap_image.hpp` von [Arash Partow](http://partow.net/programming/bitmap/index.html), welche dazu verwendet wird um mit Bitmaps in C++ zu arbeiten.
+
+# Portierung Third Party nach WebAssembly
+Die Idee dieses Artikels ist, dass eine komplexere Applikation (wie sie in einer C++ Bibliothek bestehen könnte) genommen und in WebAssembly portiert wird. Dabei wird die Applikation zuerst in nativen Maschinencode kompiliert und direkt auf dem Betriebssystem ausführt. Danach in einem zweiten Schritt wird die gleiche Applikation in WebAssembly kompiliert und in einer Webanwendung verwendet.
+
+## Bitmap Applikation
+Die Applikation benutzt die `bitmap_image.hpp` von [Arash Partow](http://partow.net/programming/bitmap/index.html), welche dazu verwendet wird um mit Bitmaps in C++ zu arbeiten.
 
 ```cpp
 #include <cmath>
@@ -47,7 +61,7 @@ int main(int argc, char **argv)
    }
 
    build_bitmap(choosen);
-   
+
    return 0;
 }
 
@@ -107,7 +121,7 @@ clean:
 
 ---
 emscripten nicht installiert, lese auch meinen [anderen Artikel](https://medium.com/webassembly/emscripten-simple-portability-9d3238d99294) oder folge der Anweisung
-https://emscripten.org/docs/getting_started/downloads.html 
+https://emscripten.org/docs/getting_started/downloads.html
 Unter Ubuntu `sudo apt intall emscripten`
 
 ----
@@ -117,9 +131,9 @@ Welches über `make -f MakefileWasm` (Explizites Makefile) ausgeführt werden ka
 Zuerst jedoch kurz die Unterschiede zwischen den beiden Makefiles. An erster Stelle fällt auf, dass ein anderer Compiler verwendet wird, anstatt `c++` wird `em++` eingesetzt. Danach folgt die neue Benennung des Outputs von `bitmap` zu `bitmap.js` und zu guter Letzt die einzelnen Optionen für den Linker ([Dokumentation](https://github.com/emscripten-core/emscripten/blob/main/src/settings.js)):
 
 * `-s FORCE_FILESYSTEM=1`: Damit eine Virtualisierung des Dateisystems in der Webanwendung verwendet werden kann ([Dokumentation](https://emscripten.org/docs/api_reference/Filesystem-API.html)).
-* `-s ALLOW_MEMORY_GROWTH=1`: Damit der Speicher dynamisch wachsen kann. 
-* `-s INVOKE_RUN=0`: Damit die `main` Funktion nicht automatisch ausgeführt wird. 
-* `-s EXPORTED_RUNTIME_METHODS="cwrap, callMain"`: Damit die `cwrap` und `callMain` Funktion exportiert wird ([Dokumentation](https://emscripten.org/docs/api_reference/preamble.js.html?highlight=cwrap#cwrap)). 
+* `-s ALLOW_MEMORY_GROWTH=1`: Damit der Speicher dynamisch wachsen kann.
+* `-s INVOKE_RUN=0`: Damit die `main` Funktion nicht automatisch ausgeführt wird.
+* `-s EXPORTED_RUNTIME_METHODS="cwrap, callMain"`: Damit die `cwrap` und `callMain` Funktion exportiert wird ([Dokumentation](https://emscripten.org/docs/api_reference/preamble.js.html?highlight=cwrap#cwrap)).
 * `-s EXPORTED_FUNCTIONS="_main, _build_bitmap"`: Damit die `main` Funktion eigenständig exportiert wird (Dies wäre eigentlich nicht nötig, da `main` standardmässig exportiert wird). Jedoch kann dank dieser Option auch die `build_bitmap` Funktion eigenständig exportiert werden. Damit der Name der Funktion vom C++ Compiler nicht verändert wird, muss die Funktion in C++ mit `extern "C"` deklariert werden (siehe Sourcecode oben, [C++ name mangling](https://en.wikipedia.org/wiki/Name_mangling)).
 
 ### Webanwendung
@@ -179,12 +193,12 @@ Analysieren im Browser `http://localhost:8000`.
 
 ![Console Log](console_log.png)
 
-Das Ausführen des Scripts benötigt einiges an Rechenkapazität und kann zu einer Meldung vom Browser führen, dass die Webanwendung den Browser verlangsamt. Diese kann für dieses Beispiel einfach ignoriert werden. 
+Das Ausführen des Scripts benötigt einiges an Rechenkapazität und kann zu einer Meldung vom Browser führen, dass die Webanwendung den Browser verlangsamt. Diese kann für dieses Beispiel einfach ignoriert werden.
 
 Ein paar Kurzkommentare zum Code:
 * `bitmap_image.js` ist eine Hilfsdatei, welche ähnlich der `bitmap_image.hpp` dazu dient die Bitmaps einfacher zu verarbeiten. Sie hilft damit die Bitmap Datei zu lesen und später in das Canvas zu zeichnen.
 * Die `build_bitmap` Funktion kann gemäss Linker Optionen auf drei Wegen aufgerufen werden. Entweder über die `cwrap` Funktion, über die exportierte `build_bitmap` Funktion oder über die `main` Funktion.
-* `FS.readFile("./mandelbrot_set_vga.bmp")` liest die Datei aus dem virtualisierten Dateisystem. Dies ist möglich, weil die Option `-s FORCE_FILESYSTEM=1` gesetzt ist und somit die [File System API](https://emscripten.org/docs/api_reference/Filesystem-API.html) eingebunden wurde. Interessant sind auch weitere Befehle wie `FS.readdir("/")` siehe Screenshot vom Konsolen Output. 
+* `FS.readFile("./mandelbrot_set_vga.bmp")` liest die Datei aus dem virtualisierten Dateisystem. Dies ist möglich, weil die Option `-s FORCE_FILESYSTEM=1` gesetzt ist und somit die [File System API](https://emscripten.org/docs/api_reference/Filesystem-API.html) eingebunden wurde. Interessant sind auch weitere Befehle wie `FS.readdir("/")` siehe Screenshot vom Konsolen Output.
 
 ## Weiterführend
 * [Source Code](https://github.com/marcokuoni/public_doc/tree/main/essays/9_porting_third_party_to_webassembly)

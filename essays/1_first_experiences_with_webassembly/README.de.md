@@ -1,9 +1,23 @@
+---
+title: 'Erste Erfahrungen mit WebAssembliy'
+subtitle: 'Diese Idee abstrahiert die Programmiersprache von der Zielplattform. Doch dies ist nur ein Vorteil dieser Lösung. Unter anderem ermöglicht sie die Kombination verschiedener Programmiersprachen, die Erhöhung von Sicherheit und Effizienz und vieles mehr.'
+author: Marco Kuoni
+date: 2023-08-14T00:00:00+0100
+keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
+lang: de-CH
+abstract: |
+  Diese Idee abstrahiert die Programmiersprache von der Zielplattform. Doch dies ist nur ein Vorteil dieser Lösung. Unter anderem ermöglicht sie die Kombination verschiedener Programmiersprachen, die Erhöhung von Sicherheit und Effizienz und vieles mehr.
+email: mail@marcokuoni.ch
+reference-section-title: Weiterführend
+---
+
+
 # Erste Erfahrungen mit WebAssembly
 
 ## Grundsätzliche Idee
-1. Wir haben eine beliebig existierende Programmiersprache (z. Bsp.: Rust, C, C++ usw.). 
-2. Welche in ein binäres Format übersetzt wird (*.wasm). 
-3. Dieses binäre Format wird auf einem standardisierten Stackautomaten ausgeführt. 
+1. Wir haben eine beliebig existierende Programmiersprache (z. Bsp.: Rust, C, C++ usw.).
+2. Welche in ein binäres Format übersetzt wird (*.wasm).
+3. Dieses binäre Format wird auf einem standardisierten Stackautomaten ausgeführt.
 4. Die Implementierung des Stackautomaten gibt es für verschiedene Zielsystem.
 
 Diese Idee abstrahiert die Programmiersprache von der Zielplattform. Das ist aber nur ein Vorteil der diese Lösung beinhaltet. Unter anderem erlaubt dies verschiedene Programmiersprachen zu kombinieren, die Sicherheit und Effizienz zu erhöhen und vieles mehr.
@@ -56,12 +70,12 @@ Der online [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/) Compile
 
 ![wat2wasm](wat2wasm.png)
 
-Oder das WebAssembly Binary Toolkit (WABT, ausgesprochen wabbit), welches zusätzlich noch weitere Tools anbietet. Zur Übersetzung wird `wat2wasm multiply.wat` im Terminal eingegeben. Das Resultat konnte damit von 155 Byte (WAT) auf 46 Byte (WASM) reduziert werden (29.67% vom WAT). 
+Oder das WebAssembly Binary Toolkit (WABT, ausgesprochen wabbit), welches zusätzlich noch weitere Tools anbietet. Zur Übersetzung wird `wat2wasm multiply.wat` im Terminal eingegeben. Das Resultat konnte damit von 155 Byte (WAT) auf 46 Byte (WASM) reduziert werden (29.67% vom WAT).
 
 Unter Ubuntu muss das Paket `sudo apt install wabt` installiert sein.
 
 ## Stackautomat
-wasm3 wäre ein möglicher Interpreter für WASM, der in C geschrieben ist und auf vielen Plattformen läuft. Damit kann der WASM-Code im Repl-Stil in der Kommandozeile ausgeführt werden. 
+wasm3 wäre ein möglicher Interpreter für WASM, der in C geschrieben ist und auf vielen Plattformen läuft. Damit kann der WASM-Code im Repl-Stil in der Kommandozeile ausgeführt werden.
 ```bash
 > wasm3 --repl hello.wasm
 wasm3> multiply 3 14

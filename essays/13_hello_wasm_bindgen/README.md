@@ -1,12 +1,12 @@
 ---
-title: 'Hello WASI'
-subtitle: 'The introduction to WASI, the practical example, and the key benefits of using WASI with WebAssembly.'
+title: 'Hello wasm-bindgen'
+subtitle: 'Wasm-bindgen is a tool that simplifies communication between Rust and JavaScript…'
 author: Marco Kuoni
-date: 2024-09-29T00:00:00+0100
+date: 2024-03-27T00:00:00+0100
 keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
 lang: en-US
 abstract: |
-  The introduction to WASI, the practical example, and the key benefits of using WASI with WebAssembly.
+  Wasm-bindgen is a tool that simplifies communication between Rust and JavaScript…
 email: mail@marcokuoni.ch
 reference-section-title: Further Resources
 ---

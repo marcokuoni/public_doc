@@ -1,12 +1,12 @@
 ---
-title: 'Hallo WASI'
-subtitle: 'Die Einführung von WASI, das praktische Beispiel und die wichtigsten Vorteile der Verwendung von WASI mit WebAssembly.'
+title: 'Ein einfaches Rust Programm in WebAssembly'
+subtitle: 'Eine einfache Anleitung von Rust zu WebAssembly und dessen Verwendung in einer Webanwendung…'
 author: Marco Kuoni
-date: 2024-09-29T00:00:00+0100
+date: 2024-03-06T00:00:00+0100
 keywords: [WebAssembly,wasi,javascript,Webdev,Webdeveloper,web,html,browser,webapp,webapplication,webapplications,programming,coding,software,technology]
 lang: de-CH
 abstract: |
-  Die Einführung von WASI, das praktische Beispiel und die wichtigsten Vorteile der Verwendung von WASI mit WebAssembly.
+  Eine einfache Anleitung von Rust zu WebAssembly und dessen Verwendung in einer Webanwendung…
 email: mail@marcokuoni.ch
 reference-section-title: Weiterführend
 ---

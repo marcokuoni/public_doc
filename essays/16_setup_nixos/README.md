@@ -15,7 +15,7 @@ Dont forget to remove your initial password for all partitions, i use a second f
 
 Authentication: <https://www.token2.com/site/page/using-token2-fido2-security-keys-for-linux-local-authentication>
 i used the passwordless version. make sure you map both keys (including backup key)
-the structure of the /tmp/u2f_mappings ´<username>:<KeyHandle1>,<UserKey1>,<CoseType1>,<Options1>:<KeyHandle2>,<UserKey2>,<CoseType2>,<Options2>:...´
+the structure of the u2f_mappings ´<username>:<KeyHandle1>,<UserKey1>,<CoseType1>,<Options1>:<KeyHandle2>,<UserKey2>,<CoseType2>,<Options2>:...´
 See the details for nixos here: <https://nixos.wiki/wiki/Yubikey>
 Check also the testing part <https://nixos.wiki/wiki/Yubikey#Test_PAM_configuration>
 After this i also enabled pin
@@ -59,6 +59,16 @@ rules.auth.u2f.args = lib.mkAfter [
 };
 };
 ´´´
+
+Creating SSH Keys with resident option ´-O resident´ <https://www.token2.com/site/page/using-token2-fido2-security-keys-for-openssh>
+´ssh-keygen -t ed25519-sk -O resident -C "Main"´
+´ssh-keygen -t ed25519-sk -O resident -C "Backup"´
+
+- add yubikey to config and make it more generic for other hosts: <https://joinemm.dev/blog/yubikey-nixos-guide>
+- change to Home Manager <https://nixos.wiki/wiki/Home_Manager>
+- change structure to <http://gitlab.com/thomas-zahner/Nix>
+  remove git /etc/nixos but instead use a folder in ~ with the style of thomas and rebuild with ´nixos-rebuild switch --flake '.#laptop'
+- install wayland
 
 ## Steps
 

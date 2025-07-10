@@ -16,6 +16,7 @@ blogs=(
   "12_simple_rust_program_in_webassembly"
   "13_hello_wasm_bindgen"
   "14_hello_wasi"
+  "15_capabilities_based_security"
 )
 
 # Basisverzeichnis für die Ausgabe

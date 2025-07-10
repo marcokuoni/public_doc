@@ -1,0 +1,1 @@
+/home/progressio/Nextcloud/marco-private/Git/Forschung/public_doc/essays/15_capabilities_based_security/hello-security/target/wasm32-wasip1/release/hello-security.wasm: /home/progressio/Nextcloud/marco-private/Git/Forschung/public_doc/essays/15_capabilities_based_security/hello-security/src/main.rs

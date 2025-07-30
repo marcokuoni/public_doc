@@ -14,11 +14,7 @@
     "{+KC_RALT}{+KC_EQL}{100}{-KC_RALT}{-KC_EQL}",
     "{+KC_RALT}{+KC_Z}{100}{-KC_RALT}{-KC_Z}",
     "{+KC_RALT}{+KC_X}{100}{-KC_RALT}{-KC_X}",
-<<<<<<< HEAD
     "{+KC_RSFT}{+KC_EQL}{100}{-KC_RSFT}{-KC_EQL}{+KC_RSFT}{+KC_EQL}{100}{-KC_RSFT}{-KC_EQL}",
-=======
-    "{+KC_LSFT}{+KC_EQL}{100}{-KC_LSFT}{-KC_EQL}{+KC_LSFT}{+KC_EQL}{100}{-KC_LSFT}{-KC_EQL}",
->>>>>>> 2326c1053a2db9562fd58f78388687c626153aa1
     "{+KC_EQL}{100}{-KC_EQL}{+KC_EQL}{100}{-KC_EQL}",
     "{+KC_LGUI}{+KC_L}{100}{-KC_LGUI}{-KC_L}",
     ""

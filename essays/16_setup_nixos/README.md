@@ -65,10 +65,52 @@ Creating SSH Keys with resident option ´-O resident´ <https://www.token2.com/s
 ´ssh-keygen -t ed25519-sk -O resident -C "Backup"´
 
 - add yubikey to config and make it more generic for other hosts: <https://joinemm.dev/blog/yubikey-nixos-guide>
-- change to Home Manager <https://nixos.wiki/wiki/Home_Manager>
+
+´´´
+  users.users.progressio = {
+    isNormalUser = true;
+    description = "Progressio";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+    #  thunderbird
+    ];
+  };
+
+  security.pam.services = {
+    login = {
+      unixAuth = false;
+      u2fAuth = true;
+      rules.auth.u2f.args = lib.mkAfter [
+        "pinverification=1"
+      ];
+    };
+    sudo = {
+      unixAuth = false;
+      u2fAuth = true;
+      rules.auth.u2f.args = lib.mkAfter [
+        "pinverification=1"
+      ];
+    };
+  };
+
+  security.pam.u2f.settings = {
+    authfile = pkgs.writeText "u2f-mappings" (lib.concatStrings [
+      "progressio"
+      ":EiIM/QYe93WmeZzozdS/mlSSAyr6WSP6AjdnSpkU9YOFgVH7xtz7IVjlT4RTD5m4tLchwfm5IGJc2ET52UDtAFaZuY+Idtm3Ma9eoxX9Jtohz1TTeCzT9whwrpX6usRd,h/Jdj53wbia4JC4oHpQgC0EZ5KniR9ImFM4/A1dCHy3AC0E6UPJ54OpJRugw9FHVbbffF9wUCaGV+zeYYMX9kA==,es256,+presence"
+      ":FgniLy8rpTkmdKfBWWayvXSxNlWYGIdcwDSSGJtb729FaMop0QXhdC5mKzhA/Bmvc+0rOCrcz3LdJmQfOfjKOGMhsbs/bwMd9TFg99PTBA0jLt44GgnY1B7sQ24qi+xf,V3O/CtCBu3qnniXRUhUmfIGCBTe9fgTouaRyYHMz/nXWjZPMU6vghGqpv0uhiwj1T07s8MZD3//tsg4kjXyw5A==,es256,+presence"
+    ]);
+  };
+´´´
 - change structure to <http://gitlab.com/thomas-zahner/Nix>
+ First we go to flakes with the current setup
   remove git /etc/nixos but instead use a folder in ~ with the style of thomas and rebuild with ´nixos-rebuild switch --flake '.#laptop'
+
+- change to Home Manager <https://nixos.wiki/wiki/Home_Manager>
+https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+Before we can install sway we need the home manager cause of the .config file for sway
+
 - install wayland
+
 
 ## Steps
 

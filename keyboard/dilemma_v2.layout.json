@@ -11,10 +11,10 @@
     "{+KC_RALT}{+KC_7}{100}{-KC_RALT}{-KC_7}",
     "{+KC_RALT}{+KC_3}{100}{-KC_RALT}{-KC_3}",
     "{+KC_RALT}{+KC_2}{100}{-KC_RALT}{-KC_2}",
-    "{+KC_RALT}{+KC_EQL}{100}{-KC_RALT}{-KC_EQL}{+KC_RALT}{+KC_EQL}{100}{-KC_RALT}{-KC_EQL}",
+    "{+KC_RALT}{+KC_EQL}{100}{-KC_RALT}{-KC_EQL}",
     "{+KC_RALT}{+KC_Z}{100}{-KC_RALT}{-KC_Z}",
     "{+KC_RALT}{+KC_X}{100}{-KC_RALT}{-KC_X}",
-    "{+KC_RALT}{+KC_MINS}{100}{-KC_RALT}{-KC_MINS}{+KC_RALT}{+KC_MINS}{100}{-KC_RALT}{-KC_MINS}",
+    "{+KC_RSFT}{+KC_EQL}{100}{-KC_RSFT}{-KC_EQL}{+KC_RSFT}{+KC_EQL}{100}{-KC_RSFT}{-KC_EQL}",
     "{+KC_EQL}{100}{-KC_EQL}{+KC_EQL}{100}{-KC_EQL}",
     "{+KC_LGUI}{+KC_L}{100}{-KC_LGUI}{-KC_L}",
     ""

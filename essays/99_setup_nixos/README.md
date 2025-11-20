@@ -67,50 +67,52 @@ Creating SSH Keys with resident option ´-O resident´ <https://www.token2.com/s
 - add yubikey to config and make it more generic for other hosts: <https://joinemm.dev/blog/yubikey-nixos-guide>
 
 ´´´
-  users.users.progressio = {
-    isNormalUser = true;
-    description = "Progressio";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
-  };
+users.users.progressio = {
+isNormalUser = true;
+description = "Progressio";
+extraGroups = [ "networkmanager" "wheel" ];
+packages = with pkgs; [
 
-  security.pam.services = {
-    login = {
-      unixAuth = false;
-      u2fAuth = true;
-      rules.auth.u2f.args = lib.mkAfter [
-        "pinverification=1"
-      ];
-    };
-    sudo = {
-      unixAuth = false;
-      u2fAuth = true;
-      rules.auth.u2f.args = lib.mkAfter [
-        "pinverification=1"
-      ];
-    };
-  };
+# thunderbird
 
-  security.pam.u2f.settings = {
-    authfile = pkgs.writeText "u2f-mappings" (lib.concatStrings [
-      "progressio"
-      ":EiIM/QYe93WmeZzozdS/mlSSAyr6WSP6AjdnSpkU9YOFgVH7xtz7IVjlT4RTD5m4tLchwfm5IGJc2ET52UDtAFaZuY+Idtm3Ma9eoxX9Jtohz1TTeCzT9whwrpX6usRd,h/Jdj53wbia4JC4oHpQgC0EZ5KniR9ImFM4/A1dCHy3AC0E6UPJ54OpJRugw9FHVbbffF9wUCaGV+zeYYMX9kA==,es256,+presence"
-      ":FgniLy8rpTkmdKfBWWayvXSxNlWYGIdcwDSSGJtb729FaMop0QXhdC5mKzhA/Bmvc+0rOCrcz3LdJmQfOfjKOGMhsbs/bwMd9TFg99PTBA0jLt44GgnY1B7sQ24qi+xf,V3O/CtCBu3qnniXRUhUmfIGCBTe9fgTouaRyYHMz/nXWjZPMU6vghGqpv0uhiwj1T07s8MZD3//tsg4kjXyw5A==,es256,+presence"
-    ]);
-  };
+];
+};
+
+security.pam.services = {
+login = {
+unixAuth = false;
+u2fAuth = true;
+rules.auth.u2f.args = lib.mkAfter [
+"pinverification=1"
+];
+};
+sudo = {
+unixAuth = false;
+u2fAuth = true;
+rules.auth.u2f.args = lib.mkAfter [
+"pinverification=1"
+];
+};
+};
+
+security.pam.u2f.settings = {
+authfile = pkgs.writeText "u2f-mappings" (lib.concatStrings [
+"progressio"
+":EiIM/QYe93WmeZzozdS/mlSSAyr6WSP6AjdnSpkU9YOFgVH7xtz7IVjlT4RTD5m4tLchwfm5IGJc2ET52UDtAFaZuY+Idtm3Ma9eoxX9Jtohz1TTeCzT9whwrpX6usRd,h/Jdj53wbia4JC4oHpQgC0EZ5KniR9ImFM4/A1dCHy3AC0E6UPJ54OpJRugw9FHVbbffF9wUCaGV+zeYYMX9kA==,es256,+presence"
+":FgniLy8rpTkmdKfBWWayvXSxNlWYGIdcwDSSGJtb729FaMop0QXhdC5mKzhA/Bmvc+0rOCrcz3LdJmQfOfjKOGMhsbs/bwMd9TFg99PTBA0jLt44GgnY1B7sQ24qi+xf,V3O/CtCBu3qnniXRUhUmfIGCBTe9fgTouaRyYHMz/nXWjZPMU6vghGqpv0uhiwj1T07s8MZD3//tsg4kjXyw5A==,es256,+presence"
+]);
+};
 ´´´
+
 - change structure to <http://gitlab.com/thomas-zahner/Nix>
- First we go to flakes with the current setup
+  First we go to flakes with the current setup
   remove git /etc/nixos but instead use a folder in ~ with the style of thomas and rebuild with ´nixos-rebuild switch --flake '.#laptop'
 
 - change to Home Manager <https://nixos.wiki/wiki/Home_Manager>
-https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
-Before we can install sway we need the home manager cause of the .config file for sway
+  <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module>
+  Before we can install sway we need the home manager cause of the .config file for sway
 
 - install wayland
-
 
 ## Steps
 
@@ -171,3 +173,94 @@ sudo nix-channel --update
 sudo nixos-install
 
 - <https://www.token2.swiss/site/page/unlock-linux-luks-encrypted-drives-with-token2-fido2-security-keys>
+
+# configure with label like below
+
+{ config, lib, pkgs, modulesPath, ... }:
+{
+imports =
+[ (modulesPath + "/installer/scan/not-detected.nix")
+];
+
+boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" ]; # <--
+boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS"; # <--
+boot.kernelModules = [ "kvm-intel" ];
+boot.extraModulePackages = [ ];
+
+fileSystems."/" =
+{ device = "/dev/disk/by-label/NIXOS_ROOT"; # <--
+fsType = "ext4";
+};
+
+fileSystems."/boot" =
+{ device = "/dev/disk/by-label/NIXOS_BOOT"; # <--
+fsType = "vfat";
+options = [ "fmask=0077" "dmask=0077" ];
+};
+
+fileSystems."/home" =
+{ device = "/dev/disk/by-label/NIXOS_HOME"; # <--
+fsType = "ext4";
+};
+
+swapDevices =
+[ { device = "/dev/disk/by-label/NIXOS_SWAP"; } # <--
+];
+
+networking.useDHCP = lib.mkDefault true;
+nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+hardware.enableAllFirmware = true; # <--
+hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+}
+
+# reinstall
+
+# Paritioning
+
+sudo gdisk /dev/sdx
+
+# Luks
+
+sudo cryptsetup -v -y -c aes-xts-plain64 -s 512 -h sha512 -i 4000 --use-random --label=NIXOS_LUKS luksFormat --type luks2 /dev/sdx2
+sudo cryptsetup open --type luks /dev/sdx2 cryptroot
+
+# LVM
+
+sudo pvcreate /dev/mapper/cryptroot
+sudo vgcreate lvmroot /dev/mapper/cryptroot
+sudo lvcreate -L16G lvmroot -n swap
+sudo lvcreate -L128G lvmroot -n root
+sudo lvcreate -l 100%FREE lvmroot -n home
+
+# Filesystems
+
+sudo mkfs.fat -n NIXOS_BOOT -F32 /dev/sdx1
+sudo mkfs.ext4 -L NIXOS_ROOT /dev/mapper/lvmroot-root
+sudo mkfs.ext4 -L NIXOS_HOME /dev/mapper/lvmroot-home
+sudo mkswap -L NIXOS_SWAP /dev/mapper/lvmroot-swap
+
+# Mounting
+
+sudo mount /dev/disk/by-label/NIXOS_ROOT /mnt
+sudo mkdir /mnt/boot
+sudo mkdir /mnt/home
+sudo mount -o umask=0077 /dev/disk/by-label/NIXOS_BOOT /mnt/boot
+sudo mount /dev/disk/by-label/NIXOS_HOME /mnt/home
+sudo swapon -L NIXOS_SWAP
+
+# Installing NixOS From a Flake
+
+sudo nixos-install --root /mnt --no-root-passwd --flake github:me/nixfiles#nixos
+sudo nixos-enter --root /mnt -c 'passwd me'
+
+# Unmounting
+
+sudo umount -R /mnt
+sudo swapoff -L NIXOS_SWAP
+sudo vgchange -a n lvmroot
+sudo cryptsetup close /dev/mapper/cryptroot
+
+# Done
+
+reboot
